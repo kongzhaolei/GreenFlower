@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+  <title>TestNG reports</title>
+
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" />  
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="testng-reports.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table']});
+      google.setOnLoadCallback(drawTable);
+      var suiteTableInitFunctions = new Array();
+      var suiteTableData = new Array();
+    </script>
+    <!--
+      <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+     -->
+  </head>
+
+  <body>
+    <div class="top-banner-root">
+      <span class="top-banner-title-font">Test results</span>
+      <br/>
+      <span class="top-banner-font-1">1 suite</span>
+    </div> <!-- top-banner-root -->
+    <div class="navigator-root">
+      <div class="navigator-suite-header">
+        <span>All suites</span>
+        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
+          <img class="collapse-all-icon" src="collapseall.gif">
+          </img> <!-- collapse-all-icon -->
+        </a> <!-- collapse-all-link -->
+      </div> <!-- navigator-suite-header -->
+      <div class="suite">
+        <div class="rounded-window">
+          <div class="suite-header light-rounded-window-top">
+            <a href="#" class="navigator-link" panel-name="suite-Default_suite">
+              <span class="suite-name border-passed">Default suite</span>
+            </a> <!-- navigator-link -->
+          </div> <!-- suite-header light-rounded-window-top -->
+          <div class="navigator-suite-content">
+            <div class="suite-section-title">
+              <span>Info</span>
+            </div> <!-- suite-section-title -->
+            <div class="suite-section-content">
+              <ul>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="test-xml-Default_suite">
+                    <span>C:\Users\Administrator.USER-20150530DS\AppData\Local\Temp\testng-eclipse-665883324\testng-customsuite.xml</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="testlist-Default_suite">
+                    <span class="test-stats">1 test</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="group-Default_suite">
+                    <span>0 groups</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="times-Default_suite">
+                    <span>Times</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="reporter-Default_suite">
+                    <span>Reporter output</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="ignored-methods-Default_suite">
+                    <span>Ignored methods</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+                <li>
+                  <a href="#" class="navigator-link " panel-name="chronological-Default_suite">
+                    <span>Chronological view</span>
+                  </a> <!-- navigator-link  -->
+                </li>
+              </ul>
+            </div> <!-- suite-section-content -->
+            <div class="result-section">
+              <div class="suite-section-title">
+                <span>Results</span>
+              </div> <!-- suite-section-title -->
+              <div class="suite-section-content">
+                <ul>
+                  <li>
+                    <span class="method-stats">13 methods,   13 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Default_suite" title="org.gradle.HttpServiceTest" hash-for-method="test0(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">test0(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Default_suite -->
+                  </li>
+                </ul>
+              </div> <!-- suite-section-content -->
+            </div> <!-- result-section -->
+          </div> <!-- navigator-suite-content -->
+        </div> <!-- rounded-window -->
+      </div> <!-- suite -->
+    </div> <!-- navigator-root -->
+    <div class="wrapper">
+      <div class="main-panel-root">
+        <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
+              <span class="class-name">org.gradle.HttpServiceTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, groupbydevice=0, functionname=CountStationInfo, endtime=2015-08-13 23:59:59, BTZ=480, starttime=2015-08-13 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, groupbydevice=1, functionname=CountFailureInfo, farea=false, endtime=2015-08-13 23:59:59, BTZ=480, starttime=2015-08-01 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, functionname=CountEventLog, proid=null, endtime=2015-08-18 23:59:59, BTZ=480, starttime=2015-08-18 00:00:00, type=true, iecs=WTUR.Bool.Rd.b0.11041.10, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, groupbydevice=0, functionname=CountFailureInfoType, endtime=2015-08-14 23:59:59, BTZ=480, starttime=2015-08-01 00:00:00, wtid=652112122,652112121})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {wsid=652112902, Zip=false, functionname=GetPowerChange, proid=null, endtime=2015-08-14 23:59:59, BTZ=480, starttime=2015-08-01 00:00:00})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, devtype=WindTurbine, CountColumn=true, modelid=1DD28544-7805-4D86-8E39-09404726214A, functionname=CountDay, endtime=2015-08-14, BTZ=480, starttime=2015-08-01, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, CountColumn=true, functionname=CountWfSum, BTZ=480, iecs=WTUR.TotEgyAt.Wt.F32, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, devtype=WindTurbine, outputype=11, CountColumn=true, modelid=F3F1481A-7508-428e-9CD8-C3C198D17B2E, functionname=CountCanNeng, endtime=2015-08-14, BTZ=480, starttime=2015-08-01, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, CountColumn=true, functionname=GetLostPower, proid=null, endtime=2015-08-14 23:59:59, BTZ=480, starttime=2015-08-01 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, devtype=WindTurbine, CountColumn=true, modelid=2F818169-2D1D-4E68-A9B6-125C24F59D7F, functionname=CountTenMinit, endtime=2015-08-06 23:59:59, BTZ=480, starttime=2015-08-01 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, devtype=WindTurbine, outputype=1, CountColumn=true, modelid=C5A39F9C-792D-41F8-8ADC-0DC8DA97B2B0, functionname=CountCanNeng, endtime=2015-08-14 09:04:22, BTZ=480, starttime=2015-08-01 00:00:00, wtid=652112124,652112125})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, groupbydevice=0, functionname=CountStateData, iec=WTUR.Flt.Ri.I32.main, endtime=2015-08-18 23:59:59, BTZ=480, starttime=2015-08-18 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="test0(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)">
+                  </a> <!-- test0(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...) -->
+                  <span class="method-name">test0</span>
+                  <span class="parameters">(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hcnvyLz1hWHL0jyg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubnkyOGAuA0uzKLsxupZ8YjbnXWOxWyDju%2ffUHRg9ljbWQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHdOvJllpZ6stc1dEgbjAVAUngDhAMughWg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzY75X46A%2bfmy9p9pi7eYnItM0i7raN2hyWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYpht3LtI%2bQ%2b7sDpPuCT3eb%2fmbAFumXQfkbU1xNM10QIbFIg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmz8Pt2EAHHuMlxjHcuAp3jhxEpdms0Tf2N5YcSpoQprg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArOqyVwFytTmHBXODt73c0r7mMIjy2D3yzudCyZbVW6Tw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzTIq4%2bc%2fdISvn5tEXdqqpJRxDxdXsJ%2bxwmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtmpfRkkXlbVxsKLxfH9%2fQx4bW6QSQckZvQJZhQb6aIVA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubntaL39zXUA4VE2ThQPncZHGBBssCqTH%2fHzKiZjofW5Mw%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiArDsf6SBkN98VhFFOaC9Xh%2fo6yHMs9AozZSmQLj6IL3Ew%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzQw%2fxmxAl1pNog4uXzQg1cfbOcPtQjcnXmRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsry6e2gUYIneYDeK4ds%2fMlg106dmjf9tRXpQLHdb3WAg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubl9YtWxN358vf5yGc4nUMIcJlGb6zaodZG81jrLRloplQ%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAqUmuRcOWobHYvkjxald2XFXoCGH8NUsloWYiZ5VmNMaA%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzXVSppuI3xcvPvGwpVq5OanI4bd%2bm3ix%2fWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphsl8nsXeUpHIf4kWMeA4aE850aMOkzD3nSr4Q98PWXjEw%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubmRuQFL6xUFiGRSVe6KqKIBq0W38ma0R%2fFV42%2f6q0fXgA%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAoO%2b9%2bJasjXvPe%2bCCF1k7k1h2Fu%2f40jyufXozrpvWva3Q%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzVCIHlkXtBPn%2fVk7d8Q7BZllNomBUHqR8WRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphur2PDzZuxJL2t%2fhk8u5E%2f4A9Gw3y344ZYZatPT1mkMFg%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgubkQ1DkLRFjheCIRvU2XiAz2%2fHJAY6u71B%2bik4K88VLgHg%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAo0QrC7NIZSGTiiMdPQvrBz7U7Zv5rlCiVa6Ep1709oqw%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYzaYBFk%2flGm8z1vQGI%2flWYdYK79ArdEurpWRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; rozU75MYphtiWoZ6uyhHuTECoYl1xW%2bk1rIx0gqw%2b%2foreJS5JETPSA%3d%3d=s1ZRvYtlJ8s%3d; bswlz16F%2bM6aDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=GZ5s2t4dPgs%3d; MvXKGvNgublDtZTgqSaPodz6B1B6sNQpWFfn43WH%2b0PikO1uVILw3w%3d%3d=cRoS1gQMpCdkSz9zfmexbw%3d%3d; a0HE5lsBiAq%2bhpuRf6Ja6uMDbly8vB5B%2fmClgoqrfP9D8RpV4hPINg%3d%3d=GZ5s2t4dPgs%3d; lUNytQ4fcOqaDZRnQCDYza39IXq5776IlkRM1itIt9r69TkCBlSHPGRLP3N%2bZ7Fv=s1ZRvYtlJ8s%3d; Language=zh-cn, User-Agent=Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.124 Safari/537.36, Content-Type=application/x-www-form-urlencoded;charset=UTF-8}, {Zip=false, groupbydevice=0, functionname=CountStateData, iec=WTUR.Other.Wn.I16.StopModeWord, endtime=2015-08-18 23:59:59, BTZ=480, starttime=2015-08-18 00:00:00, wtid=652112121,652112122})</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-passed -->
+        </div> <!-- panel Default_suite -->
+        <div panel-name="test-xml-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">C:\Users\Administrator.USER-20150530DS\AppData\Local\Temp\testng-eclipse-665883324\testng-customsuite.xml</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;suite name=&quot;Default suite&quot;&gt;
+  &lt;test verbose=&quot;2&quot; name=&quot;Default test&quot;&gt;
+    &lt;classes&gt;
+      &lt;class name=&quot;org.gradle.HttpServiceTest&quot;/&gt;
+    &lt;/classes&gt;
+  &lt;/test&gt; &lt;!-- Default test --&gt;
+&lt;/suite&gt; &lt;!-- Default suite --&gt;
+            </pre>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="testlist-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Tests for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <ul>
+              <li>
+                <span class="test-name">Default test (1 class)</span>
+              </li>
+            </ul>
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="group-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Groups for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="times-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Times for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="times-div">
+              <script type="text/javascript">
+suiteTableInitFunctions.push('tableData_Default_suite');
+function tableData_Default_suite() {
+var data = new google.visualization.DataTable();
+data.addColumn('number', 'Number');
+data.addColumn('string', 'Method');
+data.addColumn('string', 'Class');
+data.addColumn('number', 'Time (ms)');
+data.addRows(13);
+data.setCell(0, 0, 0)
+data.setCell(0, 1, 'test0')
+data.setCell(0, 2, 'org.gradle.HttpServiceTest')
+data.setCell(0, 3, 4854);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'test0')
+data.setCell(1, 2, 'org.gradle.HttpServiceTest')
+data.setCell(1, 3, 4731);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'test0')
+data.setCell(2, 2, 'org.gradle.HttpServiceTest')
+data.setCell(2, 3, 891);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'test0')
+data.setCell(3, 2, 'org.gradle.HttpServiceTest')
+data.setCell(3, 3, 692);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'test0')
+data.setCell(4, 2, 'org.gradle.HttpServiceTest')
+data.setCell(4, 3, 582);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'test0')
+data.setCell(5, 2, 'org.gradle.HttpServiceTest')
+data.setCell(5, 3, 568);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'test0')
+data.setCell(6, 2, 'org.gradle.HttpServiceTest')
+data.setCell(6, 3, 468);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'test0')
+data.setCell(7, 2, 'org.gradle.HttpServiceTest')
+data.setCell(7, 3, 388);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'test0')
+data.setCell(8, 2, 'org.gradle.HttpServiceTest')
+data.setCell(8, 3, 354);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'test0')
+data.setCell(9, 2, 'org.gradle.HttpServiceTest')
+data.setCell(9, 3, 326);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'test0')
+data.setCell(10, 2, 'org.gradle.HttpServiceTest')
+data.setCell(10, 3, 247);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'test0')
+data.setCell(11, 2, 'org.gradle.HttpServiceTest')
+data.setCell(11, 3, 234);
+data.setCell(12, 0, 12)
+data.setCell(12, 1, 'test0')
+data.setCell(12, 2, 'org.gradle.HttpServiceTest')
+data.setCell(12, 3, 174);
+window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
+return data;
+}
+              </script>
+              <span class="suite-total-time">Total running time: 14 seconds</span>
+              <div id="times-div-Default_suite">
+              </div> <!-- times-div-Default_suite -->
+            </div> <!-- times-div -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="reporter-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Reporter output for Default suite</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="ignored-methods-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">0 ignored methods</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+        <div panel-name="chronological-Default_suite" class="panel">
+          <div class="main-panel-header rounded-window-top">
+            <span class="header-content">Methods in chronological order</span>
+          </div> <!-- main-panel-header rounded-window-top -->
+          <div class="main-panel-content rounded-window-bottom">
+            <div class="chronological-class">
+              <div class="chronological-class-name">org.gradle.HttpServiceTest</div> <!-- chronological-class-name -->
+              <div class="configuration-class before">
+                <span class="method-name">init</span>
+                <span class="method-start">0 ms</span>
+              </div> <!-- configuration-class before -->
+              <div class="test-method">
+                <span class="method-name">test0(001, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">510 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(002, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">5365 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(003, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">5720 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(004, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">6613 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(005, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">7307 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(006, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">12039 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(007, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">12608 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(008, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">13191 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(009, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">13439 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(010, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">13827 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(011, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">14154 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(012, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">14623 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">test0(013, POST, http://10.64.23.5:8001/Monitor/xml.aspx, {Cookie=rozU75MYphu9PzUEOED2dz35rh98MN9uCwKBJ8hc...)</span>
+                <span class="method-start">14859 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">teardown</span>
+                <span class="method-start">15036 ms</span>
+              </div> <!-- configuration-class after -->
+          </div> <!-- main-panel-content rounded-window-bottom -->
+        </div> <!-- panel -->
+      </div> <!-- main-panel-root -->
+    </div> <!-- wrapper -->
+  </body>
+</html>
