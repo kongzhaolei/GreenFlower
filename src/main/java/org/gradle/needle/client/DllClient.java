@@ -3,7 +3,6 @@
  * 因此需要另寻他路了
  */
 
-
 package org.gradle.needle.client;
 
 import org.xvolks.jnative.JNative;
@@ -18,29 +17,33 @@ public class DllClient {
 
 	// 编写dll接口,实现library接口
 	public interface SoftAdapterJNA extends Library {
-		SoftAdapterJNA instancedll = (SoftAdapterJNA) Native
-				.loadLibrary("SoftAdapter",SoftAdapterJNA.class);
-		
+		SoftAdapterJNA instancedll = (SoftAdapterJNA) Native.loadLibrary("SoftAdapter", SoftAdapterJNA.class);
+
 		public void StartService();
+
 		public void GetErrorTypeByID(String id);
 	}
-	
-	public interface SoftAdapterJNR{
+
+	public interface SoftAdapterJNR {
 		public void GetErrorTypeByID(String id);
 	}
-	
-	public static void SoftAdapterJNtive() throws NativeException, IllegalAccessException{
-		JNative jnative = new JNative("SoftAdapter","GetErrorTypeByID");
-		jnative.setParameter(0,"20103323");
+
+	public static void SoftAdapterJNtive() throws NativeException, IllegalAccessException {
+		System.setProperty("jnative.debug", "true");
+		System.setProperty("jnative.loadNative", "S:\\workspace\\GreenFlower\\src\\main\\resources\\JNativeCpp.dll");
+		System.loadLibrary("SoftAdapter");
+		JNative jnative = new JNative("SoftAdapter", "GetErrorTypeByID");
+		jnative.setParameter(0, "20103323");
 		jnative.invoke();
-		System.out.println(jnative.getRetVal()); 
+		System.out.println(jnative.getRetVal());
 	}
 
 	public static void main(String[] args) {
-		 //SoftAdapterJNA.instancedll.GetErrorTypeByID("20103323");
-		 //SoftAdapterJNR libc = LibraryLoader.create(SoftAdapterJNR.class).load("SoftAdapter");  
-		 //libc.GetErrorTypeByID("20103323");
-		
+		// SoftAdapterJNA.instancedll.GetErrorTypeByID("20103323");
+		// SoftAdapterJNR libc =
+		// LibraryLoader.create(SoftAdapterJNR.class).load("SoftAdapter");
+		// libc.GetErrorTypeByID("20103323");
+		System.out.println(System.getProperty("java.library.path"));
 		try {
 			DllClient.SoftAdapterJNtive();
 		} catch (IllegalAccessException e) {
