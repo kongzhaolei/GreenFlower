@@ -1,4 +1,15 @@
+/**
+ * JNA和JNR只能调用非托管代码，对.NET的这种托管项目无可奈何
+ * 因此需要另寻他路了
+ */
+
+
 package org.gradle.needle.client;
+
+import org.xvolks.jnative.JNative;
+import org.xvolks.jnative.exceptions.NativeException;
+
+import jnr.ffi.LibraryLoader;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -6,18 +17,38 @@ import com.sun.jna.Native;
 public class DllClient {
 
 	// 编写dll接口,实现library接口
-	public interface DataProviderServiceDll extends Library {
-		DataProviderServiceDll instancedll = (DataProviderServiceDll) Native
-				.loadLibrary("SoftAdapter",DataProviderServiceDll.class);
+	public interface SoftAdapterJNA extends Library {
+		SoftAdapterJNA instancedll = (SoftAdapterJNA) Native
+				.loadLibrary("SoftAdapter",SoftAdapterJNA.class);
 		
 		public void StartService();
 		public void GetErrorTypeByID(String id);
-		
-			
+	}
+	
+	public interface SoftAdapterJNR{
+		public void GetErrorTypeByID(String id);
+	}
+	
+	public static void SoftAdapterJNtive() throws NativeException, IllegalAccessException{
+		JNative jnative = new JNative("SoftAdapter","GetErrorTypeByID");
+		jnative.setParameter(0,"20103323");
+		jnative.invoke();
+		System.out.println(jnative.getRetVal()); 
 	}
 
 	public static void main(String[] args) {
-		DataProviderServiceDll.instancedll.GetErrorTypeByID("20103323");
+		 //SoftAdapterJNA.instancedll.GetErrorTypeByID("20103323");
+		 //SoftAdapterJNR libc = LibraryLoader.create(SoftAdapterJNR.class).load("SoftAdapter");  
+		 //libc.GetErrorTypeByID("20103323");
+		
+		try {
+			DllClient.SoftAdapterJNtive();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NativeException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
