@@ -5,7 +5,18 @@
 
 package org.gradle.needle.client;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.jawin.COMException;
+import org.jawin.DispatchPtr;
+import org.jawin.FuncPtr;
+import org.jawin.ReturnFlags;
+import org.jawin.io.LittleEndianInputStream;
+import org.jawin.io.LittleEndianOutputStream;
+import org.jawin.io.NakedByteStream;
 import org.xvolks.jnative.JNative;
+import org.xvolks.jnative.Type;
 import org.xvolks.jnative.exceptions.NativeException;
 
 import jnr.ffi.LibraryLoader;
@@ -19,7 +30,8 @@ public class DllClient {
 	public interface SoftAdapterJNA extends Library {
 		SoftAdapterJNA instancedll = (SoftAdapterJNA) Native.loadLibrary("SoftAdapter", SoftAdapterJNA.class);
 		public void StartService();
-		public void GetErrorTypeByID(String id);
+		public void  DelErrorCode(String id);
+		public String GetLastTenData(int devid,String iecpath);
 	}
     
 	// 2. JNR方式：
@@ -28,29 +40,62 @@ public class DllClient {
 	}
 
 	// 3. JNative方式：
-	public static void SoftAdapterJNtive() throws NativeException, IllegalAccessException {
+	public static void SoftAdapterJNtive(){
 		System.setProperty("jnative.debug", "true");
-		System.setProperty("jnative.loadNative", "S:\\workspace\\GreenFlower\\src\\main\\resources\\JNativeCpp.dll");
-		System.out.println(System.getProperty("java.library.path"));
+		//设置日志记录的开启,方便跟踪JNative的运行过程
+		JNative.setLoggingEnabled(true); 
+		//加载动态链接库
 		System.loadLibrary("SoftAdapter");
-		JNative jnative = new JNative("SoftAdapter", "GetErrorTypeByID");
-		jnative.setParameter(0, "20103323");
-		jnative.invoke();
-		System.out.println(jnative.getRetVal());
-	}
-
-	public static void main(String[] args) {
-		// SoftAdapterJNA.instancedll.GetErrorTypeByID("20103323");
-		// SoftAdapterJNR libc = LibraryLoader.create(SoftAdapterJNR.class).load("SoftAdapter");
-		// libc.GetErrorTypeByID("20103323");
 		try {
-			DllClient.SoftAdapterJNtive();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			//将动态链接库的名字和方法传递给JNative
+			JNative jnative = new JNative("SoftAdapter", "GetErrorTypeByID");
+			//设置调用动态库的方法后的返回类型
+			jnative.setRetVal(Type.STRING);
+			//设置参数
+			jnative.setParameter(0, "20103323");
+			//调用方法
+			jnative.invoke();
+			System.out.println(jnative.getRetVal());
 		} catch (NativeException e) {
 			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
-
 	}
+	
+	//4. jawin方式：
+	public static void SoftAdapterJawin(){
+		 try {
+			FuncPtr jaw = new FuncPtr("SoftAdapter.dll", "DelErrorCode@4");
+			String marshal = "II:I:L4L4";
+			NakedByteStream nbs = new NakedByteStream();
+			LittleEndianOutputStream leos = new LittleEndianOutputStream(nbs);	
+			leos.writeInt(4);
+			leos.writeInt(3);
+			byte[] res = jaw.invoke(marshal, 12, nbs, null, ReturnFlags.CHECK_W32);
+			ByteArrayInputStream bais = new ByteArrayInputStream(res);
+			LittleEndianInputStream leis = new LittleEndianInputStream(bais);
+			int result = leis.readInt();
+			System.out.println(result);
+			
+			//DispatchPtr app = new DispatchPtr("SoftAdapter");
+			//app.invoke("DelErrorCode","001");
+			
+		} catch (COMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
+	public static void main(String[] args) {
+		System.out.println(System.getProperty("java.library.path"));
+		//SoftAdapterJNA.instancedll.DelErrorCode("01");
+		//SoftAdapterJNA.instancedll.GetLastTenData(01,"11");
+		// SoftAdapterJNR libc = LibraryLoader.create(SoftAdapterJNR.class).load("SoftAdapter");
+		// libc.GetErrorTypeByID("20103323");
+		// DllClient.SoftAdapterJNtive();
+		DllClient.SoftAdapterJawin();
+	}
 }

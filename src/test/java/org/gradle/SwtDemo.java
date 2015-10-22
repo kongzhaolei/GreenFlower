@@ -1,4 +1,4 @@
-package org.gradle.test;
+package org.gradle;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;

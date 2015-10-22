@@ -1,4 +1,4 @@
-package org.gradle.test;
+package org.gradle;
 
 import java.util.Iterator;
 import java.util.Map;

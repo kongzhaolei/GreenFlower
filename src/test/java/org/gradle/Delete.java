@@ -1,4 +1,4 @@
-package org.gradle.test;
+package org.gradle;
 
 import java.io.IOException;
 import java.util.ArrayList;

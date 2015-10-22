@@ -17,7 +17,7 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.gradle.test.HttpServiceTest;
+import org.gradle.HttpServiceTest;
 
 public class HttpReqGen {
 	private static Logger logger = Logger.getLogger(HttpServiceTest.class
