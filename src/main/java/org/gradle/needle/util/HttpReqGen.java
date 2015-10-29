@@ -17,10 +17,10 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.gradle.HttpServiceTest;
+
 
 public class HttpReqGen {
-	private static Logger logger = Logger.getLogger(HttpServiceTest.class
+	private static Logger logger = Logger.getLogger(HttpReqGen.class
 			.getName());
 
 	public HttpReqGen() {
@@ -43,7 +43,7 @@ public class HttpReqGen {
 		// 加载request模板
 		try {
 			String filePath = System.getProperty("user.dir")
-					+ "/src/test/resources/http_request_template.txt";
+					+ "/src/main/resources/http_request_template.txt";
 			InputStream file = new BufferedInputStream(new FileInputStream(
 					filePath));
 			template = IOUtils.toString(file, Charset.defaultCharset());
@@ -101,6 +101,7 @@ public class HttpReqGen {
 			requestfiles.add(request.toArray());
 		}
 		Iterator<Object[]> s = requestfiles.iterator();
+		logger.info("HTTP请求报文组装完成");
 		return s;
 	}
 
@@ -112,7 +113,7 @@ public class HttpReqGen {
 	 */
 	private static String[] tokenize_template(String temp) {
 		String[] tokens = temp.split("(?=[<]{2})|(?<=[>]{2})");
-		String[] nodes = new String[tokens.length / 2 + 1];
+		String[] nodes = new String[tokens.length / 2];
 		int i = 0;
 		for (String item : tokens) {
 			if (item.startsWith("<<") && item.endsWith(">>")) {

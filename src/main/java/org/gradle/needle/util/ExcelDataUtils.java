@@ -31,15 +31,16 @@ public class ExcelDataUtils {
 	 * @param SheetName
 	 * @throws Exception
 	 */
-	public static void setExcelWorkSheet(String SheetName) throws Exception {
+	public static void setExcelWorkSheet(String SheetName){
 		try {
 			FileInputStream ExcelFile = new FileInputStream(TestDataFile);
 			ExcelWorkBook = WorkbookFactory.create(ExcelFile);
 			ExcelWorkSheet = ExcelWorkBook.getSheet(SheetName);
-			// logger.info("测试工作表已初始化");
+			 logger.info("测试工作表 " + SheetName + " 成功初始化");
 			ExcelFile.close();
-		} catch (Exception e) {
-			throw (e);
+		} catch (Exception e){
+			logger.error("测试工作表 " + SheetName + " 初始化失败！");
+			e.printStackTrace();
 		}
 	}
 	
@@ -123,6 +124,7 @@ public class ExcelDataUtils {
 			// logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
 		}
 		Iterator<Map<String, String>> s = requestlist.iterator();
+		logger.info("所有测试用例初始化完成");
 		return (s);
 	}
 

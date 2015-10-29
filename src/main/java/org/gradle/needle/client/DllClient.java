@@ -1,6 +1,6 @@
 /**
  * JNA和JNR只能调用非托管代码，对.NET的这种托管项目无可奈何
- * 因此需要另寻他路了
+ * 此恨绵绵无绝期
  */
 
 package org.gradle.needle.client;
