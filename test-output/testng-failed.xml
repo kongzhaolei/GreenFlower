@@ -5,9 +5,9 @@
     <classes>
       <class name="org.gradle.HttpServiceTest">
         <methods>
+          <include name="init"/>
           <include name="teardown"/>
           <include name="test0"/>
-          <include name="init"/>
         </methods>
       </class> <!-- org.gradle.HttpServiceTest -->
     </classes>

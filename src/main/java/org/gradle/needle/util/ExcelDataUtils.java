@@ -115,16 +115,16 @@ public class ExcelDataUtils {
 								.toString());
 					}
 				} else {
-					// logger.info("非本次测试数据集，第 " + row.getRowNum() +
-					// " 行测试数据将跳过");
+					 logger.info("非本次测试数据集，第 " + row.getRowNum() +
+					 " 行测试数据将跳过");
 					continue;
 				}
 			}
 			requestlist.add(m);
-			// logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
+			 logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
 		}
 		Iterator<Map<String, String>> s = requestlist.iterator();
-		logger.info("所有测试用例初始化完成");
+		logger.info("所有测试用例初始化完成" + "\r\n");
 		return (s);
 	}
 
