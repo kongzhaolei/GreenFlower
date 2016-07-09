@@ -8,7 +8,7 @@ import org.gradle.needle.dbo.GlobalSettings;
 import org.gradle.needle.selenium.BrowserFactory;
 import org.gradle.needle.util.ExcelDataUtils;
 import org.gradle.needle.util.OracleConnAndDataAssert;
-import org.gradle.needle.util.XMLParserAndSend;
+import org.gradle.needle.util.XMLParser;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -90,7 +90,7 @@ public class TestNGDemo {
 	@Test(priority = 1, enabled = false)
 	public static void SendXMLFile() {
 		// ·¢ËÍXMLÎÄ¼þ
-		XMLParserAndSend.SendXMLFile(XmlDataFile1);
+		XMLParser.SendXMLFile(XmlDataFile1);
 	}
 
 	@Test(priority = 2, enabled = false)
