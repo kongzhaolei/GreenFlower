@@ -7,7 +7,7 @@ import org.dom4j.DocumentException;
 import org.gradle.needle.dbo.GlobalSettings;
 import org.gradle.needle.selenium.BrowserFactory;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.OracleConnAndDataAssert;
+import org.gradle.needle.util.DBUtils;
 import org.gradle.needle.util.XMLParser;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
@@ -93,14 +93,14 @@ public class SeleniumDemo {
 		XMLParser.SendXMLFile(XmlDataFile1);
 	}
 
-	@Test(priority = 2, enabled = false)
+/*	@Test(priority = 2, enabled = false)
 	public static void DataBaseAssert() {
 		// 数据库验证
-		OracleConnAndDataAssert oa = new OracleConnAndDataAssert();
+		DBUtils oa = new DBUtils(");
 		oa.DataAssert(sql, "ISCAIYANG", "1");
 		oa.ConnClose();
 	}
-
+*/
 	@Test(priority = 3, enabled = false)
 	public static void DealWithExcelFile() {
 		// 读取EXCEL数据

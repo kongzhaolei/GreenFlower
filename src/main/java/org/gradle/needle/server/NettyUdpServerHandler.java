@@ -1,6 +1,9 @@
 package org.gradle.needle.server;
 
-import io.netty.buffer.Unpooled;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.zip.ZipInputStream;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
@@ -14,11 +17,26 @@ public class NettyUdpServerHandler extends
 			throws Exception {
 		// 读取收到的数据
 		String req = msg.content().toString(CharsetUtil.UTF_8);
-		System.out.println("收到客户端数据：   " + req);
-
+//		System.out.println("收到：   " + req);
+	
+		ByteArrayInputStream bis = new ByteArrayInputStream(req.getBytes());
+		ZipInputStream zis = new ZipInputStream(bis);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		int defBlockSize = 4096;
+		byte[] buffer = new byte[defBlockSize];
+	    int n = zis.read(buffer,0,buffer.length);
+		while (n != -1) {
+			out.write(buffer, 0, n);
+			n = zis.read(buffer,0,buffer.length);
+		}
+		String s  =  new String(out.toByteArray());
+		System.out.println(s);
+		
+		zis.close();
+	    	
 		// 回复数据给客户端
-		ctx.writeAndFlush(
-				new DatagramPacket(Unpooled.copiedBuffer("fine，三克油",
-						CharsetUtil.UTF_8), msg.sender())).sync();
+//		ctx.writeAndFlush(
+//				new DatagramPacket(Unpooled.copiedBuffer("fine，三克油",
+//						CharsetUtil.UTF_8), msg.sender())).sync();
 	}
 }

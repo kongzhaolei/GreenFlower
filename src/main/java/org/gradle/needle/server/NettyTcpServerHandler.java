@@ -7,8 +7,7 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception{
 		System.out.println(ctx.channel().remoteAddress() + msg.toString());
-		ctx.write(msg);
-		ctx.flush();
+		ctx.writeAndFlush(msg);
 	}
 	
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause){

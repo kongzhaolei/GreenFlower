@@ -20,7 +20,7 @@ public class NettyUdpClient {
 
 	public static void main(String[] args) throws Exception {
 
-		int port = 7777;
+		int port = 8805;
 		new NettyUdpClient().run(port);
 
 	}

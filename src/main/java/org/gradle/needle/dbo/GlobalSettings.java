@@ -34,13 +34,6 @@ public class GlobalSettings {
 	public static String stepInterval = prop.getProperty("StepInterval", "500");
 	public static String timeout = prop.getProperty("Timeout", "30000");
 
-	// 数据库基本配置
-	public static String driver = prop.getProperty("driver",
-			"oracle.jdbc.driver.OracleDriver");
-	public static String connurl = prop.getProperty("connurl",
-			"jdbc:oracle:thin:@10.122.3.102:1521:orcl");
-	public static String userName = prop.getProperty("userName", "fx");
-	public static String password = prop.getProperty("password", "1234");
 
 	// Excel数据文件路径配置
 	public static String ExcelDataFile = prop.getProperty("ExcelDataFile", "");
