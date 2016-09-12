@@ -30,20 +30,20 @@ public class DataEngine {
 			ResultSet configSet = df.getConfigSetOnCmdname();
 			ResultSet dataSet = df.getDataSetOnCmdname();
 			while (dataSet.next()) {
-				varpathMap.put(dataSet.getString("varpath").trim(),
+				varpathMap.put(dataSet.getString("iecpath").trim(),
 						df.getDynamicValue(dataSet));
-//				varpathMap.put(rSet2.getString("varpath").trim(),
+//				varpathMap.put(rSet2.getString("iecpath").trim(),
 //						"1");
 			}
 
 			if (!configSet.wasNull()) {
 				while (configSet.next()) {
-					if (varpathMap.containsKey(configSet.getString("datapath").trim())) {
-						sReturn += varpathMap.get(configSet.getString("datapath"))
+					if (varpathMap.containsKey(configSet.getString("iecpath").trim())) {
+						sReturn += varpathMap.get(configSet.getString("iecpath"))
 								+ ";";
 					} else {
 						logger.info("DataSet不存在此IEC量： "
-								+ configSet.getString("datapath") + "------" 
+								+ configSet.getString("iecpath") + "------" 
 								+ configSet.getString("descrcn"));
 					}
 				}
