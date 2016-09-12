@@ -31,7 +31,7 @@ public class DataEngine {
 			ResultSet dataSet = df.getDataSetOnCmdname();
 			while (dataSet.next()) {
 				varpathMap.put(dataSet.getString("varpath").trim(),
-						df.getDynamicValue(dataSet.getString("varpath").trim()));
+						df.getDynamicValue(dataSet));
 //				varpathMap.put(rSet2.getString("varpath").trim(),
 //						"1");
 			}

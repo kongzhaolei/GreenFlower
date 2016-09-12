@@ -120,13 +120,11 @@ public class DataDefined {
 	 *14 STOPMODE 停机模式字/状态模式字
 	 *15 LIMITMODE 限功率模式字
 	 */
-	public String getDynamicValue(String varpath) throws SQLException {
-		ResultSet dataSet = getDataSetOnCmdname();
+	public String getDynamicValue(ResultSet dataSet) throws SQLException {
 		String rString = "null";
-		while (dataSet.next()) {
-			if (varpath.equals(dataSet.getString("varpath").trim())) {
-				switch (dataSet.getString("dttype").trim()) {
-
+		String dttype = dataSet.getString("dttype");
+		
+				switch (dttype.trim()) {
 				case "FIXED":
 					rString = dataSet.getString("initvalue");
 					break;
@@ -194,10 +192,7 @@ public class DataDefined {
 					rString = dataSet.getString("initvalue");
 					break;
 				}
-			}else {
-				continue;
-			}
-		}
+				
 		return rString;
 	}
 	
