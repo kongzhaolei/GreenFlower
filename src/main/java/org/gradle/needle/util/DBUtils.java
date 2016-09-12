@@ -42,18 +42,16 @@ public class DBUtils {
 		this.instance = instance;
 		this.username = username;
 		this.password = password;
+		conn = GetConn();
 	}
 	
 	/*
 	 * 构造方法2
-	 * 无实例概念，针对ACCESS类型数据库
+	 * 无实例概念，不设用户和密码，针对ACCESS类型数据库
 	 */
-	public DBUtils(String databasetype, String url, String username,
-			String password) {
+	public DBUtils(String databasetype, String url) {
 		this.databasetype = databasetype;
 		this.url = url;
-		this.username = username;
-		this.password = password;
 	}
 	
 	/*
@@ -93,9 +91,13 @@ public class DBUtils {
 		}
 		
 		try{
-			conn = DriverManager.getConnection(connurl, username, password);
+			if ("access".equals(databasetype)) {
+				conn = DriverManager.getConnection(connurl);
+			}else {
+				conn = DriverManager.getConnection(connurl, username, password);
+			}		
 			 if(conn != null && !conn.isClosed())
-				 logger.info("数据库连接成功！");
+				 logger.info(conn.getSchema() + "数据库连接成功！");
 		}catch(SQLException e){  
 			e.printStackTrace();
 		}
@@ -104,12 +106,12 @@ public class DBUtils {
 	
 	//关闭所有连接
 	public void ConnClose(){
-		if (rs!=null)
-			try{
-				rs.close();
-			}catch(SQLException e){
-				e.printStackTrace();  
-			}
+//		if (rs!=null)
+//			try{
+//				rs.close();
+//			}catch(SQLException e){
+//				e.printStackTrace();  
+//			}
 		
 		if (ps!=null)
 			try{
@@ -129,11 +131,12 @@ public class DBUtils {
 	
 	//获取整个查询结果
 	public ResultSet Query(String sql){
-		conn = GetConn();
 		try{
-			ps = conn.createStatement();
+			ps = GetConn().createStatement();
 			rs = ps.executeQuery(sql);
-			System.out.println("查询成功！");
+			if (!rs.wasNull()) {
+				logger.info("查询成功");
+			}
 		}catch (SQLException e){
 			e.printStackTrace(); 
 		}
@@ -145,7 +148,7 @@ public class DBUtils {
 		List<String> list = new ArrayList<String>();
 	       String[] farms = null;
 		try {
-			ps = conn.createStatement();
+			ps = GetConn().createStatement();
 			rs = ps.executeQuery(sql);
 			while (rs.next()) {
 				String farm = (rs.getString(column));
@@ -162,18 +165,23 @@ public class DBUtils {
 	 // 单纯执行sql，无返回结果，例如insert
 	public void excutesql(String sql) {
 		try{
-			ps = conn.createStatement();
+			ps = GetConn().createStatement();
 			ps.executeQuery(sql);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
    
-	//DataAssert()重载1，获取单表单个字段的查询结果，和期望值对比，返回验证结果
-	public void DataAssert(String sql, String qycolumn, String etresult){
+	/*
+	 * DataAssert()
+	 * 验证单表单个字段的查询结果，和期望值对比，返回验证结果
+	 * 相等：true ，不相等：false
+	 */
+	public boolean DataAssert(String sql, String qycolumn, String etresult){
 		String qyresult = null;
+		boolean a;
 		try{
-			ps = conn.createStatement();
+			ps = GetConn().createStatement();
 			rs = ps.executeQuery(sql);
 			while (rs.next()){
 				qyresult = rs.getString(qycolumn);
@@ -183,52 +191,21 @@ public class DBUtils {
 			e.printStackTrace(); 
 		}
 		if(qyresult.equals(etresult))
-			logger.info("数据验证通过");
+			a = true;
 		else
-			logger.info("数据验证不通过");
+			a = false;
+		return a;
 	}
 	
-	//DataAssert()重载2，获取两个表单个字段的结果进行对比
-	public void DataAssert(String zbsql,String zbcolumn,String bbsql,String bbcolumn){
-		double zbresultf = 0;
-		double bbresultf = 0;
-		
-		try{
-			ps = conn.createStatement();
-			ResultSet zbrs = ps.executeQuery(zbsql);
-			while (zbrs.next()){
-				double zbresult = zbrs.getFloat(zbcolumn);
-				BigDecimal  bd1 = new BigDecimal(zbresult);  
-				zbresultf = bd1.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
-			}	
-		}catch (SQLException e){
-			e.printStackTrace(); 
-		}
-		
-		try{
-			ps = conn.createStatement();
-			ResultSet bbrs = ps.executeQuery(bbsql);
-				while (bbrs.next()){
-					double bbresult = bbrs.getFloat(bbcolumn);
-					BigDecimal  bd2 = new BigDecimal(bbresult);  
-					bbresultf = bd2.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();  
-				}
-		}catch (SQLException e){
-			e.printStackTrace(); 
-		}
-		
-		if(bbresultf == zbresultf)
-			logger.info(bbcolumn + "----------" + "passed");
-		else
-			logger.info(bbcolumn + "---------- " + "failed");
-	}
-	
-	//DataAssert()重载3,获取两个表两组数据的关联对比
+	/*
+	 * DataAssert()
+	 * 验证两个表两组数据的关联对比
+	 */
 	public void DataAssert(String key, String zbsql,String zbcolumn,String bbsql,String bbcolumn){
 		 Map<String,Float> zbmap = new HashMap<String,Float>();
 		 Map<String,Float> bbmap = new HashMap<String,Float>();
 		 try{
-				ps = conn.createStatement();
+				ps = GetConn().createStatement();
 				ResultSet zbrs = ps.executeQuery(zbsql);
 				 while (zbrs.next()){
 							zbmap.put(zbrs.getString(key),zbrs.getFloat(zbcolumn));
@@ -238,7 +215,7 @@ public class DBUtils {
 			}
 		 
 		 try{
-				ps = conn.createStatement();
+				ps = GetConn().createStatement();
 				ResultSet bbrs = ps.executeQuery(bbsql);
 				 while (bbrs.next()){
 							bbmap.put(bbrs.getString(key),bbrs.getFloat(bbcolumn));

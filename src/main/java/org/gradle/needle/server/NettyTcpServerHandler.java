@@ -7,21 +7,22 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
-	int protocolid;
+	int protocolid = 1907;
 	
 	public NettyTcpServerHandler(){
 		
 	}
 	
-	public NettyTcpServerHandler(int protocolid){
-		this.protocolid = protocolid;
-	}
+//	public NettyTcpServerHandler(int protocolid){
+//		this.protocolid = protocolid;
+//	}
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception{
-		DataEngine de = new DataEngine(protocolid);
-		System.out.println(ctx.channel().remoteAddress() + msg.toString());
-		String sReturnString = de.getCacheValue(msg.toString());
-		ctx.writeAndFlush("欢迎使用tcp服务端。。。"  + sReturnString);
+		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
+		System.out.println(ctx.channel().remoteAddress() + "\n" + msg.toString());
+		String sReturnString = de.getCacheValue();
+		System.out.println(sReturnString);
+		ctx.writeAndFlush(sReturnString);
 		
 	}
 	
