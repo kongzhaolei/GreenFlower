@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
-	int protocolid = 158111;
+	int protocolid = 1907;
 	
 	public NettyTcpServerHandler(){
 		
@@ -23,12 +23,11 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 		String sReturnString = de.getCacheValue();
 		System.out.println(sReturnString);
 		ctx.writeAndFlush(sReturnString);
-		
+		ctx.close();	
 	}
 	
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause){
 		cause.printStackTrace();
 		ctx.close();
 	}
-
 }

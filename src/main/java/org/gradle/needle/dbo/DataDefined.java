@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -59,8 +57,9 @@ public class DataDefined {
 	 * 获取data库data表典型维数据集
 	 */
 	protected ResultSet getDataSetOnCmdname() {
-		String sql2 = "SELECT * FROM DATA WHERE compath = " + "'"
-				+ getCompathOnCmdname() + "'";
+		String sql2 = "SELECT * FROM prodata Where protocolid = " + protocolid
+				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
+				+ " ORDER BY pathid ASC";
 
 		ResultSet dataSet = null;
 
@@ -77,29 +76,14 @@ public class DataDefined {
 	 * 根据前置的GWSOCKET命令获取对应的compath
 	 */
 	protected String getCompathOnCmdname() {
-		String compath = null;
-		String sql = "select * from tocmd";
-
-		Map<String, String> cmdMap = new HashMap<String, String>();
-
-		try {
-			ResultSet rs = dataDb.Query(sql);
-			while (rs.next()) {
-				cmdMap.put(rs.getString("cmdname").trim(),
-						rs.getString("compath'").trim());
-			}
-			if (cmdMap.containsKey(cmdname)) {
-				compath = cmdMap.get(cmdname);
-			} else {
-				logger.info("无法响应该指令： " + cmdname);
-			}
-	//		dataDb.ConnClose();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		String compath = GlobalSettings.getProperty(cmdname);
+		String compathString = null;
+		if (null != compath) {
+			compathString = compath;
+		}else {
+			logger.info("无法响应该指令： " + cmdname);
 		}
-
-		return compath;
-
+		return compathString;
 	}
 
 	/*

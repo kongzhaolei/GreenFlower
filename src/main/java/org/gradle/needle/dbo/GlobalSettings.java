@@ -49,6 +49,7 @@ public class GlobalSettings {
 	public static int A_key = Integer.parseInt((prop.getProperty("A_key", "")));
 	public static int A_value = Integer.parseInt((prop.getProperty("A_value", "")));
 	public static int Result = Integer.parseInt((prop.getProperty("Result", "")));
+	
 
 	public static String getProperty(String property) {
 		return prop.getProperty(property);
