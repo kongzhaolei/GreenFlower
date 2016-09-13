@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
-	int protocolid = 1907;
+	int protocolid = 158111;
 	
 	public NettyTcpServerHandler(){
 		

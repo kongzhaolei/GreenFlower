@@ -54,7 +54,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * 获取data库data表典型维数据集
+	 * 获取data库prodata表典型维数据集
 	 */
 	protected ResultSet getDataSetOnCmdname() {
 		String sql2 = "SELECT * FROM prodata Where protocolid = " + protocolid
@@ -211,7 +211,7 @@ public class DataDefined {
 	 */
 	public String stopModeRefresh() {
 		
-		return null;
+		return "4";
 
 	}
 
@@ -220,7 +220,7 @@ public class DataDefined {
 	 */
 	public String limitModeRefresh() {
 		
-		return null;
+		return "1";
 
 	}
 

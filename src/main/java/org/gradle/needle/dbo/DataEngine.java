@@ -19,12 +19,11 @@ public class DataEngine {
 	}
 
 	/*
-	 * 根据GWSOCKET命令获取cachevalue
-	 * cachevalue根据varpath对应的dttype动态生成
+	 * 根据GWSOCKET命令获取cachevalue cachevalue根据varpath对应的dttype动态生成
 	 */
 	public String getCacheValue() {
 		String sReturn = null;
-		DataDefined df = new DataDefined(protocolid,cmdname);
+		DataDefined df = new DataDefined(protocolid, cmdname);
 		Map<String, String> varpathMap = new HashMap<String, String>();
 		try {
 			ResultSet configSet = df.getConfigSetOnCmdname();
@@ -32,18 +31,17 @@ public class DataEngine {
 			while (dataSet.next()) {
 				varpathMap.put(dataSet.getString("iecpath").trim(),
 						df.getDynamicValue(dataSet));
-//				varpathMap.put(rSet2.getString("iecpath").trim(),
-//						"1");
 			}
 
 			if (!configSet.wasNull()) {
 				while (configSet.next()) {
-					if (varpathMap.containsKey(configSet.getString("iecpath").trim())) {
-						sReturn += varpathMap.get(configSet.getString("iecpath"))
-								+ ";";
+					if (varpathMap.containsKey(configSet.getString("iecpath")
+							.trim())) {
+						sReturn += varpathMap.get(configSet
+								.getString("iecpath")) + ";";
 					} else {
 						logger.info("DataSet不存在此IEC量： "
-								+ configSet.getString("iecpath") + "------" 
+								+ configSet.getString("iecpath") + "------"
 								+ configSet.getString("descrcn"));
 					}
 				}
@@ -60,12 +58,13 @@ public class DataEngine {
 				sReturn.length() - 1);
 
 	}
-	
+
 	/*
 	 * 根据协议自定义停机模式字
 	 */
 	public void setStopModeWord() {
 		
+
 	}
 
 }
