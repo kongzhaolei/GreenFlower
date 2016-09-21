@@ -1,6 +1,9 @@
 package org.gradle.needle.server;
 
+import org.apache.log4j.Logger;
 import org.gradle.needle.dbo.DataEngine;
+
+
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -8,6 +11,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
 	int protocolid = 158111;
+	private static Logger logger = Logger
+			.getLogger(NettyTcpServerHandler.class.getName());
 	
 	public NettyTcpServerHandler(){
 		
@@ -21,13 +26,15 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
 		System.out.println(ctx.channel().remoteAddress() + "\n" + msg.toString());
 		String sReturnString = de.getCacheValue();
-		System.out.println(sReturnString);
 		ctx.writeAndFlush(sReturnString);
-		ctx.close();	
+		System.out.println(sReturnString);
 	}
 	
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause){
-		cause.printStackTrace();
-		ctx.close();
+		if (this == ctx.pipeline().last()) {
+			logger.warn(cause.getCause());
+			ctx.close();
+		}
+		ctx.writeAndFlush(cause); 
 	}
 }

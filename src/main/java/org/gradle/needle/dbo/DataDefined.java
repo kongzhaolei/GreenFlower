@@ -1,6 +1,5 @@
 package org.gradle.needle.dbo;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -145,11 +144,12 @@ public class DataDefined {
 					
 				case "FIXBOOL":
 					rString = Boolean.toString(ranBoolean());
+					//rString = Integer.toString(ranCoin());
 					break;
 				
 					//暂时赋值initvalue
 				case "DYNAMIC":
-					rString = dataSet.getString("initvalue");
+					rString = Integer.toString(ranCoin());
 					break;
 					
 				case "FAULTMAIN":
@@ -161,7 +161,8 @@ public class DataDefined {
 					break;
 					
 				case "TOTAL":
-					rString = TotalRefresh();
+					//rString = TotalRefresh();
+					rString = dataSet.getString("initvalue");
 					break;
 					
 				case "STOPMODE":
@@ -195,7 +196,7 @@ public class DataDefined {
 	 */
 	private String mainFaultRefresh() {
 		
-		return null;
+		return "0";
 	}
 
 	/*
@@ -203,7 +204,7 @@ public class DataDefined {
 	 */
 	private String getStatus() {
 		
-		return null;
+		return "5";
 	}
 
 	/*
@@ -220,7 +221,7 @@ public class DataDefined {
 	 */
 	public String limitModeRefresh() {
 		
-		return "1";
+		return "0";
 
 	}
 
@@ -240,10 +241,11 @@ public class DataDefined {
 	/*
 	 * 生成随机数位于max和min之间的方法
 	 */
-	public static String ranDouble(String max, String min) {
-		BigDecimal bd = new BigDecimal(Math.random() * Integer.parseInt(max)
-				+ Integer.parseInt(min));
-		 DecimalFormat df = new DecimalFormat("#.00");
+	public static String ranDouble(String min, String max) {
+		Random random  = new Random();
+		int bd = random.nextInt(Integer.parseInt(max) - Integer.parseInt(min))
+				+ Integer.parseInt(min);
+		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(bd).toString();
 	}
 
@@ -253,5 +255,13 @@ public class DataDefined {
 	public static boolean ranBoolean() {
 		Random x = new Random();
 		return x.nextBoolean();
+	}
+	
+	/*
+	 * 生成随机0或1
+	 */
+	public static int ranCoin() {
+		Random rand = new Random();
+		return rand.nextInt(2);
 	}
 }
