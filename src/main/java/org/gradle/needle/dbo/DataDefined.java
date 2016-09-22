@@ -86,8 +86,9 @@ public class DataDefined {
 	}
 
 	/*
-	 * 根据dttype生成CacheValue 
-	 * 1 FIXED 固定值，initvalue
+	 * 
+	 * 根据col_1生成CacheValue 
+	 * 1 FIXED 固定值，col_2
 	 * 2 FIXBOOL 随机布尔   ranBoolean()
 	 * 3 DYNAMIC  动态计算
 	 * 4 FAULTMAIN  主故障
@@ -105,11 +106,11 @@ public class DataDefined {
 	 */
 	public String getDynamicValue(ResultSet dataSet) throws SQLException {
 		String rString = "null";
-		String dttype = dataSet.getString("dttype");
+		String dttype = dataSet.getString("col_1");
 		
 				switch (dttype.trim()) {
 				case "FIXED":
-					rString = dataSet.getString("initvalue");
+					rString = dataSet.getString("col_2");
 					break;
 
 				case "YEAR":
@@ -138,8 +139,8 @@ public class DataDefined {
 
 				case "RANDOM":
 					rString = ranDouble(
-							dataSet.getString("initvalue").split(",")[0],
-							dataSet.getString("initvalue").split(",")[1]);
+							dataSet.getString("col_2").split(",")[0],
+							dataSet.getString("col_2").split(",")[1]);
 					break;
 					
 				case "FIXBOOL":
@@ -147,7 +148,7 @@ public class DataDefined {
 					//rString = Integer.toString(ranCoin());
 					break;
 				
-					//暂时赋值initvalue
+					//暂时赋值col_2
 				case "DYNAMIC":
 					rString = Integer.toString(ranCoin());
 					break;
@@ -162,7 +163,7 @@ public class DataDefined {
 					
 				case "TOTAL":
 					//rString = TotalRefresh();
-					rString = dataSet.getString("initvalue");
+					rString = dataSet.getString("col_2");
 					break;
 					
 				case "STOPMODE":
@@ -174,7 +175,7 @@ public class DataDefined {
 					break;
 					
 				default:
-					rString = dataSet.getString("initvalue");
+					rString = dataSet.getString("col_2");
 					break;
 				}
 				

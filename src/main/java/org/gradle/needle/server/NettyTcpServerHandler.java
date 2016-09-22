@@ -10,7 +10,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
-	int protocolid = 158111;
+	int protocolid = 158112;
 	private static Logger logger = Logger
 			.getLogger(NettyTcpServerHandler.class.getName());
 	
