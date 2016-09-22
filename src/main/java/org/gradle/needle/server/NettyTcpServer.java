@@ -2,6 +2,8 @@ package org.gradle.needle.server;
 
 import java.net.InetSocketAddress;
 
+import org.gradle.needle.dbo.GlobalSettings;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -16,6 +18,7 @@ import io.netty.handler.codec.string.StringEncoder;
 public class NettyTcpServer {
 
 	private int port;
+	int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 
 	public NettyTcpServer(int port) {
 		this.port = port;
@@ -35,8 +38,8 @@ public class NettyTcpServer {
 						protected void initChannel(SocketChannel ch) {
 							ch.pipeline().addLast("decoder", new StringDecoder());
 							ch.pipeline().addLast("encoder", new StringEncoder());
-							ch.pipeline().addLast(new NettyTcpServerHandler(158112));
-							ch.pipeline().addLast(new NettyTcpServerHandler(159112));
+							ch.pipeline().addLast(new NettyTcpServerHandler(protocolid));
+
 							
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)
