@@ -35,7 +35,9 @@ public class NettyTcpServer {
 						protected void initChannel(SocketChannel ch) {
 							ch.pipeline().addLast("decoder", new StringDecoder());
 							ch.pipeline().addLast("encoder", new StringEncoder());
-							ch.pipeline().addLast(new NettyTcpServerHandler());
+							ch.pipeline().addLast(new NettyTcpServerHandler(158112));
+							ch.pipeline().addLast(new NettyTcpServerHandler(159112));
+							
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)
 					.childOption(ChannelOption.SO_KEEPALIVE, true);

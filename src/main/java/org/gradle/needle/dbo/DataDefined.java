@@ -45,7 +45,7 @@ public class DataDefined {
 
 		try {
 			configSet = configDb.Query(sql1);
-	//		configDb.ConnClose();
+			// configDb.ConnClose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -64,7 +64,7 @@ public class DataDefined {
 
 		try {
 			dataSet = dataDb.Query(sql2);
-	//		dataDb.ConnClose();
+			// dataDb.ConnClose();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,7 +79,7 @@ public class DataDefined {
 		String compathString = null;
 		if (null != compath) {
 			compathString = compath;
-		}else {
+		} else {
 			logger.info("无法响应该指令： " + cmdname);
 		}
 		return compathString;
@@ -87,102 +87,87 @@ public class DataDefined {
 
 	/*
 	 * 
-	 * 根据col_1生成CacheValue 
-	 * 1 FIXED 固定值，col_2
-	 * 2 FIXBOOL 随机布尔   ranBoolean()
-	 * 3 DYNAMIC  动态计算
-	 * 4 FAULTMAIN  主故障
-	 * 5 STATUS   风机状态
-	 * 6 YEAR 年 
-	 * 7 MONTH 月 
-	 * 8 DAY 日 
-	 * 9 HOUR 时
-	 *10 MINUTE 分 
-	 *11 SECOND 秒 
-	 *12 RANDOM 随机数 ranDouble() 
-	 *13 TOTAL   遥脉量
-	 *14 STOPMODE 停机模式字/状态模式字
-	 *15 LIMITMODE 限功率模式字
+	 * 根据col_1生成CacheValue 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
+	 * DYNAMIC 动态计算 4 FAULTMAIN 主故障 5 STATUS 风机状态 6 YEAR 年 7 MONTH 月 8 DAY 日 9
+	 * HOUR 时10 MINUTE 分11 SECOND 秒12 RANDOM 随机数 ranDouble()13 TOTAL 遥脉量14
+	 * STOPMODE 停机模式字/状态模式字15 LIMITMODE 限功率模式字
 	 */
 	public String getDynamicValue(ResultSet dataSet) throws SQLException {
 		String rString = "null";
 		String dttype = dataSet.getString("col_1");
-		
-				switch (dttype.trim()) {
-				case "FIXED":
-					rString = dataSet.getString("col_2");
-					break;
 
-				case "YEAR":
-					rString = Integer.toString(Calendar.YEAR);
-					break;
+		switch (dttype.trim()) {
+		case "FIXED":
+			rString = dataSet.getString("col_2");
+			break;
 
-				case "MONTH":
-					rString = Integer.toString(Calendar.MONTH);
-					break;
+		case "YEAR":
+			rString = Integer.toString(Calendar.YEAR);
+			break;
 
-				case "DAY":
-					rString = Integer.toString(Calendar.DATE);
-					break;
+		case "MONTH":
+			rString = Integer.toString(Calendar.MONTH);
+			break;
 
-				case "HOUR":
-					rString = Integer.toString(Calendar.HOUR);
-					break;
+		case "DAY":
+			rString = Integer.toString(Calendar.DATE);
+			break;
 
-				case "MINUTE":
-					rString = Integer.toString(Calendar.MINUTE);
-					break;
+		case "HOUR":
+			rString = Integer.toString(Calendar.HOUR);
+			break;
 
-				case "SECOND":
-					rString = Integer.toString(Calendar.SECOND);
-					break;
+		case "MINUTE":
+			rString = Integer.toString(Calendar.MINUTE);
+			break;
 
-				case "RANDOM":
-					rString = ranDouble(
-							dataSet.getString("col_2").split(",")[0],
-							dataSet.getString("col_2").split(",")[1]);
-					break;
-					
-				case "FIXBOOL":
-					rString = Boolean.toString(ranBoolean());
-					//rString = Integer.toString(ranCoin());
-					break;
-				
-					//暂时赋值col_2
-				case "DYNAMIC":
-					rString = Integer.toString(ranCoin());
-					break;
-					
-				case "FAULTMAIN":
-					rString = mainFaultRefresh();
-					break;
-					
-				case "STATUS":
-					rString = getStatus();
-					break;
-					
-				case "TOTAL":
-					//rString = TotalRefresh();
-					rString = dataSet.getString("col_2");
-					break;
-					
-				case "STOPMODE":
-					rString = stopModeRefresh();
-					break;
-					
-				case "LIMITMODE":
-					rString = limitModeRefresh();
-					break;
-					
-				default:
-					rString = dataSet.getString("col_2");
-					break;
-				}
-				
+		case "SECOND":
+			rString = Integer.toString(Calendar.SECOND);
+			break;
+
+		case "RANDOM":
+			rString = ranDouble(dataSet.getString("col_2").split(",")[0],
+					dataSet.getString("col_2").split(",")[1]);
+			break;
+
+		case "FIXBOOL":
+			rString = Boolean.toString(ranBoolean());
+			// rString = Integer.toString(ranCoin());
+			break;
+
+		// 暂时赋值col_2
+		case "DYNAMIC":
+			rString = Integer.toString(ranCoin());
+			break;
+
+		case "FAULTMAIN":
+			rString = mainFaultRefresh();
+			break;
+
+		case "STATUS":
+			rString = getStatus();
+			break;
+
+		case "TOTAL":
+			// rString = TotalRefresh();
+			rString = dataSet.getString("col_2");
+			break;
+
+		case "STOPMODE":
+			rString = stopModeRefresh();
+			break;
+
+		case "LIMITMODE":
+			rString = limitModeRefresh();
+			break;
+
+		default:
+			rString = dataSet.getString("col_2");
+			break;
+		}
+
 		return rString;
 	}
-	
-	
 
 	/*
 	 * 遥脉量计算
@@ -196,7 +181,7 @@ public class DataDefined {
 	 * 主故障动态刷新
 	 */
 	private String mainFaultRefresh() {
-		
+
 		return "0";
 	}
 
@@ -204,7 +189,7 @@ public class DataDefined {
 	 * 风机状态的动态刷新
 	 */
 	private String getStatus() {
-		
+
 		return "5";
 	}
 
@@ -212,7 +197,7 @@ public class DataDefined {
 	 * 停机模式字的动态刷新
 	 */
 	public String stopModeRefresh() {
-		
+
 		return "4";
 
 	}
@@ -221,7 +206,7 @@ public class DataDefined {
 	 * 限功率模式字的动态刷新
 	 */
 	public String limitModeRefresh() {
-		
+
 		return "0";
 
 	}
@@ -243,9 +228,14 @@ public class DataDefined {
 	 * 生成随机数位于max和min之间的方法
 	 */
 	public static String ranDouble(String min, String max) {
-		Random random  = new Random();
+		Random random = new Random();
 		int bd = random.nextInt(Integer.parseInt(max) - Integer.parseInt(min))
 				+ Integer.parseInt(min);
+		
+//		double bt = Integer.parseInt(min)
+//				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random()
+//						.nextDouble());
+		
 		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(bd).toString();
 	}
@@ -257,7 +247,7 @@ public class DataDefined {
 		Random x = new Random();
 		return x.nextBoolean();
 	}
-	
+
 	/*
 	 * 生成随机0或1
 	 */

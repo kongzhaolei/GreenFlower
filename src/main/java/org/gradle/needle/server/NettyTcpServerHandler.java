@@ -10,7 +10,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	
-	int protocolid = 158112;
+	int protocolid;
 	private static Logger logger = Logger
 			.getLogger(NettyTcpServerHandler.class.getName());
 	
@@ -18,9 +18,9 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 		
 	}
 	
-//	public NettyTcpServerHandler(int protocolid){
-//		this.protocolid = protocolid;
-//	}
+	public NettyTcpServerHandler(int protocolid){
+		this.protocolid = protocolid;
+	}
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception{
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
