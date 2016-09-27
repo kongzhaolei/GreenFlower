@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.gradle.needle.dbo.GlobalSettings;
+import org.gradle.needle.dao.GlobalSettings;
 
 import net.sf.jxls.util.Util;
 

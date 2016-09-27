@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dbo.GlobalSettings;
+import org.gradle.needle.dao.GlobalSettings;
 
 public class HttpResVer {
 	private static Logger logger = Logger.getLogger(HttpResVer.class.getName());

@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.gradle.needle.dbo;
+package org.gradle.needle.dao;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

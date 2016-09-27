@@ -2,7 +2,7 @@ package org.gradle.needle.server;
 
 import java.net.InetSocketAddress;
 
-import org.gradle.needle.dbo.GlobalSettings;
+import org.gradle.needle.dao.GlobalSettings;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

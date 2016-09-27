@@ -1,22 +1,35 @@
-package org.gradle.needle.dbo;
+package org.gradle.needle.dao;
 
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 
 public class DataEngine {
 
 	int protocolid;
+	int list_n;
 	String cmdname;
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
-	// 构造方法,初始化协议号
+	/*
+	 * 构造方法,初始化协议号
+	 */
 	public DataEngine(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
+	}
+	
+	/*
+	 * 空构造方法
+	 */
+	public DataEngine() {
+		// TODO 自动生成的构造函数存根
 	}
 
 	/*
@@ -73,10 +86,18 @@ public class DataEngine {
 	}
 	
 	/*
-	 * 定时器
+	 * 模式字定时器
 	 */
 	public void timerStart() {
-		
+		long interval = 3000;
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask() {			
+			@Override
+			public void run() {
+				list_n++;
+			}
+		};
+		timer.scheduleAtFixedRate(task, new Date(), interval);
 	}
 
 	/*

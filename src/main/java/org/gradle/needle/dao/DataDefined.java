@@ -1,9 +1,11 @@
-package org.gradle.needle.dbo;
+package org.gradle.needle.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -31,6 +33,32 @@ public class DataDefined {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 
+	}
+	
+	/*
+	 * 空构造方法
+	 */
+	public DataDefined() {
+		// TODO 自动生成的构造函数存根
+	}
+	
+	/*
+	 * 获取停机模式字列表
+	 */
+	protected List<String> getStopModeWordList() {
+		List<String> list = new ArrayList<String>();
+		String sql = "SELECT * FROM pathdescr WHERE protocolid = " + protocolid 
+				+ " AND iecpath = 'WTUR.Other.Wn.I16.StopModeWord'";
+		
+		try {
+			ResultSet rs = configDb.Query(sql);
+			while (rs.next()) {
+				list.add(rs.getString("iecvalue"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	/*
@@ -170,14 +198,6 @@ public class DataDefined {
 	}
 
 	/*
-	 * 遥脉量计算
-	 */
-	private String TotalRefresh() {
-		// TODO 自动生成的方法存根
-		return null;
-	}
-
-	/*
 	 * 主故障动态刷新
 	 */
 	private String mainFaultRefresh() {
@@ -228,16 +248,17 @@ public class DataDefined {
 	 * 生成随机数位于max和min之间的方法
 	 */
 	public static String ranDouble(String min, String max) {
-		Random random = new Random();
-		int bd = random.nextInt(Integer.parseInt(max) - Integer.parseInt(min))
-				+ Integer.parseInt(min);
 		
-//		double bt = Integer.parseInt(min)
-//				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random()
-//						.nextDouble());
+//		Random random = new Random();
+//		int bd = random.nextInt(Integer.parseInt(max) - Integer.parseInt(min))
+//				+ Integer.parseInt(min);
+		
+		double bt = Integer.parseInt(min)
+				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random()
+						.nextDouble());
 		
 		DecimalFormat df = new DecimalFormat("#.00");
-		return df.format(bd).toString();
+		return df.format(bt).toString();
 	}
 
 	/*
