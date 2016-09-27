@@ -12,7 +12,6 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	private static Logger logger = Logger.getLogger(NettyTcpServerHandler.class
 			.getName());
 
-
 	public NettyTcpServerHandler(int protocolid) {
 		this.protocolid = protocolid;
 	}
@@ -20,8 +19,8 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
-		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid
-				+ "\n" + msg.toString());
+		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid + "\n"
+				+ msg.toString());
 		String sReturnString = de.getCacheValue();
 		ctx.writeAndFlush(sReturnString);
 		logger.info(sReturnString);
