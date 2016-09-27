@@ -71,6 +71,13 @@ public class DataEngine {
 		}
 		return sReturn;
 	}
+	
+	/*
+	 * 定时器
+	 */
+	public void timerStart() {
+		
+	}
 
 	/*
 	 * 根据协议自定义停机模式字
