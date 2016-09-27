@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 public class DataEngine {
 
 	int protocolid;
-	int list_n;
+	int list_n = 0;
 	String cmdname;
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
@@ -24,7 +24,7 @@ public class DataEngine {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 	}
-	
+
 	/*
 	 * 空构造方法
 	 */
@@ -44,7 +44,7 @@ public class DataEngine {
 			if ("GETCURRENTERROR".equals(cmdname)) {
 				sReturn = sFaultString;
 				logger.info("已发送故障号" + sFaultString);
-			}else{
+			} else {
 				ResultSet configSet = df.getConfigSetOnCmdname();
 				ResultSet dataSet = df.getDataSetOnCmdname();
 				while (dataSet.next()) {
@@ -54,19 +54,20 @@ public class DataEngine {
 
 				if (!configSet.wasNull()) {
 					while (configSet.next()) {
-						while(n < configSet.getInt("ascflg")){
-							sReturn = sReturn+";";
+						while (n < configSet.getInt("ascflg")) {
+							sReturn = sReturn + ";";
 							n++;
 						}
-						
-						if (varpathMap.containsKey(configSet.getString("iecpath")
-								.trim())) {
+
+						if (varpathMap.containsKey(configSet.getString(
+								"iecpath").trim())) {
 							sReturn += varpathMap.get(configSet
 									.getString("iecpath")) + ";";
 							n++;
 						} else {
 							logger.info("DataSet不存在此IEC量： "
-									+ configSet.getString("iecpath") + " ------ "
+									+ configSet.getString("iecpath")
+									+ " ------ "
 									+ configSet.getString("descrcn"));
 						}
 					}
@@ -74,37 +75,69 @@ public class DataEngine {
 					logger.info(protocolid + " 协议号不匹配，arraylist不存在该compath： "
 							+ df.getCompathOnCmdname());
 				}
-				sReturn  = sReturn.substring(sReturn.indexOf("null") + 4,
+				sReturn = sReturn.substring(sReturn.indexOf("null") + 4,
 						sReturn.length() - 1);
-				logger.info(df.getCompathOnCmdname() + " 数组已发送" 
-						+  sReturn.split(";").length + "个IEC量");
+				logger.info(df.getCompathOnCmdname() + " 数组已发送"
+						+ sReturn.split(";").length + "个IEC量");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sReturn;
 	}
-	
+
 	/*
-	 * 模式字定时器
+	 * 定时器实现停机模式字号迭代
 	 */
 	public void timerStart() {
-		long interval = 3000;
+		long interval = 30000;
 		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {			
+		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				list_n++;
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);
+		if (list_n > new DataDefined().getStopModeWordList().size()) {
+			timer.cancel();
+			list_n = 0;
+		}
 	}
 
 	/*
-	 * 根据协议自定义停机模式字
+	 * 停机模式字动态刷新
 	 */
-	public void setStopModeWord() {
-		
+	public String getStopModeWord() {
+		DataDefined ddf = new DataDefined();
+		String stopmodeword = ddf.getStopModeWordList().get(list_n);
+		logger.info("当前停机模式字为： " + stopmodeword + list_n);
+		return stopmodeword;
+
+	}
+	
+	/*
+	 * 主故障动态刷新
+	 */
+	public String getMainFault() {
+
+		return "0";
+	}
+
+	/*
+	 * 风机状态的动态刷新
+	 */
+	public String getStatus() {
+
+		return "5";
+	}
+
+	/*
+	 * 限功率模式字的动态刷新
+	 */
+	public String getLimitMode() {
+
+		return "0";
 
 	}
 

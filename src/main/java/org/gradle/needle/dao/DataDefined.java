@@ -46,19 +46,19 @@ public class DataDefined {
 	 * 获取停机模式字列表
 	 */
 	protected List<String> getStopModeWordList() {
-		List<String> list = new ArrayList<String>();
+		List<String> lists = new ArrayList<String>();
 		String sql = "SELECT * FROM pathdescr WHERE protocolid = " + protocolid 
 				+ " AND iecpath = 'WTUR.Other.Wn.I16.StopModeWord'";
 		
 		try {
 			ResultSet rs = configDb.Query(sql);
 			while (rs.next()) {
-				list.add(rs.getString("iecvalue"));
+				lists.add(rs.getString("iecvalue"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return lists;
 	}
 
 	/*
@@ -115,7 +115,8 @@ public class DataDefined {
 
 	/*
 	 * 
-	 * 根据col_1生成CacheValue 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
+	 * 根据col_1生成CacheValue 
+	 * 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
 	 * DYNAMIC 动态计算 4 FAULTMAIN 主故障 5 STATUS 风机状态 6 YEAR 年 7 MONTH 月 8 DAY 日 9
 	 * HOUR 时10 MINUTE 分11 SECOND 秒12 RANDOM 随机数 ranDouble()13 TOTAL 遥脉量14
 	 * STOPMODE 停机模式字/状态模式字15 LIMITMODE 限功率模式字
@@ -160,7 +161,6 @@ public class DataDefined {
 
 		case "FIXBOOL":
 			rString = Boolean.toString(ranBoolean());
-			// rString = Integer.toString(ranCoin());
 			break;
 
 		// 暂时赋值col_2
@@ -169,11 +169,11 @@ public class DataDefined {
 			break;
 
 		case "FAULTMAIN":
-			rString = mainFaultRefresh();
+			rString = new DataEngine().getMainFault();
 			break;
 
 		case "STATUS":
-			rString = getStatus();
+			rString = new DataEngine().getStatus();
 			break;
 
 		case "TOTAL":
@@ -182,11 +182,11 @@ public class DataDefined {
 			break;
 
 		case "STOPMODE":
-			rString = stopModeRefresh();
+			rString = new DataEngine().getStopModeWord();
 			break;
 
 		case "LIMITMODE":
-			rString = limitModeRefresh();
+			rString = new DataEngine().getLimitMode();
 			break;
 
 		default:
@@ -195,40 +195,6 @@ public class DataDefined {
 		}
 
 		return rString;
-	}
-
-	/*
-	 * 主故障动态刷新
-	 */
-	private String mainFaultRefresh() {
-
-		return "0";
-	}
-
-	/*
-	 * 风机状态的动态刷新
-	 */
-	private String getStatus() {
-
-		return "5";
-	}
-
-	/*
-	 * 停机模式字的动态刷新
-	 */
-	public String stopModeRefresh() {
-
-		return "4";
-
-	}
-
-	/*
-	 * 限功率模式字的动态刷新
-	 */
-	public String limitModeRefresh() {
-
-		return "0";
-
 	}
 
 	/*

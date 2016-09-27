@@ -1,7 +1,6 @@
 package org.gradle.needle.util;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +14,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class DBUtils {
-	private Connection conn=null;   //数据库连接对象
-	private Statement ps=null;  //数据库预编译对象
-	private ResultSet rs=null;   //查询结果集
 	private static Logger logger = Logger.getLogger(DBUtils.class
 			.getName());
 	String url;
@@ -42,7 +38,6 @@ public class DBUtils {
 		this.instance = instance;
 		this.username = username;
 		this.password = password;
-		conn = GetConn();
 	}
 	
 	/*
@@ -60,7 +55,8 @@ public class DBUtils {
 	 * 支持sqlserver，postgresql, oracle, access
 	 * 
 	 */
-	public Connection GetConn() {
+	public Statement GetConn() {
+		Statement conn = null;   //数据库预编译对象
 		try {
 			if ("sqlserver".equals(databasetype)) {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -92,12 +88,13 @@ public class DBUtils {
 		
 		try{
 			if ("access".equals(databasetype)) {
-				conn = DriverManager.getConnection(connurl);
+				conn = DriverManager.getConnection(connurl).createStatement();
+				
 			}else {
-				conn = DriverManager.getConnection(connurl, username, password);
+				conn = DriverManager.getConnection(connurl, username, password).createStatement();
 			}		
 			 if(conn != null && !conn.isClosed())
-				 logger.info(conn.getSchema() + "数据库连接成功！");
+				 logger.info(" 数据库连接成功！");
 		}catch(SQLException e){  
 			e.printStackTrace();
 		}
@@ -105,24 +102,10 @@ public class DBUtils {
 	}
 	
 	//关闭所有连接
-	public void ConnClose(){
-//		if (rs!=null)
-//			try{
-//				rs.close();
-//			}catch(SQLException e){
-//				e.printStackTrace();  
-//			}
-		
-		if (ps!=null)
+	public void ConnClose(){	
+		if (GetConn()!=null)
 			try{
-				ps.close();
-			}catch(SQLException e){
-				e.printStackTrace(); 
-			}
-		
-		if (conn!=null)
-			try{
-				conn.close();
+				GetConn().close();
 			}catch(SQLException e){
 				e.printStackTrace(); 
 			}
@@ -131,9 +114,9 @@ public class DBUtils {
 	
 	//获取整个查询结果
 	public ResultSet Query(String sql){
+		ResultSet rs = null;
 		try{
-			ps = GetConn().createStatement();
-			rs = ps.executeQuery(sql);
+			rs = GetConn().executeQuery(sql);
 			if (!rs.wasNull()) {
 				logger.info("查询成功");
 			}
@@ -147,9 +130,9 @@ public class DBUtils {
 	public String[] Query(String sql,String column) {
 		List<String> list = new ArrayList<String>();
 	       String[] farms = null;
-		try {
-			ps = GetConn().createStatement();
-			rs = ps.executeQuery(sql);
+	       ResultSet rs = null;
+			try{
+				rs = GetConn().executeQuery(sql);
 			while (rs.next()) {
 				String farm = (rs.getString(column));
 				list.add(farm);
@@ -165,8 +148,7 @@ public class DBUtils {
 	 // 单纯执行sql，无返回结果，例如insert
 	public void excutesql(String sql) {
 		try{
-			ps = GetConn().createStatement();
-			ps.executeQuery(sql);
+			GetConn().executeQuery(sql);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -180,9 +162,9 @@ public class DBUtils {
 	public boolean DataAssert(String sql, String qycolumn, String etresult){
 		String qyresult = null;
 		boolean a;
+		ResultSet rs = null;
 		try{
-			ps = GetConn().createStatement();
-			rs = ps.executeQuery(sql);
+			rs = GetConn().executeQuery(sql);
 			while (rs.next()){
 				qyresult = rs.getString(qycolumn);
 			}
@@ -204,9 +186,10 @@ public class DBUtils {
 	public void DataAssert(String key, String zbsql,String zbcolumn,String bbsql,String bbcolumn){
 		 Map<String,Float> zbmap = new HashMap<String,Float>();
 		 Map<String,Float> bbmap = new HashMap<String,Float>();
-		 try{
-				ps = GetConn().createStatement();
-				ResultSet zbrs = ps.executeQuery(zbsql);
+		 ResultSet zbrs = null;
+		 ResultSet bbrs = null;
+			try{
+				zbrs = GetConn().executeQuery(zbsql);
 				 while (zbrs.next()){
 							zbmap.put(zbrs.getString(key),zbrs.getFloat(zbcolumn));
 				 }
@@ -215,8 +198,7 @@ public class DBUtils {
 			}
 		 
 		 try{
-				ps = GetConn().createStatement();
-				ResultSet bbrs = ps.executeQuery(bbsql);
+				bbrs =  GetConn().executeQuery(bbsql);
 				 while (bbrs.next()){
 							bbmap.put(bbrs.getString(key),bbrs.getFloat(bbcolumn));
 				 }
