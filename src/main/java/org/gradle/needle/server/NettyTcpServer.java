@@ -2,6 +2,7 @@ package org.gradle.needle.server;
 
 import java.net.InetSocketAddress;
 
+import org.gradle.needle.dao.DataEngine;
 import org.gradle.needle.dao.GlobalSettings;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -18,7 +19,7 @@ import io.netty.handler.codec.string.StringEncoder;
 public class NettyTcpServer {
 
 	private int port;
-	int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+	static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 
 	public NettyTcpServer(int port) {
 		this.port = port;
@@ -36,11 +37,13 @@ public class NettyTcpServer {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 
 						protected void initChannel(SocketChannel ch) {
-							ch.pipeline().addLast("decoder", new StringDecoder());
-							ch.pipeline().addLast("encoder", new StringEncoder());
-							ch.pipeline().addLast(new NettyTcpServerHandler(protocolid));
+							ch.pipeline().addLast("decoder",
+									new StringDecoder());
+							ch.pipeline().addLast("encoder",
+									new StringEncoder());
+							ch.pipeline().addLast(
+									new NettyTcpServerHandler(protocolid));
 
-							
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)
 					.childOption(ChannelOption.SO_KEEPALIVE, true);
@@ -57,10 +60,11 @@ public class NettyTcpServer {
 
 	public static void main(String[] args) throws Exception {
 		int port;
+		new DataEngine(protocolid).timerStart();
 		if (args.length > 0) {
 			port = Integer.parseInt(args[0]);
 		} else {
-			port = 1120;  //GWSOCKET
+			port = 1120; // GWSOCKET
 		}
 		new NettyTcpServer(port).start();
 	}

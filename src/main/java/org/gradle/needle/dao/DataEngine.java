@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 public class DataEngine {
 
 	int protocolid;
-	int list_n = 0;
 	String cmdname;
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
@@ -24,6 +23,10 @@ public class DataEngine {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 	}
+	
+	public DataEngine(int protocolid) {
+		this.protocolid = protocolid;
+	}
 
 	/*
 	 * 空构造方法
@@ -31,7 +34,7 @@ public class DataEngine {
 	public DataEngine() {
 		// TODO 自动生成的构造函数存根
 	}
-
+	
 	/*
 	 * 根据GWSOCKET命令获取cachevalue cachevalue根据varpath对应的dttype动态生成
 	 */
@@ -45,13 +48,13 @@ public class DataEngine {
 				sReturn = sFaultString;
 				logger.info("已发送故障号" + sFaultString);
 			} else {
-				ResultSet configSet = df.getConfigSetOnCmdname();
 				ResultSet dataSet = df.getDataSetOnCmdname();
 				while (dataSet.next()) {
 					varpathMap.put(dataSet.getString("iecpath").trim(),
 							df.getDynamicValue(dataSet));
 				}
-
+				
+				ResultSet configSet = df.getConfigSetOnCmdname();
 				if (!configSet.wasNull()) {
 					while (configSet.next()) {
 						while (n < configSet.getInt("ascflg")) {
@@ -86,32 +89,42 @@ public class DataEngine {
 		return sReturn;
 	}
 
-	/*
-	 * 定时器实现停机模式字号迭代
-	 */
-	public void timerStart() {
-		long interval = 30000;
+     /* 定时器实现停机模式字号迭代
+      * 
+      */
+	public int timerStart() {
+		long interval = 5000;
+		int list_n = 0;
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				list_n++;
+				System.out.println("wo cao " + list_n);
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);
-		if (list_n > new DataDefined().getStopModeWordList().size()) {
+		if (list_n > new DataDefined(protocolid).getStopModeWordList().size()) {
 			timer.cancel();
 			list_n = 0;
 		}
+		return list_n;
 	}
-
+	
 	/*
 	 * 停机模式字动态刷新
 	 */
 	public String getStopModeWord() {
-		DataDefined ddf = new DataDefined();
-		String stopmodeword = ddf.getStopModeWordList().get(list_n);
-		logger.info("当前停机模式字为： " + stopmodeword + list_n);
+		String stopmodeword = null;
+		DataDefined ddf = new DataDefined(protocolid);
+		try {
+			if (!(timerStart() > ddf.getStopModeWordList().size())) {
+				stopmodeword = ddf.getStopModeWordList().get(timerStart());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("当前停机模式字为： " + stopmodeword);
 		return stopmodeword;
 
 	}

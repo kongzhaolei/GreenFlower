@@ -21,13 +21,11 @@ public class DataDefined {
 
 	String datapath = "d:/Data.mdb";
 	String configpath = "d:/config.mdb";
-	DBUtils dataDb = new DBUtils("access", datapath);
-	DBUtils configDb = new DBUtils("access", configpath);
 	private static Logger logger = Logger
 			.getLogger(DataDefined.class.getName());
 
 	/*
-	 * 构造方法,初始化协议号
+	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataDefined(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
@@ -36,10 +34,17 @@ public class DataDefined {
 	}
 	
 	/*
+	 * 构造方法,初始化protocolid
+	 */
+	public DataDefined(int protocolid) {
+		this.protocolid = protocolid;
+	}
+	
+	/*
 	 * 空构造方法
 	 */
 	public DataDefined() {
-		// TODO 自动生成的构造函数存根
+		
 	}
 	
 	/*
@@ -47,13 +52,18 @@ public class DataDefined {
 	 */
 	protected List<String> getStopModeWordList() {
 		List<String> lists = new ArrayList<String>();
-		String sql = "SELECT * FROM pathdescr WHERE protocolid = " + protocolid 
+		String sql3 = "SELECT * FROM pathdescr WHERE protocolid = " + protocolid 
 				+ " AND iecpath = 'WTUR.Other.Wn.I16.StopModeWord'";
+		DBUtils configDb2 = new DBUtils("access", configpath);
 		
 		try {
-			ResultSet rs = configDb.Query(sql);
-			while (rs.next()) {
-				lists.add(rs.getString("iecvalue"));
+			ResultSet rs = configDb2.Query(sql3);
+			if (!rs.wasNull()) {
+				while (rs.next()) {
+					lists.add(rs.getString("iecvalue"));
+				}
+			}else {
+				logger.info("数据集为空： " + rs);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +78,8 @@ public class DataDefined {
 		String sql1 = "SELECT * FROM propaths Where protocolid = " + protocolid
 				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
 				+ " ORDER BY pathid ASC";
-
+		
+		DBUtils configDb = new DBUtils("access", configpath);
 		ResultSet configSet = null;
 
 		try {
@@ -87,7 +98,8 @@ public class DataDefined {
 		String sql2 = "SELECT * FROM prodata Where protocolid = " + protocolid
 				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
 				+ " ORDER BY pathid ASC";
-
+		
+		DBUtils dataDb = new DBUtils("access", datapath);
 		ResultSet dataSet = null;
 
 		try {
@@ -169,11 +181,11 @@ public class DataDefined {
 			break;
 
 		case "FAULTMAIN":
-			rString = new DataEngine().getMainFault();
+			rString = new DataEngine(protocolid).getMainFault();
 			break;
 
 		case "STATUS":
-			rString = new DataEngine().getStatus();
+			rString = new DataEngine(protocolid).getStatus();
 			break;
 
 		case "TOTAL":
@@ -182,11 +194,11 @@ public class DataDefined {
 			break;
 
 		case "STOPMODE":
-			rString = new DataEngine().getStopModeWord();
+			rString = new DataEngine(protocolid).getStopModeWord();
 			break;
 
 		case "LIMITMODE":
-			rString = new DataEngine().getLimitMode();
+			rString = new DataEngine(protocolid).getLimitMode();
 			break;
 
 		default:
