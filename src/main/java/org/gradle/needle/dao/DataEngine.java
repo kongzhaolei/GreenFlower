@@ -1,13 +1,12 @@
 package org.gradle.needle.dao;
 
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.server.NettyTcpServer;
 
 public class DataEngine {
 
@@ -88,28 +87,6 @@ public class DataEngine {
 		}
 		return sReturn;
 	}
-
-     /* 定时器实现停机模式字号迭代
-      * 
-      */
-	public int timerStart() {
-		long interval = 5000;
-		int list_n = 0;
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				list_n++;
-				System.out.println("wo cao " + list_n);
-			}
-		};
-		timer.scheduleAtFixedRate(task, new Date(), interval);
-		if (list_n > new DataDefined(protocolid).getStopModeWordList().size()) {
-			timer.cancel();
-			list_n = 0;
-		}
-		return list_n;
-	}
 	
 	/*
 	 * 停机模式字动态刷新
@@ -117,9 +94,13 @@ public class DataEngine {
 	public String getStopModeWord() {
 		String stopmodeword = null;
 		DataDefined ddf = new DataDefined(protocolid);
+		List<String> lists = ddf.getStopModeWordList();
+		int n = NettyTcpServer.getIecvalue();
 		try {
-			if (!(timerStart() > ddf.getStopModeWordList().size())) {
-				stopmodeword = ddf.getStopModeWordList().get(timerStart());
+			if (!(n > lists.size())) {
+				stopmodeword = lists.get(n);
+			}else {
+				stopmodeword = "4";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -148,9 +129,23 @@ public class DataEngine {
 	/*
 	 * 限功率模式字的动态刷新
 	 */
-	public String getLimitMode() {
+	public String getLimitModeWord() {
 
-		return "0";
+		String limitmodeword = null;
+		DataDefined ddf = new DataDefined(protocolid);
+		List<String> lists = ddf.getLimitModeWordList();
+		int n = NettyTcpServer.getIecvalue();
+		try {
+			if (!(n > lists.size())) {
+				limitmodeword = lists.get(n);
+			}else {
+				limitmodeword = "5";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("当前限功率模式字为： " + limitmodeword);
+		return limitmodeword;
 
 	}
 

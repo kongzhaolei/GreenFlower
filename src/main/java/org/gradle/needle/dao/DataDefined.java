@@ -32,39 +32,68 @@ public class DataDefined {
 		this.cmdname = cmdname;
 
 	}
-	
+
 	/*
 	 * 构造方法,初始化protocolid
 	 */
 	public DataDefined(int protocolid) {
 		this.protocolid = protocolid;
 	}
-	
+
 	/*
 	 * 空构造方法
 	 */
 	public DataDefined() {
-		
+
+	}
+
+	/*
+	 * 获取故障iecvalue列表
+	 */
+	public List<String> getMainFaultList() {
+		String fault_sql = "SELECT * FROM pathdescr WHERE protocolid = "
+				+ protocolid
+				+ " AND iecpath = 'WTUR.Flt.Rs.S'";
+		return getkeyList(fault_sql, "iecvalue");
 	}
 	
 	/*
-	 * 获取停机模式字列表
+	 * 获取风机状态iecvalue列表
 	 */
-	protected List<String> getStopModeWordList() {
-		List<String> lists = new ArrayList<String>();
-		String sql3 = "SELECT * FROM pathdescr WHERE protocolid = " + protocolid 
+	public List<String> getStatusList() {
+		String fault_sql = "SELECT * FROM pathdescr WHERE protocolid = "
+				+ protocolid
+				+ " AND iecpath = 'WTUR.TurSt.Rs.S'";
+		return getkeyList(fault_sql, "iecvalue");
+	}
+
+	/*
+	 * 获取停机模式字iecvalue列表
+	 */
+	public List<String> getStopModeWordList() {
+		String stop_sql = "SELECT * FROM pathdescr WHERE protocolid = "
+				+ protocolid
 				+ " AND iecpath = 'WTUR.Other.Wn.I16.StopModeWord'";
-		DBUtils configDb2 = new DBUtils("access", configpath);
-		
+		return getkeyList(stop_sql, "iecvalue");
+	}
+
+	/*
+	 * 获取限功率模式字iecvalue列表
+	 */
+	public List<String> getLimitModeWordList() {
+		String limit_sql = "SELECT * FROM pathdescr WHERE protocolid = "
+				+ protocolid + " AND iecpath = 'WTUR.Other.Ri.I16.LitPowByPLC'";
+		return getkeyList(limit_sql, "iecvalue");
+	}
+
+	/*
+	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
+	 */
+	public List<String> getkeyList(String sql, String column) {
+		List<String> lists = new ArrayList<String>();
+		DBUtils configDb = new DBUtils("access", configpath);
 		try {
-			ResultSet rs = configDb2.Query(sql3);
-			if (!rs.wasNull()) {
-				while (rs.next()) {
-					lists.add(rs.getString("iecvalue"));
-				}
-			}else {
-				logger.info("数据集为空： " + rs);
-			}
+			lists = configDb.Query(sql, column);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,7 +107,7 @@ public class DataDefined {
 		String sql1 = "SELECT * FROM propaths Where protocolid = " + protocolid
 				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
 				+ " ORDER BY pathid ASC";
-		
+
 		DBUtils configDb = new DBUtils("access", configpath);
 		ResultSet configSet = null;
 
@@ -98,7 +127,7 @@ public class DataDefined {
 		String sql2 = "SELECT * FROM prodata Where protocolid = " + protocolid
 				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
 				+ " ORDER BY pathid ASC";
-		
+
 		DBUtils dataDb = new DBUtils("access", datapath);
 		ResultSet dataSet = null;
 
@@ -127,8 +156,7 @@ public class DataDefined {
 
 	/*
 	 * 
-	 * 根据col_1生成CacheValue 
-	 * 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
+	 * 根据col_1生成CacheValue 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
 	 * DYNAMIC 动态计算 4 FAULTMAIN 主故障 5 STATUS 风机状态 6 YEAR 年 7 MONTH 月 8 DAY 日 9
 	 * HOUR 时10 MINUTE 分11 SECOND 秒12 RANDOM 随机数 ranDouble()13 TOTAL 遥脉量14
 	 * STOPMODE 停机模式字/状态模式字15 LIMITMODE 限功率模式字
@@ -198,7 +226,7 @@ public class DataDefined {
 			break;
 
 		case "LIMITMODE":
-			rString = new DataEngine(protocolid).getLimitMode();
+			rString = new DataEngine(protocolid).getLimitModeWord();
 			break;
 
 		default:
@@ -226,15 +254,16 @@ public class DataDefined {
 	 * 生成随机数位于max和min之间的方法
 	 */
 	public static String ranDouble(String min, String max) {
-		
-//		Random random = new Random();
-//		int bd = random.nextInt(Integer.parseInt(max) - Integer.parseInt(min))
-//				+ Integer.parseInt(min);
-		
+
+		// Random random = new Random();
+		// int bd = random.nextInt(Integer.parseInt(max) -
+		// Integer.parseInt(min))
+		// + Integer.parseInt(min);
+
 		double bt = Integer.parseInt(min)
 				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random()
 						.nextDouble());
-		
+
 		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(bt).toString();
 	}

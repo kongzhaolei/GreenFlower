@@ -1,8 +1,11 @@
 package org.gradle.needle.server;
 
 import java.net.InetSocketAddress;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import org.gradle.needle.dao.DataEngine;
+import org.gradle.needle.dao.DataDefined;
 import org.gradle.needle.dao.GlobalSettings;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -19,10 +22,23 @@ import io.netty.handler.codec.string.StringEncoder;
 public class NettyTcpServer {
 
 	private int port;
-	static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+	static int list_n = -1;
+	static int protocolid = Integer.parseInt(GlobalSettings
+			.getProperty("protocolid"));
 
 	public NettyTcpServer(int port) {
 		this.port = port;
+	}
+
+	public static void main(String[] args) throws Exception {
+		int port;
+		stopTimerStart();
+		if (args.length > 0) {
+			port = Integer.parseInt(args[0]);
+		} else {
+			port = 1120; // GWSOCKET
+		}
+		new NettyTcpServer(port).start();
 	}
 
 	public void start() {
@@ -58,15 +74,28 @@ public class NettyTcpServer {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
-		int port;
-		new DataEngine(protocolid).timerStart();
-		if (args.length > 0) {
-			port = Integer.parseInt(args[0]);
-		} else {
-			port = 1120; // GWSOCKET
-		}
-		new NettyTcpServer(port).start();
+	/*
+	 * 定时器实现停机模式字号迭代
+	 */
+	public static void stopTimerStart() {
+		long interval = 60000;
+		Timer timer = new Timer();
+		final int size = new DataDefined(protocolid).getStopModeWordList()
+				.size();
+		TimerTask task = new TimerTask() {
+			@Override
+			public void run() {
+				list_n++;
+				if (list_n > size) {
+					list_n = 0;
+				}
+				System.out.println("fuck everything " + list_n);
+			}
+		};
+		timer.scheduleAtFixedRate(task, new Date(), interval);
 	}
-
+	
+	public static int getIecvalue() {
+		return list_n;
+	}
 }

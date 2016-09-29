@@ -126,23 +126,20 @@ public class DBUtils {
 		return rs;
 	}
 	
-	// 获取某一列的查询结果
-	public String[] Query(String sql,String column) {
-		List<String> list = new ArrayList<String>();
-	       String[] farms = null;
+	// 获取某一列的查询结果,以列表存储
+	public List<String> Query(String sql,String column) {
+		List<String> lists = new ArrayList<String>();
 	       ResultSet rs = null;
 			try{
 				rs = GetConn().executeQuery(sql);
 			while (rs.next()) {
-				String farm = (rs.getString(column));
-				list.add(farm);
+				lists.add(rs.getString(column));
 			}
-			farms = (String[]) list.toArray(new String[list.size()]);
 			System.out.println("查询成功！");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return farms;
+		return lists;
 	}
 	
 	 // 单纯执行sql，无返回结果，例如insert
