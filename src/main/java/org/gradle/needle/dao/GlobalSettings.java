@@ -59,11 +59,11 @@ public class GlobalSettings {
 		Properties prop = new Properties();
 		try {
 			//绝对路径读取JAT包外的配置文件方法
-			String filePath = System.getProperty("user.dir") + "/src/main/resources/Globalsetting.properties"; 
-			InputStream file = new BufferedInputStream(new FileInputStream(filePath)); 
+//			String filePath = System.getProperty("user.dir") + "/src/main/resources/Globalsetting.properties"; 
+//			InputStream file = new BufferedInputStream(new FileInputStream(filePath)); 
 			
 			//读取JAR包内的配置文件方法,类文件和配置文件在同一包内
-			//InputStream file = GlobalSettings.class.getClass().getResourceAsStream("/Globalsetting.properties");
+			InputStream file = GlobalSettings.class.getClass().getResourceAsStream("/Globalsetting.properties");
 			
 			prop.load(file);
 			file.close();

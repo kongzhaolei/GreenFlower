@@ -78,7 +78,7 @@ public class NettyTcpServer {
 	 * 定时器实现停机模式字号迭代
 	 */
 	public static void stopTimerStart() {
-		long interval = 60000;
+		long interval = 120000;
 		Timer timer = new Timer();
 		final int size = new DataDefined(protocolid).getStopModeWordList()
 				.size();
