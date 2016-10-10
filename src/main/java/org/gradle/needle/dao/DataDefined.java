@@ -11,6 +11,11 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 import org.gradle.needle.util.DBUtils;
 
+/**
+ * 
+ * @author kongzhaolei
+ *
+ */
 public class DataDefined {
 	int protocolid;
 	String cmdname;
@@ -19,8 +24,8 @@ public class DataDefined {
 	// String configpath = System.getProperty("user.dir")+
 	// "/src/main/resources/config.mdb";
 
-	String datapath = "d:/Data.mdb";
-	String configpath = "d:/config.mdb";
+	String datapath = "d:/GreenFlower/Data.mdb";
+	String configpath = "d:/GreenFlower/config.mdb";
 	private static Logger logger = Logger
 			.getLogger(DataDefined.class.getName());
 
@@ -203,7 +208,7 @@ public class DataDefined {
 			rString = Boolean.toString(ranBoolean());
 			break;
 
-		// 暂时赋值col_2
+		// 暂时赋值 ranCoin()
 		case "DYNAMIC":
 			rString = Integer.toString(ranCoin());
 			break;
@@ -217,7 +222,7 @@ public class DataDefined {
 			break;
 
 		case "TOTAL":
-			// rString = TotalRefresh();
+
 			rString = dataSet.getString("col_2");
 			break;
 

@@ -15,7 +15,7 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 	public NettyTcpServerHandler(int protocolid) {
 		this.protocolid = protocolid;
 	}
-
+	
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias alias="DBMybatis" type="org.gradle.needle.util.DBMybatis" />
+	</typeAliases>
+
+	<environments default="sqlserver">
+		<environment id="access">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
+				<property name="url" value="d:/GreenFlower/Data.mdb" />
+			</dataSource>
+		</environment>
+
+		<environment id="sqlserver">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+				<property name="url" value="10.68.100.28" />
+				<property name="username" value="sa"/>
+				<property name="password" value="1234.abcd"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="sqlmap/prodata.xml" />
+		<mapper resource="sqlmap/propaths.xml" />
+		<mapper resource="sqlmap/pathdescr.xml" />
+	</mappers>
+</configuration>

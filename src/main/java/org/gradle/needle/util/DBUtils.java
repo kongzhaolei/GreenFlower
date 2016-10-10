@@ -13,6 +13,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+/**
+ * 
+ * @author kongzhaolei
+ * 
+ */
 public class DBUtils {
 	private static Logger logger = Logger.getLogger(DBUtils.class
 			.getName());

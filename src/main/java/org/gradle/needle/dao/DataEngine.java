@@ -8,6 +8,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.gradle.needle.server.NettyTcpServer;
 
+/**
+ * 
+ * @author kongzhaolei
+ *
+ */
 public class DataEngine {
 
 	int protocolid;
@@ -16,13 +21,16 @@ public class DataEngine {
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
 	/*
-	 * 构造方法,初始化协议号
+	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataEngine(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 	}
 	
+	/*
+	 *  构造方法,初始化protocolid
+	 */
 	public DataEngine(int protocolid) {
 		this.protocolid = protocolid;
 	}
@@ -31,7 +39,7 @@ public class DataEngine {
 	 * 空构造方法
 	 */
 	public DataEngine() {
-		// TODO 自动生成的构造函数存根
+
 	}
 	
 	/*

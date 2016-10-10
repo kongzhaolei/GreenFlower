@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sqlmap">
+	<select id="Pathdescr" parameterType="DBmybatis" resultType="DBMybatis">
+        <![CDATA[
+            SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}
+        ]]>
+	</select>
+</mapper>

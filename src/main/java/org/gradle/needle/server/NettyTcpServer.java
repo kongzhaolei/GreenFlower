@@ -19,6 +19,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
+/**
+ * 
+ * @author kongzhaolei
+ *
+ */
 public class NettyTcpServer {
 
 	private int port;
@@ -40,7 +45,18 @@ public class NettyTcpServer {
 		}
 		new NettyTcpServer(port).start();
 	}
+	
+	public static int getIecvalue() {
+		return list_n;
+	}
+	
+	public static int getProcolid() {
+		return protocolid;
+	}
 
+	/*
+	 * 服务端启动
+	 */
 	public void start() {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -78,7 +94,7 @@ public class NettyTcpServer {
 	 * 定时器实现停机模式字号迭代
 	 */
 	public static void stopTimerStart() {
-		long interval = 120000;
+		final long interval = 60000;
 		Timer timer = new Timer();
 		final int size = new DataDefined(protocolid).getStopModeWordList()
 				.size();
@@ -93,9 +109,5 @@ public class NettyTcpServer {
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);
-	}
-	
-	public static int getIecvalue() {
-		return list_n;
 	}
 }
