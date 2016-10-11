@@ -6,12 +6,20 @@
 		<typeAlias alias="DBMybatis" type="org.gradle.needle.util.DBMybatis" />
 	</typeAliases>
 
-	<environments default="sqlserver">
-		<environment id="access">
+	<environments default="configdb">
+		<environment id="datadb">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
 				<property name="url" value="d:/GreenFlower/Data.mdb" />
+			</dataSource>
+		</environment>
+
+		<environment id="configdb">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
+				<property name="url" value="d:/GreenFlower/config.mdb" />
 			</dataSource>
 		</environment>
 
@@ -20,8 +28,28 @@
 			<dataSource type="POOLED">
 				<property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 				<property name="url" value="10.68.100.28" />
-				<property name="username" value="sa"/>
-				<property name="password" value="1234.abcd"/>
+				<property name="username" value="sa" />
+				<property name="password" value="1234.abcd" />
+			</dataSource>
+		</environment>
+
+		<environment id="postgresql">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="org.postgresql.Driver" />
+				<property name="url" value="10.68.100.28:5432" />
+				<property name="username" value="postgres" />
+				<property name="password" value="123" />
+			</dataSource>
+		</environment>
+
+		<environment id="oracle">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="10.68.100.28" />
+				<property name="username" value="test" />
+				<property name="password" value="1234.abcd" />
 			</dataSource>
 		</environment>
 	</environments>
