@@ -1,7 +1,7 @@
 package org.gradle.needle.server;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dao.DataEngine;
+import org.gradle.needle.mapper.DataEngine;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

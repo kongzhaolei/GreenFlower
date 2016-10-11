@@ -1,4 +1,4 @@
-package org.gradle.needle.dao;
+package org.gradle.needle.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,15 +8,17 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
+import org.gradle.needle.util.DBMybatis;
 import org.gradle.needle.util.DBUtils;
 
 /**
  * 
  * @author kongzhaolei
- *
+ * 继承 DBmybatis
  */
-public class DataDefined {
+public class DataDefined extends DBMybatis {
 	int protocolid;
 	String cmdname;
 	// String datapath = System.getProperty("user.dir")+
@@ -144,6 +146,23 @@ public class DataDefined {
 		}
 		return dataSet;
 	}
+	
+	/*
+	 * mybatis框架
+	 * 不需要实现ProdataMapper接口，mybatis自动生成mapper代理对象
+	 */
+	public List<Prodata> getProData() {
+		SqlSession sqlSession = datassf.openSession();
+		ProdataMapper mapper = sqlSession.getMapper(ProdataMapper.class);
+		Prodata prodata = new Prodata();
+		prodata.setcompath(getCompathOnCmdname());
+		prodata.setProtocolid(protocolid);
+		List<Prodata> list = mapper.selectProdata(prodata);
+		System.out.println(list);
+		return list;
+		
+	}
+	
 
 	/*
 	 * 根据前置的GWSOCKET命令获取对应的compath

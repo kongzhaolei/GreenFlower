@@ -1,4 +1,4 @@
-package org.gradle.needle.dao;
+package org.gradle.needle.mapper;
 
 import java.sql.ResultSet;
 import java.util.HashMap;

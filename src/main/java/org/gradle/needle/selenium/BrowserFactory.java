@@ -23,8 +23,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dao.GlobalSettings;
-import org.gradle.needle.dao.UIMapSetting;
+import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.mapper.UIMapSetting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

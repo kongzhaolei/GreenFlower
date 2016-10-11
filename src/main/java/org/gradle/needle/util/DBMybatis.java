@@ -1,5 +1,5 @@
 /**
- *
+ *定义一个基类，创建各个数据库的会话工厂，传入mybatis配置文件信息
  */
 package org.gradle.needle.util;
 

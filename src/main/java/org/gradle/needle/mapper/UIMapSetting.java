@@ -1,4 +1,4 @@
-package org.gradle.needle.dao;
+package org.gradle.needle.mapper;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

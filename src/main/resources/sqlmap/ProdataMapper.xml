@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="sqlmap">
-	<select id="Prodata" parameterType="org.gradle.needle.Prodata" flushCache="false" useCache=true
+<mapper namespace="org.gradle.needle.dao.ProdataMapper">
+	<select id="selectProdata" parameterType="org.gradle.needle.Prodata" flushCache="false" useCache=true
 		    statementType="PREPARED" resultType="org.gradle.needle.Prodata">
         <![CDATA[
             SELECT * FROM prodata WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}

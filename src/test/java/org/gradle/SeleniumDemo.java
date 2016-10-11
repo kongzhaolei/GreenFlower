@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 
 import org.dom4j.DocumentException;
-import org.gradle.needle.dao.GlobalSettings;
+import org.gradle.needle.mapper.GlobalSettings;
 import org.gradle.needle.selenium.BrowserFactory;
 import org.gradle.needle.util.ExcelDataUtils;
 import org.gradle.needle.util.DBUtils;

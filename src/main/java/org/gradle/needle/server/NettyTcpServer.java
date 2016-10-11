@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.gradle.needle.dao.DataDefined;
-import org.gradle.needle.dao.GlobalSettings;
+import org.gradle.needle.mapper.DataDefined;
+import org.gradle.needle.mapper.GlobalSettings;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
