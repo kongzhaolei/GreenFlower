@@ -7,6 +7,7 @@ public class Propaths {
 	private String iecpath;
 	private String compath;
 	private String datapath;
+	private String descrcn;
 	
 	public Integer getProtocolid() {
 		return protocolid;
@@ -38,6 +39,10 @@ public class Propaths {
 
 	public String getDatapath() {
 		return datapath;
+	}
+	
+	public String getDescrcn() {
+		return descrcn;
 	}
 
 }

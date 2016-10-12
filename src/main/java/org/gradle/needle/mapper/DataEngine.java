@@ -1,6 +1,5 @@
 package org.gradle.needle.mapper;
 
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,7 @@ import org.gradle.needle.server.NettyTcpServer;
 /**
  * 
  * @author kongzhaolei
- *
+ * 
  */
 public class DataEngine {
 
@@ -27,9 +26,9 @@ public class DataEngine {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 	}
-	
+
 	/*
-	 *  构造方法,初始化protocolid
+	 * 构造方法,初始化protocolid
 	 */
 	public DataEngine(int protocolid) {
 		this.protocolid = protocolid;
@@ -41,7 +40,7 @@ public class DataEngine {
 	public DataEngine() {
 
 	}
-	
+
 	/*
 	 * 根据GWSOCKET命令获取cachevalue cachevalue根据varpath对应的dttype动态生成
 	 */
@@ -55,30 +54,24 @@ public class DataEngine {
 				sReturn = sFaultString;
 				logger.info("已发送故障号" + sFaultString);
 			} else {
-				ResultSet dataSet = df.getProData();
-				while (dataSet.next()) {
-					varpathMap.put(dataSet.getString("iecpath").trim(),
-							df.getDynamicValue(dataSet));
+				for (Prodata pda : df.getProData()) {
+					varpathMap.put(pda.getIecpath().trim(),
+							df.getDynamicValue(pda));
 				}
-				
-				ResultSet configSet = df.getPropaths();
-				if (!configSet.wasNull()) {
-					while (configSet.next()) {
-						while (n < configSet.getInt("ascflg")) {
+
+				if (!df.getPropaths().isEmpty()) {
+					for (Propaths pps : df.getPropaths()) {
+						while (n < pps.getAscflg()) {
 							sReturn = sReturn + ";";
 							n++;
 						}
 
-						if (varpathMap.containsKey(configSet.getString(
-								"iecpath").trim())) {
-							sReturn += varpathMap.get(configSet
-									.getString("iecpath")) + ";";
+						if (varpathMap.containsKey(pps.getIecpath().trim())) {
+							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("DataSet不存在此IEC量： "
-									+ configSet.getString("iecpath")
-									+ " ------ "
-									+ configSet.getString("descrcn"));
+							logger.info("DataSet不存在此IEC量： " + pps.getIecpath()
+									+ " ------ " + pps.getDescrcn());
 						}
 					}
 				} else {
@@ -95,7 +88,7 @@ public class DataEngine {
 		}
 		return sReturn;
 	}
-	
+
 	/*
 	 * 停机模式字动态刷新
 	 */
@@ -107,7 +100,7 @@ public class DataEngine {
 		try {
 			if (!(n > lists.size())) {
 				stopmodeword = lists.get(n);
-			}else {
+			} else {
 				stopmodeword = "4";
 			}
 		} catch (Exception e) {
@@ -117,7 +110,7 @@ public class DataEngine {
 		return stopmodeword;
 
 	}
-	
+
 	/*
 	 * 主故障动态刷新
 	 */
@@ -146,7 +139,7 @@ public class DataEngine {
 		try {
 			if (!(n > lists.size())) {
 				limitmodeword = lists.get(n);
-			}else {
+			} else {
 				limitmodeword = "5";
 			}
 		} catch (Exception e) {

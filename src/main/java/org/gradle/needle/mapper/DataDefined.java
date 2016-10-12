@@ -1,6 +1,5 @@
 package org.gradle.needle.mapper;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -11,14 +10,10 @@ import java.util.Random;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.gradle.needle.util.DBMybatis;
-import org.gradle.needle.util.DBUtils;
-
-import com.sun.java.swing.plaf.windows.TMSchema.Prop;
 
 /**
  * 
- * @author kongzhaolei
- * 继承 DBmybatis
+ * @author kongzhaolei 继承 DBmybatis
  */
 public class DataDefined extends DBMybatis {
 	int protocolid;
@@ -62,7 +57,7 @@ public class DataDefined extends DBMybatis {
 	public List<String> getMainFaultList() {
 		return getkeyList("WTUR.Flt.Rs.S");
 	}
-	
+
 	/*
 	 * 获取风机状态iecvalue列表
 	 */
@@ -85,26 +80,26 @@ public class DataDefined extends DBMybatis {
 	}
 
 	/*
-	 * 基于mybatis框架
-	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
 	 */
-	public List<Pathdescr> getkeyList(String iecpath) {
+	public List<String> getkeyList(String iecpath) {
 		SqlSession sqlSession = configssf.openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		List<String> iecvalueList = new ArrayList<String>();
 		Pathdescr pathdescr = new Pathdescr();
 		pathdescr.setProtocolid(protocolid);
 		pathdescr.setIecpath(iecpath);
 		List<Pathdescr> list = mapper.selectPathdescr(pathdescr);
-		System.out.println(list);
-		List<String> iecvalueList = new ArrayList<String>;
-		return list;
+		for (Pathdescr pdr : list) {
+			iecvalueList.add(pdr.getIecvalue());
+		}
+		return iecvalueList;
 
 	}
 
 	/*
-	 * 基于mybatis框架
-	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库propaths表典型维数据集
 	 */
 	public List<Propaths> getPropaths() {
@@ -117,10 +112,9 @@ public class DataDefined extends DBMybatis {
 		System.out.println(list);
 		return list;
 	}
-	
+
 	/*
-	 * 基于mybatis框架
-	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {
@@ -133,9 +127,6 @@ public class DataDefined extends DBMybatis {
 		System.out.println(list);
 		return list;
 	}
-	
-	
-	
 
 	/*
 	 * 根据前置的GWSOCKET命令获取对应的compath
@@ -158,13 +149,13 @@ public class DataDefined extends DBMybatis {
 	 * HOUR 时10 MINUTE 分11 SECOND 秒12 RANDOM 随机数 ranDouble()13 TOTAL 遥脉量14
 	 * STOPMODE 停机模式字/状态模式字15 LIMITMODE 限功率模式字
 	 */
-	public String getDynamicValue(ResultSet dataSet) throws SQLException {
+	public String getDynamicValue(Prodata pda) throws SQLException {
 		String rString = "null";
-		String dttype = dataSet.getString("col_1");
+		String dttype = pda.getCol1();
 
 		switch (dttype.trim()) {
 		case "FIXED":
-			rString = dataSet.getString("col_2");
+			rString = pda.getCol2();
 			break;
 
 		case "YEAR":
@@ -192,8 +183,8 @@ public class DataDefined extends DBMybatis {
 			break;
 
 		case "RANDOM":
-			rString = ranDouble(dataSet.getString("col_2").split(",")[0],
-					dataSet.getString("col_2").split(",")[1]);
+			rString = ranDouble(pda.getCol2().split(",")[0], pda.getCol2()
+					.split(",")[1]);
 			break;
 
 		case "FIXBOOL":
@@ -215,7 +206,7 @@ public class DataDefined extends DBMybatis {
 
 		case "TOTAL":
 
-			rString = dataSet.getString("col_2");
+			rString = pda.getCol2();
 			break;
 
 		case "STOPMODE":
@@ -227,7 +218,7 @@ public class DataDefined extends DBMybatis {
 			break;
 
 		default:
-			rString = dataSet.getString("col_2");
+			rString = pda.getCol2();
 			break;
 		}
 
