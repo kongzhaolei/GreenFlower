@@ -148,19 +148,19 @@ public class DataDefined extends DBMybatis {
 	}
 	
 	/*
-	 * mybatis框架
+	 * 基于mybatis框架
 	 * 不需要实现ProdataMapper接口，mybatis自动生成mapper代理对象
+	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {
 		SqlSession sqlSession = datassf.openSession();
-		ProdataMapper mapper = sqlSession.getMapper(ProdataMapper.class);
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
 		prodata.setcompath(getCompathOnCmdname());
 		prodata.setProtocolid(protocolid);
 		List<Prodata> list = mapper.selectProdata(prodata);
 		System.out.println(list);
 		return list;
-		
 	}
 	
 
