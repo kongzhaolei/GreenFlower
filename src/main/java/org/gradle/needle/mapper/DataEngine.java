@@ -55,13 +55,13 @@ public class DataEngine {
 				sReturn = sFaultString;
 				logger.info("“—∑¢ÀÕπ ’œ∫≈" + sFaultString);
 			} else {
-				ResultSet dataSet = df.getDataSetOnCmdname();
+				ResultSet dataSet = df.getProData();
 				while (dataSet.next()) {
 					varpathMap.put(dataSet.getString("iecpath").trim(),
 							df.getDynamicValue(dataSet));
 				}
 				
-				ResultSet configSet = df.getConfigSetOnCmdname();
+				ResultSet configSet = df.getPropaths();
 				if (!configSet.wasNull()) {
 					while (configSet.next()) {
 						while (n < configSet.getInt("ascflg")) {

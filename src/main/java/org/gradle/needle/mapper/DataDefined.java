@@ -13,6 +13,8 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.util.DBMybatis;
 import org.gradle.needle.util.DBUtils;
 
+import com.sun.java.swing.plaf.windows.TMSchema.Prop;
+
 /**
  * 
  * @author kongzhaolei
@@ -58,98 +60,67 @@ public class DataDefined extends DBMybatis {
 	 * 获取故障iecvalue列表
 	 */
 	public List<String> getMainFaultList() {
-		String fault_sql = "SELECT * FROM pathdescr WHERE protocolid = "
-				+ protocolid
-				+ " AND iecpath = 'WTUR.Flt.Rs.S'";
-		return getkeyList(fault_sql, "iecvalue");
+		return getkeyList("WTUR.Flt.Rs.S");
 	}
 	
 	/*
 	 * 获取风机状态iecvalue列表
 	 */
 	public List<String> getStatusList() {
-		String fault_sql = "SELECT * FROM pathdescr WHERE protocolid = "
-				+ protocolid
-				+ " AND iecpath = 'WTUR.TurSt.Rs.S'";
-		return getkeyList(fault_sql, "iecvalue");
+		return getkeyList("WTUR.TurSt.Rs.S");
 	}
 
 	/*
 	 * 获取停机模式字iecvalue列表
 	 */
 	public List<String> getStopModeWordList() {
-		String stop_sql = "SELECT * FROM pathdescr WHERE protocolid = "
-				+ protocolid
-				+ " AND iecpath = 'WTUR.Other.Wn.I16.StopModeWord'";
-		return getkeyList(stop_sql, "iecvalue");
+		return getkeyList("WTUR.Other.Wn.I16.StopModeWord");
 	}
 
 	/*
 	 * 获取限功率模式字iecvalue列表
 	 */
 	public List<String> getLimitModeWordList() {
-		String limit_sql = "SELECT * FROM pathdescr WHERE protocolid = "
-				+ protocolid + " AND iecpath = 'WTUR.Other.Ri.I16.LitPowByPLC'";
-		return getkeyList(limit_sql, "iecvalue");
+		return getkeyList("WTUR.Other.Ri.I16.LitPowByPLC");
 	}
 
 	/*
+	 * 基于mybatis框架
+	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
 	 */
-	public List<String> getkeyList(String sql, String column) {
-		List<String> lists = new ArrayList<String>();
-		DBUtils configDb = new DBUtils("access", configpath);
-		try {
-			lists = configDb.Query(sql, column);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lists;
+	public List<Pathdescr> getkeyList(String iecpath) {
+		SqlSession sqlSession = configssf.openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Pathdescr pathdescr = new Pathdescr();
+		pathdescr.setProtocolid(protocolid);
+		pathdescr.setIecpath(iecpath);
+		List<Pathdescr> list = mapper.selectPathdescr(pathdescr);
+		System.out.println(list);
+		List<String> iecvalueList = new ArrayList<String>;
+		return list;
+
 	}
 
 	/*
+	 * 基于mybatis框架
+	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库propaths表典型维数据集
 	 */
-	public ResultSet getConfigSetOnCmdname() {
-		String sql1 = "SELECT * FROM propaths Where protocolid = " + protocolid
-				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
-				+ " ORDER BY pathid ASC";
-
-		DBUtils configDb = new DBUtils("access", configpath);
-		ResultSet configSet = null;
-
-		try {
-			configSet = configDb.Query(sql1);
-			// configDb.ConnClose();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return configSet;
-	}
-
-	/*
-	 * 获取data库prodata表典型维数据集
-	 */
-	protected ResultSet getDataSetOnCmdname() {
-		String sql2 = "SELECT * FROM prodata Where protocolid = " + protocolid
-				+ " AND compath = " + "'" + getCompathOnCmdname() + "'"
-				+ " ORDER BY pathid ASC";
-
-		DBUtils dataDb = new DBUtils("access", datapath);
-		ResultSet dataSet = null;
-
-		try {
-			dataSet = dataDb.Query(sql2);
-			// dataDb.ConnClose();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dataSet;
+	public List<Propaths> getPropaths() {
+		SqlSession sqlSession = configssf.openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Propaths propaths = new Propaths();
+		propaths.setcompath(getCompathOnCmdname());
+		propaths.setProtocolid(protocolid);
+		List<Propaths> list = mapper.selectPropaths(propaths);
+		System.out.println(list);
+		return list;
 	}
 	
 	/*
 	 * 基于mybatis框架
-	 * 不需要实现ProdataMapper接口，mybatis自动生成mapper代理对象
+	 * 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {
@@ -162,6 +133,8 @@ public class DataDefined extends DBMybatis {
 		System.out.println(list);
 		return list;
 	}
+	
+	
 	
 
 	/*
