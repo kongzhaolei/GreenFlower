@@ -3,23 +3,24 @@
 
 <mapper namespace="org.gradle.needle.mapper.SuperMapper">
 	<select id="selectProdata" parameterType="Prodata" flushCache="false"
-		useCache=true statementType="PREPARED" resultType="Prodata">
+		useCache="true" statementType="PREPARED" resultType="Prodata">
         <![CDATA[
-            SELECT * FROM prodata WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}
+ SELECT * FROM prodata WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}
         ]]>
 	</select>
 
 	<select id="selectPropaths" parameterType="Propaths" flushCache="false"
-		useCache=true statementType="PREPARED" resultType="Propaths">
+		useCache="true" statementType="PREPARED" resultType="Propaths">
         <![CDATA[
-           SELECT * FROM propaths WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}
+ SELECT * FROM propaths WHERE PROTOCOLID = #{protocolid} AND COMPATH = #{compath}
         ]]>
 	</select>
 
-	<select id="selectPathdescr" parameterType="Pathdescr" flushCache="false"
-		useCache=true statementType="PREPARED" resultType="Pathdescr">
+	<select id="selectPathdescr" parameterType="Pathdescr"
+		flushCache="false" useCache="true" statementType="PREPARED"
+		resultType="Pathdescr">
         <![CDATA[
-            SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
+SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
         ]]>
 	</select>
 

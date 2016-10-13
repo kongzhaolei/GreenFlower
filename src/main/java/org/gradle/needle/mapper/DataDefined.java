@@ -9,22 +9,16 @@ import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
-import org.gradle.needle.util.DBMybatis;
+import org.gradle.needle.util.DBFactory;
+import org.gradle.needle.util.DBFactory.DBEnvironment;
 
 /**
  * 
- * @author kongzhaolei 继承 DBmybatis
+ * @author kongzhaolei
  */
-public class DataDefined extends DBMybatis {
+public class DataDefined {
 	int protocolid;
 	String cmdname;
-	// String datapath = System.getProperty("user.dir")+
-	// "/src/main/resources/data.mdb";
-	// String configpath = System.getProperty("user.dir")+
-	// "/src/main/resources/config.mdb";
-
-	String datapath = "d:/GreenFlower/Data.mdb";
-	String configpath = "d:/GreenFlower/config.mdb";
 	private static Logger logger = Logger
 			.getLogger(DataDefined.class.getName());
 
@@ -84,7 +78,7 @@ public class DataDefined extends DBMybatis {
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
 	 */
 	public List<String> getkeyList(String iecpath) {
-		SqlSession sqlSession = configssf.openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		List<String> iecvalueList = new ArrayList<String>();
 		Pathdescr pathdescr = new Pathdescr();
@@ -103,7 +97,7 @@ public class DataDefined extends DBMybatis {
 	 * 获取config库propaths表典型维数据集
 	 */
 	public List<Propaths> getPropaths() {
-		SqlSession sqlSession = configssf.openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Propaths propaths = new Propaths();
 		propaths.setcompath(getCompathOnCmdname());
@@ -118,7 +112,7 @@ public class DataDefined extends DBMybatis {
 	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {
-		SqlSession sqlSession = datassf.openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
 		prodata.setcompath(getCompathOnCmdname());

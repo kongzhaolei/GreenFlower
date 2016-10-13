@@ -3,10 +3,10 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="DBMybatis" type="org.gradle.needle.util.DBMybatis" />
-		<typeAlias alias="Prodata" type="org.gradle.needle.util.Prodata" />
-		<typeAlias alias="Propaths" type="org.gradle.needle.util.Propaths" />
-		<typeAlias alias="Pathdescr" type="org.gradle.needle.util.Pathdescr" />
+		<typeAlias alias="DBFactory" type="org.gradle.needle.util.DBFactory" />
+		<typeAlias alias="Prodata" type="org.gradle.needle.mapper.Prodata" />
+		<typeAlias alias="Propaths" type="org.gradle.needle.mapper.Propaths" />
+		<typeAlias alias="Pathdescr" type="org.gradle.needle.mapper.Pathdescr" />
 		
 	</typeAliases>
 
@@ -15,33 +15,33 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="d:/GreenFlower/Data.mdb" />
+				<property name="url" value="jdbc:ucanaccess://d:/GreenFlower/Data.mdb" />
 			</dataSource>
 		</environment>
-
+		
 		<environment id="configdb">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="d:/GreenFlower/config.mdb" />
+				<property name="url" value="jdbc:ucanaccess://d:/GreenFlower/config.mdb" />
 			</dataSource>
 		</environment>
-
+		
 		<environment id="sqlserver">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-				<property name="url" value="10.68.100.28" />
+				<property name="url" value="jdbc:sqlserver://10.68.100.28;databaseName=MirrorDB_wf836610" />
 				<property name="username" value="sa" />
 				<property name="password" value="1234.abcd" />
 			</dataSource>
 		</environment>
-x
+		
 		<environment id="postgresql">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.postgresql.Driver" />
-				<property name="url" value="10.68.100.28:5432" />
+				<property name="url" value="jdbc:postgresql://10.68.100.28:5432/scada" />
 				<property name="username" value="postgres" />
 				<property name="password" value="123" />
 			</dataSource>
@@ -51,12 +51,11 @@ x
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="10.68.100.28" />
+				<property name="url" value="jdbc:oracle:thin:@10.68.100.28:1521:orcl" />
 				<property name="username" value="test" />
 				<property name="password" value="1234.abcd" />
 			</dataSource>
-		</environment>
-		
+		</environment>	
 	</environments>
 
 	<mappers>

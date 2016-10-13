@@ -2,10 +2,6 @@ package org.gradle.needle.client;
 
 import java.net.InetSocketAddress;
 
-import org.gradle.needle.server.NettyUdpServerHandler;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
