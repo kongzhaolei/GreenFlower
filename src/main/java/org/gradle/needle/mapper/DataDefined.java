@@ -103,7 +103,6 @@ public class DataDefined {
 		propaths.setcompath(getCompathOnCmdname());
 		propaths.setProtocolid(protocolid);
 		List<Propaths> list = mapper.selectPropaths(propaths);
-		System.out.println(list);
 		return list;
 	}
 
@@ -118,7 +117,6 @@ public class DataDefined {
 		prodata.setcompath(getCompathOnCmdname());
 		prodata.setProtocolid(protocolid);
 		List<Prodata> list = mapper.selectProdata(prodata);
-		System.out.println(list);
 		return list;
 	}
 
