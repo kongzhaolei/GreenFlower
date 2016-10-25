@@ -7,6 +7,7 @@
 		<typeAlias alias="Prodata" type="org.gradle.needle.mapper.Prodata" />
 		<typeAlias alias="Propaths" type="org.gradle.needle.mapper.Propaths" />
 		<typeAlias alias="Pathdescr" type="org.gradle.needle.mapper.Pathdescr" />
+		<typeAlias alias="Portinfo" type="org.gradle.needle.mapper.Portinfo" />
 		
 	</typeAliases>
 

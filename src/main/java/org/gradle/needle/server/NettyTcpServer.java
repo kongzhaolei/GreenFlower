@@ -1,6 +1,6 @@
 package org.gradle.needle.server;
 
-import java.net.InetSocketAddress;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,34 +22,39 @@ import io.netty.handler.codec.string.StringEncoder;
 /**
  * 
  * @author kongzhaolei
- *
+ * 
  */
 public class NettyTcpServer {
 
 	private int port;
+	private String inetHost;
 	static int list_n = -1;
 	static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
 
-	public NettyTcpServer(int port) {
+	public NettyTcpServer(String inetHost, int port) {
 		this.port = port;
+		this.inetHost = inetHost;
 	}
 
+	/**
+	 * 根据风机IP配置，自动扩展多台风机模拟服务
+	 * 
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
-		int port;
+		// 获取本机IP
+		String host = InetAddress.getLocalHost().getHostAddress();
+		int port = 1120;
 		stopTimerStart();
-		if (args.length > 0) {
-			port = Integer.parseInt(args[0]);
-		} else {
-			port = 1120; // GWSOCKET
-		}
-		new NettyTcpServer(port).start();
+		new NettyTcpServer(host, port).start();
 	}
-	
+
 	public static int getIecvalue() {
 		return list_n;
 	}
-	
+
 	public static int getProcolid() {
 		return protocolid;
 	}
@@ -58,14 +63,16 @@ public class NettyTcpServer {
 	 * 服务端启动
 	 */
 	public void start() {
-		EventLoopGroup bossGroup = new NioEventLoopGroup();
+		// EventLoopGroup是用来处理IO操作的多线程事件循环器
+		// bossGroup 用来接收客户端的连接，workerGroup 用来处理已经被接收的连接
+		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 		try {
+			// NIO 服务的辅助启动类
 			ServerBootstrap sbs = new ServerBootstrap()
 					.group(bossGroup, workerGroup)
 					.channel(NioServerSocketChannel.class)
-					.localAddress(new InetSocketAddress(port))
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 
 						protected void initChannel(SocketChannel ch) {
@@ -81,8 +88,8 @@ public class NettyTcpServer {
 					.childOption(ChannelOption.SO_KEEPALIVE, true);
 
 			// 绑定端口，开始接收进来的连接
-			ChannelFuture future = sbs.bind(port).sync();
-			System.out.println("服务器开始监听于： " + port);
+			ChannelFuture future = sbs.bind(inetHost, port).sync();
+			System.out.println("服务器监听于： " + inetHost + ":" + port);
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			bossGroup.shutdownGracefully();
