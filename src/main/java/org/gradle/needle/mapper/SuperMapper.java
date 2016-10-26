@@ -18,7 +18,5 @@ public interface SuperMapper {
 	public List<Propaths> selectPropaths(Propaths config);
 	
 	public List<Pathdescr> selectPathdescr(Pathdescr descr);
-	
-	public List<Portinfo> selectPortinfo(Portinfo portinfo); 
 
 }

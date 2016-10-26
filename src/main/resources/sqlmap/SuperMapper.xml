@@ -23,12 +23,4 @@
  SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
         ]]>
 	</select>
-
-	<select id="selectPortinfo" parameterType="Portinfo" flushCache="false"
-		useCache="true" statementType="PREPARED" resultType="Portinfo">
-        <![CDATA[
- SELECT wt.protocolid, pf.* FROM portinfo pf, wtinfo wt WHERE wt.portid = pf.portid
-        ]]>
-	</select>
-
 </mapper>
