@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.client.HttpServiceClient;
 import org.gradle.needle.client.HttpServiceNewClient;
 import org.gradle.needle.util.ExcelDataUtils;
 import org.gradle.needle.util.HttpReqGen;

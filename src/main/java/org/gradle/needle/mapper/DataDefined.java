@@ -49,35 +49,35 @@ public class DataDefined {
 	 * 获取故障iecvalue列表
 	 */
 	public List<String> getMainFaultList() {
-		return getkeyList("WTUR.Flt.Rs.S");
+		return getkeyWordList("WTUR.Flt.Rs.S");
 	}
 
 	/*
 	 * 获取风机状态iecvalue列表
 	 */
 	public List<String> getStatusList() {
-		return getkeyList("WTUR.TurSt.Rs.S");
+		return getkeyWordList("WTUR.TurSt.Rs.S");
 	}
 
 	/*
 	 * 获取停机模式字iecvalue列表
 	 */
 	public List<String> getStopModeWordList() {
-		return getkeyList("WTUR.Other.Wn.I16.StopModeWord");
+		return getkeyWordList("WTUR.Other.Wn.I16.StopModeWord");
 	}
 
 	/*
 	 * 获取限功率模式字iecvalue列表
 	 */
 	public List<String> getLimitModeWordList() {
-		return getkeyList("WTUR.Other.Ri.I16.LitPowByPLC");
+		return getkeyWordList("WTUR.Other.Ri.I16.LitPowByPLC");
 	}
 
 	/*
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
 	 */
-	public List<String> getkeyList(String iecpath) {
+	public List<String> getkeyWordList(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		List<String> iecvalueList = new ArrayList<String>();
@@ -105,7 +105,7 @@ public class DataDefined {
 		List<Propaths> list = mapper.selectPropaths(propaths);
 		return list;
 	}
-
+	
 	/*
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
@@ -119,6 +119,7 @@ public class DataDefined {
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
 	}
+	
 
 	/*
 	 * 根据前置的GWSOCKET命令获取对应的compath

@@ -20,9 +20,7 @@
 		flushCache="false" useCache="true" statementType="PREPARED"
 		resultType="Pathdescr">
         <![CDATA[
-SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
+ SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
         ]]>
 	</select>
-
-
 </mapper>
