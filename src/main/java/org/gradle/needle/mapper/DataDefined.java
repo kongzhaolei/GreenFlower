@@ -108,18 +108,6 @@ public class DataDefined {
 	
 	/*
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库portinfo表对应各协议的端口信息
-	 */
-	public static List<Portinfo> getPortinfo() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
-		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Portinfo portinfo = new Portinfo();
-		List<Portinfo> list = mapper.selectPortinfo(portinfo);
-		return list;
-	}
-
-	/*
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {

@@ -1,6 +1,5 @@
 package org.gradle.needle.server;
 
-import java.net.InetAddress;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,15 +25,15 @@ import io.netty.handler.codec.string.StringEncoder;
  */
 public class NettyTcpServer {
 
-	private int port;
-	private String inetHost;
-	static int list_n = -1;
-	static int protocolid = Integer.parseInt(GlobalSettings
+	private static int list_n = -1;
+	private static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
-
-	public NettyTcpServer(String inetHost, int port) {
+	private int port;
+	private String host;
+	
+	public NettyTcpServer(String host, int port) {
 		this.port = port;
-		this.inetHost = inetHost;
+		this.host = host;
 	}
 
 	/**
@@ -44,11 +43,10 @@ public class NettyTcpServer {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		// 获取本机IP
-		String host = InetAddress.getLocalHost().getHostAddress();
-		int port = 1120;
+
+		String host = GlobalSettings.getProperty("host");
 		stopTimerStart();
-		new NettyTcpServer(host, port).start();
+		new NettyTcpServer(host, 1120).start();
 	}
 
 	public static int getIecvalue() {
@@ -88,8 +86,8 @@ public class NettyTcpServer {
 					.childOption(ChannelOption.SO_KEEPALIVE, true);
 
 			// 绑定端口，开始接收进来的连接
-			ChannelFuture future = sbs.bind(inetHost, port).sync();
-			System.out.println("服务器监听于： " + inetHost + ":" + port);
+			ChannelFuture future = sbs.bind(host, port).sync();
+			System.out.println("服务器监听于： " + host + ":" + port);
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			bossGroup.shutdownGracefully();
