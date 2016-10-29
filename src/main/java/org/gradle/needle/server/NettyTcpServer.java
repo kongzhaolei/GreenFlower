@@ -37,7 +37,7 @@ public class NettyTcpServer {
 	}
 
 	/**
-	 * 根据风机IP配置，自动扩展多台风机模拟服务
+	 * 根据风机IP配置，扩展多台风机模拟服务
 	 * 
 	 * @param args
 	 * @throws Exception
@@ -45,8 +45,9 @@ public class NettyTcpServer {
 	public static void main(String[] args) throws Exception {
 
 		String host = GlobalSettings.getProperty("host");
-		stopTimerStart();
-		new NettyTcpServer(host, 1120).start();
+		timerStart();
+		//默认端口1120
+		new NettyTcpServer(host, 1120).serverStart();
 	}
 
 	public static int getIecvalue() {
@@ -60,7 +61,7 @@ public class NettyTcpServer {
 	/*
 	 * 服务端启动
 	 */
-	public void start() {
+	public void serverStart() {
 		// EventLoopGroup是用来处理IO操作的多线程事件循环器
 		// bossGroup 用来接收客户端的连接，workerGroup 用来处理已经被接收的连接
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -96,12 +97,12 @@ public class NettyTcpServer {
 	}
 
 	/*
-	 * 定时器实现停机模式字号迭代
+	 * 模式字定时器，以停机模式字为例
 	 */
-	public static void stopTimerStart() {
+	public static void timerStart() {
 		final long interval = 60000;
 		Timer timer = new Timer();
-		final int size = new DataDefined(protocolid).getStopModeWordList()
+		final int size = new DataDefined(protocolid).getStopModeWordIecValueList()
 				.size();
 		TimerTask task = new TimerTask() {
 			@Override
@@ -111,6 +112,8 @@ public class NettyTcpServer {
 					list_n = 0;
 				}
 				System.out.println("fuck everything " + list_n);
+				
+				
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);

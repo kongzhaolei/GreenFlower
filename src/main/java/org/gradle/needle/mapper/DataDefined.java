@@ -2,9 +2,11 @@ package org.gradle.needle.mapper;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
@@ -46,49 +48,91 @@ public class DataDefined {
 	}
 
 	/*
-	 * 获取故障iecvalue列表
+	 * 获取故障Map<iecvalue, explaincn>
 	 */
-	public List<String> getMainFaultList() {
-		return getkeyWordList("WTUR.Flt.Rs.S");
+	public Map<String, String> getMainFaultMap() {
+		return getkeyWordMap("WTUR.Flt.Rs.S");
 	}
 
 	/*
-	 * 获取风机状态iecvalue列表
+	 * 获取警告Map<iecvalue, explaincn>
 	 */
-	public List<String> getStatusList() {
-		return getkeyWordList("WTUR.TurSt.Rs.S");
+	public Map<String, String> getAlarmMap() {
+		return getkeyWordMap("WTUR.Alam.Rs.S");
 	}
 
 	/*
-	 * 获取停机模式字iecvalue列表
+	 * 获取风机状态Map<iecvalue, explaincn>
 	 */
-	public List<String> getStopModeWordList() {
-		return getkeyWordList("WTUR.Other.Wn.I16.StopModeWord");
+	public Map<String, String> getStatusMap() {
+		return getkeyWordMap("WTUR.TurSt.Rs.S");
 	}
 
 	/*
-	 * 获取限功率模式字iecvalue列表
+	 * 获取停机模式字Map<iecvalue, explaincn>
 	 */
-	public List<String> getLimitModeWordList() {
-		return getkeyWordList("WTUR.Other.Ri.I16.LitPowByPLC");
+	public Map<String, String> getStopModeWordMap() {
+		return getkeyWordMap("WTUR.Other.Wn.I16.StopModeWord");
+	}
+
+	/*
+	 * 获取停机模式字list<iecvalue>
+	 */
+	public List<String> getStopModeWordIecValueList() {
+		List<String> lists = null;
+		Iterator<String> iterator = getStopModeWordMap().keySet().iterator();
+		while (iterator.hasNext()) {
+			String iecvalue = iterator.next();
+			try {
+				lists.add(iecvalue);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return lists;
+	}
+
+	/*
+	 * 获取限功率模式字Map<iecvalue, explaincn>
+	 */
+	public Map<String, String> getLimitModeWordMap() {
+		return getkeyWordMap("WTUR.Other.Ri.I16.LitPowByPLC");
+	}
+
+	/*
+	 * 获取限功率模式字list<iecvalue>
+	 */
+	public List<String> getLimitModeWordIecValueList() {
+		List<String> lists = null;
+		Iterator<String> iterator = getLimitModeWordMap().keySet().iterator();
+		while (iterator.hasNext()) {
+			String iecvalue = iterator.next();
+			try {
+				lists.add(iecvalue);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return lists;
 	}
 
 	/*
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按列表存储
+	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按Map<String,String>存储
 	 */
-	public List<String> getkeyWordList(String iecpath) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
+	public Map<String, String> getkeyWordMap(String iecpath) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
+				DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		List<String> iecvalueList = new ArrayList<String>();
+		Map<String, String> keyWordMap = new HashMap<String, String>();
 		Pathdescr pathdescr = new Pathdescr();
 		pathdescr.setProtocolid(protocolid);
 		pathdescr.setIecpath(iecpath);
 		List<Pathdescr> list = mapper.selectPathdescr(pathdescr);
 		for (Pathdescr pdr : list) {
-			iecvalueList.add(pdr.getIecvalue());
+			keyWordMap.put(pdr.getIecvalue(), pdr.getexplaincn());
 		}
-		return iecvalueList;
+		return keyWordMap;
 
 	}
 
@@ -97,7 +141,8 @@ public class DataDefined {
 	 * 获取config库propaths表典型维数据集
 	 */
 	public List<Propaths> getPropaths() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
+				DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Propaths propaths = new Propaths();
 		propaths.setcompath(getCompathOnCmdname());
@@ -105,13 +150,14 @@ public class DataDefined {
 		List<Propaths> list = mapper.selectPropaths(propaths);
 		return list;
 	}
-	
+
 	/*
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
 	 */
 	public List<Prodata> getProData() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
+				DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
 		prodata.setcompath(getCompathOnCmdname());
@@ -119,7 +165,6 @@ public class DataDefined {
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
 	}
-	
 
 	/*
 	 * 根据前置的GWSOCKET命令获取对应的compath
@@ -264,4 +309,5 @@ public class DataDefined {
 		Random rand = new Random();
 		return rand.nextInt(2);
 	}
+
 }

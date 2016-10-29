@@ -127,7 +127,7 @@ public class BrowserFactory {
 
 	// º”‘ÿ≤‚ ‘“≥√Ê
 	public void open(String projectSName){
-		projectUrl = GlobalSettings.getProperties().getProperty(projectSName);
+		projectUrl = GlobalSettings.getFileProperties().getProperty(projectSName);
 		browser = new WebDriverBackedSelenium(browserCore, projectUrl);
 		pause(stepInterval);
 		try {
