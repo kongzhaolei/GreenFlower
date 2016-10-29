@@ -33,8 +33,9 @@ public class GlobalSettings {
 	public static String stepInterval = prop.getProperty("StepInterval", "500");
 	public static String timeout = prop.getProperty("Timeout", "30000");
 
-	// Excel数据文件路径配置
+	// webapi测试数据文件路径配置
 	public static String ExcelDataFile = prop.getProperty("ExcelDataFile", "");
+	// key
 
 	// XML数据文件配置
 	public static String XmlDataFile1 = prop.getProperty("XmlDataFile1", "");

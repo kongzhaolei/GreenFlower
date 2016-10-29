@@ -18,7 +18,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-/**
+/***
  * 
  * @author kongzhaolei
  * 
@@ -36,7 +36,7 @@ public class NettyTcpServer {
 		this.host = host;
 	}
 
-	/**
+	/***
 	 * 根据风机IP配置，扩展多台风机模拟服务
 	 * 
 	 * @param args
@@ -50,7 +50,7 @@ public class NettyTcpServer {
 		new NettyTcpServer(host, 1120).serverStart();
 	}
 
-	public static int getIecvalue() {
+	public static int getNum() {
 		return list_n;
 	}
 
@@ -58,7 +58,7 @@ public class NettyTcpServer {
 		return protocolid;
 	}
 
-	/*
+	/**
 	 * 服务端启动
 	 */
 	public void serverStart() {
@@ -96,7 +96,7 @@ public class NettyTcpServer {
 		}
 	}
 
-	/*
+	/**
 	 * 模式字定时器，以停机模式字为例
 	 */
 	public static void timerStart() {

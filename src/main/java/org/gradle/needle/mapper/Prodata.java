@@ -57,14 +57,4 @@ public class Prodata {
 	public String getCol2() {
 		return col_2;
 	}
-
-	@Override
-	public String toString() {
-		return "Prodata [protocolid = " + protocolid + ", ascflg = " + ascflg
-				+ ", pathid = " + pathid + ", iecpath = " + iecpath
-				+ ", compath = " + compath + ", datapath = " + datapath
-				+ ", col_1 = " + col_1 + ", col_2 = " + col_2 + "]";
-
-	}
-
 }

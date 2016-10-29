@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.gradle.needle.server.NettyTcpServer;
 
-/**
+/***
  * 
  * @author kongzhaolei
  * 
@@ -19,7 +19,7 @@ public class DataEngine {
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
-	/*
+	/**
 	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataEngine(int protocolid, String cmdname) {
@@ -27,21 +27,21 @@ public class DataEngine {
 		this.cmdname = cmdname;
 	}
 
-	/*
+	/**
 	 * 构造方法,初始化protocolid
 	 */
 	public DataEngine(int protocolid) {
 		this.protocolid = protocolid;
 	}
 
-	/*
+	/**
 	 * 空构造方法
 	 */
 	public DataEngine() {
 
 	}
 
-	/*
+	/**
 	 * 根据GWSOCKET命令获取cachevalue cachevalue根据varpath对应的dttype动态生成
 	 */
 	public String getCacheValue() {
@@ -89,14 +89,14 @@ public class DataEngine {
 		return sReturn;
 	}
 
-	/*
+	/**
 	 * 定时器刷新停机模式字
 	 */
-	public String getStopModeWord() {
+	public String getStopModeWordIecValue() {
 		String stopmodeword = null;
 		DataDefined ddf = new DataDefined(protocolid);
 		List<String> lists = ddf.getStopModeWordIecValueList();
-		int n = NettyTcpServer.getIecvalue(); // 时钟计数器
+		int n = NettyTcpServer.getNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
 				stopmodeword = lists.get(n);
@@ -110,14 +110,14 @@ public class DataEngine {
 		return stopmodeword;
 	}
 
-	/*
+	/**
 	 * 定时器刷新限功率模式字
 	 */
-	public String getLimitModeWord() {
+	public String getLimitModeWordIecValue() {
 		String limitmodeword = null;
 		DataDefined ddf = new DataDefined(protocolid);
 		List<String> lists = ddf.getLimitModeWordIecValueList();
-		int n = NettyTcpServer.getIecvalue(); // 时钟计数器
+		int n = NettyTcpServer.getNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
 				limitmodeword = lists.get(n);
@@ -131,23 +131,23 @@ public class DataEngine {
 		return limitmodeword;
 	}
 
-	/*
+	/**
 	 * 获取当前停机模式字对应的中文解析
 	 */
 	public String getStopModeExplaincn() {
 		return new DataDefined(protocolid).getStopModeWordMap().get(
-				getStopModeWord());
+				getStopModeWordIecValue());
 	}
 
-	/*
+	/**
 	 * 获取当前限功率模式字对应的中文解析
 	 */
 	public String getLimitModeExplaincn() {
 		return new DataDefined(protocolid).getLimitModeWordMap().get(
-				getLimitModeWord());
+				getLimitModeWordIecValue());
 	}
 
-	/*
+	/**
 	 * 风机主故障
 	 */
 	public String getMainFault() {
@@ -155,14 +155,14 @@ public class DataEngine {
 		return "0";
 	}
 
-	/*
+	/**
 	 * 风机警告
 	 */
 	public String getAlarm() {
 		return "0";
 	}
 
-	/*
+	/**
 	 * 风机状态
 	 */
 	public String getStatus() {

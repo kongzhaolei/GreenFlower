@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
 
-/**
+/***
  * 
  * @author kongzhaolei
  */
@@ -24,7 +24,7 @@ public class DataDefined {
 	private static Logger logger = Logger
 			.getLogger(DataDefined.class.getName());
 
-	/*
+	/**
 	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataDefined(int protocolid, String cmdname) {
@@ -33,49 +33,49 @@ public class DataDefined {
 
 	}
 
-	/*
+	/**
 	 * 构造方法,初始化protocolid
 	 */
 	public DataDefined(int protocolid) {
 		this.protocolid = protocolid;
 	}
 
-	/*
+	/**
 	 * 空构造方法
 	 */
 	public DataDefined() {
 
 	}
 
-	/*
+	/**
 	 * 获取故障Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getMainFaultMap() {
 		return getkeyWordMap("WTUR.Flt.Rs.S");
 	}
 
-	/*
+	/**
 	 * 获取警告Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getAlarmMap() {
 		return getkeyWordMap("WTUR.Alam.Rs.S");
 	}
 
-	/*
+	/**
 	 * 获取风机状态Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getStatusMap() {
 		return getkeyWordMap("WTUR.TurSt.Rs.S");
 	}
 
-	/*
+	/**
 	 * 获取停机模式字Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getStopModeWordMap() {
 		return getkeyWordMap("WTUR.Other.Wn.I16.StopModeWord");
 	}
 
-	/*
+	/**
 	 * 获取停机模式字list<iecvalue>
 	 */
 	public List<String> getStopModeWordIecValueList() {
@@ -92,14 +92,14 @@ public class DataDefined {
 		return lists;
 	}
 
-	/*
+	/**
 	 * 获取限功率模式字Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getLimitModeWordMap() {
 		return getkeyWordMap("WTUR.Other.Ri.I16.LitPowByPLC");
 	}
 
-	/*
+	/**
 	 * 获取限功率模式字list<iecvalue>
 	 */
 	public List<String> getLimitModeWordIecValueList() {
@@ -116,7 +116,7 @@ public class DataDefined {
 		return lists;
 	}
 
-	/*
+	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按Map<String,String>存储
 	 */
@@ -136,7 +136,7 @@ public class DataDefined {
 
 	}
 
-	/*
+	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库propaths表典型维数据集
 	 */
@@ -151,7 +151,7 @@ public class DataDefined {
 		return list;
 	}
 
-	/*
+	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取data库prodata表典型维数据集
 	 */
@@ -166,7 +166,7 @@ public class DataDefined {
 		return list;
 	}
 
-	/*
+	/**
 	 * 根据前置的GWSOCKET命令获取对应的compath
 	 */
 	protected String getCompathOnCmdname() {
@@ -180,7 +180,7 @@ public class DataDefined {
 		return compathString;
 	}
 
-	/*
+	/**
 	 * 
 	 * 根据col_1生成CacheValue 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
 	 * DYNAMIC 动态计算 4 FAULTMAIN 主故障 5 STATUS 风机状态 6 YEAR 年 7 MONTH 月 8 DAY 日 9
@@ -248,11 +248,11 @@ public class DataDefined {
 			break;
 
 		case "STOPMODE":
-			rString = new DataEngine(protocolid).getStopModeWord();
+			rString = new DataEngine(protocolid).getStopModeWordIecValue();
 			break;
 
 		case "LIMITMODE":
-			rString = new DataEngine(protocolid).getLimitModeWord();
+			rString = new DataEngine(protocolid).getLimitModeWordIecValue();
 			break;
 
 		default:
@@ -263,7 +263,7 @@ public class DataDefined {
 		return rString;
 	}
 
-	/*
+	/**
 	 * 生成随机字符串的方法
 	 */
 	public static String ranString(int length) {
@@ -276,7 +276,7 @@ public class DataDefined {
 		return sb.toString();
 	}
 
-	/*
+	/**
 	 * 生成随机数位于max和min之间的方法
 	 */
 	public static String ranDouble(String min, String max) {
@@ -294,7 +294,7 @@ public class DataDefined {
 		return df.format(bt).toString();
 	}
 
-	/*
+	/**
 	 * 生成一个随机的布尔值的方法
 	 */
 	public static boolean ranBoolean() {
@@ -302,7 +302,7 @@ public class DataDefined {
 		return x.nextBoolean();
 	}
 
-	/*
+	/**
 	 * 生成随机0或1
 	 */
 	public static int ranCoin() {
