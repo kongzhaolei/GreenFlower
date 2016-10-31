@@ -59,7 +59,7 @@ public class HttpServiceTest {
 		ExcelDataUtils.setExcelWorkSheet("Input");
 		Iterator<Map<String, String>> datamap = ExcelDataUtils
 				.getRowDataMap(testset0);
-		Iterator<Object[]> requestfiles = HttpReqGen.prerequest(datamap);
+		Iterator<Object[]> requestfiles = HttpReqGen.preReqGen(datamap);
 		return (requestfiles);
 	}
 }
