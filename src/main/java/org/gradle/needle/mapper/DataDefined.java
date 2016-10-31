@@ -2,6 +2,7 @@ package org.gradle.needle.mapper;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -79,15 +80,15 @@ public class DataDefined {
 	 * 获取停机模式字list<iecvalue>
 	 */
 	public List<String> getStopModeWordIecValueList() {
-		List<String> lists = null;
+		List<String> lists = new ArrayList<String>();
 		Iterator<String> iterator = getStopModeWordMap().keySet().iterator();
-		while (iterator.hasNext()) {
-			String iecvalue = iterator.next();
-			try {
+		try {
+			while (iterator.hasNext()) {
+				String iecvalue = iterator.next();
 				lists.add(iecvalue);
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return lists;
 	}
@@ -103,18 +104,22 @@ public class DataDefined {
 	 * 获取限功率模式字list<iecvalue>
 	 */
 	public List<String> getLimitModeWordIecValueList() {
-		List<String> lists = null;
+		List<String> lists = new ArrayList<String>();
 		Iterator<String> iterator = getLimitModeWordMap().keySet().iterator();
-		while (iterator.hasNext()) {
-			String iecvalue = iterator.next();
-			try {
+		try {
+			while (iterator.hasNext()) {
+				String iecvalue = iterator.next();
 				lists.add(iecvalue);
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return lists;
 	}
+
+	/**
+	 * 
+	 */
 
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
