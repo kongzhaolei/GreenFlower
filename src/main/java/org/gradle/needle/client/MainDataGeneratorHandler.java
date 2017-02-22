@@ -5,7 +5,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
 
-public class NettyUdpClientHandler extends SimpleChannelInboundHandler<DatagramPacket> {
+public class MainDataGeneratorHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 	
 	@Override
 	public void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg)

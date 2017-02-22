@@ -6,13 +6,13 @@ import org.gradle.needle.mapper.DataEngine;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
+public class WindFarmSimulatorHandler extends ChannelInboundHandlerAdapter {
 
 	int protocolid;
-	private static Logger logger = Logger.getLogger(NettyTcpServerHandler.class
+	private static Logger logger = Logger.getLogger(WindFarmSimulatorHandler.class
 			.getName());
 
-	public NettyTcpServerHandler(int protocolid) {
+	public WindFarmSimulatorHandler(int protocolid) {
 		this.protocolid = protocolid;
 	}
 	

@@ -23,7 +23,7 @@ import io.netty.handler.codec.string.StringEncoder;
  * @author kongzhaolei
  * 
  */
-public class NettyTcpServer {
+public class WindFarmSimulator {
 
 	private static int list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings
@@ -31,7 +31,7 @@ public class NettyTcpServer {
 	private int port;
 	private String host;
 	
-	public NettyTcpServer(String host, int port) {
+	public WindFarmSimulator(String host, int port) {
 		this.port = port;
 		this.host = host;
 	}
@@ -47,7 +47,7 @@ public class NettyTcpServer {
 		String host = GlobalSettings.getProperty("host");
 		timerStart();
 		//д╛хо╤к©з1120
-		new NettyTcpServer(host, 1120).serverStart();
+		new WindFarmSimulator(host, 1120).serverStart();
 	}
 
 	public static int getNum() {
@@ -80,7 +80,7 @@ public class NettyTcpServer {
 							ch.pipeline().addLast("encoder",
 									new StringEncoder());
 							ch.pipeline().addLast(
-									new NettyTcpServerHandler(protocolid));
+									new WindFarmSimulatorHandler(protocolid));
 
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)

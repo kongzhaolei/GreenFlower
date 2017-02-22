@@ -12,12 +12,12 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.util.CharsetUtil;
 import io.netty.channel.socket.DatagramPacket;
 
-public class NettyUdpClient {
+public class MainDataGenerator {
 
 	public static void main(String[] args) throws Exception {
 
-		int port = 8805;
-		new NettyUdpClient().run(port);
+		int port = 8769;
+		new MainDataGenerator().run(port);
 
 	}
 
@@ -27,15 +27,15 @@ public class NettyUdpClient {
 			Bootstrap bs = new Bootstrap();
 			bs.group(group).channel(NioDatagramChannel.class)
 					.option(ChannelOption.SO_BROADCAST, true)
-					.handler(new NettyUdpClientHandler());
+					.handler(new MainDataGeneratorHandler());
 
 			Channel channel = bs.bind(0).sync().channel();
 
-			// 向网段内的所有机器组播UDP消息
+			// 向服务端传递UDP消息
 			channel.writeAndFlush(
-					new DatagramPacket(Unpooled.copiedBuffer("how are you...",
+					new DatagramPacket(Unpooled.copiedBuffer("comstate|836610009|0",
 							CharsetUtil.UTF_8), new InetSocketAddress(
-							"255.255.255.255", port))).sync();
+							"224.1.1.15", port))).sync();
 			if (!channel.closeFuture().await(6000)) {
 				System.out.println("查询超时");
 			}
