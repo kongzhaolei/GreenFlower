@@ -12,6 +12,23 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.util.CharsetUtil;
 import io.netty.channel.socket.DatagramPacket;
 
+/** author
+ * kongzhaolei
+ * 
+ * --组播数据的发生器
+ * 两种通讯类型
+ *   1. 动态模拟前置的组播，
+ *   2. 模拟数据处理服务的UDP向上转发
+ * 两个维度的动态变化
+ *   1. 动态模拟不同协议的主轮询数据
+ *   2. 动态模拟不同风机的主轮询数据
+ * 不同业务类型数据
+ *   1. 主轮询数据 MainData    wman
+ *   2. 故障数据  FaultData    falutdata
+ *   3. 通信状态  ComState   
+ *   4. 包数据 PackData
+ *   
+ */  
 public class MainDataGenerator {
 
 	public static void main(String[] args) throws Exception {
