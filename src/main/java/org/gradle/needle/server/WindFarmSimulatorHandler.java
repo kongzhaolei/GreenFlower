@@ -21,7 +21,7 @@ public class WindFarmSimulatorHandler extends ChannelInboundHandlerAdapter {
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
 		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid + "\n"
 				+ msg.toString());
-		String sReturnString = de.getCacheValue();
+		String sReturnString = de.genDevPackData();
 		ctx.writeAndFlush(sReturnString);
 		logger.info(sReturnString);
 	}

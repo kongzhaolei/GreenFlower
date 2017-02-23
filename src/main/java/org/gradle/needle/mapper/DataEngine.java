@@ -40,11 +40,14 @@ public class DataEngine {
 	public DataEngine() {
 
 	}
+	
+	
 
 	/**
-	 * 根据GWSOCKET命令获取cachevalue cachevalue根据varpath对应的dttype动态生成
+	 * 根据GWSOCKET命令生成 DevPackData 
+	 * DevPackData根据varpath对应的dttype动态生成
 	 */
-	public String getCacheValue() {
+	public String genDevPackData() {
 		String sReturn = null;
 		int n = 0;
 		DataDefined df = new DataDefined(protocolid, cmdname);
