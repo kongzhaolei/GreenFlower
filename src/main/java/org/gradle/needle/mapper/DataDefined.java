@@ -118,12 +118,8 @@ public class DataDefined {
 	}
 
 	/**
-	 * 
-	 */
-
-	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障公共方法 按Map<String,String>存储
+	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障的公共方法 按Map<String,String>存储
 	 */
 	public Map<String, String> getkeyWordMap(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
@@ -140,32 +136,66 @@ public class DataDefined {
 		return keyWordMap;
 
 	}
-
+	
 	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库propaths表典型维数据集
+	 * 获取包数据的propaths表典型维数据集(protocolid, cmdname)
 	 */
-	public List<Propaths> getPropaths() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
-				DBEnvironment.configdb).openSession();
-		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Propaths propaths = new Propaths();
-		propaths.setcompath(getCompathOnCmdname());
-		propaths.setProtocolid(protocolid);
-		List<Propaths> list = mapper.selectPropaths(propaths);
-		return list;
+	public List<Propaths> getPackPropaths() {
+		List<Propaths> pack_list = new ArrayList<>();
+		try {
+			for(Propaths pps : getAllPropaths()){
+				if(getCompathOnCmdname().equals(pps.getCompath())){
+					pack_list.add(pps);
+				}	
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pack_list;
 	}
 
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取data库prodata表典型维数据集
+	 * 获取config库propaths表典型维数据集(protocolid)
 	 */
-	public List<Prodata> getProData() {
+	public List<Propaths> getAllPropaths() {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
+				DBEnvironment.configdb).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Propaths propaths = new Propaths();
+		//propaths.setcompath(getCompathOnCmdname());
+		propaths.setProtocolid(protocolid);
+		List<Propaths> list = mapper.selectPropaths(propaths);
+		return list;
+	}
+	
+	/**
+	 * 获取包数据的prodata表典型维数据集(protocolid, cmdname)
+	 */
+	public List<Prodata> getPackProData() {
+		List<Prodata> pack_list = new ArrayList<>();
+		try {
+			for(Prodata pda : getAllProData()){
+				if(getCompathOnCmdname().equals(pda.getCompath())){
+					pack_list.add(pda);
+				}	
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pack_list;	
+	}
+
+	/**
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 获取data库prodata表典型维数据集(protocolid)
+	 */
+	public List<Prodata> getAllProData() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
 				DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
-		prodata.setcompath(getCompathOnCmdname());
+		//prodata.setcompath(getCompathOnCmdname());
 		prodata.setProtocolid(protocolid);
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
@@ -187,10 +217,22 @@ public class DataDefined {
 
 	/**
 	 * 
-	 * 根据col_1生成CacheValue 1 FIXED 固定值，col_2 2 FIXBOOL 随机布尔 ranBoolean() 3
-	 * DYNAMIC 动态计算 4 FAULTMAIN 主故障 5 STATUS 风机状态 6 YEAR 年 7 MONTH 月 8 DAY 日 9
-	 * HOUR 时10 MINUTE 分11 SECOND 秒12 RANDOM 随机数 ranDouble()13 TOTAL 遥脉量14
-	 * STOPMODE 停机模式字/状态模式字15 LIMITMODE 限功率模式字
+	 * 根据col_1类型生成DynamicValue 
+	 * 1 FIXED 固定值，col_2 
+	 * 2 FIXBOOL 随机布尔 ranBoolean() 
+	 * 3 DYNAMIC 动态计算
+	 * 4 FAULTMAIN 主故障 
+	 * 5 STATUS 风机状态 
+	 * 6 YEAR 年 
+	 * 7 MONTH 月 
+	 * 8 DAY 日 
+	 * 9 HOUR 时
+	 * 10 MINUTE 分
+	 * 11 SECOND 秒
+	 * 12 RANDOM 随机数 ranDouble()
+	 * 13 TOTAL 遥脉量
+	 * 14 STOPMODE 停机模式字/状态模式字
+	 * 15 LIMITMODE 限功率模式字
 	 */
 	public String getDynamicValue(Prodata pda) throws SQLException {
 		String rString = "null";

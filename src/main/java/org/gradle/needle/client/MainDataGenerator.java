@@ -14,8 +14,8 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.util.CharsetUtil;
 import io.netty.channel.socket.DatagramPacket;
 
-/** author
- * kongzhaolei
+/** 
+ * author kongzhaolei
  * 
  * --组播数据的发生器
  * 两种通讯类型
@@ -25,10 +25,32 @@ import io.netty.channel.socket.DatagramPacket;
  *   1. 动态模拟不同协议的主轮询数据
  *   2. 动态模拟不同风机的主轮询数据
  * 不同业务类型数据的动态变化
- *   1. 主轮询数据 MainData    wman
- *   2. 故障数据  FaultData    falutdata
- *   3. 通信状态  ComState   
- *   4. 包数据 PackData
+ *   1. 主轮询数据 DevMainData    
+ *      格式说明：(wman|650101001|数据)
+ *      数据说明：(transtype=1  offsets从小到大排序)
+ *      数据实例：(wman|422804646|2016-07-08 10:49:03.431,1092.81,1087.53,1085.78,391.97,390.55,390.55,1259.52,-218.24,50,0.99,False,True,False,False,True,True,False,True,)
+ *   
+ *   2. 故障数据  DevFaultData
+ *      格式说明：(falutdata|wtid|故障号|关联iecpath量|设备状态|唯一号)
+ *      数据实例：(falutdata|650101001|106;90;91;92;95|
+ *               (WTUR.Bool.Rd.b0.QSBut)=FALSE;
+ *               (WNAC.Bool.Rd.b0.Qstart)=FALSE;
+ *               (WTPS.Bool.Rd.b0.Psafe1)=FALSE;
+ *               (WTPS.Bool.Rd.b0.Psafe2)=FALSE;
+ *               (WTPS.Bool.Rd.b0.Psafe3)=FALSE|2
+ *               |443c860a-9fe6-4916-9a30-0ecad3821ea2)
+ *   3. 警告数据 DevAlarmdata
+ *      格式说明：(alarmdata|wtid|警告号|关联iecpath量|设备状态)
+                数据实例：(alarmdata|650101001|106;90 |(WTUR.Bool.Rd.b0.QSBut)=FALSE;(WNAC.Bool.Rd.b0.Qstart)=FALSE |2)
+ *   
+ *   4. 前置和设备之间的通信状态  DevComState
+ *      格式说明：(comstate|wtid|通讯状态)
+ *      数据实例：(comstate|650101001|0)
+ *      
+ *   5. 包数据组播 DevPackData
+ *   格式说明：(pack|数据包名|wtid|数据)
+ *   数据说明：compath=数据包名offsets从小到大排序
+ *   数据实例：(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
  *   
  */  
 public class MainDataGenerator {
@@ -120,5 +142,4 @@ public class MainDataGenerator {
 		}
 
 	}
-
 }

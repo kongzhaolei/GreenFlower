@@ -41,11 +41,24 @@ public class DataEngine {
 
 	}
 	
-	
+	/**
+	 * 指定protocolid 生成 DevMainData
+	 */
+	public String genDevMainData() {
+		String sReturn = null;
+		
+		
+		
+		
+		
+		
+		
+		
+		return sReturn;
+	}
 
 	/**
-	 * 根据GWSOCKET命令生成 DevPackData 
-	 * DevPackData根据varpath对应的dttype动态生成
+	 * 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData 
 	 */
 	public String genDevPackData() {
 		String sReturn = null;
@@ -57,13 +70,13 @@ public class DataEngine {
 				sReturn = sFaultString;
 				logger.info("已发送故障号" + sFaultString);
 			} else {
-				for (Prodata pda : df.getProData()) {
+				for (Prodata pda : df.getPackProData()) {
 					varpathMap.put(pda.getIecpath().trim(),
 							df.getDynamicValue(pda));
 				}
 
-				if (!df.getPropaths().isEmpty()) {
-					for (Propaths pps : df.getPropaths()) {
+				if (!df.getPackPropaths().isEmpty()) {
+					for (Propaths pps : df.getPackPropaths()) {
 						while (n < pps.getAscflg()) {
 							sReturn = sReturn + ";";
 							n++;
@@ -93,7 +106,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 定时器刷新停机模式字
+	 * 定时器刷新的停机模式字
 	 */
 	public String getStopModeWordIecValue() {
 		String stopmodeword = null;
@@ -114,7 +127,8 @@ public class DataEngine {
 	}
 
 	/**
-	 * 定时器刷新限功率模式字
+	 * 定时器刷新的限功率模式字
+	 * 
 	 */
 	public String getLimitModeWordIecValue() {
 		String limitmodeword = null;
@@ -135,7 +149,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 获取当前停机模式字对应的中文解析
+	 * 定时刷新的停机模式字对应的中文解析
 	 */
 	public String getStopModeExplaincn() {
 		return new DataDefined(protocolid).getStopModeWordMap().get(
@@ -143,7 +157,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 获取当前限功率模式字对应的中文解析
+	 * 定时刷新的限功率模式字对应的中文解析
 	 */
 	public String getLimitModeExplaincn() {
 		return new DataDefined(protocolid).getLimitModeWordMap().get(
