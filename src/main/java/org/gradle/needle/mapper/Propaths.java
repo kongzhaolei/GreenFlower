@@ -3,11 +3,16 @@ package org.gradle.needle.mapper;
 public class Propaths {
 	private Integer protocolid;
 	private Integer ascflg;
+	private Integer offsets;
 	private Integer pathid;
 	private String iecpath;
 	private String compath;
 	private String datapath;
 	private String descrcn;
+	private Integer transtype;
+	private Integer changesave;
+	private Integer bsave;
+	
 	
 	public Integer getProtocolid() {
 		return protocolid;
@@ -20,9 +25,25 @@ public class Propaths {
 	public Integer getAscflg() {
 		return ascflg;
 	}
+	
+	public Integer getOffsets() {
+		return offsets;
+	}
 
 	public Integer getPathid() {
 		return pathid;
+	}
+	
+	public Integer getTranstype(){
+		return transtype;
+	}
+	
+	public Integer getChangesave() {
+		return changesave;
+	}
+	
+	public Integer getBsave() {
+		return bsave;
 	}
 
 	public String getIecpath() {
@@ -33,10 +54,6 @@ public class Propaths {
 		return compath;
 	}
 	
-	public void setcompath(String compath) {
-		this.compath = compath;
-	}
-
 	public String getDatapath() {
 		return datapath;
 	}

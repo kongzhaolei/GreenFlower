@@ -48,9 +48,9 @@ import io.netty.channel.socket.DatagramPacket;
  *      数据实例：(comstate|650101001|0)
  *      
  *   5. 包数据组播 DevPackData
- *   格式说明：(pack|数据包名|wtid|数据)
- *   数据说明：compath=数据包名offsets从小到大排序
- *   数据实例：(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
+ *      格式说明：(pack|数据包名|wtid|数据)
+ *      数据说明：compath=数据包名offsets从小到大排序
+ *      数据实例：(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
  *   
  */  
 public class MainDataGenerator {

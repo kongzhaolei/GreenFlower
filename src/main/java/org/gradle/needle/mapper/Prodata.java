@@ -42,10 +42,6 @@ public class Prodata {
 		return compath;
 	}
 	
-	public void setcompath(String compath) {
-		this.compath = compath;
-	}
-
 	public String getDatapath() {
 		return datapath;
 	}

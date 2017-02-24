@@ -144,7 +144,7 @@ public class DataDefined {
 		List<Propaths> pack_list = new ArrayList<>();
 		try {
 			for(Propaths pps : getAllPropaths()){
-				if(getCompathOnCmdname().equals(pps.getCompath())){
+				if(getCompathOnCmdname().equals(pps.getCompath().trim())){
 					pack_list.add(pps);
 				}	
 			}	
@@ -163,7 +163,6 @@ public class DataDefined {
 				DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Propaths propaths = new Propaths();
-		//propaths.setcompath(getCompathOnCmdname());
 		propaths.setProtocolid(protocolid);
 		List<Propaths> list = mapper.selectPropaths(propaths);
 		return list;
@@ -176,7 +175,7 @@ public class DataDefined {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
 			for(Prodata pda : getAllProData()){
-				if(getCompathOnCmdname().equals(pda.getCompath())){
+				if(getCompathOnCmdname().equals(pda.getCompath().trim())){
 					pack_list.add(pda);
 				}	
 			}	
@@ -195,7 +194,6 @@ public class DataDefined {
 				DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
-		//prodata.setcompath(getCompathOnCmdname());
 		prodata.setProtocolid(protocolid);
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
