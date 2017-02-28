@@ -1,6 +1,7 @@
 package org.gradle;
 
 import org.gradle.needle.client.MainDataGenerator;
+import org.gradle.needle.util.VTimer;
 
 public class SoftAdapterGhost {
 	
@@ -9,7 +10,7 @@ public class SoftAdapterGhost {
 	private static String localIP = "127.0.0.1";
 
 	public static void main(String[] args) {
-		
+		VTimer.timerStart();
 		new MainDataGenerator(multicastip, multicastPort, localIP).generatorStart();
 
 	}

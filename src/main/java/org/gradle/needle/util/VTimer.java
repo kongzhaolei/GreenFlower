@@ -8,32 +8,46 @@ import org.gradle.needle.mapper.DataDefined;
 import org.gradle.needle.mapper.GlobalSettings;
 
 public class VTimer {
-	
-	private static int list_n = -1;
-	private static int protocolid = Integer.parseInt(GlobalSettings
-			.getProperty("protocolid"));
-	
-	
-	public static int getNum() {
-		return list_n;
+
+	private static int stop_list_n = -1;
+	private static int limit_list_n = -1;
+	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+
+	/*
+	 * 停机模式字序列号
+	 */
+	public static int getStopNum() {
+		return stop_list_n;
 	}
-	
+
+	/*
+	 * 限功率模式字序列号
+	 */
+	public static int getLimitNum() {
+		return limit_list_n;
+	}
+
 	/**
 	 * 模式字定时器，停机模式字为例
 	 */
 	public static void timerStart() {
 		final long interval = 60000;
 		Timer timer = new Timer();
-		final int size = new DataDefined(protocolid).getStopModeWordIecValueList()
-				.size();
+		final int stop_size = new DataDefined(protocolid).getStopModeWordIecValueList().size();
+		final int limit_size = new DataDefined(protocolid).getLimitModeWordIecValueList().size();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				list_n++;
-				if (list_n > size) {
-					list_n = 0;
+				stop_list_n++;
+				limit_list_n++;
+				if (stop_list_n > stop_size) {
+					stop_list_n = 0;
 				}
-				System.out.println("fuck everything " + list_n);
+				if (limit_list_n > limit_size) {
+					limit_list_n = 0;
+				}
+				System.out.println("当前停机模式字序列号： " + stop_list_n);
+                System.out.println("当前限功率模式字序列号： " + limit_list_n);
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);

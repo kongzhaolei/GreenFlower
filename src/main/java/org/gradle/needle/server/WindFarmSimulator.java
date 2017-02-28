@@ -40,7 +40,6 @@ public class WindFarmSimulator {
 
 		String host = GlobalSettings.getProperty("host");
 		VTimer.timerStart();
-
 		//д╛хо╤к©з1120
 		new WindFarmSimulator(host, 1120).serverStart();
 	}
