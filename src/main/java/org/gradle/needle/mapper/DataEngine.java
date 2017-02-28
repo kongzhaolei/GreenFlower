@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.server.WindFarmSimulator;
 import org.gradle.needle.util.VTimer;
 
 /***
@@ -17,6 +16,7 @@ public class DataEngine {
 
 	int protocolid;
 	String cmdname;
+	DataDefined df; 
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
@@ -26,6 +26,7 @@ public class DataEngine {
 	public DataEngine(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
+		df = new DataDefined(protocolid, cmdname);
 	}
 
 	/**
@@ -33,6 +34,7 @@ public class DataEngine {
 	 */
 	public DataEngine(int protocolid) {
 		this.protocolid = protocolid;
+		df = new DataDefined(protocolid);
 	}
 
 	/**
@@ -47,14 +49,13 @@ public class DataEngine {
 	 */
 	public String genDevMainData() {
 		String sReturn = null;
-		DataDefined ddf = new DataDefined(protocolid);
 		Map<String, String> maindatamap = new HashMap<String, String>();
 		try {
-			for (Prodata prodata : ddf.getAllProData()) {
-				maindatamap.put(prodata.getIecpath().trim(), ddf.getDynamicValue(prodata));
+			for (Prodata prodata : df.getAllProData()) {
+				maindatamap.put(prodata.getIecpath().trim(), df.getDynamicValue(prodata));
 			}
-			if (!ddf.getAllPropaths().isEmpty()) {
-				for (Propaths propaths : ddf.getAllPropaths()) {
+			if (!df.getAllPropaths().isEmpty()) {
+				for (Propaths propaths : df.getAllPropaths()) {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) {     // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ";";
 					}else {
@@ -74,7 +75,6 @@ public class DataEngine {
 	public String genDevPackData() {
 		String sReturn = null;
 		int n = 0;
-		DataDefined df = new DataDefined(protocolid, cmdname);
 		Map<String, String> varpathMap = new HashMap<String, String>();
 		try {
 			if ("GETCURRENTERROR".equals(cmdname)) {
@@ -116,8 +116,7 @@ public class DataEngine {
 	 */
 	public String getStopModeWordIecValue() {
 		String stopmodeword = null;
-		DataDefined ddf = new DataDefined(protocolid);
-		List<String> lists = ddf.getStopModeWordIecValueList();
+		List<String> lists = df.getStopModeWordIecValueList();
 		int n = VTimer.getStopNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
@@ -138,9 +137,8 @@ public class DataEngine {
 	 */
 	public String getLimitModeWordIecValue() {
 		String limitmodeword = null;
-		DataDefined ddf = new DataDefined(protocolid);
-		List<String> lists = ddf.getLimitModeWordIecValueList();
-		int n = VTimer.getStopNum(); // 时钟计数器
+		List<String> lists = df.getLimitModeWordIecValueList();
+		int n = VTimer.getLimitNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
 				limitmodeword = lists.get(n);
@@ -158,14 +156,14 @@ public class DataEngine {
 	 * 定时刷新的停机模式字对应的中文解析
 	 */
 	public String getStopModeExplaincn() {
-		return new DataDefined(protocolid).getStopModeWordMap().get(getStopModeWordIecValue());
+		return df.getStopModeWordMap().get(getStopModeWordIecValue());
 	}
 
 	/**
 	 * 定时刷新的限功率模式字对应的中文解析
 	 */
 	public String getLimitModeExplaincn() {
-		return new DataDefined(protocolid).getLimitModeWordMap().get(getLimitModeWordIecValue());
+		return df.getLimitModeWordMap().get(getLimitModeWordIecValue());
 	}
 
 	/**

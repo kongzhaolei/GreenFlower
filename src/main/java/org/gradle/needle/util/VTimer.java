@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.log4j.Logger;
 import org.gradle.needle.mapper.DataDefined;
 import org.gradle.needle.mapper.GlobalSettings;
 
@@ -12,6 +13,7 @@ public class VTimer {
 	private static int stop_list_n = -1;
 	private static int limit_list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+    private static Logger logger = Logger.getLogger(VTimer.class.getName());
 
 	/*
 	 * 停机模式字序列号
@@ -46,8 +48,8 @@ public class VTimer {
 				if (limit_list_n > limit_size) {
 					limit_list_n = 0;
 				}
-				System.out.println("当前停机模式字序列号： " + stop_list_n);
-                System.out.println("当前限功率模式字序列号： " + limit_list_n);
+				logger.info("当前停机模式字序列号： " + stop_list_n);
+                logger.info("当前限功率模式字序列号： " + limit_list_n);
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);
