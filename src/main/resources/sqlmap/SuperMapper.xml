@@ -5,14 +5,14 @@
 	<select id="selectProdata" parameterType="Prodata" flushCache="false"
 		useCache="true" statementType="PREPARED" resultType="Prodata">
         <![CDATA[
- SELECT * FROM prodata WHERE PROTOCOLID = #{protocolid}
+ SELECT * FROM prodata WHERE PROTOCOLID = #{protocolid} ORDER BY offsets ASC
         ]]>
 	</select>
 
 	<select id="selectPropaths" parameterType="Propaths" flushCache="false"
 		useCache="true" statementType="PREPARED" resultType="Propaths">
         <![CDATA[
- SELECT * FROM propaths WHERE PROTOCOLID = #{protocolid}
+ SELECT * FROM propaths WHERE PROTOCOLID = #{protocolid} ORDER BY offsets ASC
         ]]>
 	</select>
 

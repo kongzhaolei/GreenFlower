@@ -2,7 +2,9 @@ package org.gradle.needle.client;
 
 import java.net.InetSocketAddress;
 
+import org.apache.log4j.Logger;
 import org.gradle.needle.Multicast.Multicast;
+import org.gradle.needle.mapper.DataEngine;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -60,8 +62,8 @@ public class MainDataGenerator {
 	private static String localIP;
 	private static String singleIP;
 	private static int singlePort;
-	private String message;
 	private static boolean is_multicast;
+	private static Logger logger = Logger.getLogger(MainDataGenerator.class.getName());
 	
 
 	public MainDataGenerator(String ip, int port, String localIP){
@@ -81,7 +83,7 @@ public class MainDataGenerator {
 	 * 
 	 */
 	public String getMessage() {
-		return this.message;
+		return new DataEngine(158112).genDevMainData();
 	}
 	
 	/*
@@ -108,6 +110,7 @@ public class MainDataGenerator {
 		try {
 			multicast =  new Multicast(multicastIP, multicastPort, localIP);
 			multicast.send(getMessage());
+			logger.info(multicastIP + ":" + multicastPort + "组播服务已启动...");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -132,14 +135,14 @@ public class MainDataGenerator {
 					new DatagramPacket(Unpooled.copiedBuffer(getMessage(),
 							CharsetUtil.UTF_8), new InetSocketAddress(
 									singleIP, singlePort))).sync();
+			logger.info("消息已发送...");
 			if (!channel.closeFuture().await(6000)) {
-				System.out.println("发送超时");
+				logger.info("发送超时...");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			group.shutdownGracefully();
 		}
-
 	}
 }

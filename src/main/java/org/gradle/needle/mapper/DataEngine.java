@@ -40,25 +40,35 @@ public class DataEngine {
 	public DataEngine() {
 
 	}
-	
+
 	/**
-	 * 指定protocolid 生成 DevMainData
+	 * 模拟前置-瞬态数据引擎 指定protocolid 生成 DevMainData
 	 */
 	public String genDevMainData() {
 		String sReturn = null;
-		
-		
-		
-		
-		
-		
-		
-		
+		DataDefined ddf = new DataDefined(protocolid);
+		Map<String, String> maindatamap = new HashMap<String, String>();
+		try {
+			for (Prodata prodata : ddf.getAllProData()) {
+				maindatamap.put(prodata.getIecpath().trim(), ddf.getDynamicValue(prodata));
+			}
+			if (!ddf.getAllPropaths().isEmpty()) {
+				for (Propaths propaths : ddf.getAllPropaths()) {
+					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) {     // initValue()：以int类型返回integer的值
+						sReturn += maindatamap.get(propaths.getIecpath()) + ";";
+					}else {
+						logger.info("config库不存在此IEC量： " + propaths.getIecpath() + " ------ " + propaths.getDescrcn());
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return sReturn;
 	}
 
 	/**
-	 * 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData 
+	 * 模拟风机服务-包数据引擎 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData
 	 */
 	public String genDevPackData() {
 		String sReturn = null;
@@ -71,8 +81,7 @@ public class DataEngine {
 				logger.info("已发送故障号" + sFaultString);
 			} else {
 				for (Prodata pda : df.getPackProData()) {
-					varpathMap.put(pda.getIecpath().trim(),
-							df.getDynamicValue(pda));
+					varpathMap.put(pda.getIecpath().trim(), df.getDynamicValue(pda));
 				}
 
 				if (!df.getPackPropaths().isEmpty()) {
@@ -86,18 +95,14 @@ public class DataEngine {
 							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("DataSet不存在此IEC量： " + pps.getIecpath()
-									+ " ------ " + pps.getDescrcn());
+							logger.info("不存在此IEC量： " + pps.getIecpath() + " ------ " + pps.getDescrcn());
 						}
 					}
 				} else {
-					logger.info(protocolid + " 协议号不匹配，arraylist不存在该compath： "
-							+ df.getCompathOnCmdname());
+					logger.info(protocolid + " 协议号不匹配，arraylist不存在该compath： " + df.getCompathOnCmdname());
 				}
-				sReturn = sReturn.substring(sReturn.indexOf("null") + 4,
-						sReturn.length() - 1);
-				logger.info(df.getCompathOnCmdname() + " 数组已发送"
-						+ sReturn.split(";").length + "个IEC量");
+				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
+				logger.info(df.getCompathOnCmdname() + " 数组已发送" + sReturn.split(";").length + "个IEC量");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -152,16 +157,14 @@ public class DataEngine {
 	 * 定时刷新的停机模式字对应的中文解析
 	 */
 	public String getStopModeExplaincn() {
-		return new DataDefined(protocolid).getStopModeWordMap().get(
-				getStopModeWordIecValue());
+		return new DataDefined(protocolid).getStopModeWordMap().get(getStopModeWordIecValue());
 	}
 
 	/**
 	 * 定时刷新的限功率模式字对应的中文解析
 	 */
 	public String getLimitModeExplaincn() {
-		return new DataDefined(protocolid).getLimitModeWordMap().get(
-				getLimitModeWordIecValue());
+		return new DataDefined(protocolid).getLimitModeWordMap().get(getLimitModeWordIecValue());
 	}
 
 	/**

@@ -2,8 +2,10 @@ package org.gradle.needle.mapper;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -144,12 +146,18 @@ public class DataDefined {
 		List<Propaths> pack_list = new ArrayList<>();
 		try {
 			for(Propaths pps : getAllPropaths()){
-				if(getCompathOnCmdname().equals(pps.getCompath().trim())){
-					pack_list.add(pps);
-				}	
+				if (pps.getCompath() != null) {
+					if(getCompathOnCmdname().equals(pps.getCompath().trim())){
+						pack_list.add(pps);
+					}
+				} else {
+					continue;
+				}
+					
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info(" 请检查compath的值是否为null ");
 		}
 		return pack_list;
 	}
@@ -175,9 +183,13 @@ public class DataDefined {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
 			for(Prodata pda : getAllProData()){
-				if(getCompathOnCmdname().equals(pda.getCompath().trim())){
-					pack_list.add(pda);
-				}	
+				if (pda.getCompath()!= null) {               //compath有null情况，先判断
+					if(getCompathOnCmdname().equals(pda.getCompath().trim())){
+						pack_list.add(pda);
+					}
+				}else{
+					continue;
+				}		
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -264,7 +276,11 @@ public class DataDefined {
 		case "SECOND":
 			rString = Integer.toString(Calendar.SECOND);
 			break;
-
+			
+		case "CURRENTTIME":
+			rString = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+			break;
+			
 		case "RANDOM":
 			rString = ranDouble(pda.getCol2().split(",")[0], pda.getCol2()
 					.split(",")[1]);

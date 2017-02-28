@@ -1,10 +1,5 @@
 package org.gradle.needle.server;
 
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.gradle.needle.mapper.DataDefined;
 import org.gradle.needle.mapper.GlobalSettings;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -24,8 +19,6 @@ import io.netty.handler.codec.string.StringEncoder;
  * 
  */
 public class WindFarmSimulator {
-
-	private static int list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
 	private int port;
@@ -45,13 +38,9 @@ public class WindFarmSimulator {
 	public static void main(String[] args) throws Exception {
 
 		String host = GlobalSettings.getProperty("host");
-		timerStart();
+
 		//默认端口1120
 		new WindFarmSimulator(host, 1120).serverStart();
-	}
-
-	public static int getNum() {
-		return list_n;
 	}
 
 	public static int getProcolid() {
@@ -94,28 +83,5 @@ public class WindFarmSimulator {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-	}
-
-	/**
-	 * 模式字定时器，以停机模式字为例
-	 */
-	public static void timerStart() {
-		final long interval = 60000;
-		Timer timer = new Timer();
-		final int size = new DataDefined(protocolid).getStopModeWordIecValueList()
-				.size();
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				list_n++;
-				if (list_n > size) {
-					list_n = 0;
-				}
-				System.out.println("fuck everything " + list_n);
-				
-				
-			}
-		};
-		timer.scheduleAtFixedRate(task, new Date(), interval);
 	}
 }
