@@ -1,6 +1,7 @@
 package org.gradle.needle.server;
 
 import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.util.VTimer;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -38,6 +39,7 @@ public class WindFarmSimulator {
 	public static void main(String[] args) throws Exception {
 
 		String host = GlobalSettings.getProperty("host");
+		VTimer.timerStart();
 
 		//д╛хо╤к©з1120
 		new WindFarmSimulator(host, 1120).serverStart();

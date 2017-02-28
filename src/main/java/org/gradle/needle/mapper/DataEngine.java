@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.server.WindFarmSimulator;
+import org.gradle.needle.util.VTimer;
 
 /***
  * 
@@ -117,7 +118,7 @@ public class DataEngine {
 		String stopmodeword = null;
 		DataDefined ddf = new DataDefined(protocolid);
 		List<String> lists = ddf.getStopModeWordIecValueList();
-		int n = WindFarmSimulator.getNum(); // 时钟计数器
+		int n = VTimer.getNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
 				stopmodeword = lists.get(n);
@@ -139,7 +140,7 @@ public class DataEngine {
 		String limitmodeword = null;
 		DataDefined ddf = new DataDefined(protocolid);
 		List<String> lists = ddf.getLimitModeWordIecValueList();
-		int n = WindFarmSimulator.getNum(); // 时钟计数器
+		int n = VTimer.getNum(); // 时钟计数器
 		try {
 			if (!(n > lists.size())) {
 				limitmodeword = lists.get(n);

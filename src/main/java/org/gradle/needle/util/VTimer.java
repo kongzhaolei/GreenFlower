@@ -19,11 +19,11 @@ public class VTimer {
 	}
 	
 	/**
-	 * 模式字定时器，以停机模式字为例
+	 * 模式字定时器，停机模式字为例
 	 */
 	public static void timerStart() {
 		final long interval = 60000;
-		VTimer timer = new VTimer();
+		Timer timer = new Timer();
 		final int size = new DataDefined(protocolid).getStopModeWordIecValueList()
 				.size();
 		TimerTask task = new TimerTask() {
