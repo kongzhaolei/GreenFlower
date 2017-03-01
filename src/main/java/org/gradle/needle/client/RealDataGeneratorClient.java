@@ -111,8 +111,12 @@ public class RealDataGeneratorClient {
 	private void multicastGen() {
 		try {
 			multicast =  new Multicast(multicastIP, multicastPort, localIP);
-			multicast.send(getMessage());
 			logger.info(multicastIP + ":" + multicastPort + "组播服务已启动...");
+			while(is_multicast){
+				multicast.send(getMessage());
+				logger.info("已发送组播消息：" + getMessage());
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

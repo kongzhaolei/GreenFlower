@@ -210,6 +210,35 @@ public class DataDefined {
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
 	}
+	
+	/**
+	 * 获取风机编号list<wtid>
+	 */
+	public List<Integer> getWtidList() {
+		List<Integer> lists = new ArrayList<Integer>();
+		try {
+			for(Wtinfo wtinfo : getWtinfo()){
+				lists.add(wtinfo.getWtid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+	
+	/**
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 获取config库wtinfo表典型维数据集(protocolid)
+	 */
+	public List<Wtinfo> getWtinfo() {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
+				DBEnvironment.configdb).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Wtinfo wtinfo = new Wtinfo();
+		wtinfo.setProtocolid(protocolid);
+		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
+		return list;
+	}
 
 	/**
 	 * 根据前置的GWSOCKET命令获取对应的compath

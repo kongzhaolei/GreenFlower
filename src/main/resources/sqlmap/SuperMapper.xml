@@ -23,4 +23,12 @@
  SELECT * FROM pathdescr WHERE PROTOCOLID = #{protocolid} AND IECPATH = #{iecpath}
         ]]>
 	</select>
+	
+	<select id="selectWtinfo" parameterType="Wtinfo"
+		flushCache="false" useCache="true" statementType="PREPARED"
+		resultType="Wtinfo">
+        <![CDATA[
+ SELECT * FROM wtinfo WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC
+        ]]>
+	</select>	
 </mapper>

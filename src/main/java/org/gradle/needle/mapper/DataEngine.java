@@ -57,11 +57,13 @@ public class DataEngine {
 			if (!df.getAllPropaths().isEmpty()) {
 				for (Propaths propaths : df.getAllPropaths()) {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
-						sReturn += maindatamap.get(propaths.getIecpath()) + ";";
+						sReturn += maindatamap.get(propaths.getIecpath()) + ",";
 					} else {
-						logger.info("data库不存在此IEC量： " + propaths.getIecpath() + " / " + propaths.getDescrcn());
+						continue;				
 					}
 				}
+				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
+				sReturn = "(wman|" + df.getWtidList().get(VTimer.getWtidNum()) + "|" + sReturn + ")";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
