@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import org.apache.log4j.Logger;
 import org.gradle.needle.Multicast.Multicast;
 import org.gradle.needle.mapper.DataEngine;
+import org.gradle.needle.mapper.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -63,6 +64,7 @@ public class RealDataGeneratorClient {
 	private static String singleIP;
 	private static int singlePort;
 	private static boolean is_multicast;
+	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
 	
 
@@ -83,7 +85,7 @@ public class RealDataGeneratorClient {
 	 * 
 	 */
 	public String getMessage() {
-		return new DataEngine(158112).genDevMainData();
+		return new DataEngine(protocolid).genDevMainData();
 	}
 	
 	/*

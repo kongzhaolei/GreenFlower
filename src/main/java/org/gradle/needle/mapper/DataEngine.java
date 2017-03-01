@@ -59,7 +59,7 @@ public class DataEngine {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ";";
 					} else {
-						logger.info("config库不存在此IEC量： " + propaths.getIecpath() + " ------ " + propaths.getDescrcn());
+						logger.info("data库不存在此IEC量： " + propaths.getIecpath() + " / " + propaths.getDescrcn());
 					}
 				}
 			}
@@ -96,11 +96,11 @@ public class DataEngine {
 							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("不存在此IEC量： " + pps.getIecpath() + " ------ " + pps.getDescrcn());
+							logger.info("data库不存在此IEC量： " + pps.getIecpath() + " / " + pps.getDescrcn());
 						}
 					}
 				} else {
-					logger.info(protocolid + " 协议号不匹配，arraylist不存在该compath： " + df.getCompathOnCmdname());
+					logger.info(protocolid + "协议不存在该compath： " + df.getCompathOnCmdname());
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
 				logger.info(df.getCompathOnCmdname() + " 数组已发送" + sReturn.split(";").length + "个IEC量");

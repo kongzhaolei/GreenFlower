@@ -15,6 +15,7 @@ public class Prodata {
 	private String iecpath;
 	private String compath;
 	private String datapath;
+	private String descrcn;
 	private String col_1;
 	private String col_2;
 
@@ -44,6 +45,10 @@ public class Prodata {
 	
 	public String getDatapath() {
 		return datapath;
+	}
+	
+	public String getDescrcn() {
+		return descrcn;
 	}
 
 	public String getCol1() {
