@@ -19,13 +19,13 @@ import io.netty.handler.codec.string.StringEncoder;
  * @author kongzhaolei
  * 
  */
-public class WindFarmSimulator {
+public class WindFarmSimulatorServer {
 	private static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
 	private int port;
 	private String host;
 	
-	public WindFarmSimulator(String host, int port) {
+	public WindFarmSimulatorServer(String host, int port) {
 		this.port = port;
 		this.host = host;
 	}
@@ -41,7 +41,7 @@ public class WindFarmSimulator {
 		String host = GlobalSettings.getProperty("host");
 		VTimer.timerStart();
 		//д╛хо╤к©з1120
-		new WindFarmSimulator(host, 1120).serverStart();
+		new WindFarmSimulatorServer(host, 1120).serverStart();
 	}
 
 	public static int getProcolid() {
@@ -70,7 +70,7 @@ public class WindFarmSimulator {
 							ch.pipeline().addLast("encoder",
 									new StringEncoder());
 							ch.pipeline().addLast(
-									new WindFarmSimulatorHandler(protocolid));
+									new WindFarmSimulatorServerHandler(protocolid));
 
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)

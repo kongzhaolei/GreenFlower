@@ -99,7 +99,7 @@ public class DataDefined {
 	 * 获取限功率模式字Map<iecvalue, explaincn>
 	 */
 	public Map<String, String> getLimitModeWordMap() {
-		return getkeyWordMap("WTUR.Other.Ri.I16.LitPowByPLC");
+		return getkeyWordMap("WTUR.Other.Rs.S.LitPowByPLC");
 	}
 
 	/**

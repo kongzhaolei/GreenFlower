@@ -3,7 +3,7 @@ package org.gradle.needle.client;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class HisDataGeneratorHandler extends ChannelInboundHandlerAdapter {
+public class HisDataGeneratorClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx){

@@ -7,9 +7,9 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.util.CharsetUtil;
 
-public class MainDataGeneratorHandler extends SimpleChannelInboundHandler<DatagramPacket> {
+public class RealDataGeneratorClientHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
-	private static Logger logger = Logger.getLogger(MainDataGeneratorHandler.class.getName());
+	private static Logger logger = Logger.getLogger(RealDataGeneratorClientHandler.class.getName());
 
 	@Override
 	public void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg) throws Exception {

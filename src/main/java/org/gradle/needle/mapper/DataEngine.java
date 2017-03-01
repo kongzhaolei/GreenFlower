@@ -16,7 +16,7 @@ public class DataEngine {
 
 	int protocolid;
 	String cmdname;
-	DataDefined df; 
+	DataDefined df;
 	public static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
@@ -56,9 +56,9 @@ public class DataEngine {
 			}
 			if (!df.getAllPropaths().isEmpty()) {
 				for (Propaths propaths : df.getAllPropaths()) {
-					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) {     // initValue()：以int类型返回integer的值
+					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ";";
-					}else {
+					} else {
 						logger.info("config库不存在此IEC量： " + propaths.getIecpath() + " ------ " + propaths.getDescrcn());
 					}
 				}

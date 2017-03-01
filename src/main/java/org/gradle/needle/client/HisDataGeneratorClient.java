@@ -12,7 +12,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-public class HisDataGenerator {
+public class HisDataGeneratorClient {
 	
 	static final String HOST = System.getProperty("host", "127.0.0.1");
 	static final int PORT = Integer.parseInt(System.getProperty("port", "8080"));
@@ -34,7 +34,7 @@ public class HisDataGenerator {
 					ChannelPipeline p = ch.pipeline();
 					p.addLast("decoder", new StringDecoder());
 					p.addLast("encoder", new StringEncoder());
-					p.addLast(new HisDataGeneratorHandler());
+					p.addLast(new HisDataGeneratorClientHandler());
 				}
 			});
 			ChannelFuture future = b.connect(HOST, PORT).sync();

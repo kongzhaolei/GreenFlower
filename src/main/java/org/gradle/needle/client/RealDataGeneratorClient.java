@@ -55,7 +55,7 @@ import io.netty.channel.socket.DatagramPacket;
  *      数据实例：(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
  *   
  */  
-public class MainDataGenerator {
+public class RealDataGeneratorClient {
 	private static Multicast multicast;
 	private static String multicastIP;
 	private static int multicastPort;
@@ -63,17 +63,17 @@ public class MainDataGenerator {
 	private static String singleIP;
 	private static int singlePort;
 	private static boolean is_multicast;
-	private static Logger logger = Logger.getLogger(MainDataGenerator.class.getName());
+	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
 	
 
-	public MainDataGenerator(String ip, int port, String localIP){
+	public RealDataGeneratorClient(String ip, int port, String localIP){
 		multicastIP = ip;
 		multicastPort = port;
-	    MainDataGenerator.localIP = localIP;
+	    RealDataGeneratorClient.localIP = localIP;
 	    is_multicast = true;
 	}
 	
-	public MainDataGenerator(String ip, int port){
+	public RealDataGeneratorClient(String ip, int port){
 		singleIP = ip;
 		singlePort = port;
 		is_multicast = false;
@@ -90,7 +90,7 @@ public class MainDataGenerator {
 	 * 数据发生器
 	 * 判断组播或单播方式
 	 */
-	public void generatorStart() {
+	public void run() {
 		try {
 			if (is_multicast) {
 				multicastGen();
@@ -126,7 +126,7 @@ public class MainDataGenerator {
 			Bootstrap bs = new Bootstrap();
 			bs.group(group).channel(NioDatagramChannel.class)
 					.option(ChannelOption.SO_BROADCAST, true)
-					.handler(new MainDataGeneratorHandler());
+					.handler(new RealDataGeneratorClientHandler());
 
 			Channel channel = bs.bind(0).sync().channel();
 
