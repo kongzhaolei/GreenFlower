@@ -24,10 +24,9 @@ import org.gradle.needle.util.DBFactory.DBEnvironment;
 public class DataDefined {
 	int protocolid;
 	String cmdname;
-	private static Logger logger = Logger
-			.getLogger(DataDefined.class.getName());
+	private static Logger logger = Logger.getLogger(DataDefined.class.getName());
 
-	/**
+	/*
 	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataDefined(int protocolid, String cmdname) {
@@ -36,14 +35,14 @@ public class DataDefined {
 
 	}
 
-	/**
+	/*
 	 * 构造方法,初始化protocolid
 	 */
 	public DataDefined(int protocolid) {
 		this.protocolid = protocolid;
 	}
 
-	/**
+	/*
 	 * 空构造方法
 	 */
 	public DataDefined() {
@@ -124,8 +123,7 @@ public class DataDefined {
 	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障的公共方法 按Map<String,String>存储
 	 */
 	public Map<String, String> getkeyWordMap(String iecpath) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
-				DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Map<String, String> keyWordMap = new HashMap<String, String>();
 		Pathdescr pathdescr = new Pathdescr();
@@ -138,23 +136,23 @@ public class DataDefined {
 		return keyWordMap;
 
 	}
-	
+
 	/**
 	 * 获取包数据的propaths表典型维数据集(protocolid, cmdname)
 	 */
 	public List<Propaths> getPackPropaths() {
 		List<Propaths> pack_list = new ArrayList<>();
 		try {
-			for(Propaths pps : getAllPropaths()){
+			for (Propaths pps : getAllPropaths()) {
 				if (pps.getCompath() != null) {
-					if(getCompathOnCmdname().equals(pps.getCompath().trim())){
+					if (getCompathOnCmdname().equals(pps.getCompath().trim())) {
 						pack_list.add(pps);
 					}
 				} else {
 					continue;
 				}
-					
-			}	
+
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info(" 请检查compath的值是否为null ");
@@ -167,34 +165,33 @@ public class DataDefined {
 	 * 获取config库propaths表典型维数据集(protocolid)
 	 */
 	public List<Propaths> getAllPropaths() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
-				DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Propaths propaths = new Propaths();
 		propaths.setProtocolid(protocolid);
 		List<Propaths> list = mapper.selectPropaths(propaths);
 		return list;
 	}
-	
+
 	/**
 	 * 获取包数据的prodata表典型维数据集(protocolid, cmdname)
 	 */
 	public List<Prodata> getPackProData() {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
-			for(Prodata pda : getAllProData()){
-				if (pda.getCompath()!= null) {               //compath有null情况，先判断
-					if(getCompathOnCmdname().equals(pda.getCompath().trim())){
+			for (Prodata pda : getAllProData()) {
+				if (pda.getCompath() != null) { // compath有null情况，先判断
+					if (getCompathOnCmdname().equals(pda.getCompath().trim())) {
 						pack_list.add(pda);
 					}
-				}else{
+				} else {
 					continue;
-				}		
-			}	
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return pack_list;	
+		return pack_list;
 	}
 
 	/**
@@ -202,22 +199,21 @@ public class DataDefined {
 	 * 获取data库prodata表典型维数据集(protocolid)
 	 */
 	public List<Prodata> getAllProData() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
-				DBEnvironment.datadb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Prodata prodata = new Prodata();
 		prodata.setProtocolid(protocolid);
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
 	}
-	
+
 	/**
 	 * 获取风机编号list<wtid>
 	 */
 	public List<Integer> getWtidList() {
 		List<Integer> lists = new ArrayList<Integer>();
 		try {
-			for(Wtinfo wtinfo : getWtinfo()){
+			for (Wtinfo wtinfo : getWtinfo()) {
 				lists.add(wtinfo.getWtid());
 			}
 		} catch (Exception e) {
@@ -225,14 +221,13 @@ public class DataDefined {
 		}
 		return lists;
 	}
-	
+
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库wtinfo表典型维数据集(protocolid)
 	 */
 	public List<Wtinfo> getWtinfo() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(
-				DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Wtinfo wtinfo = new Wtinfo();
 		wtinfo.setProtocolid(protocolid);
@@ -305,14 +300,13 @@ public class DataDefined {
 		case "SECOND":
 			rString = Integer.toString(Calendar.SECOND);
 			break;
-			
+
 		case "CURRENTTIME":
 			rString = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 			break;
-			
+
 		case "RANDOM":
-			rString = ranDouble(pda.getCol2().split(",")[0], pda.getCol2()
-					.split(",")[1]);
+			rString = ranDouble(pda.getCol2().split(",")[0], pda.getCol2().split(",")[1]);
 			break;
 
 		case "FIXBOOL":
@@ -367,19 +361,21 @@ public class DataDefined {
 	}
 
 	/**
-	 * 生成随机数位于max和min之间的方法
+	 * 生成随机整型，位于max和min之间的方法
+	 * 返回(min,max)集合中的整数，不包括max
+	 */
+	public Integer ranInteger(int min, int max) {
+		Random random = new Random();
+		int bd = random.nextInt(max - min) + min;   
+		return bd;
+	}
+
+	/**
+	 * 生成随机双精度，位于max和min之间的方法
 	 */
 	public static String ranDouble(String min, String max) {
-
-		// Random random = new Random();
-		// int bd = random.nextInt(Integer.parseInt(max) -
-		// Integer.parseInt(min))
-		// + Integer.parseInt(min);
-
 		double bt = Integer.parseInt(min)
-				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random()
-						.nextDouble());
-
+				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random().nextDouble());
 		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(bt).toString();
 	}

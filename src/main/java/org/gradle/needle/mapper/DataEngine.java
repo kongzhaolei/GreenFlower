@@ -14,13 +14,14 @@ import org.gradle.needle.util.VTimer;
  */
 public class DataEngine {
 
-	int protocolid;
-	String cmdname;
-	DataDefined df;
-	public static String sFaultString = "0";
+	private int protocolid;
+	private String cmdname;
+	private DataDefined df;
+	//private final int wtid_size = new DataDefined(protocolid).getWtidList().size();
+	private static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
-	/**
+	/*
 	 * 构造方法,初始化protocolid,cmdname
 	 */
 	public DataEngine(int protocolid, String cmdname) {
@@ -29,7 +30,7 @@ public class DataEngine {
 		df = new DataDefined(protocolid, cmdname);
 	}
 
-	/**
+	/*
 	 * 构造方法,初始化protocolid
 	 */
 	public DataEngine(int protocolid) {
@@ -37,7 +38,7 @@ public class DataEngine {
 		df = new DataDefined(protocolid);
 	}
 
-	/**
+	/*
 	 * 空构造方法
 	 */
 	public DataEngine() {
@@ -45,7 +46,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 模拟前置-瞬态数据引擎 指定protocolid 生成 DevMainData
+	 * 瞬态数据引擎 指定protocolid 生成 DevMainData
 	 */
 	public String genDevMainData() {
 		String sReturn = null;
@@ -58,12 +59,13 @@ public class DataEngine {
 				for (Propaths propaths : df.getAllPropaths()) {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ",";
+						
 					} else {
 						continue;
 					}
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				sReturn = "(wman|" + df.getWtidList().get(getWtidNum()) + "|" + sReturn + ")";
+				sReturn = "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + sReturn + ")";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,21 +73,8 @@ public class DataEngine {
 		return sReturn;
 	}
 
-	/*
-	 * 风机编号序列号
-	 */
-	private int getWtidNum() {
-		int wtid_list_n = -1;
-		final int wtid_size = new DataDefined(protocolid).getWtidList().size();
-		wtid_list_n++;
-		if (wtid_list_n > wtid_size - 1) {
-			wtid_list_n = 0;
-		}
-		return wtid_list_n;
-	}
-
 	/**
-	 * 模拟风机服务-包数据引擎 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData
+	 * 包数据引擎 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData
 	 */
 	public String genDevPackData() {
 		String sReturn = null;

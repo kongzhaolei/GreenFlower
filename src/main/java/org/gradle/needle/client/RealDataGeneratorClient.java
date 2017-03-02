@@ -73,14 +73,14 @@ public class RealDataGeneratorClient {
 	    is_multicast = true;
 	}
 	 
-	/*
-	 * 
+	/**
+	 * 消息体
 	 */
 	public String getMessage() {
 		return new DataEngine(protocolid).genDevMainData();
 	}
 	
-	/*
+	/**
 	 * 数据发生器
 	 * 判断组播或单播方式
 	 */
@@ -96,7 +96,7 @@ public class RealDataGeneratorClient {
 		}
 	}
 	
-/*
+/**
  * udp组播方式发送数据
  * 模拟前置组播
  */
@@ -114,7 +114,7 @@ public class RealDataGeneratorClient {
 		}
 	}
 
-/*
+/**
  * UDP单播方式发送数据
  * 模拟数据处理服务的向上转发业务
  */
