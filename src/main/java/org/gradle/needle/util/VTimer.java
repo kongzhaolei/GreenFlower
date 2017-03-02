@@ -12,7 +12,6 @@ public class VTimer {
 
 	private static int stop_list_n = -1;
 	private static int limit_list_n = -1;
-	private static int wtid_list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
     private static Logger logger = Logger.getLogger(VTimer.class.getName());
 
@@ -30,13 +29,6 @@ public class VTimer {
 		return limit_list_n;
 	}
 	
-	/*
-	 * 风机编号序列号
-	 */
-	public static int getWtidNum() {
-		return wtid_list_n;
-	}
-
 	/**
 	 * 模式字定时器，停机模式字为例
 	 */
@@ -45,25 +37,18 @@ public class VTimer {
 		Timer timer = new Timer();
 		final int stop_size = new DataDefined(protocolid).getStopModeWordIecValueList().size();
 		final int limit_size = new DataDefined(protocolid).getLimitModeWordIecValueList().size();
-		final int wtid_size = new DataDefined(protocolid).getWtidList().size();
+		
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
 				stop_list_n++;
 				limit_list_n++;
-				wtid_list_n++;
-				if (stop_list_n > stop_size) {
+				if (stop_list_n > stop_size-1) {
 					stop_list_n = 0;
 				}
-				if (limit_list_n > limit_size) {
+				if (limit_list_n > limit_size-1) {
 					limit_list_n = 0;
 				}
-				if (wtid_list_n > wtid_size) {
-					wtid_list_n = 0;
-				}
-				logger.info("当前停机模式字序列号： " + stop_list_n);
-                logger.info("当前限功率模式字序列号： " + limit_list_n);
-                logger.info("当前风机编号的序列号：" + wtid_list_n);
 			}
 		};
 		timer.scheduleAtFixedRate(task, new Date(), interval);

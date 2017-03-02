@@ -60,7 +60,6 @@ public class RealDataGeneratorClient {
 	private static Multicast multicast;
 	private static String multicastIP;
 	private static int multicastPort;
-	private static String localIP;
 	private static String singleIP;
 	private static int singlePort;
 	private static boolean is_multicast;
@@ -68,19 +67,12 @@ public class RealDataGeneratorClient {
 	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
 	
 
-	public RealDataGeneratorClient(String ip, int port, String localIP){
+	public RealDataGeneratorClient(String ip, int port){
 		multicastIP = ip;
 		multicastPort = port;
-	    RealDataGeneratorClient.localIP = localIP;
 	    is_multicast = true;
 	}
-	
-	public RealDataGeneratorClient(String ip, int port){
-		singleIP = ip;
-		singlePort = port;
-		is_multicast = false;
-	}
-    
+	 
 	/*
 	 * 
 	 */
@@ -110,7 +102,7 @@ public class RealDataGeneratorClient {
  */
 	private void multicastGen() {
 		try {
-			multicast =  new Multicast(multicastIP, multicastPort, localIP);
+			multicast =  new Multicast(multicastIP, multicastPort);
 			logger.info(multicastIP + ":" + multicastPort + "组播服务已启动...");
 			while(is_multicast){
 				multicast.send(getMessage());

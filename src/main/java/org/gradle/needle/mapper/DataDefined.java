@@ -307,7 +307,7 @@ public class DataDefined {
 			break;
 			
 		case "CURRENTTIME":
-			rString = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
+			rString = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 			break;
 			
 		case "RANDOM":

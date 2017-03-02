@@ -59,16 +59,29 @@ public class DataEngine {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ",";
 					} else {
-						continue;				
+						continue;
 					}
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				sReturn = "(wman|" + df.getWtidList().get(VTimer.getWtidNum()) + "|" + sReturn + ")";
+				sReturn = "(wman|" + df.getWtidList().get(getWtidNum()) + "|" + sReturn + ")";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sReturn;
+	}
+
+	/*
+	 * 风机编号序列号
+	 */
+	private int getWtidNum() {
+		int wtid_list_n = -1;
+		final int wtid_size = new DataDefined(protocolid).getWtidList().size();
+		wtid_list_n++;
+		if (wtid_list_n > wtid_size - 1) {
+			wtid_list_n = 0;
+		}
+		return wtid_list_n;
 	}
 
 	/**
@@ -129,7 +142,7 @@ public class DataEngine {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("当前停机模式字为： " + stopmodeword);
+		// logger.info("当前停机模式字为： " + stopmodeword);
 		return stopmodeword;
 	}
 
@@ -150,7 +163,7 @@ public class DataEngine {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("当前限功率模式字为： " + limitmodeword);
+		// logger.info("当前限功率模式字为： " + limitmodeword);
 		return limitmodeword;
 	}
 
