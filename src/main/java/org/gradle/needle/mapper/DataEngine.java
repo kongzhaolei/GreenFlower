@@ -10,19 +10,20 @@ import org.gradle.needle.util.VTimer;
 /***
  * 
  * @author kongzhaolei
- * 
+ * 数据模拟引擎类
+ * 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，包数据
+ * 2. 支持模拟历史瞬态数据，分钟数据(10,5,1)，风机状态数据，功率曲线数据，历史沉积数据，变位数据
  */
 public class DataEngine {
 
 	private int protocolid;
 	private String cmdname;
 	private DataDefined df;
-	//private final int wtid_size = new DataDefined(protocolid).getWtidList().size();
 	private static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
 
 	/*
-	 * 构造方法,初始化protocolid,cmdname
+	 * 构造方法 1 风机数据模拟器，初始化protocolid,cmdname
 	 */
 	public DataEngine(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
@@ -31,22 +32,15 @@ public class DataEngine {
 	}
 
 	/*
-	 * 构造方法,初始化protocolid
+	 * 构造方法 2 实时数据发生器，初始化protocolid
 	 */
 	public DataEngine(int protocolid) {
 		this.protocolid = protocolid;
 		df = new DataDefined(protocolid);
 	}
-
-	/*
-	 * 空构造方法
-	 */
-	public DataEngine() {
-
-	}
-
+	
 	/**
-	 * 瞬态数据引擎 指定protocolid 生成 DevMainData
+	 * 瞬态数据引擎
 	 */
 	public String genDevMainData() {
 		String sReturn = null;
@@ -59,13 +53,13 @@ public class DataEngine {
 				for (Propaths propaths : df.getAllPropaths()) {
 					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
 						sReturn += maindatamap.get(propaths.getIecpath()) + ",";
-						
 					} else {
 						continue;
 					}
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				sReturn = "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + sReturn + ")";
+				sReturn = "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + sReturn
+						+ ")";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +68,48 @@ public class DataEngine {
 	}
 
 	/**
-	 * 包数据引擎 指定protocolid, GWSOCKET命令cmdname 生成 DevPackData
+	 * 故障数据引擎
+	 */
+	public String genDevFaultData() {
+		String sReturn = null;
+		
+		
+			
+		
+		
+		return sReturn;
+	}
+	
+	/**
+	 * 警告数据引擎
+	 */
+	public String genDevAlarmData() {
+		String sReturn = null;
+		
+		
+		
+		
+		
+		
+		return sReturn;
+	}
+	
+	/**
+	 * 前置和设备通信状态引擎
+	 */
+	public String genDevComState() {
+		String sReturn = null;
+		
+		
+		
+		
+		
+		
+		return sReturn;
+	}
+
+	/**
+	 * 包数据引擎
 	 */
 	public String genDevPackData() {
 		String sReturn = null;
@@ -114,9 +149,11 @@ public class DataEngine {
 		}
 		return sReturn;
 	}
+	
+	
 
 	/**
-	 * 定时器刷新的停机模式字
+	 * 定时器刷新停机模式字
 	 */
 	public String getStopModeWordIecValue() {
 		String stopmodeword = null;
@@ -136,7 +173,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 定时器刷新的限功率模式字
+	 * 定时器刷新限功率模式字
 	 * 
 	 */
 	public String getLimitModeWordIecValue() {
@@ -171,7 +208,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 风机主故障
+	 * 定时刷新风机主故障
 	 */
 	public String getMainFault() {
 
@@ -179,14 +216,14 @@ public class DataEngine {
 	}
 
 	/**
-	 * 风机警告
+	 * 定时刷新风机警告
 	 */
 	public String getAlarm() {
 		return "0";
 	}
 
 	/**
-	 * 风机状态
+	 * 定时刷新风机状态
 	 */
 	public String getStatus() {
 

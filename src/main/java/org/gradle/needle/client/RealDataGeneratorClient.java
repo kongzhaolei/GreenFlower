@@ -34,7 +34,7 @@ import io.netty.channel.socket.DatagramPacket;
  *   1. 主轮询数据 DevMainData    
  *      格式说明：(wman|650101001|数据)
  *      数据说明：(transtype=1  offsets从小到大排序)
- *      数据实例：(wman|422804646|2016-07-08 10:49:03.431,1092.81,1087.53,1085.78,391.97,390.55,390.55,1259.52,-218.24,50,0.99,False,True,False,False,True,True,False,True,)
+ *      数据实例：(wman|422804646|2016-07-08 10:49:03.431,1092.81,1087.53,1085.78,391.97,390.55,390.55,1259.52,-218.24,50,0.99,False,True)
  *   
  *   2. 故障数据  DevFaultData
  *      格式说明：(falutdata|wtid|故障号|关联iecpath量|设备状态|唯一号)
@@ -68,6 +68,7 @@ public class RealDataGeneratorClient {
 	public static boolean is_multicast;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
+	private static DataEngine de = new DataEngine(protocolid);
 	
 
 	public RealDataGeneratorClient(String ip, int port){
@@ -145,11 +146,11 @@ public class RealDataGeneratorClient {
  */
 	public static void sendDevMainData() {
 		try {
-			multicast.send(new DataEngine(protocolid).genDevMainData());
+			multicast.send(de.genDevMainData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播消息：" + new DataEngine(protocolid).genDevMainData());
+		logger.info("已发送组播消息：" + de.genDevMainData());
 	}
 	
 /*
