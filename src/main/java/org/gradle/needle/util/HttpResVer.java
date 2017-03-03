@@ -10,14 +10,14 @@ import org.gradle.needle.mapper.GlobalSettings;
 public class HttpResVer {
 	private static Logger logger = Logger.getLogger(HttpResVer.class.getName());
 
-	// 定义几个列常量，用于数据读取或写入。(这个地方写的烂，还要改)
-	static int responsecol = GlobalSettings.response;
-	static int expectcol = GlobalSettings.expect;
-	static int E_keycol = GlobalSettings.E_key;
-	static int E_valuecol = GlobalSettings.E_value;
-	static int A_keycol = GlobalSettings.A_key;
-	static int A_valuecol = GlobalSettings.A_value;
-	static int Resultcol = GlobalSettings.Result;
+	// 定义几个列常量，用于数据读取或写入
+	static int responsecol = Integer.parseInt(GlobalSettings.getProperty("response"));
+	static int expectcol = Integer.parseInt(GlobalSettings.getProperty("expect"));
+	static int E_keycol = Integer.parseInt(GlobalSettings.getProperty("E_key"));
+	static int E_valuecol = Integer.parseInt(GlobalSettings.getProperty("E_value"));
+	static int A_keycol = Integer.parseInt(GlobalSettings.getProperty("A_key"));
+	static int A_valuecol = Integer.parseInt(GlobalSettings.getProperty("A_value"));
+	static int Resultcol = Integer.parseInt(GlobalSettings.getProperty("Result"));
 
 	/**
 	 * 对基线expect和返回response做循环对比，将对比结果写入comparison并标记
@@ -90,7 +90,7 @@ public class HttpResVer {
 	}
 
 	/**
-	 * 解析接口请求后的字符串，将变量和值存入map
+	 * 解析统计查询接口返回的字符串，将变量和值存入map
 	 * 
 	 * @param response
 	 * @return

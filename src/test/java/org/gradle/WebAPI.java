@@ -13,11 +13,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class HttpServiceTest {
+public class WebAPI {
 	// 定义脚本test0要执行的测试集
 	String testset0 = "Statistic";
 	//String testset0 = "Query";
-	private static Logger logger = Logger.getLogger(HttpServiceTest.class
+	private static Logger logger = Logger.getLogger(WebAPI.class
 			.getName());
 
 	@BeforeClass
@@ -59,7 +59,7 @@ public class HttpServiceTest {
 		ExcelDataUtils.setExcelWorkSheet("Input");
 		Iterator<Map<String, String>> datamap = ExcelDataUtils
 				.getRowDataMap(testset0);
-		Iterator<Object[]> requestfiles = HttpReqGen.prerequest(datamap);
+		Iterator<Object[]> requestfiles = HttpReqGen.preReqGen(datamap);
 		return (requestfiles);
 	}
 }

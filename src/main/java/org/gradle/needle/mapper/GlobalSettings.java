@@ -20,9 +20,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class GlobalSettings {
-
+	
+	public static Properties prop = getFileProperties();
+	
 	// 浏览器基本配置
-	public static Properties prop = getProperties();
 	public static int browserCoreType = Integer.parseInt(prop.getProperty(
 			"BrowserCoreType", "2"));
 	public static String chromeDriverPath = prop.getProperty(
@@ -32,28 +33,18 @@ public class GlobalSettings {
 	public static String stepInterval = prop.getProperty("StepInterval", "500");
 	public static String timeout = prop.getProperty("Timeout", "30000");
 
-
-	// Excel数据文件路径配置
+	// webapi测试数据文件路径配置
 	public static String ExcelDataFile = prop.getProperty("ExcelDataFile", "");
+	// key
 
 	// XML数据文件配置
 	public static String XmlDataFile1 = prop.getProperty("XmlDataFile1", "");
 	
-	//定义接口测试中读取或写入的列号，对应于ExcelDataFile的数据列
-	public static int expect = Integer.parseInt((prop.getProperty("expect", "")));
-	public static int response = Integer.parseInt((prop.getProperty("response", "")));
-	public static int E_key = Integer.parseInt((prop.getProperty("E_key", "")));
-	public static int E_value = Integer.parseInt((prop.getProperty("E_value", "")));
-	public static int A_key = Integer.parseInt((prop.getProperty("A_key", "")));
-	public static int A_value = Integer.parseInt((prop.getProperty("A_value", "")));
-	public static int Result = Integer.parseInt((prop.getProperty("Result", "")));
-	
-
 	public static String getProperty(String property) {
-		return prop.getProperty(property);
+		return prop.getProperty(property,"");
 	}
 
-	public static Properties getProperties() {
+	public static Properties getFileProperties() {
 		Properties prop = new Properties();
 		try {
 			//绝对路径读取JAT包外的配置文件方法

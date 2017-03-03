@@ -4,6 +4,7 @@ public class Pathdescr {
 	private Integer protocolid;
 	private String iecvalue;
 	private String iecpath;
+	private String explaincn;	
 
 	
 	public Integer getProtocolid() {
@@ -24,6 +25,11 @@ public class Pathdescr {
 	
 	public String getIecvalue() {
 		return iecvalue;
+	}
+	
+	public String getexplaincn() {
+		return explaincn;
+		
 	}
 
 }

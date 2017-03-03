@@ -1,11 +1,7 @@
 package org.gradle.needle.server;
 
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.gradle.needle.mapper.DataDefined;
 import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.util.VTimer;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -18,26 +14,24 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-/**
+/***
  * 
  * @author kongzhaolei
  * 
  */
-public class NettyTcpServer {
-
-	private static int list_n = -1;
+public class WindFarmSimulatorServer {
 	private static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
 	private int port;
 	private String host;
 	
-	public NettyTcpServer(String host, int port) {
+	public WindFarmSimulatorServer(String host, int port) {
 		this.port = port;
 		this.host = host;
 	}
 
-	/**
-	 * 根据风机IP配置，自动扩展多台风机模拟服务
+	/***
+	 * 根据风机IP配置，扩展多台风机模拟服务
 	 * 
 	 * @param args
 	 * @throws Exception
@@ -45,22 +39,19 @@ public class NettyTcpServer {
 	public static void main(String[] args) throws Exception {
 
 		String host = GlobalSettings.getProperty("host");
-		stopTimerStart();
-		new NettyTcpServer(host, 1120).start();
-	}
-
-	public static int getIecvalue() {
-		return list_n;
+		VTimer.timerStart();
+		//默认端口1120
+		new WindFarmSimulatorServer(host, 1120).serverStart();
 	}
 
 	public static int getProcolid() {
 		return protocolid;
 	}
 
-	/*
+	/**
 	 * 服务端启动
 	 */
-	public void start() {
+	public void serverStart() {
 		// EventLoopGroup是用来处理IO操作的多线程事件循环器
 		// bossGroup 用来接收客户端的连接，workerGroup 用来处理已经被接收的连接
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -79,7 +70,7 @@ public class NettyTcpServer {
 							ch.pipeline().addLast("encoder",
 									new StringEncoder());
 							ch.pipeline().addLast(
-									new NettyTcpServerHandler(protocolid));
+									new WindFarmSimulatorServerHandler(protocolid));
 
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)
@@ -93,26 +84,5 @@ public class NettyTcpServer {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-	}
-
-	/*
-	 * 定时器实现停机模式字号迭代
-	 */
-	public static void stopTimerStart() {
-		final long interval = 60000;
-		Timer timer = new Timer();
-		final int size = new DataDefined(protocolid).getStopModeWordList()
-				.size();
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() {
-				list_n++;
-				if (list_n > size) {
-					list_n = 0;
-				}
-				System.out.println("fuck everything " + list_n);
-			}
-		};
-		timer.scheduleAtFixedRate(task, new Date(), interval);
 	}
 }

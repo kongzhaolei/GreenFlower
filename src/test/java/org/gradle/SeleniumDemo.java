@@ -3,11 +3,9 @@ package org.gradle;
 import java.io.File;
 import java.util.Iterator;
 
-import org.dom4j.DocumentException;
 import org.gradle.needle.mapper.GlobalSettings;
 import org.gradle.needle.selenium.BrowserFactory;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.DBUtils;
 import org.gradle.needle.util.XMLParser;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
@@ -15,7 +13,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import cucumber.api.CucumberOptions;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;

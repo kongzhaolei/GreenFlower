@@ -15,6 +15,7 @@ public class Prodata {
 	private String iecpath;
 	private String compath;
 	private String datapath;
+	private String descrcn;
 	private String col_1;
 	private String col_2;
 
@@ -42,12 +43,12 @@ public class Prodata {
 		return compath;
 	}
 	
-	public void setcompath(String compath) {
-		this.compath = compath;
-	}
-
 	public String getDatapath() {
 		return datapath;
+	}
+	
+	public String getDescrcn() {
+		return descrcn;
 	}
 
 	public String getCol1() {
@@ -57,14 +58,4 @@ public class Prodata {
 	public String getCol2() {
 		return col_2;
 	}
-
-	@Override
-	public String toString() {
-		return "Prodata [protocolid = " + protocolid + ", ascflg = " + ascflg
-				+ ", pathid = " + pathid + ", iecpath = " + iecpath
-				+ ", compath = " + compath + ", datapath = " + datapath
-				+ ", col_1 = " + col_1 + ", col_2 = " + col_2 + "]";
-
-	}
-
 }

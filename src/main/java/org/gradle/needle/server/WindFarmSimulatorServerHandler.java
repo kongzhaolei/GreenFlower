@@ -6,13 +6,13 @@ import org.gradle.needle.mapper.DataEngine;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
+public class WindFarmSimulatorServerHandler extends ChannelInboundHandlerAdapter {
 
 	int protocolid;
-	private static Logger logger = Logger.getLogger(NettyTcpServerHandler.class
+	private static Logger logger = Logger.getLogger(WindFarmSimulatorServerHandler.class
 			.getName());
 
-	public NettyTcpServerHandler(int protocolid) {
+	public WindFarmSimulatorServerHandler(int protocolid) {
 		this.protocolid = protocolid;
 	}
 	
@@ -21,7 +21,7 @@ public class NettyTcpServerHandler extends ChannelInboundHandlerAdapter {
 		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
 		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid + "\n"
 				+ msg.toString());
-		String sReturnString = de.getCacheValue();
+		String sReturnString = de.genDevPackData();
 		ctx.writeAndFlush(sReturnString);
 		logger.info(sReturnString);
 	}

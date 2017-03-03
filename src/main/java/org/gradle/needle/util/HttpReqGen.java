@@ -35,7 +35,7 @@ public class HttpReqGen {
 	 * @return Iterator{[String,Map,String],[String,Map,String]]}
 	 * @throws Exception
 	 */
-	public static Iterator<Object[]> prerequest(
+	public static Iterator<Object[]> preReqGen(
 			Iterator<Map<String, String>> datamap) throws Exception {
 		List<Object[]> requestfiles = new ArrayList<Object[]>();
 		String template = "";
