@@ -47,7 +47,7 @@ import io.netty.channel.socket.DatagramPacket;
  *               |443c860a-9fe6-4916-9a30-0ecad3821ea2)
  *   3. 警告数据 DevAlarmdata
  *      格式说明：(alarmdata|wtid|警告号|关联iecpath量|设备状态)
-                数据实例：(alarmdata|650101001|106;90 |(WTUR.Bool.Rd.b0.QSBut)=FALSE;(WNAC.Bool.Rd.b0.Qstart)=FALSE |2)
+                数据实例：(alarmdata|652111802|163;120;82)
  *   
  *   4. 前置和设备之间的通信状态  DevComState
  *      格式说明：(comstate|wtid|通讯状态)
