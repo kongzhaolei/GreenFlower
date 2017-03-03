@@ -1,11 +1,14 @@
 package org.gradle.needle.client;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.Multicast.Multicast;
 import org.gradle.needle.mapper.DataEngine;
 import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.thread.DevFaultDataThread;
+import org.gradle.needle.thread.DevMainDataThread;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -62,7 +65,7 @@ public class RealDataGeneratorClient {
 	private static int multicastPort;
 	private static String singleIP;
 	private static int singlePort;
-	private static boolean is_multicast;
+	public static boolean is_multicast;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
 	
@@ -72,19 +75,12 @@ public class RealDataGeneratorClient {
 		multicastPort = port;
 	    is_multicast = true;
 	}
-	 
-	/**
-	 * 消息体
-	 */
-	public String getMessage() {
-		return new DataEngine(protocolid).genDevMainData();
-	}
 	
 	/**
 	 * 数据发生器
 	 * 判断组播或单播方式
 	 */
-	public void run() {
+	public void GeneratorStart() {
 		try {
 			if (is_multicast) {
 				multicastGen();
@@ -97,17 +93,17 @@ public class RealDataGeneratorClient {
 	}
 	
 /**
- * udp组播方式发送数据
+ * udp组播方式发送
  * 模拟前置组播
+ * 每种类型数据启动一个单线程
  */
 	private void multicastGen() {
 		try {
 			multicast =  new Multicast(multicastIP, multicastPort);
-			logger.info(multicastIP + ":" + multicastPort + "组播服务已启动...");
-			while(is_multicast){
-				multicast.send(getMessage());
-				logger.info("已发送组播消息：" + getMessage());
-			}
+			logger.info(multicastIP + ":" + multicastPort + " 组播服务已启动...");
+			new Thread(new DevMainDataThread()).start();
+			new Thread(new DevFaultDataThread()).start();
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,7 +126,7 @@ public class RealDataGeneratorClient {
 
 			// 向服务端传递UDP消息
 			channel.writeAndFlush(
-					new DatagramPacket(Unpooled.copiedBuffer(getMessage(),
+					new DatagramPacket(Unpooled.copiedBuffer("msg",
 							CharsetUtil.UTF_8), new InetSocketAddress(
 									singleIP, singlePort))).sync();
 			logger.info("消息已发送...");
@@ -143,4 +139,27 @@ public class RealDataGeneratorClient {
 			group.shutdownGracefully();
 		}
 	}
+	
+/*
+ * 发送 DevMainData
+ */
+	public static void sendDevMainData() {
+		try {
+			multicast.send(new DataEngine(protocolid).genDevMainData());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送组播消息：" + new DataEngine(protocolid).genDevMainData());
+	}
+	
+/*
+ * 发送 DevFaultData
+ */
+	public static void sendDevFaultData() {
+		
+	}
+	
+	
+	
+	
 }

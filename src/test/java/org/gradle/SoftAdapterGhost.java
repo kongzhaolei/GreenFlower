@@ -10,6 +10,6 @@ public class SoftAdapterGhost {
 
 	public static void main(String[] args) {
 		VTimer.timerStart();
-		new RealDataGeneratorClient(multicastip, multicastPort).run();
+		new RealDataGeneratorClient(multicastip, multicastPort).GeneratorStart();
 	}
 }
