@@ -360,7 +360,7 @@ public class DataDefined {
 	/**
 	 * 生成随机0或1
 	 */
-	public static int ranCoin() {
+	public int ranCoin() {
 		Random rand = new Random();
 		return rand.nextInt(2);
 	}
