@@ -35,9 +35,8 @@ public class VTimer {
 	public static void timerStart() {
 		final long interval = 60000;
 		Timer timer = new Timer();
-		final int stop_size = new DataDefined(protocolid).getStopModeWordIecValueList().size();
-		final int limit_size = new DataDefined(protocolid).getLimitModeWordIecValueList().size();
-		
+		final int stop_size = new DataDefined(protocolid).getStopModeWordList().size();
+		final int limit_size = new DataDefined(protocolid).getLimitModeWordList().size();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {

@@ -40,13 +40,8 @@ import io.netty.channel.socket.DatagramPacket;
  *   
  *   2. 故障数据  DevFaultData
  *      格式说明：(falutdata|wtid|故障号|关联iecpath量|设备状态|唯一号)
- *      数据实例：(falutdata|650101001|106;90;91;92;95|
- *               (WTUR.Bool.Rd.b0.QSBut)=FALSE;
- *               (WNAC.Bool.Rd.b0.Qstart)=FALSE;
- *               (WTPS.Bool.Rd.b0.Psafe1)=FALSE;
- *               (WTPS.Bool.Rd.b0.Psafe2)=FALSE;
- *               (WTPS.Bool.Rd.b0.Psafe3)=FALSE|2
- *               |443c860a-9fe6-4916-9a30-0ecad3821ea2)
+ *      数据实例：(falutdata|650101001|106;90;91;92;95)
+
  *   3. 警告数据 DevAlarmdata
  *      格式说明：(alarmdata|wtid|警告号|关联iecpath量|设备状态)
                 数据实例：(alarmdata|652111802|163;120;82)
@@ -107,8 +102,7 @@ public class RealDataGeneratorClient {
 			new Thread(new DevMainDataThread()).start();
 			new Thread(new DevFaultDataThread()).start();
 			new Thread(new DevAlarmDataThread()).start();
-			new Thread(new DevComStateThread()).start();
-			
+			new Thread(new DevComStateThread()).start();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

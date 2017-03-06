@@ -1,5 +1,6 @@
 package org.gradle.needle.mapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class DataEngine {
 	}
 	
 	/**
-	 * 瞬态数据引擎
+	 * 组播瞬态数据引擎
 	 */
 	public String genDevMainData() {
 		String sReturn = null;
@@ -68,48 +69,7 @@ public class DataEngine {
 	}
 
 	/**
-	 * 故障数据引擎
-	 */
-	public String genDevFaultData() {
-		String sReturn = null;
-		
-		
-			
-		
-		
-		return sReturn;
-	}
-	
-	/**
-	 * 警告数据引擎
-	 */
-	public String genDevAlarmData() {
-		String sReturn = null;
-		
-		
-		
-		
-		
-		
-		return sReturn;
-	}
-	
-	/**
-	 * 前置和设备通信状态引擎
-	 */
-	public String genDevComState() {
-		String sReturn = null;
-		
-		
-		
-		
-		
-		
-		return sReturn;
-	}
-
-	/**
-	 * 包数据引擎
+	 * 组播包数据引擎
 	 */
 	public String genDevPackData() {
 		String sReturn = null;
@@ -150,16 +110,17 @@ public class DataEngine {
 		return sReturn;
 	}
 	
-	
-
 	/**
 	 * 定时器刷新停机模式字
 	 */
-	public String getStopModeWordIecValue() {
+	public String genStopModeWord() {
 		String stopmodeword = null;
-		List<String> lists = df.getStopModeWordIecValueList();
+		List<String> lists = new ArrayList<String>();
 		int n = VTimer.getStopNum(); // 时钟计数器
 		try {
+			for(Pathdescr pathdescr : df.getStopModeWordList()) {
+				lists.add(pathdescr.getIecvalue());
+			}
 			if (!(n > lists.size())) {
 				stopmodeword = lists.get(n);
 			} else {
@@ -176,11 +137,14 @@ public class DataEngine {
 	 * 定时器刷新限功率模式字
 	 * 
 	 */
-	public String getLimitModeWordIecValue() {
+	public String genLimitModeWord() {
 		String limitmodeword = null;
-		List<String> lists = df.getLimitModeWordIecValueList();
+		List<String> lists = new ArrayList<String>();
 		int n = VTimer.getLimitNum(); // 时钟计数器
 		try {
+			for(Pathdescr pathdescr : df.getLimitModeWordList()) {
+				lists.add(pathdescr.getIecvalue());
+			}
 			if (!(n > lists.size())) {
 				limitmodeword = lists.get(n);
 			} else {
@@ -192,41 +156,84 @@ public class DataEngine {
 		// logger.info("当前限功率模式字为： " + limitmodeword);
 		return limitmodeword;
 	}
-
+	
 	/**
-	 * 定时刷新的停机模式字对应的中文解析
+	 * 组播前置和设备通信状态引擎
 	 */
-	public String getStopModeExplaincn() {
-		return df.getStopModeWordMap().get(getStopModeWordIecValue());
+	public String genDevComState() {
+		String sReturn = null;
+		
+				
+		return sReturn;
+	}
+	
+	/**
+	 * 风机主故障
+	 */
+	public String genMainFault() {
+		return genFaultTree().split(";")[0];
+	}
+	
+	/**
+	 * 组播故障数据引擎
+	 */
+	public String genDevFaultData() {
+		return "(falutdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genFaultTree()
+				+ ")";
+	}
+	
+	/**
+	 * 风机故障树,模拟5个故障
+	 */
+	public String genFaultTree() {
+		String faulttree = null;
+		List<String> lists = new ArrayList<String>();
+		try {
+			for(Pathdescr pathdescr : df.getFaultList()){
+				lists.add(pathdescr.getIecvalue());
+			}
+			for(int i = 0; i < 5; i++){
+				faulttree += faulttree + lists.remove(Math.random()* lists.size()) + ";";
+			}
+			faulttree = faulttree.substring(faulttree.indexOf("null") + 4, faulttree.length() - 1);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return faulttree;
 	}
 
 	/**
-	 * 定时刷新的限功率模式字对应的中文解析
+	 * 组播风机警告引擎
 	 */
-	public String getLimitModeExplaincn() {
-		return df.getLimitModeWordMap().get(getLimitModeWordIecValue());
+	public String genDevAlarmData() {
+		return "(alarmdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genAlarmTree()
+		+ ")";
+	}
+	
+	/**
+	 * 风机警告树，模拟3个警告
+	 */
+	public String genAlarmTree() {
+		String alarmtree = null;
+		List<String> lists = new ArrayList<String>();
+		try {
+			for(Pathdescr pathdescr : df.getAlarmList()){
+				lists.add(pathdescr.getIecvalue());
+			}
+			for(int i = 0; i < 3; i++ ){
+				alarmtree += alarmtree + lists.remove(Math.random()* lists.size()) + ";";
+			}
+			alarmtree = alarmtree.substring(alarmtree.indexOf("null") + 4, alarmtree.length() - 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmtree;
 	}
 
 	/**
-	 * 定时刷新风机主故障
+	 * 风机状态
 	 */
-	public String getMainFault() {
-
-		return "0";
-	}
-
-	/**
-	 * 定时刷新风机警告
-	 */
-	public String getAlarm() {
-		return "0";
-	}
-
-	/**
-	 * 定时刷新风机状态
-	 */
-	public String getStatus() {
-
+	public String genStatusData() {
 		return "5";
 	}
 

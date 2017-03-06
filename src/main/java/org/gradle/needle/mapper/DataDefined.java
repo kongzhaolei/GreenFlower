@@ -6,10 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,6 +17,8 @@ import org.gradle.needle.util.DBFactory.DBEnvironment;
 /***
  * 
  * @author kongzhaolei
+ * 
+ * 
  */
 public class DataDefined {
 	int protocolid;
@@ -50,93 +49,54 @@ public class DataDefined {
 	}
 
 	/**
-	 * 获取故障Map<iecvalue, explaincn>
+	 * 获取故障
 	 */
-	public Map<String, String> getMainFaultMap() {
-		return getkeyWordMap("WTUR.Flt.Rs.S");
+	public List<Pathdescr> getFaultList() {
+		return getPathdescr("WTUR.Flt.Rs.S");
 	}
 
 	/**
-	 * 获取警告Map<iecvalue, explaincn>
+	 * 获取警告
 	 */
-	public Map<String, String> getAlarmMap() {
-		return getkeyWordMap("WTUR.Alam.Rs.S");
+	public List<Pathdescr> getAlarmList() {
+		return getPathdescr("WTUR.Alam.Rs.S");
 	}
 
 	/**
-	 * 获取风机状态Map<iecvalue, explaincn>
+	 * 获取风机状态
 	 */
-	public Map<String, String> getStatusMap() {
-		return getkeyWordMap("WTUR.TurSt.Rs.S");
+	public List<Pathdescr> getStatusList() {
+		return getPathdescr("WTUR.TurSt.Rs.S");
 	}
 
 	/**
-	 * 获取停机模式字Map<iecvalue, explaincn>
+	 * 获取停机模式字
 	 */
-	public Map<String, String> getStopModeWordMap() {
-		return getkeyWordMap("WTUR.Other.Wn.I16.StopModeWord");
+	public List<Pathdescr> getStopModeWordList() {
+		return getPathdescr("WTUR.Other.Wn.I16.StopModeWord");
+	}
+	
+	/**
+	 * 获取限功率模式字
+	 */
+	public List<Pathdescr> getLimitModeWordList() {
+		return getPathdescr("WTUR.Other.Rs.S.LitPowByPLC");
 	}
 
 	/**
-	 * 获取停机模式字list<iecvalue>
+	 *  基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 *  获取config库pathdescr表典型维数据集(protocolid, iecpath)
 	 */
-	public List<String> getStopModeWordIecValueList() {
-		List<String> lists = new ArrayList<String>();
-		Iterator<String> iterator = getStopModeWordMap().keySet().iterator();
-		try {
-			while (iterator.hasNext()) {
-				String iecvalue = iterator.next();
-				lists.add(iecvalue);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lists;
-	}
-
-	/**
-	 * 获取限功率模式字Map<iecvalue, explaincn>
-	 */
-	public Map<String, String> getLimitModeWordMap() {
-		return getkeyWordMap("WTUR.Other.Rs.S.LitPowByPLC");
-	}
-
-	/**
-	 * 获取限功率模式字list<iecvalue>
-	 */
-	public List<String> getLimitModeWordIecValueList() {
-		List<String> lists = new ArrayList<String>();
-		Iterator<String> iterator = getLimitModeWordMap().keySet().iterator();
-		try {
-			while (iterator.hasNext()) {
-				String iecvalue = iterator.next();
-				lists.add(iecvalue);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lists;
-	}
-
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 抽取一个限功率模式字，停机模式字，风机状态，风机故障的公共方法 按Map<String,String>存储
-	 */
-	public Map<String, String> getkeyWordMap(String iecpath) {
+	public List<Pathdescr> getPathdescr(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Map<String, String> keyWordMap = new HashMap<String, String>();
 		Pathdescr pathdescr = new Pathdescr();
 		pathdescr.setProtocolid(protocolid);
 		pathdescr.setIecpath(iecpath);
 		List<Pathdescr> list = mapper.selectPathdescr(pathdescr);
-		for (Pathdescr pdr : list) {
-			keyWordMap.put(pdr.getIecvalue(), pdr.getexplaincn());
-		}
-		return keyWordMap;
-
+		return list;
 	}
-
+	
 	/**
 	 * 获取包数据的propaths表典型维数据集(protocolid, cmdname)
 	 */
@@ -151,7 +111,6 @@ public class DataDefined {
 				} else {
 					continue;
 				}
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -267,6 +226,8 @@ public class DataDefined {
 	 * 13 TOTAL 遥脉量
 	 * 14 STOPMODE 停机模式字/状态模式字
 	 * 15 LIMITMODE 限功率模式字
+	 * 16 ALARM  警告
+	 * 17 FAULT 故障树
 	 */
 	public String getDynamicValue(Prodata pda) throws SQLException {
 		String rString = "null";
@@ -319,31 +280,35 @@ public class DataDefined {
 			break;
 
 		case "FAULTMAIN":
-			rString = new DataEngine(protocolid).getMainFault();
+			rString = new DataEngine(protocolid).genMainFault();
 			break;
 
 		case "STATUS":
-			rString = new DataEngine(protocolid).getStatus();
+			rString = new DataEngine(protocolid).genStatusData();
 			break;
 
 		case "TOTAL":
-
 			rString = pda.getCol2();
 			break;
 
 		case "STOPMODE":
-			rString = new DataEngine(protocolid).getStopModeWordIecValue();
+			rString = new DataEngine(protocolid).genStopModeWord();
 			break;
 
 		case "LIMITMODE":
-			rString = new DataEngine(protocolid).getLimitModeWordIecValue();
+			rString = new DataEngine(protocolid).genLimitModeWord();
 			break;
+			
+		case "ALARM":
+			rString = new DataEngine(protocolid).genDevAlarmData();
+			
+		case "FAULT":
+			rString = new DataEngine(protocolid).genFaultTree();
 
 		default:
 			rString = pda.getCol2();
 			break;
 		}
-
 		return rString;
 	}
 
