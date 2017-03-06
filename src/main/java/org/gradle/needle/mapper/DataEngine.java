@@ -75,6 +75,15 @@ public class DataEngine {
 	 * 组播包数据引擎
 	 */
 	public String genDevPackData() {
+		return "(pack|" +  + "|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genPackData()
+		+ ")";
+	}
+	
+	/**
+	 * 包元数据
+	 * @return
+	 */
+	public String genPackData() {
 		String sReturn = null;
 		int n = 0;
 		Map<String, String> varpathMap = new HashMap<String, String>();
@@ -163,11 +172,9 @@ public class DataEngine {
 	/**
 	 * 组播前置和设备通信状态引擎
 	 */
-	public String genDevComState() {
-		String sReturn = null;
-		
-				
-		return sReturn;
+	public String genDevComState() {		
+		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + df.ranCoin()
+		+ ")";
 	}
 	
 	/**
@@ -239,5 +246,4 @@ public class DataEngine {
 	public String genStatusData() {
 		return "5";
 	}
-
 }
