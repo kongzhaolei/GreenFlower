@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.model.Pathdescr;
+import org.gradle.needle.model.Prodata;
+import org.gradle.needle.model.Propaths;
 import org.gradle.needle.util.VTimer;
 
 /***

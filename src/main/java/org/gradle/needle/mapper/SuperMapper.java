@@ -1,6 +1,11 @@
 package org.gradle.needle.mapper;
 
 import java.util.List;
+
+import org.gradle.needle.model.Pathdescr;
+import org.gradle.needle.model.Prodata;
+import org.gradle.needle.model.Propaths;
+import org.gradle.needle.model.Wtinfo;
 /**
  * 
  * @author kongzhaolei
