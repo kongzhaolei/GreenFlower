@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.Multicast.Multicast;
 import org.gradle.needle.mapper.DataEngine;
 import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.thread.DevAlarmDataThread;
+import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
 import org.gradle.needle.thread.DevMainDataThread;
 
@@ -96,7 +98,7 @@ public class RealDataGeneratorClient {
 /**
  * udp组播方式发送
  * 模拟前置组播
- * 每种类型数据启动一个单线程
+ * 每种类型数据启动一个线程
  */
 	private void multicastGen() {
 		try {
@@ -104,7 +106,8 @@ public class RealDataGeneratorClient {
 			logger.info(multicastIP + ":" + multicastPort + " 组播服务已启动...");
 			new Thread(new DevMainDataThread()).start();
 			new Thread(new DevFaultDataThread()).start();
-			
+			new Thread(new DevAlarmDataThread()).start();
+			new Thread(new DevComStateThread()).start();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,17 +153,43 @@ public class RealDataGeneratorClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播消息：" + de.genDevMainData());
+		logger.info("已发送组播主轮询数据：" + de.genDevMainData());
 	}
 	
 /*
  * 发送 DevFaultData
  */
 	public static void sendDevFaultData() {
-		
+		try {
+			multicast.send(de.genDevFaultData());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送组播故障数据：" + de.genDevFaultData());
 	}
 	
+/*
+ * 发送 DevAlarmData
+ */
+	public static void sendDevAlarmData() {
+		try {
+			multicast.send(de.genDevAlarmData());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送组播警告数据： " + de.genDevAlarmData());
+	}
 	
-	
+/*
+ * 发送 DevComState
+ */
+	public static void sendDevComState() {
+		try {
+			multicast.send(de.genDevComState());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送组播通信状态数据： " + de.genDevComState());
+	}
 	
 }
