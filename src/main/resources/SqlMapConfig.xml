@@ -4,10 +4,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="DBFactory" type="org.gradle.needle.util.DBFactory" />
-		<typeAlias alias="Prodata" type="org.gradle.needle.mapper.Prodata" />
-		<typeAlias alias="Propaths" type="org.gradle.needle.mapper.Propaths" />
-		<typeAlias alias="Pathdescr" type="org.gradle.needle.mapper.Pathdescr" />
-		<typeAlias alias="Wtinfo" type="org.gradle.needle.mapper.Wtinfo" />
+		<typeAlias alias="Prodata" type="org.gradle.needle.model.Prodata" />
+		<typeAlias alias="Propaths" type="org.gradle.needle.model.Propaths" />
+		<typeAlias alias="Pathdescr" type="org.gradle.needle.model.Pathdescr" />
+		<typeAlias alias="Wtinfo" type="org.gradle.needle.model.Wtinfo" />
 		
 	</typeAliases>
 

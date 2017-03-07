@@ -70,20 +70,12 @@ public class DataEngine {
 		}
 		return sReturn;
 	}
-
-	/**
-	 * 组播包数据引擎
-	 */
-	public String genDevPackData() {
-		return "(pack|" +  + "|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genPackData()
-		+ ")";
-	}
 	
 	/**
-	 * 包元数据
+	 * 风机元数据
 	 * @return
 	 */
-	public String genPackData() {
+	public String genCmdData() {
 		String sReturn = null;
 		int n = 0;
 		Map<String, String> varpathMap = new HashMap<String, String>();
@@ -92,12 +84,12 @@ public class DataEngine {
 				sReturn = sFaultString;
 				logger.info("已发送故障号" + sFaultString);
 			} else {
-				for (Prodata pda : df.getPackProData()) {
+				for (Prodata pda : df.getCmdProData()) {
 					varpathMap.put(pda.getIecpath().trim(), df.getDynamicValue(pda));
 				}
 
-				if (!df.getPackPropaths().isEmpty()) {
-					for (Propaths pps : df.getPackPropaths()) {
+				if (!df.getCmdPropaths().isEmpty()) {
+					for (Propaths pps : df.getCmdPropaths()) {
 						while (n < pps.getAscflg()) {
 							sReturn = sReturn + ";";
 							n++;
@@ -196,16 +188,16 @@ public class DataEngine {
 	 * 风机故障树,模拟5个故障
 	 */
 	public String genFaultTree() {
-		String faulttree = null;
+		String faulttree = "";
 		List<String> lists = new ArrayList<String>();
 		try {
 			for(Pathdescr pathdescr : df.getFaultList()){
 				lists.add(pathdescr.getIecvalue());
 			}
 			for(int i = 0; i < 5; i++){
-				faulttree += faulttree + lists.remove(Math.random()* lists.size()) + ";";
+				faulttree += lists.remove((int) (Math.random() * lists.size())) + ";";
 			}
-			faulttree = faulttree.substring(faulttree.indexOf("null") + 4, faulttree.length() - 1);	
+			faulttree = faulttree.substring(0, faulttree.length() - 1);	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,16 +216,16 @@ public class DataEngine {
 	 * 风机警告树，模拟3个警告
 	 */
 	public String genAlarmTree() {
-		String alarmtree = null;
+		String alarmtree = "";
 		List<String> lists = new ArrayList<String>();
 		try {
 			for(Pathdescr pathdescr : df.getAlarmList()){
 				lists.add(pathdescr.getIecvalue());
 			}
 			for(int i = 0; i < 3; i++ ){
-				alarmtree += alarmtree + lists.remove(Math.random()* lists.size()) + ";";
+				alarmtree += lists.remove((int)(Math.random()* lists.size())) + ";";
 			}
-			alarmtree = alarmtree.substring(alarmtree.indexOf("null") + 4, alarmtree.length() - 1);
+			alarmtree = alarmtree.substring(0, alarmtree.length() - 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

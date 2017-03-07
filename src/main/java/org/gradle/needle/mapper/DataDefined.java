@@ -102,9 +102,9 @@ public class DataDefined {
 	}
 	
 	/**
-	 * 获取包数据的propaths表典型维数据集(protocolid, cmdname)
+	 * 获取维度数据的propaths表典型维数据集(protocolid, cmdname)
 	 */
-	public List<Propaths> getPackPropaths() {
+	public List<Propaths> getCmdPropaths() {
 		List<Propaths> pack_list = new ArrayList<>();
 		try {
 			for (Propaths pps : getAllPropaths()) {
@@ -137,9 +137,9 @@ public class DataDefined {
 	}
 
 	/**
-	 * 获取包数据的prodata表典型维数据集(protocolid, cmdname)
+	 * 获取维度数据的prodata表典型维数据集(protocolid, cmdname)
 	 */
-	public List<Prodata> getPackProData() {
+	public List<Prodata> getCmdProData() {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
 			for (Prodata pda : getAllProData()) {
