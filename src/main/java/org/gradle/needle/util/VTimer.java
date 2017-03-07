@@ -13,9 +13,7 @@ public class VTimer {
 	private static int stop_list_n = -1;
 	private static int limit_list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
-    private static Logger logger = Logger.getLogger(VTimer.class.getName());
-
-	/*
+    /*
 	 * 停机模式字序列号
 	 */
 	public static int getStopNum() {
