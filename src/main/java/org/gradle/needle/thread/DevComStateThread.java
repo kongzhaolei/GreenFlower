@@ -11,6 +11,7 @@ public class DevComStateThread implements Runnable {
 	public void run() {
 		try {
 			while (RealDataGeneratorClient.is_multicast) {
+				Thread.sleep(60000);
 				RealDataGeneratorClient.sendDevComState();
 			}
 		} catch (Exception e) {
