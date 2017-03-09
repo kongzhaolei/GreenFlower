@@ -234,9 +234,14 @@ public class DataDefined {
 	 * 17 FAULT π ’œ ˜
 	 */
 	public String getDynamicValue(Prodata pda) throws SQLException {
-		String rString = "null";
-		String dttype = pda.getCol1();
-
+		String rString = "";
+		String dttype = "";
+		try {
+			dttype = pda.getCol1();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		switch (dttype.trim()) {
 		case "FIXED":
 			rString = pda.getCol2();
@@ -308,7 +313,10 @@ public class DataDefined {
 			
 		case "FAULT":
 			rString = new DataEngine(protocolid).genFaultTree();
-
+			
+		case "NULL":
+			rString = pda.getCol2();
+			
 		default:
 			rString = pda.getCol2();
 			break;
