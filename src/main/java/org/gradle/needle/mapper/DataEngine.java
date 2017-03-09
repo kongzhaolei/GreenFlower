@@ -163,9 +163,10 @@ public class DataEngine {
 	
 	/**
 	 * 组播前置和设备通信状态引擎
+	 * 暂时设置为通信正常
 	 */
 	public String genDevComState() {		
-		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + df.ranCoin()
+		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + "0"
 		+ ")";
 	}
 	
@@ -178,10 +179,12 @@ public class DataEngine {
 	
 	/**
 	 * 组播故障数据引擎
+	 * 暂时定义一台故障机
 	 */
 	public String genDevFaultData() {
-		return "(falutdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genFaultTree()
-				+ ")";
+//		return "(falutdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genFaultTree()
+//				+ ")";
+		return "(falutdata|" + df.getWtidList().get(1) + "|" + genFaultTree() + ")";
 	}
 	
 	/**
@@ -206,10 +209,12 @@ public class DataEngine {
 
 	/**
 	 * 组播风机警告引擎
+	 * 暂时定义一台警告机
 	 */
 	public String genDevAlarmData() {
-		return "(alarmdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genAlarmTree()
-		+ ")";
+//		return "(alarmdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genAlarmTree()
+//		+ ")";
+		return "(alarmdata|" + df.getWtidList().get(2) + "|" + genAlarmTree() + ")";
 	}
 	
 	/**

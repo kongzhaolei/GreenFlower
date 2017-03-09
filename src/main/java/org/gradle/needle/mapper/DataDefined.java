@@ -304,7 +304,7 @@ public class DataDefined {
 			break;
 			
 		case "ALARM":
-			rString = new DataEngine(protocolid).genDevAlarmData();
+			rString = new DataEngine(protocolid).genAlarmTree();
 			
 		case "FAULT":
 			rString = new DataEngine(protocolid).genFaultTree();

@@ -147,7 +147,7 @@ public class RealDataGeneratorClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播主轮询数据：" + de.genDevMainData());
+		//logger.info("已发送组播主轮询数据：" + de.genDevMainData());
 	}
 	
 /*
@@ -159,7 +159,7 @@ public class RealDataGeneratorClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播故障数据：" + de.genDevFaultData());
+		//logger.info("已发送组播故障数据：" + de.genDevFaultData());
 	}
 	
 /*
@@ -171,7 +171,7 @@ public class RealDataGeneratorClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播警告数据： " + de.genDevAlarmData());
+		//logger.info("已发送组播警告数据： " + de.genDevAlarmData());
 	}
 	
 /*
@@ -183,7 +183,7 @@ public class RealDataGeneratorClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送组播通信状态数据： " + de.genDevComState());
+		//logger.info("已发送组播通信状态数据： " + de.genDevComState());
 	}
 	
 }
