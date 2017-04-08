@@ -1,4 +1,4 @@
-package org.gradle.needle.mapper;
+package org.gradle.needle.engine;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -16,6 +16,7 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
+import org.gradle.needle.util.GlobalSettings;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
 
 /***
@@ -289,11 +290,11 @@ public class DataDefined {
 			break;
 
 		case "FAULTMAIN":
-			rString = new DataEngine(protocolid).genMainFault();
+			rString = new DataGenerator(protocolid).genMainFault();
 			break;
 
 		case "STATUS":
-			rString = new DataEngine(protocolid).genStatusData();
+			rString = new DataGenerator(protocolid).genStatusData();
 			break;
 
 		case "TOTAL":
@@ -301,18 +302,18 @@ public class DataDefined {
 			break;
 
 		case "STOPMODE":
-			rString = new DataEngine(protocolid).genStopModeWord();
+			rString = new DataGenerator(protocolid).genStopModeWord();
 			break;
 
 		case "LIMITMODE":
-			rString = new DataEngine(protocolid).genLimitModeWord();
+			rString = new DataGenerator(protocolid).genLimitModeWord();
 			break;
 			
 		case "ALARM":
-			rString = new DataEngine(protocolid).genAlarmTree();
+			rString = new DataGenerator(protocolid).genAlarmTree();
 			
 		case "FAULT":
-			rString = new DataEngine(protocolid).genFaultTree();
+			rString = new DataGenerator(protocolid).genFaultTree();
 			
 		case "NULL":
 			rString = pda.getCol2();

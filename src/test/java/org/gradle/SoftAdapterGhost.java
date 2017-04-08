@@ -1,6 +1,6 @@
 package org.gradle;
 
-import org.gradle.needle.client.RealDataGeneratorClient;
+import org.gradle.needle.client.UDPDataClient;
 import org.gradle.needle.util.VTimer;
 
 public class SoftAdapterGhost {
@@ -10,6 +10,6 @@ public class SoftAdapterGhost {
 
 	public static void main(String[] args) {
 		VTimer.timerStart();
-		new RealDataGeneratorClient(multicastip, multicastPort).GeneratorStart();
+		new UDPDataClient(multicastip, multicastPort).GeneratorStart();
 	}
 }

@@ -1,24 +1,24 @@
 package org.gradle.needle.server;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.mapper.DataEngine;
+import org.gradle.needle.engine.DataGenerator;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class WindFarmSimulatorServerHandler extends ChannelInboundHandlerAdapter {
+public class TCPDataServerHandler extends ChannelInboundHandlerAdapter {
 
 	int protocolid;
-	private static Logger logger = Logger.getLogger(WindFarmSimulatorServerHandler.class
+	private static Logger logger = Logger.getLogger(TCPDataServerHandler.class
 			.getName());
 
-	public WindFarmSimulatorServerHandler(int protocolid) {
+	public TCPDataServerHandler(int protocolid) {
 		this.protocolid = protocolid;
 	}
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
-		DataEngine de = new DataEngine(protocolid, msg.toString().trim());
+		DataGenerator de = new DataGenerator(protocolid, msg.toString().trim());
 		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid + "\n"
 				+ msg.toString());
 		String sReturnString = de.genCmdData();

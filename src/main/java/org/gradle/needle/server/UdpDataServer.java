@@ -6,7 +6,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 
-public class NettyUdpServer {
+public class UdpDataServer {
 
 	public void run(int port) throws Exception {
 		Bootstrap bs = new Bootstrap();
@@ -15,7 +15,7 @@ public class NettyUdpServer {
 			bs.group(group)
 			.channel(NioDatagramChannel.class)
 			.option(ChannelOption.SO_BROADCAST, true)
-			.handler(new NettyUdpServerHandler());
+			.handler(new UdpDataServerHandler());
 			
 			//服务端监听在 port 端口
 			bs.bind(port).sync().channel().closeFuture().await();
@@ -29,6 +29,6 @@ public class NettyUdpServer {
 	
 	public static void main(String[] args) throws Exception {
 		int port = 8805;
-		new NettyUdpServer().run(port);
+		new UdpDataServer().run(port);
 	}
 }

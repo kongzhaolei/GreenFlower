@@ -3,7 +3,7 @@
  * 这个类主要功能是提供POST或者get过程中需要的Template。
  * 将ExcelDataUtil返回的requestdataset组装为固定模板文件组
  */
-package org.gradle.needle.util;
+package org.gradle.needle.engine;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

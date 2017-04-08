@@ -1,7 +1,7 @@
 package org.gradle.needle.thread;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.client.RealDataGeneratorClient;
+import org.gradle.needle.client.UDPDataClient;
 
 public class DevMainDataThread implements Runnable{
 	
@@ -9,9 +9,9 @@ public class DevMainDataThread implements Runnable{
 
 	@Override
 	public void run() {
-		while(RealDataGeneratorClient.is_multicast){
+		while(UDPDataClient.is_multicast){
 			try {
-				RealDataGeneratorClient.sendDevMainData();
+				UDPDataClient.sendDevMainData();
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage());
 			}

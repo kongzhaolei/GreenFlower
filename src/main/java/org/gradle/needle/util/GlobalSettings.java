@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.gradle.needle.mapper;
+package org.gradle.needle.util;
 
 import java.io.InputStream;
 import java.util.Properties;

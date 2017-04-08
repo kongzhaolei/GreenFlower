@@ -1,4 +1,4 @@
-package org.gradle.needle.mapper;
+package org.gradle.needle.engine;
 
 import java.util.List;
 

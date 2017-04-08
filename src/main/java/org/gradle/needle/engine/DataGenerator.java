@@ -1,4 +1,4 @@
-package org.gradle.needle.mapper;
+package org.gradle.needle.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,18 +18,18 @@ import org.gradle.needle.util.VTimer;
  * 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，包数据
  * 2. 支持模拟历史瞬态数据，分钟数据(10,5,1)，风机状态数据，功率曲线数据，历史沉积数据，变位数据
  */
-public class DataEngine {
+public class DataGenerator {
 
 	private int protocolid;
 	private String cmdname;
 	private DataDefined df;
 	private static String sFaultString = "0";
-	private static Logger logger = Logger.getLogger(DataEngine.class.getName());
+	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
 
 	/*
 	 * 构造方法 1 风机数据模拟器，初始化protocolid,cmdname
 	 */
-	public DataEngine(int protocolid, String cmdname) {
+	public DataGenerator(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 		df = new DataDefined(protocolid, cmdname);
@@ -38,7 +38,7 @@ public class DataEngine {
 	/*
 	 * 构造方法 2 实时数据发生器，初始化protocolid
 	 */
-	public DataEngine(int protocolid) {
+	public DataGenerator(int protocolid) {
 		this.protocolid = protocolid;
 		df = new DataDefined(protocolid);
 	}

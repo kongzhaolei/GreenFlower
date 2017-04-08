@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 public class HttpServiceNewClient {
 	static CloseableHttpClient sclient;
-	private static Logger logger = Logger.getLogger(HttpServiceClient.class
+	private static Logger logger = Logger.getLogger(HttpClientFactory.class
 			.getName());
 	static String response = "";
 	// connection∫Õsocket≥¨ ±≈‰÷√œÓ

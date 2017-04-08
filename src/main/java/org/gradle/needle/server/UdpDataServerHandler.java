@@ -9,7 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
 
-public class NettyUdpServerHandler extends
+public class UdpDataServerHandler extends
 		SimpleChannelInboundHandler<DatagramPacket> {
 	
 	@Override

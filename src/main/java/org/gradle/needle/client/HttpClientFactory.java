@@ -15,10 +15,10 @@ import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.log4j.Logger;
 
-public class HttpServiceClient {
+public class HttpClientFactory {
 	// …Ë÷√≥¨ ± ms
 	private static int timeout = 360000;
-	private static Logger logger = Logger.getLogger(HttpServiceClient.class
+	private static Logger logger = Logger.getLogger(HttpClientFactory.class
 			.getName());
 	static HttpClient sclient;
 	static String response = "";

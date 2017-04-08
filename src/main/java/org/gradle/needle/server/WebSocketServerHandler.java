@@ -21,7 +21,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 
-public class NettyWebSocketServerHandler extends
+public class WebSocketServerHandler extends
 		SimpleChannelInboundHandler<Object> {
 
 	private WebSocketServerHandshaker handshaker;

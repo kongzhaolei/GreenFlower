@@ -5,8 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.mapper.DataDefined;
-import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.engine.DataDefined;
 
 public class VTimer {
 

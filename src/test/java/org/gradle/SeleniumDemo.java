@@ -3,10 +3,10 @@ package org.gradle;
 import java.io.File;
 import java.util.Iterator;
 
-import org.gradle.needle.mapper.GlobalSettings;
 import org.gradle.needle.selenium.BrowserFactory;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.XMLParser;
+import org.gradle.needle.util.GlobalSettings;
+import org.gradle.needle.util.XMLUtils;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -87,7 +87,7 @@ public class SeleniumDemo {
 	@Test(priority = 1, enabled = false)
 	public static void SendXMLFile() {
 		// ·¢ËÍXMLÎÄ¼þ
-		XMLParser.SendXMLFile(XmlDataFile1);
+		XMLUtils.SendXMLFile(XmlDataFile1);
 	}
 
 /*	@Test(priority = 2, enabled = false)

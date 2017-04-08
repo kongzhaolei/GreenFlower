@@ -5,12 +5,12 @@ import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.Multicast.Multicast;
-import org.gradle.needle.mapper.DataEngine;
-import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.engine.DataGenerator;
 import org.gradle.needle.thread.DevAlarmDataThread;
 import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
 import org.gradle.needle.thread.DevMainDataThread;
+import org.gradle.needle.util.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -56,7 +56,7 @@ import io.netty.channel.socket.DatagramPacket;
  *      Êý¾ÝÊµÀý£º(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
  *   
  */  
-public class RealDataGeneratorClient {
+public class UDPDataClient {
 	private static Multicast multicast;
 	private static String multicastIP;
 	private static int multicastPort;
@@ -64,11 +64,11 @@ public class RealDataGeneratorClient {
 	private static int singlePort;
 	public static boolean is_multicast;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
-	private static Logger logger = Logger.getLogger(RealDataGeneratorClient.class.getName());
-	private static DataEngine de = new DataEngine(protocolid);
+	private static Logger logger = Logger.getLogger(UDPDataClient.class.getName());
+	private static DataGenerator de = new DataGenerator(protocolid);
 	
 
-	public RealDataGeneratorClient(String ip, int port){
+	public UDPDataClient(String ip, int port){
 		multicastIP = ip;
 		multicastPort = port;
 	    is_multicast = true;
@@ -118,7 +118,7 @@ public class RealDataGeneratorClient {
 			Bootstrap bs = new Bootstrap();
 			bs.group(group).channel(NioDatagramChannel.class)
 					.option(ChannelOption.SO_BROADCAST, true)
-					.handler(new RealDataGeneratorClientHandler());
+					.handler(new UDPDataClientHandler());
 
 			Channel channel = bs.bind(0).sync().channel();
 

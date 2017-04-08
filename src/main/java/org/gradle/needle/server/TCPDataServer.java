@@ -1,6 +1,6 @@
 package org.gradle.needle.server;
 
-import org.gradle.needle.mapper.GlobalSettings;
+import org.gradle.needle.util.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -19,13 +19,13 @@ import io.netty.handler.codec.string.StringEncoder;
  * @author kongzhaolei
  * 
  */
-public class WindFarmSimulatorServer {
+public class TCPDataServer {
 	private static int protocolid = Integer.parseInt(GlobalSettings
 			.getProperty("protocolid"));
 	private int port;
 	private String host;
 	
-	public WindFarmSimulatorServer(String host, int port) {
+	public TCPDataServer(String host, int port) {
 		this.port = port;
 		this.host = host;
 	}
@@ -41,7 +41,7 @@ public class WindFarmSimulatorServer {
 		String host = GlobalSettings.getProperty("host");
 		VTimer.timerStart();
 		//д╛хо╤к©з1120
-		new WindFarmSimulatorServer(host, 1120).serverStart();
+		new TCPDataServer(host, 1120).serverStart();
 	}
 
 	public static int getProcolid() {
@@ -70,7 +70,7 @@ public class WindFarmSimulatorServer {
 							ch.pipeline().addLast("encoder",
 									new StringEncoder());
 							ch.pipeline().addLast(
-									new WindFarmSimulatorServerHandler(protocolid));
+									new TCPDataServerHandler(protocolid));
 
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128)

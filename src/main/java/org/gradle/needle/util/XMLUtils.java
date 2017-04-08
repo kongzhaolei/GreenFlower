@@ -6,11 +6,11 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 
 
-public class XMLParser {
-	private static Logger logger = Logger.getLogger(XMLParser.class
+public class XMLUtils {
+	private static Logger logger = Logger.getLogger(XMLUtils.class
 			.getName());
 
-	public XMLParser() {
+	public XMLUtils() {
 
 	}
 

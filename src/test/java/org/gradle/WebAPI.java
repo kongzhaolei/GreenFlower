@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.client.HttpServiceNewClient;
+import org.gradle.needle.engine.HttpReqGen;
+import org.gradle.needle.engine.HttpResVer;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.HttpReqGen;
-import org.gradle.needle.util.HttpResVer;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
