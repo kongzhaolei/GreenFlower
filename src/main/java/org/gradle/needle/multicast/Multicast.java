@@ -1,4 +1,4 @@
-package org.gradle.needle.Multicast;
+package org.gradle.needle.multicast;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

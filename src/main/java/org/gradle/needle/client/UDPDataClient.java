@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.Multicast.Multicast;
 import org.gradle.needle.engine.DataGenerator;
+import org.gradle.needle.multicast.Multicast;
 import org.gradle.needle.thread.DevAlarmDataThread;
 import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;

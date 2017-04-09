@@ -1,4 +1,4 @@
-package org.gradle.needle.Modbus;
+package org.gradle.needle.modbus;
 
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusCoupler;

@@ -24,7 +24,7 @@ import com.jacob.com.Variant;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-public class DllClient {
+public class DllFactory {
 
 	// 1.JNA方式：编写dll接口,实现library接口
 	public interface SoftAdapterJNA extends Library {
@@ -116,7 +116,7 @@ public class DllClient {
 		// libc.GetErrorTypeByID("20103323");
 		// DllClient.SoftAdapterJNtive();
 		// DllClient.SoftAdapterJawin();
-		DllClient.SoftAdapterJacob();
+		DllFactory.SoftAdapterJacob();
 
 	}
 }
