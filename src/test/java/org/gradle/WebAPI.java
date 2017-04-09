@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.client.HttpServiceNewClient;
+import org.gradle.needle.client.HttpClientFactory;
 import org.gradle.needle.engine.HttpReqGen;
 import org.gradle.needle.engine.HttpResVer;
 import org.gradle.needle.util.ExcelDataUtils;
@@ -37,9 +37,8 @@ public class WebAPI {
 	@Test(priority = 0, dataProvider = "test0", enabled = true)
 	public void test0(String testid, String call_type, String url,
 			Map<String, String> header, Map<String, String> body) {
-
-      //String response = HttpServiceClient.invokeServiceMethod(call_type, url,header, body);
-	    String response = HttpServiceNewClient.invokeServiceMethod(call_type,url,header,body);
+		
+	    String response = HttpClientFactory.invokeServiceMethod(call_type,url,header,body);
 		logger.info("接口测试用例 " + testid + "的返回结果:" + "\r\n");
 		logger.info(response + "\r\n");
 
