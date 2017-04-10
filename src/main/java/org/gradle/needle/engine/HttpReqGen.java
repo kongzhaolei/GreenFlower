@@ -113,7 +113,7 @@ public class HttpReqGen {
 	 */
 	private static String[] tokenize_template(String temp) {
 		String[] tokens = temp.split("(?=[<]{2})|(?<=[>]{2})");
-		String[] nodes = new String[tokens.length / 2];
+		String[] nodes = new String[tokens.length / 2 + 1];
 		int i = 0;
 		for (String item : tokens) {
 			if (item.startsWith("<<") && item.endsWith(">>")) {

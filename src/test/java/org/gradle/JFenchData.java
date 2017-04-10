@@ -26,7 +26,7 @@ public class JFenchData {
 		
 		//≥ı ºªØexcel sheet
 		try {
-			ExcelDataUtils.setExcelWorkSheet(sheet);
+			ExcelDataUtils.setWorkSheet(sheet);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

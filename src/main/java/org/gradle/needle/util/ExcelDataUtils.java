@@ -18,11 +18,15 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import net.sf.jxls.util.Util;
 
 public class ExcelDataUtils {
-	private static String TestDataFile = GlobalSettings.ExcelDataFile;
+	private static String CaseFile;
 	private static Sheet ExcelWorkSheet;
 	private static Workbook ExcelWorkBook;
 	private static Logger logger = Logger.getLogger(ExcelDataUtils.class
 			.getName());
+	
+	public ExcelDataUtils(String file){
+		ExcelDataUtils.CaseFile = file;
+	}
 
 	/**
 	 * 初始化Excel工作表
@@ -30,9 +34,9 @@ public class ExcelDataUtils {
 	 * @param SheetName
 	 * @throws Exception
 	 */
-	public static void setExcelWorkSheet(String SheetName){
+	public static void setWorkSheet(String SheetName){
 		try {
-			FileInputStream ExcelFile = new FileInputStream(TestDataFile);
+			FileInputStream ExcelFile = new FileInputStream(CaseFile);
 			ExcelWorkBook = WorkbookFactory.create(ExcelFile);
 			ExcelWorkSheet = ExcelWorkBook.getSheet(SheetName);
 			 logger.info("测试工作表 " + SheetName + " 成功初始化");
@@ -48,50 +52,11 @@ public class ExcelDataUtils {
 	}
 
 	/**
-	 * 获取TestSet的测试用例集，作为testng数据驱动的DataProvider 1. 检查了行数据是否为空 2.
-	 * 检查了某条testcase是否属于TestSet 3. column 从第i列开始读取数据，存入rowDataSet 4.
-	 * 返回符合结果的数据集，数据集中的每个object[]是DataProvider的参数
-	 * 
-	 * @param TestSet
-	 * @return
+	 * @param TestSet 指定TestSet
+	 * @return map类型的测试数据集，key为列标题，value为列值 column 从第i列开始读取数据
 	 * @throws Exception
 	 */
-	public static Iterator<Object[]> getRowDataSet(String TestSet)
-			throws Exception {
-		int numberOfColumns = countNonEmptyColumns(ExcelWorkSheet);
-		int i = 1;
-		List<Object[]> rowDataSet = new ArrayList<Object[]>();
-		List<Object> rowData = new ArrayList<Object>();
-		for (Row row : ExcelWorkSheet) {
-			if (isEmpty(row)) {
-				break;
-			} else {
-				if (row.getRowNum() != 0 & verRowBelong(TestSet, row)) {
-					rowData.clear();
-					for (int column = i; column < numberOfColumns; column++) {
-						Cell cell = row.getCell(column);
-						rowData.add(objectFrom(ExcelWorkBook, cell));
-					}
-				} else {
-					// logger.info("非本次测试数据集，第 " + row.getRowNum() +
-					// " 行测试数据将跳过");
-					continue;
-				}
-			}
-			rowDataSet.add(rowData.toArray()); // rowData 由list转化为数组
-			// logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
-		}
-		Iterator<Object[]> s = rowDataSet.iterator();
-		return (s);
-	}
-
-	/**
-	 * @param TestSet
-	 * @return
-	 * @throws Exception
-	 * 这个方法返回的是map类型的测试数据集，key为列标题，value为列值 column 从第i列开始读取数据
-	 */
-	public static Iterator<Map<String, String>> getRowDataMap(String TestSet)
+	public Iterator<Map<String, String>> getCaseSet(String TestSet)
 			throws Exception {
 		int numberOfColumns = countNonEmptyColumns(ExcelWorkSheet);
 		int i = 0;
@@ -318,7 +283,7 @@ public class ExcelDataUtils {
 			} else {
 				cell.setCellValue(Value);
 			}
-			FileOutputStream fileOut = new FileOutputStream(TestDataFile);
+			FileOutputStream fileOut = new FileOutputStream(CaseFile);
 			ExcelWorkBook.write(fileOut);
 			fileOut.flush();
 			fileOut.close();
@@ -360,7 +325,7 @@ public class ExcelDataUtils {
 				break;
 			}
 			cell.setCellStyle(style);
-			FileOutputStream fileOut = new FileOutputStream(TestDataFile);
+			FileOutputStream fileOut = new FileOutputStream(CaseFile);
 			ExcelWorkBook.write(fileOut);
 			fileOut.flush();
 			fileOut.close();

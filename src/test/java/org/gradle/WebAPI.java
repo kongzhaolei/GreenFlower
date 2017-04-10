@@ -15,15 +15,13 @@ import org.testng.annotations.Test;
 
 public class WebAPI {
 	// 定义脚本test0要执行的测试集
-	String testset0 = "Statistic";
-	//String testset0 = "Query";
-	private static Logger logger = Logger.getLogger(WebAPI.class
-			.getName());
+	String testset0 = "main";
+	// String testset0 = "Query";
+	private static Logger logger = Logger.getLogger(WebAPI.class.getName());
 
 	@BeforeClass
 	public static void init() throws Exception {
-		logger.info("-----------------------所有接口请求开始-------------------------"
-				+ "\r\n");
+		logger.info("-----------------------所有接口请求开始-------------------------" + "\r\n");
 	}
 
 	@AfterClass
@@ -35,10 +33,10 @@ public class WebAPI {
 	}
 
 	@Test(priority = 0, dataProvider = "test0", enabled = true)
-	public void test0(String testid, String call_type, String url,
-			Map<String, String> header, Map<String, String> body) {
-		
-	    String response = HttpClientFactory.invokeServiceMethod(call_type,url,header,body);
+	public void test0(String testid, String call_type, String url, Map<String, String> header,
+			Map<String, String> body) {
+
+		String response = HttpClientFactory.invokeServiceMethod(call_type, url, header, body);
 		logger.info("接口测试用例 " + testid + "的返回结果:" + "\r\n");
 		logger.info(response + "\r\n");
 
@@ -46,7 +44,7 @@ public class WebAPI {
 			HttpResVer.saveResponse("Output", testid, response);
 			logger.info("接口测试用例 " + testid + "的返回结果已写入Output" + "\r\n");
 
-			HttpResVer.ParserAndCompare(testid, "Baseline", response,"Comparision");
+			HttpResVer.ParserAndCompare(testid, "Baseline", response, "Comparision");
 			logger.info("接口测试用例 " + testid + "的对比结果已写入Comparision" + "\r\n\n");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,9 +53,10 @@ public class WebAPI {
 
 	@DataProvider
 	public Iterator<Object[]> test0() throws Exception {
-		ExcelDataUtils.setExcelWorkSheet("Input");
-		Iterator<Map<String, String>> datamap = ExcelDataUtils
-				.getRowDataMap(testset0);
+		String filePath = System.getProperty("user.dir") + "/src/main/resources/webapi.xls";
+		ExcelDataUtils edu = new ExcelDataUtils(filePath);
+		ExcelDataUtils.setWorkSheet("Input");
+		Iterator<Map<String, String>> datamap = edu.getCaseSet(testset0);
 		Iterator<Object[]> requestfiles = HttpReqGen.preReqGen(datamap);
 		return (requestfiles);
 	}

@@ -34,13 +34,13 @@ public class HttpResVer {
 		Map<String, String> actualmap = parser(response);
 		try {
 			// 在bsheet中读取expect字符串
-			ExcelDataUtils.setExcelWorkSheet(bsheet);
+			ExcelDataUtils.setWorkSheet(bsheet);
 			int brownum = ExcelDataUtils.getRowNumberOnTestid(testid);
 			String expectstr = (String) ExcelDataUtils.getCellData(brownum,
 					expectcol);
 
 			// 切换至csheet,写入对比后结果
-			ExcelDataUtils.setExcelWorkSheet(csheet);
+			ExcelDataUtils.setWorkSheet(csheet);
 			int crownum = ExcelDataUtils.getRowNumberOnTestid(testid);
 			Map<String, String> expectmap = parser(expectstr);
 			Iterator<String> iter = expectmap.keySet().iterator();
@@ -132,7 +132,7 @@ public class HttpResVer {
 	public static void saveResponse(String osheet, String testid,
 			String response) {
 		try {
-			ExcelDataUtils.setExcelWorkSheet(osheet);
+			ExcelDataUtils.setWorkSheet(osheet);
 			int rownumber = ExcelDataUtils.getRowNumberOnTestid(testid);
 			ExcelDataUtils.setCellData(response, rownumber, responsecol);
 			ExcelDataUtils.setBorder(rownumber, responsecol);

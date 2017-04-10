@@ -27,7 +27,7 @@ public class HttpClientFactory {
 			.getName());
 	private static String response = "";
 	// connection和socket超时配置项
-	private static int timeout = 6000;
+	private static int timeout = 60000;
 	private static RequestConfig timeconfig = RequestConfig.custom()
 			.setSocketTimeout(timeout).setConnectTimeout(timeout).build();
 
@@ -63,7 +63,7 @@ public class HttpClientFactory {
 			Map<String, String> header, Map<String, String> body) {
 		
 		sclient = HttpClients.createDefault();
-		HttpPost post = new HttpPost(url);
+		HttpPost post = new HttpPost(url.trim());
 		post.setConfig(timeconfig);
 
 		// 设置header
@@ -88,10 +88,12 @@ public class HttpClientFactory {
 			HttpResponse httpResponse = sclient.execute(post);
 			int statuscode = httpResponse.getStatusLine().getStatusCode();
 			if (statuscode == HttpStatus.SC_OK) {
+				HttpEntity entity = httpResponse.getEntity();
+				response = EntityUtils.toString(entity, "UTF-8");
 				logger.info("接口请求成功");
+			}else {
+				logger.info("接口请求失败，statuscode： " + statuscode);
 			}
-			HttpEntity entity = httpResponse.getEntity();
-			response = EntityUtils.toString(entity, "UTF-8");
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
