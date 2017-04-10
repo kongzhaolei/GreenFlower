@@ -65,9 +65,9 @@ public class HttpReqGen {
 				request.add(testid.trim());
 				// 组装HTTP请求行url
 				String call_type = parmset.get(nodes[0]);
-				request.add(call_type);
+				request.add(call_type.trim());
 				String url = parmset.get(nodes[1]);
-				request.add(url);
+				request.add(url.trim());
 			} catch (Exception e) {
 				logger.error("HTTP请求行出现异常，请检查模板和数据源");
 				throw new RuntimeException(e);

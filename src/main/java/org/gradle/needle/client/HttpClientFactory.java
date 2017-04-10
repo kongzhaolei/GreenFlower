@@ -63,13 +63,13 @@ public class HttpClientFactory {
 			Map<String, String> header, Map<String, String> body) {
 		
 		sclient = HttpClients.createDefault();
-		HttpPost post = new HttpPost(url.trim());
+		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 
 		// …Ë÷√header
 		if (header != null) {
 			for (Map.Entry<String, String> entry : header.entrySet()) {
-				post.addHeader(entry.getKey(), entry.getValue());
+				post.addHeader(entry.getKey().trim(), entry.getValue().trim());
 			}
 		}
 
@@ -77,8 +77,8 @@ public class HttpClientFactory {
 		ArrayList<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		if (body != null) {
 			for (Map.Entry<String, String> entry : body.entrySet()) {
-				pairs.add(new BasicNameValuePair(entry.getKey(), entry
-						.getValue()));
+				pairs.add(new BasicNameValuePair(entry.getKey().trim(), entry
+						.getValue().trim()));
 			}
 		}
 
