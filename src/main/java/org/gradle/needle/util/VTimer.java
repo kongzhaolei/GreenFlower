@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
 import org.gradle.needle.engine.DataDefined;
 
 public class VTimer {
