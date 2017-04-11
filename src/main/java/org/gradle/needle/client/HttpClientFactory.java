@@ -39,7 +39,7 @@ public class HttpClientFactory {
 			Map<String, String> header, Map<String, String> body) {
 
 		if (call_type.equalsIgnoreCase("get")) {
-			response = requestGetMethod(url, header);
+			response = httpGetWay(url, header);
 		} else {
 			if (call_type.equalsIgnoreCase("post")) {
 				response = httpPostWay(url, header, body);
@@ -50,7 +50,7 @@ public class HttpClientFactory {
 		return response;
 	}
 
-	private static String requestGetMethod(String url,
+	private static String httpGetWay(String url,
 			Map<String, String> header) {
 		// TODO 自动生成的方法存根
 		return null;
@@ -112,7 +112,7 @@ public class HttpClientFactory {
 	/*
 	 * 获取响应码
 	 */
-	public int getStatusCode() {
+	public static int getStatusCode() {
 		return statuscode;
 	}
 }
