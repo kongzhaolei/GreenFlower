@@ -26,11 +26,15 @@ public class HttpClientFactory {
 	private static Logger logger = Logger.getLogger(HttpClientFactory.class
 			.getName());
 	private static String response = "";
+	private static int statuscode;
 	// connection和socket超时配置项
 	private static int timeout = 60000;
 	private static RequestConfig timeconfig = RequestConfig.custom()
 			.setSocketTimeout(timeout).setConnectTimeout(timeout).build();
-
+	
+/**
+ * http get and post
+ */
 	public static String invokeServiceMethod(String call_type, String url,
 			Map<String, String> header, Map<String, String> body) {
 
@@ -53,6 +57,7 @@ public class HttpClientFactory {
 	}
 	
     /**
+     * 发送POST请求，获取response
      * HttpPost
      * @param url
      * @param header
@@ -86,7 +91,7 @@ public class HttpClientFactory {
 		try {
 			post.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
 			HttpResponse httpResponse = sclient.execute(post);
-			int statuscode = httpResponse.getStatusLine().getStatusCode();
+			statuscode = httpResponse.getStatusLine().getStatusCode();
 			if (statuscode == HttpStatus.SC_OK) {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
@@ -103,5 +108,11 @@ public class HttpClientFactory {
 		}
 		return response;
 	}
-
+	
+	/*
+	 * 获取响应码
+	 */
+	public int getStatusCode() {
+		return statuscode;
+	}
 }
