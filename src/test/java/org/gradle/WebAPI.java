@@ -14,9 +14,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class WebAPI {
-	// 定义脚本test0要执行的测试集
+
 	String testset0 = "main";
-	// String testset0 = "Query";
 	private static Logger logger = Logger.getLogger(WebAPI.class.getName());
 
 	@BeforeClass
@@ -35,17 +34,11 @@ public class WebAPI {
 	@Test(priority = 0, dataProvider = "test0", enabled = true)
 	public void test0(String testid, String call_type, String url, Map<String, String> header,
 			Map<String, String> body) {
-
 		String response = HttpClientFactory.invokeServiceMethod(call_type, url, header, body);
-		logger.info("接口测试用例 " + testid + "的返回结果:" + "\r\n");
-		logger.info(response + "\r\n");
-
 		try {
 			HttpResVer.saveResponse("Output", testid, response);
-			logger.info("接口测试用例 " + testid + "的返回结果已写入Output" + "\r\n");
-
 			HttpResVer.ParserAndCompare(testid, "Baseline", response, "Comparision");
-			logger.info("接口测试用例 " + testid + "的对比结果已写入Comparision" + "\r\n\n");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
