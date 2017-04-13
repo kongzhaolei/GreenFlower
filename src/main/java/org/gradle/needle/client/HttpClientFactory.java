@@ -45,7 +45,7 @@ public class HttpClientFactory {
 	private static Logger logger = Logger.getLogger(HttpClientFactory.class.getName());
 	private static String response = "";
 	private static int statuscode;
-	private static int timeout = 7000;
+	private static int timeout = 60000;
 
 	/**
 	 * ≥ı ºªØ≈‰÷√
