@@ -82,7 +82,7 @@ public class HttpResVer {
 				}
 
 				// 这里在testid行下面插入一个新行，准备写入下一组key-value
-				int totalrows = ExcelDataUtils.getSheet().getLastRowNum(); // 获取总行数
+				int totalrows = ExcelDataUtils.getWorkSheet().getLastRowNum(); // 获取总行数
 				ExcelDataUtils.insertRow(crownum, totalrows, 1);
 			}
 		} catch (Exception e) {
