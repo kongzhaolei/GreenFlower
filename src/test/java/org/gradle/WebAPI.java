@@ -12,6 +12,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebAPI {
 
@@ -39,7 +40,7 @@ public class WebAPI {
 		try {
 			HttpResVer.saveResponse("Output", testid, response);
 			HttpResVer.ParserAndCompare(testid, "Baseline", response, "Comparision");
-			
+			assertThat(response).containsSequence("{","ModelData","140802016");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
