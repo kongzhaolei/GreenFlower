@@ -27,7 +27,7 @@ public class DataGenerator {
 	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
 
 	/*
-	 * 构造方法 1 风机数据模拟器，初始化protocolid,cmdname
+	 * 构造方法 1 PLC，初始化protocolid,cmdname
 	 */
 	public DataGenerator(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
@@ -36,7 +36,7 @@ public class DataGenerator {
 	}
 
 	/*
-	 * 构造方法 2 实时数据发生器，初始化protocolid
+	 * 构造方法 2 normal，初始化protocolid
 	 */
 	public DataGenerator(int protocolid) {
 		this.protocolid = protocolid;
