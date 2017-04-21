@@ -294,7 +294,7 @@ public class DataDefined {
 			break;
 
 		case "STATUS":
-			rString = new DataGenerator(protocolid).genStatusData();
+			rString = new DataGenerator(protocolid).genStateData();
 			break;
 
 		case "TOTAL":
