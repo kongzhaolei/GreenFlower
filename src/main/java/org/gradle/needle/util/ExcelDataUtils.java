@@ -6,24 +6,36 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import net.sf.jxls.util.Util;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.gradle.needle.mapper.GlobalSettings;
-
-import net.sf.jxls.util.Util;
 
 public class ExcelDataUtils {
-	private static String TestDataFile = GlobalSettings.ExcelDataFile;
+	private static String CaseFile;
+	private static InputStream CaseInputStream;
 	private static Sheet ExcelWorkSheet;
 	private static Workbook ExcelWorkBook;
-	private static Logger logger = Logger.getLogger(ExcelDataUtils.class
-			.getName());
+	private static Logger logger = Logger.getLogger(ExcelDataUtils.class.getName());
+
+	public ExcelDataUtils(String CaseFile) {
+		ExcelDataUtils.CaseFile = CaseFile;
+		try {
+			CaseInputStream = new FileInputStream(CaseFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public ExcelDataUtils(InputStream CaseInputStream) {
+		ExcelDataUtils.CaseInputStream = CaseInputStream;
+	}
 
 	/**
 	 * 初始化Excel工作表
@@ -31,69 +43,28 @@ public class ExcelDataUtils {
 	 * @param SheetName
 	 * @throws Exception
 	 */
-	public static void setExcelWorkSheet(String SheetName){
+	public static void setWorkSheet(String SheetName) {
 		try {
-			FileInputStream ExcelFile = new FileInputStream(TestDataFile);
-			ExcelWorkBook = WorkbookFactory.create(ExcelFile);
+			ExcelWorkBook = WorkbookFactory.create(CaseInputStream);
 			ExcelWorkSheet = ExcelWorkBook.getSheet(SheetName);
-			 logger.info("测试工作表 " + SheetName + " 成功初始化");
-			ExcelFile.close();
-		} catch (Exception e){
+			logger.info("测试工作表 " + SheetName + " 成功初始化");
+		} catch (Exception e) {
 			logger.error("测试工作表 " + SheetName + " 初始化失败！");
 			e.printStackTrace();
 		}
 	}
-	
-	public static Sheet getSheet(){
+
+	public static Sheet getWorkSheet() {
 		return ExcelWorkSheet;
 	}
 
 	/**
-	 * 获取TestSet的测试用例集，作为testng数据驱动的DataProvider 1. 检查了行数据是否为空 2.
-	 * 检查了某条testcase是否属于TestSet 3. column 从第i列开始读取数据，存入rowDataSet 4.
-	 * 返回符合结果的数据集，数据集中的每个object[]是DataProvider的参数
-	 * 
 	 * @param TestSet
-	 * @return
+	 *            指定TestSet
+	 * @return map类型的测试数据集，key为列标题，value为列值 column 从第i列开始读取数据
 	 * @throws Exception
 	 */
-	public static Iterator<Object[]> getRowDataSet(String TestSet)
-			throws Exception {
-		int numberOfColumns = countNonEmptyColumns(ExcelWorkSheet);
-		int i = 1;
-		List<Object[]> rowDataSet = new ArrayList<Object[]>();
-		List<Object> rowData = new ArrayList<Object>();
-		for (Row row : ExcelWorkSheet) {
-			if (isEmpty(row)) {
-				break;
-			} else {
-				if (row.getRowNum() != 0 & verRowBelong(TestSet, row)) {
-					rowData.clear();
-					for (int column = i; column < numberOfColumns; column++) {
-						Cell cell = row.getCell(column);
-						rowData.add(objectFrom(ExcelWorkBook, cell));
-					}
-				} else {
-					// logger.info("非本次测试数据集，第 " + row.getRowNum() +
-					// " 行测试数据将跳过");
-					continue;
-				}
-			}
-			rowDataSet.add(rowData.toArray()); // rowData 由list转化为数组
-			// logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
-		}
-		Iterator<Object[]> s = rowDataSet.iterator();
-		return (s);
-	}
-
-	/**
-	 * @param TestSet
-	 * @return
-	 * @throws Exception
-	 * 这个方法返回的是map类型的测试数据集，key为列标题，value为列值 column 从第i列开始读取数据
-	 */
-	public static Iterator<Map<String, String>> getRowDataMap(String TestSet)
-			throws Exception {
+	public Iterator<Map<String, String>> getCaseSet(String TestSet) throws Exception {
 		int numberOfColumns = countNonEmptyColumns(ExcelWorkSheet);
 		int i = 0;
 		List<Map<String, String>> requestlist = new ArrayList<Map<String, String>>();
@@ -111,17 +82,15 @@ public class ExcelDataUtils {
 					for (int column = i; column < numberOfColumns; column++) {
 						Object key = getCellData(0, column);
 						Cell cell = row.getCell(column);
-						m.put(key.toString(), objectFrom(ExcelWorkBook, cell)
-								.toString());
+						m.put(key.toString(), objectFrom(ExcelWorkBook, cell).toString());
 					}
 				} else {
-					 logger.info("非本次测试数据集，第 " + row.getRowNum() +
-					 " 行测试数据将跳过");
+					logger.info("非本次测试数据集，第 " + row.getRowNum() + " 行测试数据将跳过");
 					continue;
 				}
 			}
 			requestlist.add(m);
-			 logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
+			logger.info("正确匹配，第 " + row.getRowNum() + " 行测试数据压入数据集");
 		}
 		Iterator<Map<String, String>> s = requestlist.iterator();
 		logger.info("所有测试用例初始化完成" + "\r\n");
@@ -136,8 +105,7 @@ public class ExcelDataUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static boolean verRowBelong(String TestSet, Row row)
-			throws Exception {
+	public static boolean verRowBelong(String TestSet, Row row) throws Exception {
 		int colNum = 1;
 		int rowNum = row.getRowNum();
 		Object Value = getCellData(rowNum, colNum);
@@ -218,8 +186,7 @@ public class ExcelDataUtils {
 	 */
 	private static boolean isEmpty(final Row row) {
 		Cell firstCell = row.getCell(0);
-		boolean rowIsEmpty = (firstCell == null)
-				|| (firstCell.getCellType() == Cell.CELL_TYPE_BLANK);
+		boolean rowIsEmpty = (firstCell == null) || (firstCell.getCellType() == Cell.CELL_TYPE_BLANK);
 		return rowIsEmpty;
 	}
 
@@ -282,10 +249,8 @@ public class ExcelDataUtils {
 		return cellValue;
 	}
 
-	private static Object evaluateCellFormula(final Workbook workbook,
-			final Cell cell) {
-		FormulaEvaluator evaluator = workbook.getCreationHelper()
-				.createFormulaEvaluator();
+	private static Object evaluateCellFormula(final Workbook workbook, final Cell cell) {
+		FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 		CellValue cellValue = evaluator.evaluate(cell);
 		Object result = null;
 
@@ -308,8 +273,7 @@ public class ExcelDataUtils {
 	 * @param ColNum
 	 * @throws Exception
 	 */
-	public static void setCellData(String Value, int RowNum, int ColNum)
-			throws Exception {
+	public static void setCellData(String Value, int RowNum, int ColNum) throws Exception {
 		try {
 			Row row = ExcelWorkSheet.getRow(RowNum);
 			Cell cell = row.getCell(ColNum, Row.RETURN_BLANK_AS_NULL);
@@ -319,7 +283,7 @@ public class ExcelDataUtils {
 			} else {
 				cell.setCellValue(Value);
 			}
-			FileOutputStream fileOut = new FileOutputStream(TestDataFile);
+			FileOutputStream fileOut = new FileOutputStream(CaseFile);
 			ExcelWorkBook.write(fileOut);
 			fileOut.flush();
 			fileOut.close();
@@ -361,7 +325,7 @@ public class ExcelDataUtils {
 				break;
 			}
 			cell.setCellStyle(style);
-			FileOutputStream fileOut = new FileOutputStream(TestDataFile);
+			FileOutputStream fileOut = new FileOutputStream(CaseFile);
 			ExcelWorkBook.write(fileOut);
 			fileOut.flush();
 			fileOut.close();
@@ -369,11 +333,10 @@ public class ExcelDataUtils {
 			e.printStackTrace();
 		}
 	}
-    
-	
+
 	/**
-	 * 单元格设置边框
-	 * 设置自动换行
+	 * 单元格设置边框 设置自动换行
+	 * 
 	 * @param crownum
 	 * @param e_keycol
 	 */
@@ -381,32 +344,36 @@ public class ExcelDataUtils {
 		try {
 			Cell cell = ExcelWorkSheet.getRow(RowNum).getCell(ColNum);
 			CellStyle style = ExcelWorkBook.createCellStyle();
-		    style.setBorderRight(CellStyle.BORDER_HAIR); 
-		    style.setBorderLeft(CellStyle.BORDER_HAIR);
-		    style.setBorderBottom(CellStyle.BORDER_HAIR);
-		    style.setBorderTop(CellStyle.BORDER_HAIR);
-		    style.setWrapText(true);
-		    cell.setCellStyle(style);
-		}catch(Exception e){
+			style.setBorderRight(CellStyle.BORDER_HAIR);
+			style.setBorderLeft(CellStyle.BORDER_HAIR);
+			style.setBorderBottom(CellStyle.BORDER_HAIR);
+			style.setBorderTop(CellStyle.BORDER_HAIR);
+			style.setWrapText(true);
+			cell.setCellStyle(style);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * 实现Excel插入行
-	 * @param startrow 起始行
-	 * @param totalrows 总行数
-	 * @param rows 插入的行数
+	 * 
+	 * @param startrow
+	 *            起始行
+	 * @param totalrows
+	 *            总行数
+	 * @param rows
+	 *            插入的行数
 	 */
-	public static void insertRow(int startrow, int totalrows,int rows) {
-		
-		ExcelWorkSheet.shiftRows(startrow+1,totalrows,rows,true,false);
-		for(int i=0; i<rows; i++){
-			Row sourceRow = null;  
+	public static void insertRow(int startrow, int totalrows, int rows) {
+
+		ExcelWorkSheet.shiftRows(startrow + 1, totalrows, rows, true, false);
+		for (int i = 0; i < rows; i++) {
+			Row sourceRow = null;
 			Row targetRow = null;
-			sourceRow = ExcelWorkSheet.getRow(startrow); 
-			targetRow = ExcelWorkSheet.createRow(++startrow); 
-			Util.copyRow(ExcelWorkSheet, sourceRow, targetRow); 
+			sourceRow = ExcelWorkSheet.getRow(startrow);
+			targetRow = ExcelWorkSheet.createRow(++startrow);
+			Util.copyRow(ExcelWorkSheet, sourceRow, targetRow);
 		}
 	}
 }

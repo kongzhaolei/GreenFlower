@@ -4,10 +4,10 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="DBFactory" type="org.gradle.needle.util.DBFactory" />
-		<typeAlias alias="Prodata" type="org.gradle.needle.mapper.Prodata" />
-		<typeAlias alias="Propaths" type="org.gradle.needle.mapper.Propaths" />
-		<typeAlias alias="Pathdescr" type="org.gradle.needle.mapper.Pathdescr" />
-		<typeAlias alias="Wtinfo" type="org.gradle.needle.mapper.Wtinfo" />
+		<typeAlias alias="Prodata" type="org.gradle.needle.model.Prodata" />
+		<typeAlias alias="Propaths" type="org.gradle.needle.model.Propaths" />
+		<typeAlias alias="Pathdescr" type="org.gradle.needle.model.Pathdescr" />
+		<typeAlias alias="Wtinfo" type="org.gradle.needle.model.Wtinfo" />
 		
 	</typeAliases>
 
@@ -16,7 +16,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="jdbc:ucanaccess://d:/GreenFlower/Data.mdb" />
+				<property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/Data.mdb" />
 			</dataSource>
 		</environment>
 		
@@ -24,7 +24,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="jdbc:ucanaccess://d:/GreenFlower/config.mdb" />
+				<property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/config.mdb" />
 			</dataSource>
 		</environment>
 		

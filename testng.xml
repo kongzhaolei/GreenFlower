@@ -2,7 +2,7 @@
 <suite name="HttpServiceTestsuit" parallel="none">
   <test name="HttpServiceTest">
     <classes>
-      <class name = "org.gradle.HttpServiceTest"/>
+      <class name = "org.gradle.WebAPI"/>
     </classes>
   </test>  
 </suite>  

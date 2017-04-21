@@ -1,46 +1,24 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-	
+
 eclipse {
-    classpath {
-        downloadJavadoc = true
-        downloadSources = true
-    }
+	classpath {
+		downloadJavadoc = true
+		downloadSources = true
+	}
 }
 
-sourceCompatibility = 1.7
-version = '1.0'
+version = '1.1'
 jar {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
-    }
+	manifest {
+		attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+	}
 }
 
-repositories {
-	mavenCentral()
-}
+repositories { mavenCentral() }
 
 
 dependencies {
 	compile fileTree(dir: 'libs', include: '*.jar')  // “¿¿µ±æµÿø‚libs
 	compile group: 'io.netty', name: 'netty-all', version: '4.1.6.Final'
-}
-
-task {
-	
-}
-
-test {
-	useTestNG(){   
-	options.suites("testng.xml")  
-	useDefaultListeners = true  
-	}  
-}
-
-uploadArchives {
-    repositories {
-       flatDir { 
-           dirs 'libs'
-       }
-    }
 }

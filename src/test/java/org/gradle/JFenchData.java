@@ -10,7 +10,7 @@ import java.util.Iterator;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.XMLParser;
+import org.gradle.needle.util.XMLUtils;
 
 public class JFenchData {
 	public static void main(String[] args) {
@@ -20,13 +20,13 @@ public class JFenchData {
 				.append("&$format=xml").toString();
 		String charset = "UTF-8";
 		String Result = get(urlAll, charset);// 得到xml字符串
-		Document xmldoc = XMLParser.string2xmldoc(Result);  //字符串转换为XML DOC
+		Document xmldoc = XMLUtils.string2xmldoc(Result);  //字符串转换为XML DOC
 		int row = 1;  //定义写入数据的第一行
 		String sheet = "S0204";  // 定义写入的sheet
 		
 		//初始化excel sheet
 		try {
-			ExcelDataUtils.setExcelWorkSheet(sheet);
+			ExcelDataUtils.setWorkSheet(sheet);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
