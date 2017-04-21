@@ -1,7 +1,5 @@
 package org.gradle.needle.engine;
 
-import static org.testng.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +13,9 @@ import org.gradle.needle.util.VTimer;
 
 /***
  * 
- * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，包数据 2.
- *         支持模拟历史瞬态数据，分钟数据(10,5,1)，风机状态数据，功率曲线数据，历史沉积数据，变位数据
+ * @author kongzhaolei 数据模拟引擎类
+ *  1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志
+ *  2. 支持模拟历史瞬态数据，分钟数据(10,5,1)，功率曲线数据，历史沉积数据，变位数据
  */
 public class DataGenerator {
 
@@ -72,8 +71,12 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 
+	 * 告警日志
 	 */
+	public String genWarnLog() {
+		String warnlog = "";
+		return warnlog;
+	}
 
 	/**
 	 * 风机元数据
@@ -175,7 +178,7 @@ public class DataGenerator {
 		List<String> lists = new ArrayList<String>();
 		int n = VTimer.getStatusNum(); // 风机状态时钟计数器
 		try {
-			if ("0".equals(genFaultTree())) {     //故障，风机停机
+			if (genFaultTree()!= "0") {     //故障，风机停机
 				status = "2";
 			} else {
 				for (Pathdescr pathdescr : df.getStatusList()) {
@@ -184,7 +187,7 @@ public class DataGenerator {
 				if (!(n > lists.size())) {
 					status = lists.get(n);
 				} else {
-					status = "0";
+					status = "5";
 				}
 			}	
 		} catch (Exception e) {
@@ -196,6 +199,10 @@ public class DataGenerator {
 	/**
 	 * 组播风机状态
 	 */
+	public String genDevStateData() {
+		return "(statedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genStateData()
+		+ ")";
+	}
 
 	/**
 	 * 组播前置和设备通信状态引擎 暂时设置为通信正常

@@ -10,6 +10,7 @@ import org.gradle.needle.thread.DevAlarmDataThread;
 import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
 import org.gradle.needle.thread.DevMainDataThread;
+import org.gradle.needle.thread.DevStateDataThread;
 import org.gradle.needle.util.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
@@ -102,7 +103,8 @@ public class UDPDataClient {
 			new Thread(new DevMainDataThread()).start();
 			new Thread(new DevFaultDataThread()).start();
 			new Thread(new DevAlarmDataThread()).start();
-			new Thread(new DevComStateThread()).start();	
+			new Thread(new DevComStateThread()).start();
+			new Thread(new DevStateDataThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,6 +174,17 @@ public class UDPDataClient {
 			e.printStackTrace();
 		}
 		//logger.info("已发送组播警告数据： " + de.genDevAlarmData());
+	}
+	
+/*
+ * 发送 DevStateData
+ */
+	public static void sendDevStateData() {
+		try {
+			multicast.send(de.genDevStateData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 /*
