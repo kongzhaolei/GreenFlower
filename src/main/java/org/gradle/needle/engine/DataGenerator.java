@@ -75,6 +75,7 @@ public class DataGenerator {
 	 */
 	public String genWarnLog() {
 		String warnlog = "";
+		
 		return warnlog;
 	}
 
