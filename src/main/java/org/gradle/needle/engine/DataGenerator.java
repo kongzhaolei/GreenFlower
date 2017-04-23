@@ -1,6 +1,8 @@
 package org.gradle.needle.engine;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,8 +76,9 @@ public class DataGenerator {
 	 * ¸æ¾¯ÈÕÖ¾
 	 */
 	public String genWarnLog() {
-		String warnlog = "";
-		
+		String systemid = Integer.toString(df.ranInteger(0, 4));
+		String levelid = Integer.toString(df.ranInteger(0, 3));
+		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		return warnlog;
 	}
 
