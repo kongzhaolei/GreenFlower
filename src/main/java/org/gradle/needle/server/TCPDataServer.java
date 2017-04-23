@@ -20,30 +20,33 @@ import io.netty.handler.codec.string.StringEncoder;
  * 
  */
 public class TCPDataServer {
-	private static int protocolid = Integer.parseInt(GlobalSettings
-			.getProperty("protocolid"));
+	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 	private int port;
 	private String host;
-	
+
 	public TCPDataServer(String host, int port) {
 		this.port = port;
 		this.host = host;
 	}
 
 	/***
-	 * 根据风机IP配置，扩展多台风机模拟服务
-	 * 
-	 * @param args
-	 * @throws Exception
+	 * 定时器启动
+	 * 风机TCP启动
 	 */
-	public static void main(String[] args) throws Exception {
-
-		String host = GlobalSettings.getProperty("host");
-		VTimer.timerStart();
-		//默认端口1120
-		new TCPDataServer(host, 1120).serverStart();
+	public void Start() {
+		try {
+			VTimer.timerStart();
+			run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * 风机协议
+	 * 
+	 * @return
+	 */
 	public static int getProcolid() {
 		return protocolid;
 	}
@@ -51,7 +54,7 @@ public class TCPDataServer {
 	/**
 	 * 服务端启动
 	 */
-	public void serverStart() {
+	public void run() {
 		// EventLoopGroup是用来处理IO操作的多线程事件循环器
 		// bossGroup 用来接收客户端的连接，workerGroup 用来处理已经被接收的连接
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
@@ -59,22 +62,16 @@ public class TCPDataServer {
 
 		try {
 			// NIO 服务的辅助启动类
-			ServerBootstrap sbs = new ServerBootstrap()
-					.group(bossGroup, workerGroup)
-					.channel(NioServerSocketChannel.class)
-					.childHandler(new ChannelInitializer<SocketChannel>() {
+			ServerBootstrap sbs = new ServerBootstrap().group(bossGroup, workerGroup)
+					.channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<SocketChannel>() {
 
 						protected void initChannel(SocketChannel ch) {
-							ch.pipeline().addLast("decoder",
-									new StringDecoder());
-							ch.pipeline().addLast("encoder",
-									new StringEncoder());
-							ch.pipeline().addLast(
-									new TCPDataServerHandler(protocolid));
+							ch.pipeline().addLast("decoder", new StringDecoder());
+							ch.pipeline().addLast("encoder", new StringEncoder());
+							ch.pipeline().addLast(new TCPDataServerHandler(protocolid));
 
 						};
-					}).option(ChannelOption.SO_BACKLOG, 128)
-					.childOption(ChannelOption.SO_KEEPALIVE, true);
+					}).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
 
 			// 绑定端口，开始接收进来的连接
 			ChannelFuture future = sbs.bind(host, port).sync();

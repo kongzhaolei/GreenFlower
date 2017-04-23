@@ -199,4 +199,15 @@ public class UDPDataClient {
 		//logger.info("已发送组播通信状态数据： " + de.genDevComState());
 	}
 	
+/*
+ * 发送DevWarnLog
+ */
+	public static void sendDevWarnLog() {
+		try {
+			multicast.send(de.genDevWarnLog().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

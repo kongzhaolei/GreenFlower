@@ -13,8 +13,6 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.util.VTimer;
 
-import sun.awt.windows.WFontConfiguration;
-
 /***
  * 
  * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志 2.
