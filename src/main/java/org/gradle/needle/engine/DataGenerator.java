@@ -1,6 +1,8 @@
 package org.gradle.needle.engine;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +13,12 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.util.VTimer;
 
+import sun.awt.windows.WFontConfiguration;
+
 /***
  * 
- * @author kongzhaolei 数据模拟引擎类
- *  1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志
- *  2. 支持模拟历史瞬态数据，分钟数据(10,5,1)，功率曲线数据，历史沉积数据，变位数据
+ * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志 2.
+ *         支持模拟历史瞬态数据，分钟数据(10,5,1)，功率曲线数据，历史沉积数据，变位数据
  */
 public class DataGenerator {
 
@@ -71,11 +74,21 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 告警日志
+	 * 组播告警日志
 	 */
-	public String genWarnLog() {
-		String warnlog = "";
-		
+	public StringBuilder genDevWarnLog() {
+		StringBuilder warnlog = new StringBuilder();
+		String systemid = "03"; // 暂时只模拟功率控制
+		String levelid = Integer.toString(df.ranInteger(0, 3));  // 0 提示、1 警告、2 故障
+		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
+		int wfid = df.getWfid();
+		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
+		String logcode = "@DisplayAllRealTimeData3377";
+		String warnid = df.ranString(16) + "-" + systemid + "003645";
+		int flag = df.ranCoin();
+		warnlog = warnlog.append("(warnlog|").append(systemid).append("|").append(levelid).append("|").append(rectime)
+				.append("|").append(wfid).append("|").append(objectid).append("|").append(logcode).append("|")
+				.append(warnid).append("|").append(flag).append(")");
 		return warnlog;
 	}
 
@@ -171,15 +184,14 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 定时器刷新风机状态
-	 * 支持故障逻辑
+	 * 定时器刷新风机状态 支持故障逻辑
 	 */
 	public String genStateData() {
 		String status = null;
 		List<String> lists = new ArrayList<String>();
 		int n = VTimer.getStatusNum(); // 风机状态时钟计数器
 		try {
-			if (genFaultTree()!= "0") {     //故障，风机停机
+			if (genFaultTree() != "0") { // 故障，风机停机
 				status = "2";
 			} else {
 				for (Pathdescr pathdescr : df.getStatusList()) {
@@ -190,7 +202,7 @@ public class DataGenerator {
 				} else {
 					status = "5";
 				}
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -202,7 +214,7 @@ public class DataGenerator {
 	 */
 	public String genDevStateData() {
 		return "(statedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genStateData()
-		+ ")";
+				+ ")";
 	}
 
 	/**
@@ -228,9 +240,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 风机故障树，初始无故障
-	 * 定时器频率模拟5个故障，之后恢复
-	 * faultsign  true 无故障；false：故障
+	 * 风机故障树，初始无故障 定时器频率模拟5个故障，之后恢复 faultsign true 无故障；false：故障
 	 */
 	public String genFaultTree() {
 		String faulttree = "";
@@ -264,15 +274,13 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 风机警告树，初始化无警告 
-	 * 定时器频率模拟3个警告，之后恢复
-	 * alarmsign
+	 * 风机警告树，初始化无警告 定时器频率模拟3个警告，之后恢复 alarmsign
 	 */
 	public String genAlarmTree() {
 		String alarmtree = "";
 		List<String> lists = new ArrayList<String>();
 		boolean alarmsign = VTimer.getAlarmSign();
-		
+
 		try {
 			if (alarmsign == true) {
 				alarmtree = "0";
@@ -284,7 +292,7 @@ public class DataGenerator {
 					alarmtree += lists.remove((int) (Math.random() * lists.size())) + ";";
 				}
 				alarmtree = alarmtree.substring(0, alarmtree.length() - 1);
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

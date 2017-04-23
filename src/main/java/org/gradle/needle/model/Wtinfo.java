@@ -3,6 +3,7 @@ package org.gradle.needle.model;
 public class Wtinfo {
 
 	private Integer protocolid;
+	private Integer wfid;
 	private Integer wtid;
 	private String wtname;
 
@@ -12,6 +13,10 @@ public class Wtinfo {
 
 	public void setProtocolid(int protocolid) {
 		this.protocolid = protocolid;
+	}
+	
+	public Integer getWfid() {
+		return wfid;
 	}
 
 	public Integer getWtid() {
