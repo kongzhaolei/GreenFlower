@@ -170,6 +170,13 @@ public class DataDefined {
 		List<Prodata> list = mapper.selectProdata(prodata);
 		return list;
 	}
+	
+	/**
+	 * 获取单风场编号
+	 */
+    public Integer getWfid() {
+		return getWtinfo().get(0).getWfid();
+	}
 
 	/**
 	 * 获取风机编号list<wtid>
@@ -328,7 +335,7 @@ public class DataDefined {
 	/**
 	 * 生成随机字符串的方法
 	 */
-	public static String ranString(int length) {
+	public String ranString(int length) {
 		String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		StringBuffer sb = new StringBuffer();
 		Random random = new Random();
