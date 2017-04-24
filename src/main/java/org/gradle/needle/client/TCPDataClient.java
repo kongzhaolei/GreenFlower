@@ -27,9 +27,8 @@ public class TCPDataClient {
 		// 配置客户端
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
-			Bootstrap b = new Bootstrap();
-			b.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
-					.handler(new ChannelInitializer<SocketChannel>() {
+			Bootstrap bs = new Bootstrap().group(group).channel(NioSocketChannel.class)
+					.option(ChannelOption.TCP_NODELAY, true).handler(new ChannelInitializer<SocketChannel>() {
 
 						@Override
 						public void initChannel(SocketChannel ch) throws Exception {
@@ -39,7 +38,7 @@ public class TCPDataClient {
 							p.addLast(new TCPDataClientHandler());
 						}
 					});
-			ChannelFuture future = b.connect(HOST, PORT).sync();
+			ChannelFuture future = bs.connect(HOST, PORT).sync();
 			future.channel().writeAndFlush("一个netty客户端的自白");
 			future.channel().close().sync();
 		} catch (Exception e) {

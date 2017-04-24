@@ -30,8 +30,7 @@ public class TCPDataServer {
 	}
 
 	/***
-	 * 定时器启动
-	 * 风机TCP启动
+	 * 定时器启动 风机TCP启动
 	 */
 	public void Start() {
 		try {
@@ -78,6 +77,8 @@ public class TCPDataServer {
 			System.out.println("服务器监听于： " + host + ":" + port);
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
