@@ -13,39 +13,43 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 public class TCPDataClient {
-	
-	static final String HOST = System.getProperty("host", "127.0.0.1");
-	static final int PORT = Integer.parseInt(System.getProperty("port", "8080"));
-	static final int SIZE = Integer.parseInt(System.getProperty("size", "256"));
-	
-	public static void main(String[] args) throws Exception {
-		
-		//配置客户端
+
+	private static String HOST;
+	private static int PORT;
+
+	public TCPDataClient(String host, int port) {
+		TCPDataClient.HOST = host;
+		TCPDataClient.PORT = port;
+	}
+
+	public void GeneratorStart() {
+
+		// 配置客户端
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			Bootstrap b = new Bootstrap();
-			b.group(group)
-			.channel(NioSocketChannel.class)
-			.option(ChannelOption.TCP_NODELAY, true)
-			.handler(new ChannelInitializer<SocketChannel>() {
-				
-				@Override
-				public void initChannel(SocketChannel ch) throws Exception{
-					ChannelPipeline p = ch.pipeline();
-					p.addLast("decoder", new StringDecoder());
-					p.addLast("encoder", new StringEncoder());
-					p.addLast(new TCPDataClientHandler());
-				}
-			});
+			b.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
+					.handler(new ChannelInitializer<SocketChannel>() {
+
+						@Override
+						public void initChannel(SocketChannel ch) throws Exception {
+							ChannelPipeline p = ch.pipeline();
+							p.addLast("decoder", new StringDecoder());
+							p.addLast("encoder", new StringEncoder());
+							p.addLast(new TCPDataClientHandler());
+						}
+					});
 			ChannelFuture future = b.connect(HOST, PORT).sync();
-			for(int i = 0; i < 8; i++){
+			for (int i = 0; i < 8; i++) {
 				Thread.sleep(900);
-			    future.channel().writeAndFlush("一个netty客户端的自白");
+				future.channel().writeAndFlush("一个netty客户端的自白");
 			}
 			future.channel().close().sync();
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			group.shutdownGracefully();
-		}	
+		}
 	}
 
 }

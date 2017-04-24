@@ -125,7 +125,7 @@ public class DataDefined {
 	}
 	
 	/**
-	 * 获取特定数据集
+	 * 获取propaths的特定数据集
 	 */
 	public List<Propaths> getTypicalPropaths(String type) {
 		return null;

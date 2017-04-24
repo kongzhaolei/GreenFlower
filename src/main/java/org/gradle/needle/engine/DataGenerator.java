@@ -13,8 +13,6 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.util.VTimer;
 
-import jnr.ffi.Struct.int16_t;
-
 /***
  * 
  * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志 2.
@@ -57,7 +55,7 @@ public class DataGenerator {
 			if (!df.getAllPropaths().isEmpty()) {
 				for (Propaths propaths : df.getTypicalPropaths(type)) {
 					if (alldatamap.containsKey(propaths.getIecpath())) {
-							sReturn += alldatamap.get(propaths.getIecpath()) + ",";
+						sReturn += alldatamap.get(propaths.getIecpath()) + ",";
 					} else {
 						continue;
 					}
@@ -124,7 +122,8 @@ public class DataGenerator {
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
 		String systemid = "03"; // 暂时只模拟功率控制
-		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2 故障
+		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2
+																// 故障
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = df.getWfid();
 		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
