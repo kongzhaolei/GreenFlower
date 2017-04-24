@@ -9,7 +9,7 @@ import org.gradle.needle.multicast.Multicast;
 import org.gradle.needle.thread.DevAlarmDataThread;
 import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
-import org.gradle.needle.thread.DevMainDataThread;
+import org.gradle.needle.thread.DevWmanDataThread;
 import org.gradle.needle.thread.DevStateDataThread;
 import org.gradle.needle.util.GlobalSettings;
 
@@ -100,7 +100,7 @@ public class UDPDataClient {
 		try {
 			multicast =  new Multicast(multicastIP, multicastPort);
 			logger.info(multicastIP + ":" + multicastPort + " 组播服务已启动...");
-			new Thread(new DevMainDataThread()).start();
+			new Thread(new DevWmanDataThread()).start();
 			new Thread(new DevFaultDataThread()).start();
 			new Thread(new DevAlarmDataThread()).start();
 			new Thread(new DevComStateThread()).start();
@@ -126,7 +126,7 @@ public class UDPDataClient {
 
 			// 向服务端传递UDP消息
 			channel.writeAndFlush(
-					new DatagramPacket(Unpooled.copiedBuffer("msg",
+					new DatagramPacket(Unpooled.copiedBuffer(de.genDevWmanData(),
 							CharsetUtil.UTF_8), new InetSocketAddress(
 									singleIP, singlePort))).sync();
 			logger.info("消息已发送...");
@@ -141,11 +141,11 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevMainData
+ * 发送 DevWmanData
  */
-	public static void sendDevMainData() {
+	public static void sendDevWmanData() {
 		try {
-			multicast.send(de.genDevMainData());
+			multicast.send(de.genDevWmanData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

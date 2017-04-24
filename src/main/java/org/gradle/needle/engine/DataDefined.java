@@ -103,7 +103,7 @@ public class DataDefined {
 	}
 	
 	/**
-	 * 获取维度数据的propaths表典型维数据集(protocolid, cmdname)
+	 * 获取propaths表 cmd 数据集(protocolid, cmdname)
 	 */
 	public List<Propaths> getCmdPropaths() {
 		List<Propaths> pack_list = new ArrayList<>();
@@ -123,6 +123,14 @@ public class DataDefined {
 		}
 		return pack_list;
 	}
+	
+	/**
+	 * 获取特定数据集
+	 */
+	public List<Propaths> getTypicalPropaths(String type) {
+		return null;
+		
+	}
 
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
@@ -138,7 +146,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * 获取维度数据的prodata表典型维数据集(protocolid, cmdname)
+	 * 获取prodata表典型维数据集(protocolid, cmdname)
 	 */
 	public List<Prodata> getCmdProData() {
 		List<Prodata> pack_list = new ArrayList<>();

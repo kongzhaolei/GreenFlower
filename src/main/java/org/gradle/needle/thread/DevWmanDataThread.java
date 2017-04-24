@@ -3,15 +3,15 @@ package org.gradle.needle.thread;
 import org.apache.log4j.Logger;
 import org.gradle.needle.client.UDPDataClient;
 
-public class DevMainDataThread implements Runnable{
+public class DevWmanDataThread implements Runnable{
 	
-	private static Logger logger = Logger.getLogger(DevMainDataThread.class.getName());
+	private static Logger logger = Logger.getLogger(DevWmanDataThread.class.getName());
 
 	@Override
 	public void run() {
 		while(UDPDataClient.is_multicast){
 			try {
-				UDPDataClient.sendDevMainData();
+				UDPDataClient.sendDevWmanData();
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage());
 			}

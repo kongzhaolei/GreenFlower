@@ -13,6 +13,8 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.util.VTimer;
 
+import jnr.ffi.Struct.int16_t;
+
 /***
  * 
  * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志 2.
@@ -23,7 +25,6 @@ public class DataGenerator {
 	private int protocolid;
 	private String cmdname;
 	private DataDefined df;
-	private static String sFaultString = "0";
 	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
 
 	/*
@@ -44,26 +45,24 @@ public class DataGenerator {
 	}
 
 	/**
-	 * wman 数据引擎
+	 * 统一数据引擎
 	 */
-	public String genDevMainData() {
+	public String gevDevDataEngine(String type) {
 		String sReturn = null;
-		Map<String, String> maindatamap = new HashMap<String, String>();
+		Map<String, String> alldatamap = new HashMap<String, String>();
 		try {
 			for (Prodata prodata : df.getAllProData()) {
-				maindatamap.put(prodata.getIecpath().trim(), df.getDynamicValue(prodata));
+				alldatamap.put(prodata.getIecpath().trim(), df.getDynamicValue(prodata));
 			}
 			if (!df.getAllPropaths().isEmpty()) {
-				for (Propaths propaths : df.getAllPropaths()) {
-					if (maindatamap.containsKey(propaths.getIecpath()) & propaths.getTranstype().intValue() == 1) { // initValue()：以int类型返回integer的值
-						sReturn += maindatamap.get(propaths.getIecpath()) + ",";
+				for (Propaths propaths : df.getTypicalPropaths(type)) {
+					if (alldatamap.containsKey(propaths.getIecpath())) {
+							sReturn += alldatamap.get(propaths.getIecpath()) + ",";
 					} else {
 						continue;
 					}
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				sReturn = "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + sReturn
-						+ ")";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,12 +71,60 @@ public class DataGenerator {
 	}
 
 	/**
+	 * 历史瞬态数据 realtimedata
+	 */
+	public String genDevRealTimeData() {
+		return "(realtimedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("realtimedata") + ")";
+	}
+
+	/**
+	 * 十分钟数据 tendata
+	 */
+	public String genDevTenData() {
+		return "(tendata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("tendata") + ")";
+	}
+
+	/**
+	 * 一分钟数据 one
+	 */
+	public String genDevOne() {
+		return "(one|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("one") + ")";
+	}
+
+	/**
+	 * 变位数据 changesave
+	 */
+	public String genDevChangeSave() {
+		return "(changesave|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("changesave") + ")";
+	}
+
+	/**
+	 * 功率曲线 powercurve
+	 */
+	public String genDevPowerCurve() {
+		return "(powercurve|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("powercurve") + ")";
+	}
+
+	/**
+	 * 组播 wman 数据
+	 */
+	public String genDevWmanData() {
+		return "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("wman") + ")";
+	}
+
+	/**
 	 * 组播告警日志
 	 */
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
 		String systemid = "03"; // 暂时只模拟功率控制
-		String levelid = Integer.toString(df.ranInteger(0, 3));  // 0 提示、1 警告、2 故障
+		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2 故障
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = df.getWfid();
 		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
@@ -91,6 +138,13 @@ public class DataGenerator {
 	}
 
 	/**
+	 * 系统告警结束
+	 */
+	public String genDevWarnEnd() {
+		return "";
+	}
+
+	/**
 	 * 风机元数据
 	 * 
 	 * @return
@@ -101,8 +155,7 @@ public class DataGenerator {
 		Map<String, String> varpathMap = new HashMap<String, String>();
 		try {
 			if ("GETCURRENTERROR".equals(cmdname)) {
-				sReturn = sFaultString;
-				logger.info("已发送故障号" + sFaultString);
+				sReturn = genMainFault();
 			} else {
 				for (Prodata pda : df.getCmdProData()) {
 					varpathMap.put(pda.getIecpath().trim(), df.getDynamicValue(pda));
