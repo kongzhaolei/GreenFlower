@@ -40,10 +40,7 @@ public class TCPDataClient {
 						}
 					});
 			ChannelFuture future = b.connect(HOST, PORT).sync();
-			for (int i = 0; i < 8; i++) {
-				Thread.sleep(900);
-				future.channel().writeAndFlush("一个netty客户端的自白");
-			}
+			future.channel().writeAndFlush("一个netty客户端的自白");
 			future.channel().close().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
