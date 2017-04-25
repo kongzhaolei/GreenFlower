@@ -51,7 +51,6 @@ public class TCPDataClient {
 				future.channel().writeAndFlush(de.genDevChangeSave());
 				future.channel().writeAndFlush(de.genDevPowerCurve());
 				future.channel().writeAndFlush(de.genDevWarnLog());
-				
 				future.channel().close().sync();
 			}
 			
