@@ -11,8 +11,6 @@ public class VTimer {
 	private static int stop_list_n = -1;
 	private static int limit_list_n = -1;
 	private static int status_list_n = -1;
-	private static boolean falutsign = false;
-	private static boolean alarmsign = false;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
     /*
 	 * 停机模式字序列号
@@ -33,20 +31,6 @@ public class VTimer {
 	 */
 	public static int getStatusNum() {
 		return status_list_n;
-	}
-	
-	/*
-	 * 风机故障切换信号
-	 */
-	public static boolean getFaultSign() {
-		return falutsign;
-	}
-	
-	/*
-	 * 风机警告切换信号
-	 */
-	public static boolean getAlarmSign() {
-		return alarmsign;
 	}
 	
 	/**
@@ -72,12 +56,6 @@ public class VTimer {
 				}
 				if (status_list_n > status_size-1) {
 					status_list_n = 0;
-				}
-				if (falutsign) {
-					falutsign = !falutsign;
-				}
-				if (alarmsign) {
-					alarmsign = !alarmsign;
 				}
 			}
 		};

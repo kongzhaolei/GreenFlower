@@ -11,7 +11,7 @@ public class DevFaultDataThread implements Runnable{
 	public void run() {
 		while (UDPDataClient.is_multicast){
 			try {
-				Thread.sleep(80000);
+				Thread.sleep(6000);
 				UDPDataClient.sendDevFaultData();
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage());

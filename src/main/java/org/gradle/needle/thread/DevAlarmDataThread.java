@@ -11,7 +11,7 @@ public class DevAlarmDataThread implements Runnable{
 	public void run() {
 		try {
 			while (UDPDataClient.is_multicast) {
-				Thread.sleep(70000);
+				Thread.sleep(6000);
 				UDPDataClient.sendDevAlarmData();
 			}
 		} catch (Exception e) {

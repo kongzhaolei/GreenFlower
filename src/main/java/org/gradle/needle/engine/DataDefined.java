@@ -408,7 +408,7 @@ public class DataDefined {
 	/**
 	 * 生成一个随机的布尔值的方法
 	 */
-	public static boolean ranBoolean() {
+	public boolean ranBoolean() {
 		Random x = new Random();
 		return x.nextBoolean();
 	}

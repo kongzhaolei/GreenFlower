@@ -11,6 +11,7 @@ import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
 import org.gradle.needle.thread.DevWmanDataThread;
 import org.gradle.needle.thread.DevStateDataThread;
+import org.gradle.needle.thread.DevWarnLogThread;
 import org.gradle.needle.util.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
@@ -105,6 +106,7 @@ public class UDPDataClient {
 			new Thread(new DevAlarmDataThread()).start();
 			new Thread(new DevComStateThread()).start();
 			new Thread(new DevStateDataThread()).start();
+			new Thread(new DevWarnLogThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,7 +151,7 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// logger.info("已发送组播主轮询数据：" + de.genDevWmanData());
+		// logger.info("已组播主轮询数据：" + de.genDevWmanData());
 	}
 	
 /*
@@ -161,7 +163,7 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//logger.info("已发送组播故障数据：" + de.genDevFaultData());
+		logger.info("已组播故障数据：" + de.genDevFaultData());
 	}
 	
 /*
@@ -173,7 +175,7 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//logger.info("已发送组播警告数据： " + de.genDevAlarmData());
+		logger.info("已组播警告数据： " + de.genDevAlarmData());
 	}
 	
 /*
@@ -185,6 +187,7 @@ public class UDPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("已组播风机状态： " + de.genDevStateData());
 	}
 	
 /*
@@ -196,7 +199,7 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//logger.info("已发送组播通信状态数据： " + de.genDevComState());
+		logger.info("已组播通信状态数据： " + de.genDevComState());
 	}
 	
 /*
@@ -208,6 +211,7 @@ public class UDPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("已组播告警日志：" + de.genDevWarnLog().toString());
 	}
 	
 }

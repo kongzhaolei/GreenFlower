@@ -122,8 +122,8 @@ public class DataGenerator {
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
 		String systemid = "03"; // 暂时只模拟功率控制
-		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2
-																// 故障
+		// 0 提示、1 警告、2 故障
+		String levelid = Integer.toString(df.ranInteger(0, 3));
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = df.getWfid();
 		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
@@ -295,9 +295,9 @@ public class DataGenerator {
 	public String genFaultTree() {
 		String faulttree = "";
 		List<String> lists = new ArrayList<String>();
-		boolean faultsign = VTimer.getFaultSign();
+		boolean faultsign = df.ranBoolean();
 		try {
-			if (faultsign == true) {
+			if (faultsign == false) {
 				faulttree = "0";
 			} else {
 				for (Pathdescr pathdescr : df.getFaultList()) {
@@ -329,10 +329,10 @@ public class DataGenerator {
 	public String genAlarmTree() {
 		String alarmtree = "";
 		List<String> lists = new ArrayList<String>();
-		boolean alarmsign = VTimer.getAlarmSign();
+		boolean alarmsign = df.ranBoolean();
 
 		try {
-			if (alarmsign == true) {
+			if (alarmsign == false) {
 				alarmtree = "0";
 			} else {
 				for (Pathdescr pathdescr : df.getAlarmList()) {
