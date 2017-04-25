@@ -19,8 +19,6 @@ import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.GlobalSettings;
 
-import com.kenai.jffi.Array;
-
 import org.gradle.needle.util.DBFactory.DBEnvironment;
 
 /***
