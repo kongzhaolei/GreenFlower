@@ -10,7 +10,7 @@ public class DevStateDataThread implements Runnable {
 	public void run() {
 		try {
 			while (UDPDataClient.is_multicast) {
-				Thread.sleep(60000);
+				Thread.sleep(600000);
 				UDPDataClient.sendDevStateData();
 			}
 		} catch (Exception e) {
