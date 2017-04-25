@@ -130,34 +130,34 @@ public class DataDefined {
 	 * 获取propaths的特定数据集
 	 */
 	public List<Propaths> getTypicalPropaths(String type) {
-		List<Propaths> pack_list = new ArrayList<>();
+		List<Propaths> pps_list = new ArrayList<>();
 		try {
 			switch (type) {
 			case "wman":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 1) {
-						pack_list.add(pps);
+						pps_list.add(pps);
 					}
 				}
 				break;
 			case "tendata":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 2) {
-						pack_list.add(pps);
+						pps_list.add(pps);
 					}
 				}
 				break;
 			case "changesave":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() < 2 & pps.getChangesave().intValue() == 1) {
-						pack_list.add(pps);
+						pps_list.add(pps);
 					}
 				}
 				break;
 			case "realtimedata":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 1 & pps.getBsave().intValue() == 1) {
-						pack_list.add(pps);
+						pps_list.add(pps);
 					}
 				}
 				break;
@@ -165,7 +165,7 @@ public class DataDefined {
 				String[] iec = { "WTUR.WSpd.Ra.F32[AVG]", "WTUR.PwrAt.Ra.F32[AVG]", "WTUR.Temp.Ra.F32[AVG]" };
 				for (Propaths pps : getAllPropaths()) {
 					if (Arrays.asList(iec).contains(pps.getIecpath().trim())) {
-						pack_list.add(pps);
+						pps_list.add(pps);
 					}
 				}
 				break;
@@ -176,7 +176,7 @@ public class DataDefined {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return pack_list;
+		return pps_list;
 	}
 
 	/**

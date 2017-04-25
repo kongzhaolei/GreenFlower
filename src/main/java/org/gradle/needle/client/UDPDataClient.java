@@ -149,7 +149,7 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//logger.info("已发送组播主轮询数据：" + de.genDevMainData());
+		// logger.info("已发送组播主轮询数据：" + de.genDevWmanData());
 	}
 	
 /*

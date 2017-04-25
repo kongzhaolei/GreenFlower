@@ -16,7 +16,9 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/Data.mdb" />
+				<!-- property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/Data.mdb" /-->
+				<property name="url" value="jdbc:ucanaccess://D:/RealtimeTool/Data.mdb" />
+				
 			</dataSource>
 		</environment>
 		
@@ -24,7 +26,8 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/config.mdb" />
+				<!--  property name="url" value="jdbc:ucanaccess:///opt/needle/realtime/config.mdb" /-->
+				<property name="url" value="jdbc:ucanaccess://D:/RealtimeTool/config.mdb" />
 			</dataSource>
 		</environment>
 		

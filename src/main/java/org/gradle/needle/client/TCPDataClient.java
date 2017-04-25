@@ -30,7 +30,6 @@ public class TCPDataClient {
 	}
 
 	public void GeneratorStart() {
-
 		// 配置客户端
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
@@ -42,13 +41,20 @@ public class TCPDataClient {
 							ChannelPipeline p = ch.pipeline();
 							p.addLast("decoder", new StringDecoder());
 							p.addLast("encoder", new StringEncoder());
-							p.addLast(new TCPDataClientHandler());
 						}
 					});
 			ChannelFuture future = bs.connect(HOST, PORT).sync();
 			logger.info("已连接到" + HOST + ":" + PORT);
-			future.channel().writeAndFlush(de.genDevWarnLog());
-			future.channel().close().sync();
+			while (true) {
+				future.channel().writeAndFlush(de.genDevTenData());
+				future.channel().writeAndFlush(de.genDevRealTimeData());
+				future.channel().writeAndFlush(de.genDevChangeSave());
+				future.channel().writeAndFlush(de.genDevPowerCurve());
+				future.channel().writeAndFlush(de.genDevWarnLog());
+				
+				future.channel().close().sync();
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
