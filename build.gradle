@@ -13,16 +13,18 @@ repositories {
 	mavenCentral() 
 }
 
-jar {
-	baseName = 'GreenFlower'
-	version = '1.2'
-	mainfest {
-		attributes 'Main-Clas' : 'DataDispGhost.class'
-		
-	}
-}
-
 dependencies {
 	compile fileTree(dir: 'libs', include: '*.jar')  // 依赖本地库libs
 	compile group: 'io.netty', name: 'netty-all', version: '4.1.6.Final'
+}
+
+//可执行包
+task runnbaleJar(type: Jar) {
+	 from files(sourceSets.main.output.classesDir)
+	 from configurations.runtime.asFileTree.files.collect { zipTree(it) }
+	 manifest {
+		attributes "Implementation-Title": 'GreenFlower'
+		attributes "Implementation-Version": '1.3'
+		attributes 'Main-Class': 'org.gradle.DataDispGhost'
+	}
 }
