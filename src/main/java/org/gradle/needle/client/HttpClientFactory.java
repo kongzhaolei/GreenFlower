@@ -33,6 +33,7 @@ import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -65,7 +66,7 @@ public class HttpClientFactory {
 	 * 
 	 * @return CloseableHttpClient
 	 */
-	private static CloseableHttpClient getHttpClient() {
+	private static CloseableHttpClient getSSLHttpClient() {
 		RegistryBuilder<ConnectionSocketFactory> registryBuilder = RegistryBuilder.<ConnectionSocketFactory>create();
 		ConnectionSocketFactory plainSF = new PlainConnectionSocketFactory();
 		registryBuilder.register("http", plainSF);
@@ -132,8 +133,8 @@ public class HttpClientFactory {
 	 */
 	private static String httpPostWay(String url, Map<String, String> header, Map<String, String> body) {
 
-		// httpclient = HttpClients.createDefault();
-		httpclient = getHttpClient();
+		httpclient = HttpClients.createDefault();
+		// httpclient = getSSLHttpClient();
 		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 

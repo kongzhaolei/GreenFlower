@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="HttpServiceTestsuit" parallel="none">
-  <test name="HttpServiceTest">
-    <classes>
-      <class name = "org.gradle.WebAPI"/>
-    </classes>
-  </test>  
-</suite>  
