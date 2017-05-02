@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+mainClassName = "org.gradle.DataDispGhost"
 
 eclipse {
 	classpath {
@@ -19,12 +20,12 @@ dependencies {
 }
 
 //¿ÉÖ´ÐÐ°ü
-task runnbaleJar(type: Jar) {
+task runjar(type: Jar) {
 	 from files(sourceSets.main.output.classesDir)
 	 from configurations.runtime.asFileTree.files.collect { zipTree(it) }
 	 manifest {
-		attributes "Implementation-Title": 'GreenFlower'
-		attributes "Implementation-Version": '1.3'
+		attributes "Implementation-Title": "greenflower"
+        attributes "Implementation-Version": 1.3
 		attributes 'Main-Class': 'org.gradle.DataDispGhost'
 	}
 }
