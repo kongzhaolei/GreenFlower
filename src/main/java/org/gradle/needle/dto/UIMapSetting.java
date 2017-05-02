@@ -1,4 +1,4 @@
-package org.gradle.needle.util;
+package org.gradle.needle.dto;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

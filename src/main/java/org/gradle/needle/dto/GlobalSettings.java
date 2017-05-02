@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.gradle.needle.util;
+package org.gradle.needle.dto;
 
 import java.io.InputStream;
 import java.util.Properties;

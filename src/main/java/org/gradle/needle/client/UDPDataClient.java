@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.engine.DataGenerator;
 import org.gradle.needle.multicast.Multicast;
 import org.gradle.needle.thread.DevAlarmDataThread;
@@ -12,7 +13,6 @@ import org.gradle.needle.thread.DevFaultDataThread;
 import org.gradle.needle.thread.DevWmanDataThread;
 import org.gradle.needle.thread.DevStateDataThread;
 import org.gradle.needle.thread.DevWarnLogThread;
-import org.gradle.needle.util.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;

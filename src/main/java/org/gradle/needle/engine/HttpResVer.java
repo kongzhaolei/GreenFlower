@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.util.GlobalSettings;
 
 public class HttpResVer {
 	private static Logger logger = Logger.getLogger(HttpResVer.class.getName());

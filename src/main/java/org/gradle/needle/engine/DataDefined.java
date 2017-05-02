@@ -12,13 +12,12 @@ import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
-import org.gradle.needle.util.GlobalSettings;
-
 import org.gradle.needle.util.DBFactory.DBEnvironment;
 
 /***

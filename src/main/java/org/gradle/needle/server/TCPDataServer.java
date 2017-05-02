@@ -1,6 +1,6 @@
 package org.gradle.needle.server;
 
-import org.gradle.needle.util.GlobalSettings;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 
 import io.netty.bootstrap.ServerBootstrap;

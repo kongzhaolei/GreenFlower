@@ -1,8 +1,8 @@
 package org.gradle.needle.client;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.engine.DataGenerator;
-import org.gradle.needle.util.GlobalSettings;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
