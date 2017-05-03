@@ -133,8 +133,8 @@ public class HttpClientFactory {
 	 */
 	private static String httpPostWay(String url, Map<String, String> header, Map<String, String> body) {
 
-		httpclient = HttpClients.createDefault();
-		// httpclient = getSSLHttpClient();
+		//httpclient = HttpClients.createDefault();
+		httpclient = getSSLHttpClient();
 		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 

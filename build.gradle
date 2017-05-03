@@ -17,7 +17,7 @@ repositories {
 dependencies {
 	compile fileTree(dir: 'libs', include: '*.jar')  // 依赖本地库libs
 	compile group: 'io.netty', name: 'netty-all', version: '4.1.6.Final'
-	compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.13'
+	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.31'
 }
 
 //可执行包
