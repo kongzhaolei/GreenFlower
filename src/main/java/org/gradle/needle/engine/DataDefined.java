@@ -259,6 +259,11 @@ public class DataDefined {
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
+	
+	/**
+	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
+	 * 获取config库runlogcode表典型维数据集
+	 */
 
 	/**
 	 * 根据前置的GWSOCKET命令获取对应的compath
