@@ -38,8 +38,10 @@ public class HttpResVer {
 		Map<String, JsonObject> modeldata = JsonUtils.phareData(res);
 		int sum = 0;
 		for (String key : modeldata.keySet()) {
-			JsonObject single = modeldata.get(key);
-			sum = sum + single.get(keyword).getAsInt();
+			JsonObject singlewt = modeldata.get(key);
+		    JsonObject count = singlewt.getAsJsonObject(keyword);
+		    
+			sum = sum + count.get("1").getAsInt();
 
 		}
 	}
