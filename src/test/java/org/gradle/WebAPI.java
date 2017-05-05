@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.client.HttpClientFactory;
 import org.gradle.needle.engine.HttpReqGen;
 import org.gradle.needle.util.ExcelDataUtils;
-import org.gradle.needle.verify.HttpResVer;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -38,8 +37,8 @@ public class WebAPI {
 		String response = HttpClientFactory.invokeServiceMethod(call_type, url, header, body);
 		logger.info(response);
 		try {
-			HttpResVer.saveResponse("Output", testid, response);
-			HttpResVer.ParserAndCompare(testid, "Baseline", response, "Comparision");
+			ExcelDataUtils.saveResponse("Output", testid, response);
+			ExcelDataUtils.ParserAndCompare(testid, "Baseline", response, "Comparision");
 			assertThat(response).containsSequence("{","ModelData","140802016");
 		} catch (Exception e) {
 			e.printStackTrace();
