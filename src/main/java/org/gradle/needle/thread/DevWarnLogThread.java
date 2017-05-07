@@ -10,7 +10,7 @@ public class DevWarnLogThread implements Runnable{
 	public void run() {
 		try {
 			while (UDPDataClient.is_multicast) {
-				Thread.sleep(30000);
+				//Thread.sleep(30000);
 				UDPDataClient.sendDevWarnLog();
 			}
 		} catch (Exception e) {

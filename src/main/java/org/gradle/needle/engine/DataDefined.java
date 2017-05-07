@@ -16,6 +16,7 @@ import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
+import org.gradle.needle.model.Runlogcode;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
@@ -261,9 +262,33 @@ public class DataDefined {
 	}
 	
 	/**
+	 * 获取code list<code> 
+	 * @systemid
+	 */
+	public List<String> getLogCodeList(int systemid) {
+		List<String> lists = new ArrayList<String>();
+		try {
+			for (Runlogcode runlogcode : getRunLogCode(systemid)) {
+				lists.add(runlogcode.getCode());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+	
+	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库runlogcode表典型维数据集
 	 */
+	public List<Runlogcode> getRunLogCode(int systemid) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Runlogcode runlogcode = new Runlogcode();
+		runlogcode.setSystemid(systemid);
+		List<Runlogcode> list = mapper.selectRunlogcode(runlogcode);
+		return list;
+	}
 
 	/**
 	 * 根据前置的GWSOCKET命令获取对应的compath

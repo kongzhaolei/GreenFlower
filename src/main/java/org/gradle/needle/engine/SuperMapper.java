@@ -5,6 +5,7 @@ import java.util.List;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
+import org.gradle.needle.model.Runlogcode;
 import org.gradle.needle.model.Wtinfo;
 /**
  * 
@@ -25,5 +26,7 @@ public interface SuperMapper {
 	public List<Pathdescr> selectPathdescr(Pathdescr descr);
 	
 	public List<Wtinfo> selectWtinfo(Wtinfo wtinfo);
+	
+	public List<Runlogcode> selectRunlogcode(Runlogcode runlogcode);
  
 }

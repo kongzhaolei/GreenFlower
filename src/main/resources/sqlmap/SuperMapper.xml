@@ -28,5 +28,12 @@
         <![CDATA[
  SELECT * FROM wtinfo WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC
         ]]>
+	</select>
+	
+	<select id="selectRunlogcode" parameterType="Runlogcode" flushCache="false"
+	    useCache="true" statementType="PREPARED" resultType="Runlogcode">
+        <![CDATA[
+ SELECT * FROM runlogcode WHERE systemid = #{systemid}
+        ]]>
 	</select>	
 </mapper>
