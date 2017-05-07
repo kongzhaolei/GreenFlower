@@ -55,7 +55,7 @@ public class TCPDataClient {
 	 * 
 	 * @param data
 	 */
-	public static void TcpConnect() {
+	public void TcpConnect() {
 		EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			Bootstrap bs = new Bootstrap().group(group).channel(NioSocketChannel.class)
