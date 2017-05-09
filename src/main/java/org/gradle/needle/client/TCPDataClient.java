@@ -47,7 +47,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**

@@ -54,7 +54,7 @@ public class ModbusTcpSlave {
 			listener = new ModbusTCPListener(3);
 			listener.setPort(port);
 			
-			System.out.println("Listening to " + listener.getAddress() .getCanonicalHostName()+" on port "+port);
+			//System.out.println("Listening to " + listener.getAddress() .getCanonicalHostName()+" on port "+port);
 			
 			listener.start();
 			

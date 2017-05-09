@@ -28,6 +28,7 @@ import org.gradle.needle.dto.UIMapSetting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -43,7 +44,8 @@ import org.testng.Assert;
 import org.testng.Reporter;
 
 import com.thoughtworks.selenium.Wait;
-import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
+
+
 
 public class BrowserFactory {
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.gradle.needle.client.HttpClientFactory;
 import org.gradle.needle.engine.HttpReqGen;
-import org.gradle.needle.util.ExcelDataUtils;
+import org.gradle.needle.util.ExcelUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -37,8 +37,8 @@ public class WebAPI {
 		String response = HttpClientFactory.invokeServiceMethod(call_type, url, header, body);
 		logger.info(response);
 		try {
-			ExcelDataUtils.saveResponse("Output", testid, response);
-			ExcelDataUtils.ParserAndCompare(testid, "Baseline", response, "Comparision");
+			ExcelUtils.saveResponse("Output", testid, response);
+			ExcelUtils.ParserAndCompare(testid, "Baseline", response, "Comparision");
 			assertThat(response).containsSequence("{","ModelData","140802016");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,8 +48,8 @@ public class WebAPI {
 	@DataProvider
 	public Iterator<Object[]> test0() throws Exception {
 		String filePath = System.getProperty("user.dir") + "/src/main/resources/webapi.xls";
-		ExcelDataUtils edu = new ExcelDataUtils(filePath);
-		ExcelDataUtils.setWorkSheet("Input");
+		ExcelUtils edu = new ExcelUtils(filePath);
+		ExcelUtils.setWorkSheet("Input");
 		Iterator<Map<String, String>> datamap = edu.getCaseSet(testset0);
 		Iterator<Object[]> requestfiles = HttpReqGen.preReqGen(datamap);
 		return (requestfiles);

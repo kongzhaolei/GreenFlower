@@ -99,6 +99,14 @@ public class HttpClientFactory {
 		// 构建客户端
 		return HttpClientBuilder.create().setConnectionManager(connManager).build();
 	}
+	
+	/**
+	 * http 异步调用
+	 */
+	
+	
+	
+	
 
 	/**
 	 * http get and post
