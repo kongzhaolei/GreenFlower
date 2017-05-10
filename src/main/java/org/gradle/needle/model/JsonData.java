@@ -2,7 +2,7 @@ package org.gradle.needle.model;
 
 import com.google.gson.JsonObject;
 
-public class ModelData {
+public class JsonData {
 	
 	private String time;
 	private JsonObject data;

@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.gradle.needle.model.ModelData;
+import org.gradle.needle.model.JsonData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -25,25 +25,24 @@ public class JsonUtils {
 	/*
 	 * 嵌套json反序列化 返回 java对象
 	 */
-	public static ModelData FromJson(String json) {
+	public static JsonData FromJson(String json) {
 		Gson gson = new Gson();
-		ModelData md = gson.fromJson(json, ModelData.class);
+		JsonData md = gson.fromJson(json, JsonData.class);
 		return md;
 	}
 
 	/*
-	 * 解析JsonObject ModelData{} 转化为Map<String,JsonObject>对象
+	 * 解析childobject转化为Map<String,JsonObject>对象
 	 */
-	public static Map<String, JsonObject> phareData(String json) {
+	public static Map<String, JsonObject> childToMap(String json, String childlabel) {
 		Map<String, JsonObject> wtjson = new HashMap<String, JsonObject>();
 		Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
 		Type type = new TypeToken<Map<String, JsonObject>>() {
 		}.getType();
 		try {
-			JsonElement modeldata = FromJson(json).getData().getAsJsonObject("cli").getAsJsonObject("dps")
-					.getAsJsonObject("ModelData");
-
-			wtjson = gson2.fromJson(modeldata, type);
+			JsonElement childobject = FromJson(json).getData().getAsJsonObject("cli").getAsJsonObject("dps")
+					.getAsJsonObject(childlabel);
+			wtjson = gson2.fromJson(childobject, type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,23 +54,32 @@ public class JsonUtils {
 		int count = 0;
 		Pattern pattern = Pattern.compile(keyword);
 		Matcher matcher = pattern.matcher(res);
-		while(matcher.find()){
+		while (matcher.find()) {
 			count++;
 		}
 		return count;
 	}
 
-	// json 关键字:value合计值
+	// ModelData StatusWfCount 合计值
 	public static int keyValueSum(String res, String keyword) {
-		Map<String, JsonObject> modeldata = JsonUtils.phareData(res);
+		Map<String, JsonObject> modeldata = JsonUtils.childToMap(res, "ModelData");
 		int sum = 0;
 		for (String key : modeldata.keySet()) {
-			JsonObject singleObject = modeldata.get(key);
-			JsonObject keywordObject = singleObject.getAsJsonObject(keyword);
-			for (Entry<String, JsonElement> entry : keywordObject.entrySet()) {
+			JsonObject child2 = modeldata.get(key);
+			JsonObject child3 = child2.getAsJsonObject(keyword);
+			for (Entry<String, JsonElement> entry : child3.entrySet()) {
 				sum = sum + entry.getValue().getAsInt();
 			}
 		}
 		return sum;
 	}
+
+	// AsynTask 获取taskStatus-code
+	public static String getTaskStatusCode(String res, String keword) {
+		Map<String, JsonObject> asyntask = JsonUtils.childToMap(res, "AsynTask");
+		JsonObject child2 = asyntask.get("taskStatus");
+		String code = child2.get(keword).getAsString();
+		return code;
+	}
+
 }
