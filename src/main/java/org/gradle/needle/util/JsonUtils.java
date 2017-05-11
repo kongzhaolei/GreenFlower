@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.gradle.needle.model.JsonData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,10 +35,10 @@ public class JsonUtils {
 	/*
 	 * 解析childobject转化为Map<String,JsonObject>对象
 	 */
-	public static Map<String, JsonObject> childToMap(String json, String childlabel) {
-		Map<String, JsonObject> wtjson = new HashMap<String, JsonObject>();
+	public static Map<String, JsonElement> childToMap(String json, String childlabel) {
+		Map<String, JsonElement> wtjson = new HashMap<String, JsonElement>();
 		Gson gson2 = new GsonBuilder().enableComplexMapKeySerialization().create();
-		Type type = new TypeToken<Map<String, JsonObject>>() {
+		Type type = new TypeToken<Map<String, JsonElement>>() {
 		}.getType();
 		try {
 			JsonElement childobject = FromJson(json).getData().getAsJsonObject("cli").getAsJsonObject("dps")
@@ -62,10 +63,10 @@ public class JsonUtils {
 
 	// ModelData StatusWfCount 合计值
 	public static int keyValueSum(String res, String keyword) {
-		Map<String, JsonObject> modeldata = JsonUtils.childToMap(res, "ModelData");
+		Map<String, JsonElement> modeldata = JsonUtils.childToMap(res, "ModelData");
 		int sum = 0;
 		for (String key : modeldata.keySet()) {
-			JsonObject child2 = modeldata.get(key);
+			JsonObject child2 = modeldata.get(key).getAsJsonObject();
 			JsonObject child3 = child2.getAsJsonObject(keyword);
 			for (Entry<String, JsonElement> entry : child3.entrySet()) {
 				sum = sum + entry.getValue().getAsInt();
@@ -76,9 +77,9 @@ public class JsonUtils {
 
 	// AsynTask 获取taskStatus-code
 	public static String getTaskStatusCode(String res, String keword) {
-		Map<String, JsonObject> asyntask = JsonUtils.childToMap(res, "AsynTask");
-		JsonObject child2 = asyntask.get("taskStatus");
-		String code = child2.get(keword).getAsString();
+		Map<String, JsonElement> asyntask = JsonUtils.childToMap(res, "AsynTask");
+		JsonObject child2 = asyntask.get("taskStatus").getAsJsonObject();
+		String code = child2.getAsJsonPrimitive(keword).getAsString();
 		return code;
 	}
 
