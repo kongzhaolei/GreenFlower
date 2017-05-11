@@ -10,15 +10,12 @@ public class CustomUtils {
 	 private static Logger logger = Logger.getLogger(CustomUtils.class);
 	
 	/**
-	 * 自定义解析一
-	 * 中控格式
+	 * 中控自定义格式，非标准json或xml格式
 	 * @param response
 	 * @return
 	 */
 	public static Map<String, String> parser(String response) {
 		Map<String, String> m = new HashMap<String, String>();
-
-		// 对所解析的字符串做校验，排除返回结果为空或返回非正常的结果
 		if (response != null) {
 			if (response.indexOf("OK") >= 0) {
 				String[] tokens = response.split("},");
