@@ -64,10 +64,12 @@ public class TCPDataClient {
 							ChannelPipeline p = ch.pipeline();
 							p.addLast("decoder", new StringDecoder());
 							p.addLast("encoder", new StringEncoder());
+							p.addLast(new TCPDataClientHandler());
 						}
 					});
 			future = bs.connect(HOST, PORT).sync();
-			logger.info("已连接到" + HOST + ":" + PORT);
+			logger.info("已连接到服务端 " + HOST + ":" + PORT);
+			//future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

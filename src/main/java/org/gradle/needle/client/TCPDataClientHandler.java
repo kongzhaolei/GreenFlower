@@ -11,7 +11,7 @@ public class TCPDataClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx){
-		logger.info("NettyClientHandler激活");
+		logger.info(" 通道初始化完毕 ");
 	}
 	
 	@Override

@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	compile fileTree(dir: 'libs', include: '*.jar')  // “¿¿µ±æµÿø‚libs
+	compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
 	compile group: 'io.netty', name: 'netty-all', version: '4.1.6.Final'
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
 	compile group: 'org.assertj', name: 'assertj-core', version: '3.6.2'
@@ -38,6 +39,8 @@ dependencies {
 	compile group: 'net.sf.jxls', name: 'jxls-core', version: '1.0.6'
 	compile group: 'org.seleniumhq.selenium', name: 'selenium-server-standalone', version: '2.35.0'
 	compile group: 'net.sf.ucanaccess', name: 'ucanaccess', version: '3.0.4'
+	compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1'
+	
 	
 	
 }

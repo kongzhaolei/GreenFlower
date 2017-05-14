@@ -1,5 +1,7 @@
 package org.gradle.needle.server;
 
+import org.apache.log4j.Logger;
+import org.gradle.needle.client.TCPDataClient;
 import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 
@@ -23,6 +25,7 @@ public class TCPDataServer {
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
 	private int port;
 	private String host;
+	private static Logger logger = Logger.getLogger(TCPDataServer.class.getName());
 
 	public TCPDataServer(String host, int port) {
 		this.port = port;
@@ -74,7 +77,7 @@ public class TCPDataServer {
 
 			// 绑定端口，开始接收进来的连接
 			ChannelFuture future = sbs.bind(host, port).sync();
-			System.out.println("服务器监听于： " + host + ":" + port);
+			logger.info("服务器监听于： " + host + ":" + port);
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
