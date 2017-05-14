@@ -28,7 +28,8 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.3.3'
 	compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
 	compile group: 'log4j', name: 'log4j', version: '1.2.17'
-	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.4'
+	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.1'
+	compile group: 'com.healthmarketscience.jackcess', name: 'jackcess', version: '2.1.3'
 	compile group: 'net.wimpi', name: 'jamod', version: '1.2'
 	compile group: 'org.testng', name: 'testng', version: '6.11'
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
@@ -36,6 +37,8 @@ dependencies {
 	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.7'
 	compile group: 'net.sf.jxls', name: 'jxls-core', version: '1.0.6'
 	compile group: 'org.seleniumhq.selenium', name: 'selenium-server-standalone', version: '2.35.0'
+	compile group: 'net.sf.ucanaccess', name: 'ucanaccess', version: '3.0.4'
+	
 	
 }
 

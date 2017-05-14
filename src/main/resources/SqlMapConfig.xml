@@ -19,7 +19,6 @@
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
 				<!-- property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/Data.mdb" /-->
 				<property name="url" value="jdbc:ucanaccess://D:/GreenFlower/Data.mdb" />
-				
 			</dataSource>
 		</environment>
 		
