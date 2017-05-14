@@ -68,7 +68,15 @@ public class DataGenerator {
 		return sReturn;
 	}
 
-	/**
+	/*
+	 * 沉积数据 sediment,十分钟
+	 */
+	public String genDevSedimentData() {
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date()) + "|" + genDevTenData()
+				+ ")";
+	}
+
+	/*
 	 * 历史瞬态数据 realtimedata
 	 */
 	public String genDevRealTimeData() {
@@ -76,7 +84,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("realtimedata") + ")";
 	}
 
-	/**
+	/*
 	 * 十分钟数据 tendata
 	 */
 	public String genDevTenData() {
@@ -84,7 +92,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("tendata") + ")";
 	}
 
-	/**
+	/*
 	 * 一分钟数据 one
 	 */
 	public String genDevOneData() {
@@ -92,7 +100,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("onedata") + ")";
 	}
 
-	/**
+	/*
 	 * 变位数据 changesave
 	 */
 	public String genDevChangeSave() {
@@ -100,7 +108,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("changesave") + ")";
 	}
 
-	/**
+	/*
 	 * 功率曲线 powercurve
 	 */
 	public String genDevPowerCurve() {
@@ -108,7 +116,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("powercurve") + ")";
 	}
 
-	/**
+	/*
 	 * 主轮询数据 wman
 	 */
 	public String genDevWmanData() {
@@ -116,7 +124,7 @@ public class DataGenerator {
 				+ this.gevDevDataEngine("wman") + ")";
 	}
 
-	/**
+	/*
 	 * 告警日志
 	 */
 	public StringBuilder genDevWarnLog() {
@@ -136,14 +144,14 @@ public class DataGenerator {
 		return warnlog;
 	}
 
-	/**
+	/*
 	 * 系统告警结束
 	 */
 	public String genDevWarnEnd() {
 		return "";
 	}
 
-	/**
+	/*
 	 * 风机元数据
 	 * 
 	 * @return
@@ -186,7 +194,7 @@ public class DataGenerator {
 		return sReturn;
 	}
 
-	/**
+	/*
 	 * 定时器刷新停机模式字
 	 */
 	public String genStopModeWord() {
@@ -209,7 +217,7 @@ public class DataGenerator {
 		return stopmodeword;
 	}
 
-	/**
+	/*
 	 * 定时器刷新限功率模式字
 	 * 
 	 */
@@ -233,7 +241,7 @@ public class DataGenerator {
 		return limitmodeword;
 	}
 
-	/**
+	/*
 	 * 定时器刷新风机状态 支持故障逻辑
 	 */
 	public String genStateData() {
@@ -259,7 +267,7 @@ public class DataGenerator {
 		return status;
 	}
 
-	/**
+	/*
 	 * 风机状态
 	 */
 	public String genDevStateData() {
@@ -267,21 +275,21 @@ public class DataGenerator {
 				+ ")";
 	}
 
-	/**
+	/*
 	 * 前置和设备通信状态，暂时设置为通信正常
 	 */
 	public String genDevComState() {
 		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + "0" + ")";
 	}
 
-	/**
+	/*
 	 * 风机主故障
 	 */
 	public String genMainFault() {
 		return genFaultTree().split(";")[0];
 	}
 
-	/**
+	/*
 	 * 故障数据
 	 */
 	public String genDevFaultData() {
@@ -289,7 +297,7 @@ public class DataGenerator {
 				+ ")";
 	}
 
-	/**
+	/*
 	 * 风机故障树，初始无故障 定时器频率模拟5个故障，之后恢复 faultsign true 无故障；false：故障
 	 */
 	public String genFaultTree() {
@@ -315,7 +323,7 @@ public class DataGenerator {
 		return faulttree;
 	}
 
-	/**
+	/*
 	 * 风机警告
 	 */
 	public String genDevAlarmData() {
@@ -323,7 +331,7 @@ public class DataGenerator {
 				+ ")";
 	}
 
-	/**
+	/*
 	 * 风机警告树，初始化无警告 定时器频率模拟3个警告，之后恢复 alarmsign
 	 */
 	public String genAlarmTree() {

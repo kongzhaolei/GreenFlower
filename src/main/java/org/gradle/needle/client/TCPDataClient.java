@@ -96,7 +96,7 @@ public class TCPDataClient {
 		}
 		logger.info("已发送十分钟数据： " + de.genDevTenData());
 	}
-	
+
 	/*
 	 * send DevOneData
 	 */
@@ -143,6 +143,18 @@ public class TCPDataClient {
 			e.printStackTrace();
 		}
 		logger.info("已发送功率曲线： " + de.genDevPowerCurve());
+	}
+
+	/*
+	 * send DevSedimentData
+	 */
+	public static void sendDevSedimentData() {
+		try {
+			channelSend(de.genDevSedimentData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送沉积数据： " + de.genDevSedimentData());
 	}
 
 }
