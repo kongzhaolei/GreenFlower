@@ -96,6 +96,18 @@ public class TCPDataClient {
 		}
 		logger.info("已发送十分钟数据： " + de.genDevTenData());
 	}
+	
+	/*
+	 * send DevOneData
+	 */
+	public static void sendDevOneData() {
+		try {
+			channelSend(de.genDevOneData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("已发送一分钟数据： " + de.genDevOneData());
+	}
 
 	/*
 	 * send DevRealTimeData
@@ -106,7 +118,7 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送实时数据： " + de.genDevRealTimeData());
+		logger.info("已发送历史瞬态数据： " + de.genDevRealTimeData());
 	}
 
 	/*

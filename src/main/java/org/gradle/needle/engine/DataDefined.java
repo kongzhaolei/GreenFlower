@@ -141,6 +141,7 @@ public class DataDefined {
 				}
 				break;
 			case "tendata":
+			case "onedata":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 2) {
 						pps_list.add(pps);
@@ -260,9 +261,10 @@ public class DataDefined {
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
-	
+
 	/**
-	 * 获取code list<code> 
+	 * 获取code list<code>
+	 * 
 	 * @systemid
 	 */
 	public List<String> getLogCodeList(int systemid) {
@@ -276,7 +278,7 @@ public class DataDefined {
 		}
 		return lists;
 	}
-	
+
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
 	 * 获取config库runlogcode表典型维数据集

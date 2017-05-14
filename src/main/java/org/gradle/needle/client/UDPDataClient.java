@@ -143,7 +143,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevWmanData
+ * 组播 DevWmanData
  */
 	public static void sendDevWmanData() {
 		try {
@@ -155,7 +155,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevFaultData
+ * 组播 DevFaultData
  */
 	public static void sendDevFaultData() {
 		try {
@@ -167,7 +167,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevAlarmData
+ * 组播 DevAlarmData
  */
 	public static void sendDevAlarmData() {
 		try {
@@ -179,7 +179,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevStateData
+ * 组播 DevStateData
  */
 	public static void sendDevStateData() {
 		try {
@@ -191,7 +191,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送 DevComState
+ * 组播 DevComState
  */
 	public static void sendDevComState() {
 		try {
@@ -203,7 +203,7 @@ public class UDPDataClient {
 	}
 	
 /*
- * 发送DevWarnLog
+ * 组播 DevWarnLog
  */
 	public static void sendDevWarnLog() {
 		try {

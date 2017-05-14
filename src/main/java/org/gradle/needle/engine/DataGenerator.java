@@ -87,9 +87,9 @@ public class DataGenerator {
 	/**
 	 * 一分钟数据 one
 	 */
-	public String genDevOne() {
+	public String genDevOneData() {
 		return "(one|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
-				+ this.gevDevDataEngine("one") + ")";
+				+ this.gevDevDataEngine("onedata") + ")";
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播 wman 数据
+	 * 主轮询数据 wman
 	 */
 	public String genDevWmanData() {
 		return "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
@@ -117,12 +117,13 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播告警日志
+	 * 告警日志
 	 */
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
 		int systemid = 3; // 暂时只模拟功率控制
-		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2// 故障
+		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 提示、1 警告、2//
+																// 故障
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = df.getWfid();
 		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
@@ -259,7 +260,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播风机状态
+	 * 风机状态
 	 */
 	public String genDevStateData() {
 		return "(statedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genStateData()
@@ -267,7 +268,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播前置和设备通信状态引擎 暂时设置为通信正常
+	 * 前置和设备通信状态，暂时设置为通信正常
 	 */
 	public String genDevComState() {
 		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + "0" + ")";
@@ -281,7 +282,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播故障数据引擎
+	 * 故障数据
 	 */
 	public String genDevFaultData() {
 		return "(falutdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genFaultTree()
@@ -315,7 +316,7 @@ public class DataGenerator {
 	}
 
 	/**
-	 * 组播风机警告引擎
+	 * 风机警告
 	 */
 	public String genDevAlarmData() {
 		return "(alarmdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genAlarmTree()
