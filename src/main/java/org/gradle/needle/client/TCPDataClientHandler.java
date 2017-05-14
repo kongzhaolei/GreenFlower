@@ -11,12 +11,12 @@ public class TCPDataClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx){
-		logger.info(" 通道初始化完毕 ");
+		logger.info("通道初始化完成 ");
 	}
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
-		logger.info(msg);
+		logger.info("服务端返回消息： " + msg);
 	}
 	
 	@Override
