@@ -1,7 +1,6 @@
 package org.gradle.needle.server;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.client.TCPDataClient;
 import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 
