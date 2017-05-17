@@ -170,10 +170,10 @@ public class HttpClientFactory {
 			if (statuscode == HttpStatus.SC_OK) {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
-				logger.info("接口请求成功"); 
-				logger.info("返回结果： " + response); 
+				logger.info("API test success!"); 
+				logger.info("API test response ： " + response); 
 			} else {
-				logger.info("接口请求失败，statuscode： " + statuscode);
+				logger.info("API test faiure！，statuscode： " + statuscode);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
