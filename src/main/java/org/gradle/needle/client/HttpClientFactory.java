@@ -38,6 +38,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.noneDSA;
 
 public class HttpClientFactory {
 	private static CloseableHttpClient httpclient;
@@ -169,7 +170,8 @@ public class HttpClientFactory {
 			if (statuscode == HttpStatus.SC_OK) {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
-				logger.info("接口请求成功");
+				logger.info("接口请求成功"); 
+				logger.info("返回结果： " + response); 
 			} else {
 				logger.info("接口请求失败，statuscode： " + statuscode);
 			}

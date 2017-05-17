@@ -17,8 +17,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<!-- property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/Data.mdb" /-->
-				<property name="url" value="jdbc:ucanaccess://D:/GreenFlower/Data.mdb" />
+				<property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/Data.mdb" />
 			</dataSource>
 		</environment>
 		
@@ -26,8 +25,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
-				<!-- property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/config.mdb" /-->
-				<property name="url" value="jdbc:ucanaccess://D:/GreenFlower/config.mdb" />
+				<property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/config.mdb" />
 			</dataSource>
 		</environment>
 		

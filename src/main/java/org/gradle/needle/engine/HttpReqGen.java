@@ -71,7 +71,7 @@ public class HttpReqGen {
 			}		
 		}
 		Iterator<Object[]> s = Cases.iterator();
-		logger.info("HTTP请求报文组装完成");
+		//logger.info("HTTP请求报文组装完成");
 		return s;
 	}
 }
