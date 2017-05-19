@@ -41,7 +41,7 @@ dependencies {
 	compile group: 'org.seleniumhq.selenium', name: 'selenium-server-standalone', version: '2.35.0'
 	compile group: 'net.sf.ucanaccess', name: 'ucanaccess', version: '3.0.4'
 	compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.1'
-	compile group: 'org.postgresql', name: 'postgresql', version: '42.1.1'
+	compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1212'
 	
 	
 	

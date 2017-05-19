@@ -6,7 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.apache.log4j.Logger;
+import org.postgresql.ds.PGPoolingDataSource;
 
 /**
  * 
@@ -15,10 +19,10 @@ import org.apache.log4j.Logger;
  */
 public class DBUtils {
 	private static Logger logger = Logger.getLogger(DBUtils.class.getName());
-	String url;
-	String instance;
-	String username;
-	String password;
+	private String url;
+	private String instance;
+	private String username;
+	private String password;
 	String connurl;
 	String databasetype;
 
@@ -33,13 +37,38 @@ public class DBUtils {
 		this.username = username;
 		this.password = password;
 	}
+	
+	/*
+	 * 构造方法2
+	 * @param datasource 初始化
+	 * @param url
+	 */
+	public DBUtils(String url, String instance, String username, String password) {
+		this.url = url;
+		this.instance = instance;
+		this.username = username;
+		this.password = password;
+	}
 
 	/*
-	 * 构造方法2 无实例概念，不设用户和密码，针对ACCESS类型数据库
+	 * 构造方法3
+	 * 无实例概念，不设用户和密码，针对ACCESS类型数据库
 	 */
 	public DBUtils(String databasetype, String url) {
 		this.databasetype = databasetype;
 		this.url = url;
+	}
+	
+	/*
+	 * postgresql DataSource
+	 */
+	public DataSource getPGDataSource() {
+		PGPoolingDataSource dataSource = new PGPoolingDataSource();
+		dataSource.setServerName(url);
+		dataSource.setDatabaseName(instance);
+		dataSource.setUser(username);
+		dataSource.setPassword(password);
+		return dataSource;
 	}
 
 	/*
