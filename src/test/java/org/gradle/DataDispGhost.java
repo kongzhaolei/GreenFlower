@@ -1,13 +1,12 @@
 package org.gradle;
 
-import org.gradle.needle.client.TCPDataClient;
-import org.gradle.needle.util.VTimer;
-import org.gradle.needle.util.VerifyUtils;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.awaitility.Awaitility.await;
 
 import org.apache.log4j.Logger;
-
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import org.gradle.needle.client.TCPDataClient;
+import org.gradle.needle.util.VTimer;
+import org.gradle.needle.util.VerifyUtils;
 
 public class DataDispGhost {
 

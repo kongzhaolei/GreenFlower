@@ -20,7 +20,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
-public class TCPDataClient {
+public class TCPDataClient implements DataClient {
 
 	private static String HOST;
 	private static int PORT;
@@ -32,6 +32,10 @@ public class TCPDataClient {
 	public TCPDataClient(String host, int port) {
 		TCPDataClient.HOST = host;
 		TCPDataClient.PORT = port;
+	}
+	
+	public TCPDataClient() {
+		
 	}
 
 	/**
@@ -86,9 +90,7 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevTenData
-	 */
+	// send DevTenData
 	public static void sendDevTenData() {
 		try {
 			channelSend(de.genDevTenData());
@@ -97,9 +99,8 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevOneData
-	 */
+	// send DevOneData
+
 	public static void sendDevOneData() {
 		try {
 			channelSend(de.genDevOneData());
@@ -108,9 +109,8 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevRealTimeData
-	 */
+	// send DevRealTimeData
+
 	public static void sendDevRealTimeData() {
 		try {
 			channelSend(de.genDevRealTimeData());
@@ -119,9 +119,8 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevChangeSave
-	 */
+	// send DevChangeSave
+
 	public static void sendDevChangeSave() {
 		try {
 			channelSend(de.genDevChangeSave());
@@ -130,9 +129,8 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevPowerCurve
-	 */
+	// send DevPowerCurve
+
 	public static void sendDevPowerCurve() {
 		try {
 			channelSend(de.genDevPowerCurve());
@@ -141,9 +139,8 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevSedimentData
-	 */
+	// send DevSedimentData
+
 	public static void sendDevSedimentData() {
 		try {
 			channelSend(de.genDevSedimentData());
@@ -152,12 +149,38 @@ public class TCPDataClient {
 		}
 	}
 
-	/*
-	 * send DevWarnLog
-	 */
-	public static void sendDevWarnLog() {
+	// send DevWarnLog
+
+	public void sendDevWarnLog() {
 		try {
 			channelSend(de.genDevWarnLog().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send DevFaultData
+	public void sendDevFaultData() {
+		try {
+			channelSend(de.genDevFaultData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send DevAlarmData
+	public void sendDevAlarmData() {
+		try {
+			channelSend(de.genDevAlarmData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send DevStateData
+	public void sendDevStateData() {
+		try {
+			channelSend(de.genDevStateData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
