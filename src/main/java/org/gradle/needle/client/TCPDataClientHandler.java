@@ -8,6 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class TCPDataClientHandler extends ChannelInboundHandlerAdapter {
 	
 	private static Logger logger = Logger.getLogger(TCPDataClientHandler.class.getName());
+	static String res;
 	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx){
@@ -16,7 +17,12 @@ public class TCPDataClientHandler extends ChannelInboundHandlerAdapter {
 	
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
-		logger.info("服务端返回消息： " + msg);
+		res = msg.toString();
+		logger.info("服务端返回消息： " + msg.toString());
+	}
+	
+	public static String getchannelRead() {
+		return res;
 	}
 	
 	@Override

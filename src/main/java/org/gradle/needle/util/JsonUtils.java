@@ -81,5 +81,4 @@ public class JsonUtils {
 		String code = child2.getAsJsonPrimitive(keword).getAsString();
 		return code;
 	}
-
 }

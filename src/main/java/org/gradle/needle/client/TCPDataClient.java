@@ -81,7 +81,6 @@ public class TCPDataClient {
 	public static void channelSend(String data) {
 		try {
 			future.channel().writeAndFlush(data);
-			future.channel().close().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
