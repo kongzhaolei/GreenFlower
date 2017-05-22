@@ -93,9 +93,7 @@ public class UDPDataClient {
 	}
 	
 /**
- * udp组播方式发送
- * 模拟前置组播
- * 每种类型数据启动一个线程
+ * udp线程组
  */
 	private void multicastGen() {
 		try {
@@ -151,7 +149,6 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// logger.info("已组播主轮询数据：" + de.genDevWmanData());
 	}
 	
 /*
@@ -163,7 +160,6 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已组播故障数据：" + de.genDevFaultData());
 	}
 	
 /*
@@ -175,7 +171,6 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已组播警告数据： " + de.genDevAlarmData());
 	}
 	
 /*
@@ -187,7 +182,6 @@ public class UDPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已组播风机状态： " + de.genDevStateData());
 	}
 	
 /*
@@ -199,7 +193,6 @@ public class UDPDataClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		logger.info("已组播通信状态数据： " + de.genDevComState());
 	}
 	
 /*
@@ -211,7 +204,6 @@ public class UDPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已组播告警日志：" + de.genDevWarnLog().toString());
 	}
 	
 }

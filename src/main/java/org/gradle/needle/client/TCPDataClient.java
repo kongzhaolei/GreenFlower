@@ -69,7 +69,7 @@ public class TCPDataClient {
 					});
 			future = bs.connect(HOST, PORT).sync();
 			logger.info("已连接到服务端 " + HOST + ":" + PORT);
-			//future.channel().closeFuture().sync();
+			// future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,7 +95,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送十分钟数据： " + de.genDevTenData());
 	}
 
 	/*
@@ -107,7 +106,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送一分钟数据： " + de.genDevOneData());
 	}
 
 	/*
@@ -119,7 +117,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送历史瞬态数据： " + de.genDevRealTimeData());
 	}
 
 	/*
@@ -131,7 +128,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送变位数据： " + de.genDevChangeSave());
 	}
 
 	/*
@@ -143,7 +139,6 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送功率曲线： " + de.genDevPowerCurve());
 	}
 
 	/*
@@ -155,7 +150,17 @@ public class TCPDataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("已发送沉积数据： " + de.genDevSedimentData());
+	}
+
+	/*
+	 * send DevWarnLog
+	 */
+	public static void sendDevWarnLog() {
+		try {
+			channelSend(de.genDevWarnLog().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
