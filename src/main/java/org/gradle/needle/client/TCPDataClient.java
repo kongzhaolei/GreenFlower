@@ -33,9 +33,9 @@ public class TCPDataClient implements DataClient {
 		TCPDataClient.HOST = host;
 		TCPDataClient.PORT = port;
 	}
-	
+
 	public TCPDataClient() {
-		
+
 	}
 
 	/**
@@ -139,11 +139,20 @@ public class TCPDataClient implements DataClient {
 		}
 	}
 
-	// send DevSedimentData
+	// send DevSedimentOneData
 
-	public static void sendDevSedimentData() {
+	public static void sendDevSedimentOneData() {
 		try {
-			channelSend(de.genDevSedimentData());
+			channelSend(de.genDevSedimentOneData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send DevSedimentOneData
+	public static void sendDevSedimentRealData() {
+		try {
+			channelSend(de.genDevSedimentRealData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

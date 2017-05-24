@@ -69,10 +69,20 @@ public class DataGenerator {
 	}
 
 	/*
-	 * 沉积数据 sediment,十分钟
+	 * 沉积数据 sediment,一分钟
 	 */
-	public String genDevSedimentData() {
-		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date()) + "|" + genDevTenData()
+	public String genDevSedimentOneData() {
+	    Date date  = new Date();
+	    date.setTime(date.getTime() + 60 * 1000);
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOneData()
+				+ ")";
+	}
+	
+	// 沉积数据 sediment 历史瞬态
+	public String genDevSedimentRealData() {
+	    Date date  = new Date();
+	    date.setTime(date.getTime() + 1000);
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevRealTimeData()
 				+ ")";
 	}
 
