@@ -24,6 +24,7 @@ public class DataGenerator {
 	private String cmdname;
 	private DataDefined df;
 	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
+	Date date  = new Date();
 
 	/*
 	 * 构造方法 1 PLC，初始化protocolid,cmdname
@@ -72,16 +73,14 @@ public class DataGenerator {
 	 * 沉积数据 sediment,一分钟
 	 */
 	public String genDevSedimentOneData() {
-	    Date date  = new Date();
-	    date.setTime(date.getTime() + 60 * 1000);
+	    date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOneData()
 				+ ")";
 	}
 	
 	// 沉积数据 sediment 历史瞬态
 	public String genDevSedimentRealData() {
-	    Date date  = new Date();
-	    date.setTime(date.getTime() + 1000);
+	    date.setTime(date.getTime() - 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevRealTimeData()
 				+ ")";
 	}
@@ -106,7 +105,7 @@ public class DataGenerator {
 	 * 一分钟数据 one
 	 */
 	public String genDevOneData() {
-		return "(one|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(onedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("onedata") + ")";
 	}
 

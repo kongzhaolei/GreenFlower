@@ -1,5 +1,6 @@
 package org.gradle.needle.util;
 
+import org.apache.log4j.Logger;
 import org.assertj.db.type.Changes;
 import org.assertj.db.type.Table;
 import org.gradle.needle.client.TCPDataClientHandler;
@@ -14,6 +15,8 @@ public class VerifyUtils {
 	private static String instance;
 	private static String username;
 	private static String password;
+	private static Logger logger = Logger.getLogger(VerifyUtils.class.getName());
+	
 
 	/*
 	 * database
@@ -57,5 +60,6 @@ public class VerifyUtils {
 	 */
 	public void assertTcpResponse() {
 		assertThat(TCPDataClientHandler.getchannelRead() == "(ok)");
+		logger.info("assert success");
 	}
 }

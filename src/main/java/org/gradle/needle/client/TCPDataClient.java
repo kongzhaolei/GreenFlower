@@ -103,7 +103,9 @@ public class TCPDataClient implements DataClient {
 
 	public static void sendDevOneData() {
 		try {
-			channelSend(de.genDevOneData());
+			String s = de.genDevOneData();
+			channelSend(s);
+			logger.info(s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,7 +145,9 @@ public class TCPDataClient implements DataClient {
 
 	public static void sendDevSedimentOneData() {
 		try {
-			channelSend(de.genDevSedimentOneData());
+			String s = de.genDevSedimentOneData();
+			channelSend(s);
+			logger.info(s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -152,7 +156,9 @@ public class TCPDataClient implements DataClient {
 	// send DevSedimentOneData
 	public static void sendDevSedimentRealData() {
 		try {
-			channelSend(de.genDevSedimentRealData());
+			String s = de.genDevSedimentRealData();
+			channelSend(s);
+			logger.info(s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
