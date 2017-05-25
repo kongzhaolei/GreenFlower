@@ -141,9 +141,16 @@ public class DataDefined {
 				}
 				break;
 			case "tendata":
-			case "onedata":
+			case "one":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 2) {
+						pps_list.add(pps);
+					}
+				}
+				break;
+			case "onedata":
+				for (Propaths pps : getAllPropaths()) {
+					if (pps.getBsend().intValue() == 1) {
 						pps_list.add(pps);
 					}
 				}
@@ -169,7 +176,7 @@ public class DataDefined {
 						pps_list.add(pps);
 					}
 				}
-				break;
+				break;			
 			default:
 				getAllPropaths();
 				break;
@@ -429,7 +436,7 @@ public class DataDefined {
 	/**
 	 * 生成随机双精度，位于max和min之间的方法
 	 */
-	public static String ranDouble(String min, String max) {
+	public  String ranDouble(String min, String max) {
 		double bt = Integer.parseInt(min)
 				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random().nextDouble());
 		DecimalFormat df = new DecimalFormat("#.00");

@@ -24,7 +24,7 @@ public class DataGenerator {
 	private String cmdname;
 	private DataDefined df;
 	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
-	Date date  = new Date();
+	Date date = new Date();
 
 	/*
 	 * 构造方法 1 PLC，初始化protocolid,cmdname
@@ -72,15 +72,21 @@ public class DataGenerator {
 	/*
 	 * 沉积数据 sediment,一分钟
 	 */
+	public String genDevSedimentOne() {
+		date.setTime(date.getTime() - 60 * 1000);
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOne() + ")";
+	}
+
+	// 沉积数据 sediment 一分钟理论
 	public String genDevSedimentOneData() {
-	    date.setTime(date.getTime() - 60 * 1000);
+		date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOneData()
 				+ ")";
 	}
-	
+
 	// 沉积数据 sediment 历史瞬态
 	public String genDevSedimentRealData() {
-	    date.setTime(date.getTime() - 1000);
+		date.setTime(date.getTime() - 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevRealTimeData()
 				+ ")";
 	}
@@ -104,9 +110,29 @@ public class DataGenerator {
 	/*
 	 * 一分钟数据 one
 	 */
+	public String genDevOne() {
+		return "(one|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("one") + ")";
+	}
+
+	// 一分钟理论数据 onedata
 	public String genDevOneData() {
-		return "(onedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
-				+ this.gevDevDataEngine("onedata") + ")";
+		StringBuilder onedata = new StringBuilder();
+		Integer wtid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
+		String wind_power = this.gevDevDataEngine("onedata");
+		String theoretical = df.ranDouble("25", "87");
+		String statdata = this.genStateData();
+		String otherstat = Integer.toString(df.ranInteger(0, 3));
+		String mainfault = this.genMainFault();
+		String stopword = this.genStopModeWord();
+		String ambient_temp = df.ranDouble("20", "60");
+		String first_yield = df.ranDouble("0", "8687");
+		String last_yield = df.ranDouble("90001", "686877");
+		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",").append(theoretical)
+				.append(",").append(statdata).append(",").append(otherstat).append(",").append(mainfault).append(",")
+				.append(stopword).append(",").append(ambient_temp).append(",").append(first_yield).append(",")
+				.append(last_yield).append(")");
+		return onedata.toString();
 	}
 
 	/*

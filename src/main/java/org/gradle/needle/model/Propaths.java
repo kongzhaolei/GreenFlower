@@ -11,7 +11,10 @@ public class Propaths {
 	private String descrcn;
 	private Integer transtype;
 	private Integer changesave;
+	private Integer bsend;
 	private Integer bsave;
+	
+	
 	
 	
 	public Integer getProtocolid() {
@@ -40,6 +43,10 @@ public class Propaths {
 	
 	public Integer getChangesave() {
 		return changesave;
+	}
+	
+	public Integer getBsend() {
+		return bsend;
 	}
 	
 	public Integer getBsave() {
