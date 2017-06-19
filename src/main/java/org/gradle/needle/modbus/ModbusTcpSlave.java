@@ -1,6 +1,8 @@
 package org.gradle.needle.modbus;
 
-import net.wimpi.modbus.Modbus;
+import org.apache.log4j.Logger;
+import org.gradle.needle.engine.DataDefined;
+
 import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.net.ModbusTCPListener;
 import net.wimpi.modbus.procimg.SimpleDigitalIn;
@@ -10,65 +12,82 @@ import net.wimpi.modbus.procimg.SimpleProcessImage;
 import net.wimpi.modbus.procimg.SimpleRegister;
 
 public class ModbusTcpSlave {
-	
-	public static void main(String[] args) {
 
-		ModbusTCPListener listener = null;
-		SimpleProcessImage spi = null;
-		int port = Modbus.DEFAULT_PORT;
+	ModbusTCPListener listener = null;
+	SimpleProcessImage spi = null;
+	int port;
+	Logger logger = Logger.getLogger(ModbusTcpSlave.class.getName());
 
+	public ModbusTcpSlave(int port) {
+		this.port = port;
+	}
+
+	/*
+	 * ¿ªÆô¼àÌý
+	 */
+	public void startTcpListenerThreadPool(int size, int unitId) {
 		try {
-			if (args != null && args.length == 1) {
-				port = Integer.parseInt(args[0]);
-			}
-			System.out.println("jModbus Modbus Slave (Server)");
-
-			// 1. prepare a process image
 			spi = new SimpleProcessImage();
-
-			spi.addDigitalOut(new SimpleDigitalOut(true));
-			spi.addDigitalOut(new SimpleDigitalOut(true));
-
-			spi.addDigitalIn(new SimpleDigitalIn(false));
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-			spi.addDigitalIn(new SimpleDigitalIn(false));
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-			// allow checking LSB/MSB order
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-			spi.addDigitalIn(new SimpleDigitalIn(true));
-
-			spi.addRegister(new SimpleRegister(251));
-			spi.addInputRegister(new SimpleInputRegister(45));
-			spi.addInputRegister(new SimpleInputRegister(46));
- 
-			// 2. create the coupler holding the image
 			ModbusCoupler.getReference().setProcessImage(spi);
 			ModbusCoupler.getReference().setMaster(false);
-			ModbusCoupler.getReference().setUnitID(1);
-
-			// 3. create a listener with 3 threads in pool
-			if (Modbus.debug)
-				System.out.println("Listening...");
-			listener = new ModbusTCPListener(3);
+			ModbusCoupler.getReference().setUnitID(unitId);
+			listener = new ModbusTCPListener(size);
 			listener.setPort(port);
-			
-			//System.out.println("Listening to " + listener.getAddress() .getCanonicalHostName()+" on port "+port);
-			
 			listener.start();
-			
-			System.out.println("Press enter to exit");
-			
-			System.in.read();
-			
-			System.out.println("Exiting...");
-			
-			listener.stop();
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.info("ModbusTcpSlave¿ªÆô¼àÌý: " + port);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * ¹Ø±Õ¼àÌý
+	 */
+	public void stopTcplistener() {
+		listener.stop();
+	}
+
+	/*
+	 * send DI
+	 */
+	public void sendDevDI(int len) {
+		int i = 0;
+		while (i < len) {
+			spi.addDigitalIn(new SimpleDigitalIn(new DataDefined().ranBoolean()));
+			i++;
+		}
+	}
+
+	/*
+	 * send DO
+	 */
+	public void sendDevDO(int len) {
+		int i = 0;
+		while (i < len) {
+			spi.addDigitalOut(new SimpleDigitalOut(new DataDefined().ranBoolean()));
+			i++;
+		}
+	}
+
+	/*
+	 * InputRegister
+	 */
+	public void sendDevIR(int len) {
+		int i = 0;
+		while (i < len) {
+			spi.addInputRegister(new SimpleInputRegister(new DataDefined().ranInteger(20, 70)));
+			i++;
+		}
+	}
+
+	/*
+	 * Register
+	 */
+	public void sendDevRI(int len) {
+		int i = 0;
+		while (i < len) {
+			spi.addRegister(new SimpleRegister(new DataDefined().ranInteger(20, 70)));
+			i++;
+		}
+	}
 }

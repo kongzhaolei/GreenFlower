@@ -19,8 +19,8 @@ public class DataDispGhost {
 		VTimer.timerStart();
 		new TCPDataClient(host, port).TcpConnect();
 		while (true) {
-			TCPDataClient.sendDevSedimentOneData();
-			//TCPDataClient.sendDevSedimentRealData();
+			//TCPDataClient.sendDevSedimentOneData();
+			TCPDataClient.sendDevSedimentRealData();
 			// TCPDataClient.sendDevOneData();
 			// TCPDataClient.sendDevTenData();
 			
