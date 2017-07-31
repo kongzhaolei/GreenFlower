@@ -106,6 +106,14 @@ public class DataGenerator {
 		return "(tendata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("tendata") + ")";
 	}
+	
+	/*
+	 * 五分钟数据 fivedata
+	 */
+	public String genDevFiveData() {
+		return "(fivedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+				+ this.gevDevDataEngine("fivedata") + ")";
+	}
 
 	/*
 	 * 一分钟数据 one

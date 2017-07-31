@@ -98,6 +98,15 @@ public class TCPDataClient implements DataClient {
 			e.printStackTrace();
 		}
 	}
+	
+	// send DevFiveData
+	public static void sendDevFiveData(){
+		try {
+			channelSend(de.genDevFiveData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	// send DevOne
 

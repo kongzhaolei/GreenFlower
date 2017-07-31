@@ -27,8 +27,7 @@ import io.netty.channel.socket.DatagramPacket;
 /**
  * author kongzhaolei
  * 
- * --组播数据的发生器 两种通讯类型 1. multicast: 动态模拟前置的组播 2. UDP: 模拟数据处理服务的向上转发 两个维度的动态变化 1.
- * 动态模拟不同协议的主轮询数据 2. 动态模拟不同风机的主轮询数据 不同业务类型数据的动态变化
+ * --组播数据的发生器 两种通讯类型 1. multicast: 动态模拟前置的组播 2. UDP: 模拟数据处理服务的向上转发
  *  1. 主轮询数据 DevMainData
  * 格式说明：(wman|650101001|数据) 数据说明：(transtype=1 offsets从小到大排序)
  * 数据实例：(wman|422804646|2016-07-08

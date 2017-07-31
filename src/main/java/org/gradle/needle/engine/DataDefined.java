@@ -141,6 +141,7 @@ public class DataDefined {
 				}
 				break;
 			case "tendata":
+			case "fivedata":
 			case "one":
 				for (Propaths pps : getAllPropaths()) {
 					if (pps.getTranstype().intValue() == 2) {

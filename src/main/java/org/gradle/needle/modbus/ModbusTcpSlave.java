@@ -25,13 +25,13 @@ public class ModbusTcpSlave {
 	/*
 	 * ¿ªÆô¼àÌý
 	 */
-	public void startTcpListenerThreadPool(int size, int unitId) {
+	public void startTcpListenerThreadPool(int poolsize, int unitId) {
 		try {
 			spi = new SimpleProcessImage();
 			ModbusCoupler.getReference().setProcessImage(spi);
 			ModbusCoupler.getReference().setMaster(false);
 			ModbusCoupler.getReference().setUnitID(unitId);
-			listener = new ModbusTCPListener(size);
+			listener = new ModbusTCPListener(poolsize);
 			listener.setPort(port);
 			listener.start();
 			logger.info("ModbusTcpSlave¿ªÆô¼àÌý: " + port);
@@ -72,10 +72,10 @@ public class ModbusTcpSlave {
 	/*
 	 * InputRegister
 	 */
-	public void sendDevIR(int len) {
+	public void sendDevIR04(int len) {
 		int i = 0;
 		while (i < len) {
-			spi.addInputRegister(new SimpleInputRegister(new DataDefined().ranInteger(20, 70)));
+			spi.addInputRegister(new SimpleInputRegister(new DataDefined().ranInteger(0, 10)));
 			i++;
 		}
 	}
@@ -83,7 +83,7 @@ public class ModbusTcpSlave {
 	/*
 	 * Register
 	 */
-	public void sendDevRI(int len) {
+	public void sendDevRI03(int len) {
 		int i = 0;
 		while (i < len) {
 			spi.addRegister(new SimpleRegister(new DataDefined().ranInteger(20, 70)));
