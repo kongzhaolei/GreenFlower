@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.engine.DataGenerator;
 import org.gradle.needle.thread.DevChangeSaveThread;
+import org.gradle.needle.thread.DevFiveDataThread;
 import org.gradle.needle.thread.DevPowerCurveThread;
 import org.gradle.needle.thread.DevRealTimeDataThread;
 import org.gradle.needle.thread.DevTenDataThread;
@@ -45,6 +46,7 @@ public class TCPDataClient implements DataClient {
 		try {
 			TcpConnect();
 			new Thread(new DevTenDataThread()).start();
+			new Thread(new DevFiveDataThread()).start();
 			new Thread(new DevRealTimeDataThread()).start();
 			new Thread(new DevChangeSaveThread()).start();
 			new Thread(new DevPowerCurveThread()).start();
