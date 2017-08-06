@@ -53,9 +53,11 @@ public class UDPDataClient implements DataClient {
 	private static String singleIP;
 	private static int singlePort;
 	public static boolean is_multicast;
-	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+	private static int protocolid_wt = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
+	private static int protocolid_cft = Integer.parseInt(GlobalSettings.getProperty("protocolid_cft"));
 	private static Logger logger = Logger.getLogger(UDPDataClient.class.getName());
-	private static DataGenerator de = new DataGenerator(protocolid);
+	private static DataGenerator dgen_wt = new DataGenerator(protocolid_wt);
+	private static DataGenerator dgen_cft = new DataGenerator(protocolid_cft);
 
 	public UDPDataClient(String ip, int port) {
 		multicastIP = ip;
@@ -113,7 +115,7 @@ public class UDPDataClient implements DataClient {
 			Channel channel = bs.bind(0).sync().channel();
 
 			// 向服务端传递UDP消息
-			channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(de.genDevWmanData(), CharsetUtil.UTF_8),
+			channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(dgen_wt.genDevWmanData(), CharsetUtil.UTF_8),
 					new InetSocketAddress(singleIP, singlePort))).sync();
 			logger.info("消息已发送...");
 			if (!channel.closeFuture().await(6000)) {
@@ -126,12 +128,21 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// 组播 DevWmanData
+	// 组播风机 DevWmanData
 
 	public static void sendDevWmanData() {
 		try {
-			multicast.send(de.genDevWmanData());
+			multicast.send(dgen_wt.genDevWmanData());
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+   // 组播测风塔 CftWmanData
+	public static void sendCftWmanData() {
+		try {
+			multicast.send(dgen_cft.genDevWmanData());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -140,7 +151,7 @@ public class UDPDataClient implements DataClient {
 
 	public void sendDevFaultData() {
 		try {
-			multicast.send(de.genDevFaultData());
+			multicast.send(dgen_wt.genDevFaultData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -150,7 +161,7 @@ public class UDPDataClient implements DataClient {
 
 	public void sendDevAlarmData() {
 		try {
-			multicast.send(de.genDevAlarmData());
+			multicast.send(dgen_wt.genDevAlarmData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -160,7 +171,7 @@ public class UDPDataClient implements DataClient {
 
 	public void sendDevStateData() {
 		try {
-			multicast.send(de.genDevStateData());
+			multicast.send(dgen_wt.genDevStateData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -170,7 +181,7 @@ public class UDPDataClient implements DataClient {
 
 	public static void sendDevComState() {
 		try {
-			multicast.send(de.genDevComState());
+			multicast.send(dgen_wt.genDevComState());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -180,7 +191,7 @@ public class UDPDataClient implements DataClient {
 
 	public void sendDevWarnLog() {
 		try {
-			multicast.send(de.genDevWarnLog().toString());
+			multicast.send(dgen_wt.genDevWarnLog().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

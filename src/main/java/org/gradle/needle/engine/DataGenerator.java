@@ -160,13 +160,13 @@ public class DataGenerator {
 	}
 
 	/*
-	 * 主轮询数据 wman
+	 * 风机,测风塔主轮询数据 wman
 	 */
 	public String genDevWmanData() {
 		return "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("wman") + ")";
 	}
-
+	
 	/*
 	 * 告警日志
 	 */
