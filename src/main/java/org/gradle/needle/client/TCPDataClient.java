@@ -3,6 +3,8 @@ package org.gradle.needle.client;
 import org.apache.log4j.Logger;
 import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.engine.DataGenerator;
+import org.gradle.needle.thread.CftFiveDataThread;
+import org.gradle.needle.thread.CftTenDataThread;
 import org.gradle.needle.thread.DevChangeSaveThread;
 import org.gradle.needle.thread.DevFiveDataThread;
 import org.gradle.needle.thread.DevPowerCurveThread;
@@ -25,9 +27,11 @@ public class TCPDataClient implements DataClient {
 
 	private static String HOST;
 	private static int PORT;
-	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
+	private static int protocolid_wt = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
+	private static int protocolid_cft = Integer.parseInt(GlobalSettings.getProperty("protocolid_cft"));
 	private static Logger logger = Logger.getLogger(TCPDataClient.class.getName());
-	private static DataGenerator de = new DataGenerator(protocolid);
+	private static DataGenerator dgen_wt = new DataGenerator(protocolid_wt);
+	private static DataGenerator dgen_cft = new DataGenerator(protocolid_cft);
 	private static ChannelFuture future;
 
 	public TCPDataClient(String host, int port) {
@@ -47,9 +51,11 @@ public class TCPDataClient implements DataClient {
 			TcpConnect();
 			new Thread(new DevTenDataThread()).start();
 			new Thread(new DevFiveDataThread()).start();
-			//new Thread(new DevRealTimeDataThread()).start();
-			//new Thread(new DevChangeSaveThread()).start();
-			//new Thread(new DevPowerCurveThread()).start();
+			new Thread(new CftTenDataThread()).start();
+			new Thread(new CftFiveDataThread()).start();
+			// new Thread(new DevRealTimeDataThread()).start();
+			// new Thread(new DevChangeSaveThread()).start();
+			// new Thread(new DevPowerCurveThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,29 +98,46 @@ public class TCPDataClient implements DataClient {
 		}
 	}
 
-	// send DevTenData
-	public static void sendDevTenData() {
+	// send CftTenData
+	public static void sendCftTenData() {
 		try {
-			channelSend(de.genDevTenData());
+			channelSend(dgen_cft.genDevTenData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	// send DevFiveData
-	public static void sendDevFiveData(){
+
+	// send DevTenData
+	public static void sendDevTenData() {
 		try {
-			channelSend(de.genDevFiveData());
+			channelSend(dgen_wt.genDevTenData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send CftFiveData
+	public static void sendCftFiveData() {
+		try {
+			channelSend(dgen_cft.genDevFiveData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// send DevFiveData
+	public static void sendDevFiveData() {
+		try {
+			channelSend(dgen_wt.genDevFiveData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	// send DevOne
-
 	public static void sendDevOne() {
 		try {
-			String s = de.genDevOne();
+			String s = dgen_wt.genDevOne();
 			channelSend(s);
 			logger.info(s);
 		} catch (Exception e) {
@@ -123,30 +146,27 @@ public class TCPDataClient implements DataClient {
 	}
 
 	// send DevRealTimeData
-
 	public static void sendDevRealTimeData() {
 		try {
-			channelSend(de.genDevRealTimeData());
+			channelSend(dgen_wt.genDevRealTimeData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	// send DevChangeSave
-
 	public static void sendDevChangeSave() {
 		try {
-			channelSend(de.genDevChangeSave());
+			channelSend(dgen_wt.genDevChangeSave());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	// send DevPowerCurve
-
 	public static void sendDevPowerCurve() {
 		try {
-			channelSend(de.genDevPowerCurve());
+			channelSend(dgen_wt.genDevPowerCurve());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -155,18 +175,18 @@ public class TCPDataClient implements DataClient {
 	// send DevSedimentOne
 	public static void sendDevSedimentOne() {
 		try {
-			String s = de.genDevSedimentOne();
+			String s = dgen_wt.genDevSedimentOne();
 			channelSend(s);
 			logger.info(s);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// send DevSedimentOnedata
 	public static void sendDevSedimentOneData() {
 		try {
-			String s = de.genDevSedimentOneData();
+			String s = dgen_wt.genDevSedimentOneData();
 			channelSend(s);
 			logger.info(s);
 		} catch (Exception e) {
@@ -177,7 +197,7 @@ public class TCPDataClient implements DataClient {
 	// send DevSedimentRealData
 	public static void sendDevSedimentRealData() {
 		try {
-			String s = de.genDevSedimentRealData();
+			String s = dgen_wt.genDevSedimentRealData();
 			channelSend(s);
 			logger.info(s);
 		} catch (Exception e) {
@@ -189,7 +209,7 @@ public class TCPDataClient implements DataClient {
 
 	public void sendDevWarnLog() {
 		try {
-			channelSend(de.genDevWarnLog().toString());
+			channelSend(dgen_wt.genDevWarnLog().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -198,7 +218,7 @@ public class TCPDataClient implements DataClient {
 	// send DevFaultData
 	public void sendDevFaultData() {
 		try {
-			channelSend(de.genDevFaultData());
+			channelSend(dgen_wt.genDevFaultData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -207,7 +227,7 @@ public class TCPDataClient implements DataClient {
 	// send DevAlarmData
 	public void sendDevAlarmData() {
 		try {
-			channelSend(de.genDevAlarmData());
+			channelSend(dgen_wt.genDevAlarmData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -216,7 +236,7 @@ public class TCPDataClient implements DataClient {
 	// send DevStateData
 	public void sendDevStateData() {
 		try {
-			channelSend(de.genDevStateData());
+			channelSend(dgen_wt.genDevStateData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
