@@ -12,8 +12,8 @@
 		
 	</typeAliases>
 
-	<environments default="configdb">
-		<environment id="datadb">
+	<environments default="localdb">
+		<environment id="datamdb">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
@@ -21,11 +21,27 @@
 			</dataSource>
 		</environment>
 		
-		<environment id="configdb">
+		<environment id="configmdb">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="net.ucanaccess.jdbc.UcanaccessDriver" />
 				<property name="url" value="jdbc:ucanaccess:///opt/needle/GreenFlower/config.mdb" />
+			</dataSource>
+		</environment>
+		
+		<environment id="localdb">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="org.sqlite.JDBC" />
+				<property name="url" value="jdbc:sqlite:/opt/needle/GreenFlower/localdb.sqlite" />
+			</dataSource>
+		</environment>
+		
+		<environment id="datadb">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="org.sqlite.JDBC" />
+				<property name="url" value="jdbc:sqlite:/opt/needle/GreenFlower/datadb.sqlite" />
 			</dataSource>
 		</environment>
 		

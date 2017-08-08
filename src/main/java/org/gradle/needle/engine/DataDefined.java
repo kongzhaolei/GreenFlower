@@ -95,7 +95,7 @@ public class DataDefined {
 	 * 获取config库pathdescr表典型维数据集(protocolid, iecpath)
 	 */
 	public List<Pathdescr> getPathdescr(String iecpath) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Pathdescr pathdescr = new Pathdescr();
 		pathdescr.setProtocolid(protocolid);
@@ -193,7 +193,7 @@ public class DataDefined {
 	 * 获取config库propaths表典型维数据集(protocolid)
 	 */
 	public List<Propaths> getAllPropaths() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Propaths propaths = new Propaths();
 		propaths.setProtocolid(protocolid);
@@ -259,10 +259,10 @@ public class DataDefined {
 
 	/**
 	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库wtinfo表典型维数据集(protocolid)
+	 * 获取local库wtinfo表典型维数据集(protocolid)
 	 */
 	public List<Wtinfo> getWtinfo() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.configdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Wtinfo wtinfo = new Wtinfo();
 		wtinfo.setProtocolid(protocolid);
@@ -292,7 +292,7 @@ public class DataDefined {
 	 * 获取config库runlogcode表典型维数据集
 	 */
 	public List<Runlogcode> getRunLogCode(int systemid) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Runlogcode runlogcode = new Runlogcode();
 		runlogcode.setSystemid(systemid);
@@ -329,7 +329,6 @@ public class DataDefined {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		switch (dttype.trim()) {
 		case "FIXED":
 			rString = pda.getCol2();

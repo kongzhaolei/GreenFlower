@@ -25,7 +25,7 @@ public class TCPDataClient implements DataClient {
 
 	private static String HOST;
 	private static int PORT;
-	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid"));
+	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
 	private static Logger logger = Logger.getLogger(TCPDataClient.class.getName());
 	private static DataGenerator de = new DataGenerator(protocolid);
 	private static ChannelFuture future;
@@ -47,9 +47,9 @@ public class TCPDataClient implements DataClient {
 			TcpConnect();
 			new Thread(new DevTenDataThread()).start();
 			new Thread(new DevFiveDataThread()).start();
-			new Thread(new DevRealTimeDataThread()).start();
-			new Thread(new DevChangeSaveThread()).start();
-			new Thread(new DevPowerCurveThread()).start();
+			//new Thread(new DevRealTimeDataThread()).start();
+			//new Thread(new DevChangeSaveThread()).start();
+			//new Thread(new DevPowerCurveThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

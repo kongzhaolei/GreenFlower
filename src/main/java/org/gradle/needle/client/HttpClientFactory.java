@@ -38,7 +38,6 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
-import org.bouncycastle.jcajce.provider.asymmetric.dsa.DSASigner.noneDSA;
 
 public class HttpClientFactory {
 	private static CloseableHttpClient httpclient;
@@ -142,8 +141,8 @@ public class HttpClientFactory {
 	 */
 	private static String httpPostWay(String url, Map<String, String> header, Map<String, String> body) {
 
-		// httpclient = HttpClients.createDefault();
-		httpclient = getSSLHttpClient();
+		httpclient = HttpClients.createDefault();
+		// httpclient = getSSLHttpClient();
 		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 

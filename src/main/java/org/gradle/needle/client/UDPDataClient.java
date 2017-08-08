@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.engine.DataGenerator;
 import org.gradle.needle.multicast.Multicast;
+import org.gradle.needle.thread.CftWmanDataThread;
 import org.gradle.needle.thread.DevAlarmDataThread;
 import org.gradle.needle.thread.DevComStateThread;
 import org.gradle.needle.thread.DevFaultDataThread;
@@ -92,11 +93,12 @@ public class UDPDataClient implements DataClient {
 			multicast = new Multicast(multicastIP, multicastPort);
 			logger.info(multicastIP + ":" + multicastPort + " 组播服务已启动...");
 			new Thread(new DevWmanDataThread()).start();
-			new Thread(new DevFaultDataThread()).start();
-			new Thread(new DevAlarmDataThread()).start();
-			new Thread(new DevComStateThread()).start();
-			new Thread(new DevStateDataThread()).start();
-			new Thread(new DevWarnLogThread()).start();
+			new Thread(new CftWmanDataThread()).start();
+			//new Thread(new DevFaultDataThread()).start();
+			//new Thread(new DevAlarmDataThread()).start();
+			//new Thread(new DevComStateThread()).start();
+			//new Thread(new DevStateDataThread()).start();
+			//new Thread(new DevWarnLogThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,15 +135,17 @@ public class UDPDataClient implements DataClient {
 	public static void sendDevWmanData() {
 		try {
 			multicast.send(dgen_wt.genDevWmanData());
+			logger.info(dgen_wt.genDevWmanData());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}   
 	}
 	
    // 组播测风塔 CftWmanData
 	public static void sendCftWmanData() {
 		try {
 			multicast.send(dgen_cft.genDevWmanData());
+			logger.info("cft: " + dgen_cft.genDevWmanData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

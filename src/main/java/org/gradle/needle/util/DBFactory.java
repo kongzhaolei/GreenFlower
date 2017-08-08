@@ -38,8 +38,10 @@ public final class DBFactory {
 	
     //定义一个枚举类，对应多数据源的environment id
 	public static enum DBEnvironment {
-		configdb, 
-		datadb,
+		configmdb,
+		datamdb,
+	    localdb,
+	    datadb,
 		sqlserver,
 		postgresql,
 		oracle;
