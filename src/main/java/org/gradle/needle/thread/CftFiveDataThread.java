@@ -7,7 +7,8 @@ public class CftFiveDataThread implements Runnable{
 	public void run() {
 		while(true){
 			try {
-				TCPDataClient.sendCftFiveData();;
+				TCPDataClient.sendCftFiveData();
+				Thread.sleep(300000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

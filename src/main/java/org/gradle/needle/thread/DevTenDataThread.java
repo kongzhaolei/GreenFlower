@@ -11,6 +11,7 @@ public class DevTenDataThread implements Runnable {
 		while (true) {
 			try {
 				TCPDataClient.sendDevTenData();
+				Thread.sleep(600000);
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage());
 			}

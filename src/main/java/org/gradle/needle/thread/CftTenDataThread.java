@@ -9,6 +9,7 @@ public class CftTenDataThread implements Runnable{
 		while (true) {
 			try {
 				TCPDataClient.sendCftTenData();
+				Thread.sleep(600000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

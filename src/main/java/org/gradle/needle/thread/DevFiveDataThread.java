@@ -11,6 +11,7 @@ public class DevFiveDataThread implements Runnable{
 		while(true){
 			try {
 				TCPDataClient.sendDevFiveData();
+				Thread.sleep(300000);
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage());
 			}
