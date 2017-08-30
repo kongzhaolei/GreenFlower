@@ -4,13 +4,14 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.awaitility.Awaitility.await;
 
 import org.gradle.needle.client.TCPDataClient;
+import org.gradle.needle.dto.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 import org.gradle.needle.util.VerifyUtils;
 
 public class DataDispGhost {
 
-	private static String host = "10.68.100.18";
-	private static int port = 8814;
+	private static String host = GlobalSettings.getProperty("host");
+	private static int port = Integer.parseInt(GlobalSettings.getProperty("port"));
 
 	public static void main(String[] args) {
 		VTimer.timerStart();

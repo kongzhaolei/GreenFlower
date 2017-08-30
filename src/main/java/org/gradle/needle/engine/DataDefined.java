@@ -17,6 +17,7 @@ import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Runlogcode;
+import org.gradle.needle.model.Towerweatherheightmap;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
@@ -28,8 +29,8 @@ import org.gradle.needle.util.DBFactory.DBEnvironment;
  * 
  */
 public class DataDefined {
-	int protocolid;
-	String cmdname;
+	private int protocolid;
+	private String cmdname;
 	private static Logger logger = Logger.getLogger(DataDefined.class.getName());
 
 	/*
@@ -90,9 +91,8 @@ public class DataDefined {
 		return getPathdescr("WTUR.Other.Rs.S.LitPowByPLC");
 	}
 
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库pathdescr表典型维数据集(protocolid, iecpath)
+	/*
+	 * 获取localdb pathdescr表典型维数据集(protocolid, iecpath)
 	 */
 	public List<Pathdescr> getPathdescr(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -188,9 +188,8 @@ public class DataDefined {
 		return pps_list;
 	}
 
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库propaths表典型维数据集(protocolid)
+	/*
+	 * 获取localdb propaths表典型维数据集(protocolid)
 	 */
 	public List<Propaths> getAllPropaths() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -222,9 +221,8 @@ public class DataDefined {
 		return pack_list;
 	}
 
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取data库prodata表典型维数据集(protocolid)
+	/*
+	 * 获取datadb prodata表典型维数据集(protocolid)
 	 */
 	public List<Prodata> getAllProData() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
@@ -235,31 +233,23 @@ public class DataDefined {
 		return list;
 	}
 
-	/**
+	/*
 	 * 获取单风场编号
 	 */
 	public Integer getWfid() {
 		return getWtinfo().get(0).getWfid();
 	}
-
-	/**
-	 * 获取风机编号list<wtid>
+	
+	/*
+	 * 获取测风塔经纬度 float[]
 	 */
-	public List<Integer> getWtidList() {
-		List<Integer> lists = new ArrayList<Integer>();
-		try {
-			for (Wtinfo wtinfo : getWtinfo()) {
-				lists.add(wtinfo.getWtid());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lists;
+	private float[] getLongitudeAndLatitude(){
+		float[] aFloats = {getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
+		return aFloats;
 	}
 
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取local库wtinfo表典型维数据集(protocolid)
+	/*
+	 * 获取local wtinfo表典型维数据集(protocolid)
 	 */
 	public List<Wtinfo> getWtinfo() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -270,8 +260,8 @@ public class DataDefined {
 		return list;
 	}
 
-	/**
-	 * 获取code list<code>
+	/*
+	 * 获取runlog code list<code>
 	 * 
 	 * @systemid
 	 */
@@ -287,9 +277,8 @@ public class DataDefined {
 		return lists;
 	}
 
-	/**
-	 * 基于mybatis框架 不需要实现SuperMapper接口，mybatis自动生成mapper代理对象
-	 * 获取config库runlogcode表典型维数据集
+	/*
+	 * 获取localdb runlogcode表典型维数据集
 	 */
 	public List<Runlogcode> getRunLogCode(int systemid) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -299,8 +288,19 @@ public class DataDefined {
 		List<Runlogcode> list = mapper.selectRunlogcode(runlogcode);
 		return list;
 	}
+	
+	/*
+	 * 获取localdb Towerweatherheightmap典型维数据集
+	 */
+	public List<Towerweatherheightmap> getTowerweatherheightmap() {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Towerweatherheightmap towerweatherheightmap = new Towerweatherheightmap();
+		List<Towerweatherheightmap> list = mapper.selectTowerweatherheightmap(towerweatherheightmap);
+		return list;
+	}
 
-	/**
+	/*
 	 * 根据前置的GWSOCKET命令获取对应的compath
 	 */
 	protected String getCompathOnCmdname() {
@@ -376,11 +376,11 @@ public class DataDefined {
 			break;
 
 		case "FAULTMAIN":
-			rString = new DataGenerator(protocolid).genMainFault();
+			rString = new DeviceDataGenerator(protocolid).genMainFault();
 			break;
 
 		case "STATUS":
-			rString = new DataGenerator(protocolid).genStateData();
+			rString = new DeviceDataGenerator(protocolid).genStateData();
 			break;
 
 		case "TOTAL":
@@ -388,18 +388,18 @@ public class DataDefined {
 			break;
 
 		case "STOPMODE":
-			rString = new DataGenerator(protocolid).genStopModeWord();
+			rString = new DeviceDataGenerator(protocolid).genStopModeWord();
 			break;
 
 		case "LIMITMODE":
-			rString = new DataGenerator(protocolid).genLimitModeWord();
+			rString = new DeviceDataGenerator(protocolid).genLimitModeWord();
 			break;
 
 		case "ALARM":
-			rString = new DataGenerator(protocolid).genAlarmTree();
+			rString = new DeviceDataGenerator(protocolid).genAlarmTree();
 
 		case "FAULT":
-			rString = new DataGenerator(protocolid).genFaultTree();
+			rString = new DeviceDataGenerator(protocolid).genFaultTree();
 
 		case "NULL":
 			rString = pda.getCol2();

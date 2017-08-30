@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
+import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.VTimer;
 
 /***
@@ -18,18 +19,18 @@ import org.gradle.needle.util.VTimer;
  * @author kongzhaolei 数据模拟引擎类 1. 支持模拟瞬态数据，故障数据，警告数据，通信状态，风机状态数据,告警日志 2.
  *         支持模拟历史瞬态数据，分钟数据(10,5,1)，功率曲线数据，历史沉积数据，变位数据
  */
-public class DataGenerator {
+public class DeviceDataGenerator {
 
 	private int protocolid;
 	private String cmdname;
 	private DataDefined df;
-	private static Logger logger = Logger.getLogger(DataGenerator.class.getName());
+	private static Logger logger = Logger.getLogger(DeviceDataGenerator.class.getName());
 	Date date = new Date();
 
 	/*
 	 * 构造方法 1 PLC，初始化protocolid,cmdname
 	 */
-	public DataGenerator(int protocolid, String cmdname) {
+	public DeviceDataGenerator(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 		df = new DataDefined(protocolid, cmdname);
@@ -38,7 +39,7 @@ public class DataGenerator {
 	/*
 	 * 构造方法 2 normal，初始化protocolid
 	 */
-	public DataGenerator(int protocolid) {
+	public DeviceDataGenerator(int protocolid) {
 		this.protocolid = protocolid;
 		df = new DataDefined(protocolid);
 	}
@@ -68,6 +69,21 @@ public class DataGenerator {
 		}
 		return sReturn;
 	}
+	
+	/**
+	 * 获取风机编号list<wtid>
+	 */
+	public List<Integer> getWtidList() {
+		List<Integer> lists = new ArrayList<Integer>();
+		try {
+			for (Wtinfo wtinfo : df.getWtinfo()) {
+				lists.add(wtinfo.getWtid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
 
 	/*
 	 * 沉积数据 sediment,一分钟
@@ -95,23 +111,22 @@ public class DataGenerator {
 	 * 历史瞬态数据 realtimedata
 	 */
 	public String genDevRealTimeData() {
-		return "(realtimedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(realtimedata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("realtimedata") + ")";
 	}
 
 	/*
 	 * 十分钟数据 tendata
 	 */
-	public String genDevTenData() {
-		return "(tendata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
-				+ this.gevDevDataEngine("tendata") + ")";
+	public String genDevTenData(Integer wtid) {
+		return "(tendata|" + wtid + "|" + this.gevDevDataEngine("tendata") + ")";
 	}
-	
+
 	/*
 	 * 五分钟数据 fivedata
 	 */
-	public String genDevFiveData() {
-		return "(fivedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+	public String genDevFiveData(Integer wtid) {
+		return "(fivedata|" + wtid + "|"
 				+ this.gevDevDataEngine("fivedata") + ")";
 	}
 
@@ -119,14 +134,14 @@ public class DataGenerator {
 	 * 一分钟数据 one
 	 */
 	public String genDevOne() {
-		return "(one|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(one|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("one") + ")";
 	}
 
 	// 一分钟理论数据 onedata
 	public String genDevOneData() {
 		StringBuilder onedata = new StringBuilder();
-		Integer wtid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
+		Integer wtid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
 		String wind_power = this.gevDevDataEngine("onedata");
 		String theoretical = df.ranDouble("25", "87");
 		String statdata = this.genStateData();
@@ -136,10 +151,10 @@ public class DataGenerator {
 		String ambient_temp = df.ranDouble("20", "60");
 		String first_yield = df.ranDouble("0", "8687");
 		String last_yield = df.ranDouble("90001", "686877");
-		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",").append(theoretical)
-				.append(",").append(statdata).append(",").append(otherstat).append(",").append(mainfault).append(",")
-				.append(stopword).append(",").append(ambient_temp).append(",").append(first_yield).append(",")
-				.append(last_yield).append(")");
+		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",")
+				.append(theoretical).append(",").append(statdata).append(",").append(otherstat).append(",")
+				.append(mainfault).append(",").append(stopword).append(",").append(ambient_temp).append(",")
+				.append(first_yield).append(",").append(last_yield).append(")");
 		return onedata.toString();
 	}
 
@@ -147,7 +162,7 @@ public class DataGenerator {
 	 * 变位数据 changesave
 	 */
 	public String genDevChangeSave() {
-		return "(changesave|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(changesave|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("changesave") + ")";
 	}
 
@@ -155,7 +170,7 @@ public class DataGenerator {
 	 * 功率曲线 powercurve
 	 */
 	public String genDevPowerCurve() {
-		return "(powercurve|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(powercurve|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("powercurve") + ")";
 	}
 
@@ -163,10 +178,10 @@ public class DataGenerator {
 	 * 风机,测风塔主轮询数据 wman
 	 */
 	public String genDevWmanData() {
-		return "(wman|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|"
+		return "(wman|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("wman") + ")";
 	}
-	
+
 	/*
 	 * 告警日志
 	 */
@@ -177,7 +192,7 @@ public class DataGenerator {
 																// 故障
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = df.getWfid();
-		int objectid = df.getWtidList().get(df.ranInteger(0, df.getWtidList().size()));
+		int objectid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
 		String logcode = df.getLogCodeList(systemid).get(df.ranInteger(0, df.getRunLogCode(systemid).size()));
 		String warnid = df.ranString(16) + "-0" + systemid + "003645";
 		int flag = df.ranCoin();
@@ -314,7 +329,7 @@ public class DataGenerator {
 	 * 风机状态
 	 */
 	public String genDevStateData() {
-		return "(statedata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genStateData()
+		return "(statedata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genStateData()
 				+ ")";
 	}
 
@@ -322,7 +337,7 @@ public class DataGenerator {
 	 * 前置和设备通信状态，暂时设置为通信正常
 	 */
 	public String genDevComState() {
-		return "(comstate|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + "0" + ")";
+		return "(comstate|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + "0" + ")";
 	}
 
 	/*
@@ -336,7 +351,7 @@ public class DataGenerator {
 	 * 故障数据
 	 */
 	public String genDevFaultData() {
-		return "(falutdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genFaultTree()
+		return "(falutdata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genFaultTree()
 				+ ")";
 	}
 
@@ -359,7 +374,6 @@ public class DataGenerator {
 				}
 				faulttree = faulttree.substring(0, faulttree.length() - 1);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -370,7 +384,7 @@ public class DataGenerator {
 	 * 风机警告
 	 */
 	public String genDevAlarmData() {
-		return "(alarmdata|" + df.getWtidList().get(df.ranInteger(0, df.getWtidList().size())) + "|" + genAlarmTree()
+		return "(alarmdata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genAlarmTree()
 				+ ")";
 	}
 

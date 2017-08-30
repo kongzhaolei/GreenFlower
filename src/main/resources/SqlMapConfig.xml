@@ -9,6 +9,7 @@
 		<typeAlias alias="Pathdescr" type="org.gradle.needle.model.Pathdescr" />
 		<typeAlias alias="Wtinfo" type="org.gradle.needle.model.Wtinfo" />
 		<typeAlias alias="Runlogcode" type="org.gradle.needle.model.Runlogcode" />
+		<typeAlias alias="Towerweatherheightmap" type="org.gradle.needle.model.Towerweatherheightmap" />
 		
 	</typeAliases>
 

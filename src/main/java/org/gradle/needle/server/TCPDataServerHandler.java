@@ -1,7 +1,7 @@
 package org.gradle.needle.server;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.engine.DataGenerator;
+import org.gradle.needle.engine.DeviceDataGenerator;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -18,7 +18,7 @@ public class TCPDataServerHandler extends ChannelInboundHandlerAdapter {
 	
 	public void channelRead(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
-		DataGenerator de = new DataGenerator(protocolid, msg.toString().trim());
+		DeviceDataGenerator de = new DeviceDataGenerator(protocolid, msg.toString().trim());
 		logger.info(ctx.channel().remoteAddress() + "\n" + protocolid + "\n"
 				+ msg.toString());
 		String sReturnString = de.genCmdData();

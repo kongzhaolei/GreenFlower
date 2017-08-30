@@ -6,6 +6,8 @@ public class Wtinfo {
 	private Integer wfid;
 	private Integer wtid;
 	private String wtname;
+	private float wtlongitude;
+	private float wtlatitude;
 
 	public Integer getProtocolid() {
 		return protocolid;
@@ -25,5 +27,13 @@ public class Wtinfo {
 	
 	public String getWtname() {
 		return wtname;
+	}
+	
+	public float getWtlongitude() {
+		return wtlongitude;
+	}
+	
+	public float getWtlatitude() {
+		return wtlatitude;
 	}
 }

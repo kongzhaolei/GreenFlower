@@ -2,7 +2,9 @@ package org.gradle.needle.client;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.dto.GlobalSettings;
-import org.gradle.needle.engine.DataGenerator;
+import org.gradle.needle.engine.DataDefined;
+import org.gradle.needle.engine.DeviceDataGenerator;
+import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.thread.CftFiveDataThread;
 import org.gradle.needle.thread.CftTenDataThread;
 import org.gradle.needle.thread.DevChangeSaveThread;
@@ -30,8 +32,8 @@ public class TCPDataClient implements DataClient {
 	private static int protocolid_wt = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
 	private static int protocolid_cft = Integer.parseInt(GlobalSettings.getProperty("protocolid_cft"));
 	private static Logger logger = Logger.getLogger(TCPDataClient.class.getName());
-	private static DataGenerator dgen_wt = new DataGenerator(protocolid_wt);
-	private static DataGenerator dgen_cft = new DataGenerator(protocolid_cft);
+	private static DeviceDataGenerator dgen_wt = new DeviceDataGenerator(protocolid_wt);
+	private static DeviceDataGenerator dgen_cft = new DeviceDataGenerator(protocolid_cft);
 	private static ChannelFuture future;
 
 	public TCPDataClient(String host, int port) {
@@ -101,7 +103,10 @@ public class TCPDataClient implements DataClient {
 	// send CftTenData
 	public static void sendCftTenData() {
 		try {
-			channelSend(dgen_cft.genDevTenData());
+			for(Integer wtid : dgen_cft.getWtidList()){
+				channelSend(dgen_cft.genDevTenData(wtid));
+				//logger.info(dgen_cft.genDevTenData(wtid));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,7 +115,10 @@ public class TCPDataClient implements DataClient {
 	// send DevTenData
 	public static void sendDevTenData() {
 		try {
-			channelSend(dgen_wt.genDevTenData());
+			for(Integer wtid : dgen_wt.getWtidList()){
+				channelSend(dgen_wt.genDevTenData(wtid));
+				//logger.info(dgen_wt.genDevTenData(wtid));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,7 +127,10 @@ public class TCPDataClient implements DataClient {
 	// send CftFiveData
 	public static void sendCftFiveData() {
 		try {
-			channelSend(dgen_cft.genDevFiveData());
+			for(Integer wtid : dgen_cft.getWtidList()){
+				channelSend(dgen_cft.genDevFiveData(wtid));
+				//logger.info(dgen_cft.genDevFiveData(wtid));
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -128,7 +139,10 @@ public class TCPDataClient implements DataClient {
 	// send DevFiveData
 	public static void sendDevFiveData() {
 		try {
-			channelSend(dgen_wt.genDevFiveData());
+			for(Integer wtid : dgen_wt.getWtidList()){
+				channelSend(dgen_wt.genDevFiveData(wtid));
+				//logger.info(dgen_wt.genDevFiveData(wtid));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -5,7 +5,7 @@ import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
 import org.gradle.needle.dto.GlobalSettings;
-import org.gradle.needle.engine.DataGenerator;
+import org.gradle.needle.engine.DeviceDataGenerator;
 import org.gradle.needle.multicast.Multicast;
 import org.gradle.needle.thread.CftWmanDataThread;
 import org.gradle.needle.thread.DevAlarmDataThread;
@@ -57,8 +57,8 @@ public class UDPDataClient implements DataClient {
 	private static int protocolid_wt = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
 	private static int protocolid_cft = Integer.parseInt(GlobalSettings.getProperty("protocolid_cft"));
 	private static Logger logger = Logger.getLogger(UDPDataClient.class.getName());
-	private static DataGenerator dgen_wt = new DataGenerator(protocolid_wt);
-	private static DataGenerator dgen_cft = new DataGenerator(protocolid_cft);
+	private static DeviceDataGenerator dgen_wt = new DeviceDataGenerator(protocolid_wt);
+	private static DeviceDataGenerator dgen_cft = new DeviceDataGenerator(protocolid_cft);
 
 	public UDPDataClient(String ip, int port) {
 		multicastIP = ip;
@@ -135,7 +135,7 @@ public class UDPDataClient implements DataClient {
 	public static void sendDevWmanData() {
 		try {
 			multicast.send(dgen_wt.genDevWmanData());
-			logger.info(dgen_wt.genDevWmanData());
+			 logger.info(dgen_wt.genDevWmanData());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}   
@@ -145,14 +145,13 @@ public class UDPDataClient implements DataClient {
 	public static void sendCftWmanData() {
 		try {
 			multicast.send(dgen_cft.genDevWmanData());
-			logger.info("cft: " + dgen_cft.genDevWmanData());
+			 logger.info("cft: " + dgen_cft.genDevWmanData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	// ×é²¥ DevFaultData
-
 	public void sendDevFaultData() {
 		try {
 			multicast.send(dgen_wt.genDevFaultData());
