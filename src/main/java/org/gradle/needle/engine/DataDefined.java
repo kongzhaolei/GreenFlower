@@ -177,7 +177,7 @@ public class DataDefined {
 						pps_list.add(pps);
 					}
 				}
-				break;			
+				break;
 			default:
 				getAllPropaths();
 				break;
@@ -239,11 +239,11 @@ public class DataDefined {
 	public Integer getWfid() {
 		return getWtinfo().get(0).getWfid();
 	}
-	
+
 	/*
 	 * 获取测风塔经纬度 float[]
 	 */
-	private float[] getLongitudeAndLatitude(){
+	public float[] getLongitudeAndLatitude() {
 		float[] aFloats = {getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
 		return aFloats;
 	}
@@ -288,11 +288,26 @@ public class DataDefined {
 		List<Runlogcode> list = mapper.selectRunlogcode(runlogcode);
 		return list;
 	}
-	
+
+	/*
+	 * 测量塔层高
+	 */
+	public List<Integer> getTowerHeight() {
+		List<Integer> lists = new ArrayList<Integer>();
+		try {
+			for (Towerweatherheightmap towerweatherheightmap : getTowerweatherheightmap()) {
+				lists.add(towerweatherheightmap.getTowerheight());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+
 	/*
 	 * 获取localdb Towerweatherheightmap典型维数据集
 	 */
-	public List<Towerweatherheightmap> getTowerweatherheightmap() {
+	private List<Towerweatherheightmap> getTowerweatherheightmap() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Towerweatherheightmap towerweatherheightmap = new Towerweatherheightmap();
@@ -363,7 +378,8 @@ public class DataDefined {
 			break;
 
 		case "RANDOM":
-			rString = ranDouble(pda.getCol2().split(",")[0], pda.getCol2().split(",")[1]);
+			rString = ranFloat(Integer.parseInt(pda.getCol2().split(",")[0]),
+					Integer.parseInt(pda.getCol2().split(",")[1]));
 			break;
 
 		case "FIXBOOL":
@@ -433,15 +449,6 @@ public class DataDefined {
 		return bd;
 	}
 
-	/**
-	 * 生成随机双精度，位于max和min之间的方法
-	 */
-	public  String ranDouble(String min, String max) {
-		double bt = Integer.parseInt(min)
-				+ ((Integer.parseInt(max) - Integer.parseInt(min)) * new Random().nextDouble());
-		DecimalFormat df = new DecimalFormat("#.00");
-		return df.format(bt).toString();
-	}
 
 	/**
 	 * 生成一个随机的布尔值的方法
@@ -457,6 +464,15 @@ public class DataDefined {
 	public int ranCoin() {
 		Random rand = new Random();
 		return rand.nextInt(2);
+	}
+
+	/**
+	 * 生成随机单精度，位于max和min之间的方法
+	 */
+	public String ranFloat(int min, int max) {
+		double bt = min + ((max - min) * new Random().nextFloat());
+		DecimalFormat df = new DecimalFormat("######0.00");
+		return df.format(bt).toString();
 	}
 
 }

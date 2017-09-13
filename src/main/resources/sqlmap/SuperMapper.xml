@@ -40,7 +40,7 @@
 	<select id="selectTowerweatherheightmap" parameterType="Towerweatherheightmap" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="Towerweatherheightmap">
         <![CDATA[
- SELECT * FROM Towerweatherheightmap
+ SELECT * FROM Towerweatherheightmap ORDER BY towerheight ASC
         ]]>
 	</select>
 </mapper>
