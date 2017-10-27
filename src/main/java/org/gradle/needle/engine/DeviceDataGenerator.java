@@ -142,14 +142,14 @@ public class DeviceDataGenerator {
 		StringBuilder onedata = new StringBuilder();
 		Integer wtid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
 		String wind_power = this.gevDevDataEngine("onedata");
-		String theoretical = df.ranFloat(25, 87);
+		String theoretical = df.ranFloat(24,46);
 		String statdata = this.genStateData();
 		String otherstat = Integer.toString(df.ranInteger(0, 3));
 		String mainfault = this.genMainFault();
 		String stopword = this.genStopModeWord();
 		String ambient_temp = df.ranFloat(20, 60);
 		String first_yield = df.ranFloat(0, 8687);
-		String last_yield = df.ranFloat(90001, 686877);
+		String last_yield = df.ranFloat(6984, 113256);
 		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",")
 				.append(theoretical).append(",").append(statdata).append(",").append(otherstat).append(",")
 				.append(mainfault).append(",").append(stopword).append(",").append(ambient_temp).append(",")

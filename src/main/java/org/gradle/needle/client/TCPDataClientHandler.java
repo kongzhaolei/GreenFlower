@@ -18,7 +18,7 @@ public class TCPDataClientHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg){
 		res = msg.toString();
-		logger.info("服务端返回消息： " + msg.toString());
+		// logger.info("服务端返回消息： " + msg.toString());
 	}
 	
 	public static String getchannelRead() {

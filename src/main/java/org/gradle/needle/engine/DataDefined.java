@@ -237,14 +237,14 @@ public class DataDefined {
 	 * 获取单风场编号
 	 */
 	public Integer getWfid() {
-		return getWtinfo().get(0).getWfid();
+		return this.getWtinfo().get(0).getWfid();
 	}
 
 	/*
 	 * 获取测风塔经纬度 float[]
 	 */
 	public float[] getLongitudeAndLatitude() {
-		float[] aFloats = {getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
+		float[] aFloats = {this.getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
 		return aFloats;
 	}
 

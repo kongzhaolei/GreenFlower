@@ -53,8 +53,8 @@ public class TCPDataClient implements DataClient {
 			TcpConnect();
 			new Thread(new DevTenDataThread()).start();
 			new Thread(new DevFiveDataThread()).start();
-			new Thread(new CftTenDataThread()).start();
-			new Thread(new CftFiveDataThread()).start();
+			//new Thread(new CftTenDataThread()).start();
+			//new Thread(new CftFiveDataThread()).start();
 			// new Thread(new DevRealTimeDataThread()).start();
 			// new Thread(new DevChangeSaveThread()).start();
 			// new Thread(new DevPowerCurveThread()).start();

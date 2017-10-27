@@ -11,6 +11,8 @@ public class AnemometerMachine {
 		AnemometerDataGenerator anemometerDataGenerator = new AnemometerDataGenerator(
 				new File("/opt/needle"));
 		try {
+			anemometerDataGenerator.setLongtitude("95.435");
+			anemometerDataGenerator.setlatitude("37.1777");
 			anemometerDataGenerator.genAnemometerFiles(5);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -17,17 +17,29 @@ public class AnemometerDataGenerator {
 	private DataDefined dataDefined;
 	private File file;
 	private Calendar calendar;
+	private String longtitude;
+	private String latitude;
 	private static Logger logger = Logger.getLogger(AnemometerDataGenerator.class.getName());
 
 	public AnemometerDataGenerator(File file) {
 		this.file = file;
 		dataDefined = new DataDefined(Integer.parseInt(GlobalSettings.getProperty("protocolid_cft")));
 	}
+	
+	//设置经度
+	public void setLongtitude(String longtitude) {
+		this.longtitude = longtitude;
+	}
+	
+	//设置纬度
+	public void setlatitude(String latitude) {
+		this.latitude = latitude;
+	}
 
 	public String genAnemometerDataEngine() {
 		String puwspd = dataDefined.ranFloat(-5, 5);
 		String pvwspd = dataDefined.ranFloat(-4, 14);
-		String ptemp = dataDefined.ranFloat(20, 33);
+		String ptemp = dataDefined.ranFloat(20, 33);	
 		String phum = dataDefined.ranFloat(8, 100);
 		String ppres = dataDefined.ranFloat(840, 855);
 		String pradiantflux = dataDefined.ranFloat(0, 1007);
@@ -43,31 +55,25 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * 一般每个文件包括当前5天数据 
-	 * @ 00文件：0000-0600 
-	 * @ 12文件：1200-1800 
+	 * 一般每个文件包括当前5天数据
+	 * 
+	 * @ 00文件：0000-0600
+	 * 
+	 * @ 12文件：1200-1800
+	 * 
 	 * @duration 天数
 	 */
 	public void genAnemometerFiles(int duration) throws IOException {
 		file = new File(file.getAbsolutePath() + "/" + anemometerFileNameLogic());
-		int timeGranularity = 96; //时间粒度
+		int timeGranularity = 96; // 时间粒度
 		FileWriter fw = new FileWriter(file);
-		/*if (file.exists()) {
-			file.delete();
-			logger.info(anemometerFileNameLogic() + "已存在");
-		}*/
 		try {
-			//file.createNewFile();
 			for (int ontoday = -1; ontoday < duration; ontoday++) {
 				for (String time : anemometerTimeGranularity(timeGranularity)) {
 					for (int height : dataDefined.getTowerHeight()) {
-						StringBuilder line = new StringBuilder(
-								Float.toString(dataDefined.getLongitudeAndLatitude()[0]) + "\t")
-										.append(Float.toString(dataDefined.getLongitudeAndLatitude()[1]) + "\t")
-										.append(Integer.toString(height) + "\t")
-										.append(formatAnotherday(ontoday) + "\t")
-										.append(time + "\t")
-										.append(genAnemometerDataEngine());
+						StringBuilder line = new StringBuilder(longtitude + "\t").append(latitude + "\t")
+								.append(Integer.toString(height) + "\t").append(formatAnotherday(ontoday) + "\t")
+								.append(time + "\t").append(genAnemometerDataEngine());
 						fw.write(line.toString());
 						fw.flush();
 						logger.info(line.toString());
@@ -81,8 +87,7 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * 气象时间粒度 每日定时触发两次：02:50，14:50
-	 * 96个时间点
+	 * 气象时间粒度 每日定时触发两次：02:50，14:50 96个时间点
 	 */
 	private List<String> anemometerTimeGranularity(int timeGranularity) {
 		String amtime = "0000";
