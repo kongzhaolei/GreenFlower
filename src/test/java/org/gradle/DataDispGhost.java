@@ -14,7 +14,7 @@ public class DataDispGhost {
 	private static int port = Integer.parseInt(GlobalSettings.getProperty("port"));
 
 	public static void main(String[] args) {
-		VTimer.timerStart();
+		VTimer.keyWorkTimer();
 		new TCPDataClient(host, port).GeneratorStart();
 		
 /*

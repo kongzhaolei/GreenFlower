@@ -16,20 +16,18 @@
  */
 package org.gradle.needle.dto;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class GlobalSettings {
-	
+
 	public static Properties prop = getFileProperties();
-	
+
 	// 浏览器基本配置
-	public static int browserCoreType = Integer.parseInt(prop.getProperty(
-			"BrowserCoreType", "2"));
-	public static String chromeDriverPath = prop.getProperty(
-			"ChromeDriverPath", "res/chromedriver_for_win.exe");
-	public static String ieDriverPath = prop.getProperty("IEDriverPath",
-			"otherpath");
+	public static int browserCoreType = Integer.parseInt(prop.getProperty("BrowserCoreType", "2"));
+	public static String chromeDriverPath = prop.getProperty("ChromeDriverPath", "res/chromedriver_for_win.exe");
+	public static String ieDriverPath = prop.getProperty("IEDriverPath", "otherpath");
 	public static String stepInterval = prop.getProperty("StepInterval", "500");
 	public static String timeout = prop.getProperty("Timeout", "30000");
 
@@ -39,21 +37,22 @@ public class GlobalSettings {
 
 	// XML数据文件配置
 	public static String XmlDataFile1 = prop.getProperty("XmlDataFile1", "");
-	
+
 	public static String getProperty(String property) {
-		return prop.getProperty(property,"");
+		return prop.getProperty(property, "");
 	}
 
 	public static Properties getFileProperties() {
 		Properties prop = new Properties();
 		try {
-			//绝对路径读取JAT包外的配置文件方法
-//			String filePath = System.getProperty("user.dir") + "/src/main/resources/Globalsetting.properties"; 
-//			InputStream file = new BufferedInputStream(new FileInputStream(filePath)); 
-			
-			//读取JAR包内的配置文件方法,类文件和配置文件在同一包内
-			InputStream file = GlobalSettings.class.getClass().getResourceAsStream("/Globalsetting.properties");
-			
+			// 绝对路径读取JAT包外的配置文件方法
+			 //String filePath = "/opt/needle/GreenFlower/Globalsetting.properties";
+			 //InputStream file = new FileInputStream(filePath);
+
+			// 读取JAR包内的配置文件方法,类文件和配置文件在同一包内
+			 InputStream file =
+			 GlobalSettings.class.getClass().getResourceAsStream("/Globalsetting.properties");
+
 			prop.load(file);
 			file.close();
 		} catch (Exception e) {

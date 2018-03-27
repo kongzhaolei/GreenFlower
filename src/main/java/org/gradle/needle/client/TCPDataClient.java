@@ -61,7 +61,7 @@ public class TCPDataClient implements DataClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 	
 
 	/**
 	 * ≈‰÷√tcp client

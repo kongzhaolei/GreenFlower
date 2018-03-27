@@ -66,6 +66,7 @@ public class DeviceDataGenerator {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("当前数据串：" + sReturn);
 		}
 		return sReturn;
 	}
@@ -142,7 +143,6 @@ public class DeviceDataGenerator {
 		StringBuilder onedata = new StringBuilder();
 		Integer wtid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
 		String wind_power = this.gevDevDataEngine("onedata");
-		String theoretical = df.ranFloat(24,46);
 		String statdata = this.genStateData();
 		String otherstat = Integer.toString(df.ranInteger(0, 3));
 		String mainfault = this.genMainFault();
@@ -150,6 +150,7 @@ public class DeviceDataGenerator {
 		String ambient_temp = df.ranFloat(20, 60);
 		String first_yield = df.ranFloat(0, 8687);
 		String last_yield = df.ranFloat(6984, 113256);
+		String theoretical = df.ranFloat(24,46);
 		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",")
 				.append(theoretical).append(",").append(statdata).append(",").append(otherstat).append(",")
 				.append(mainfault).append(",").append(stopword).append(",").append(ambient_temp).append(",")
@@ -236,7 +237,7 @@ public class DeviceDataGenerator {
 							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("data库不存在此IEC量： " + pps.getIecpath() + " / " + pps.getDescrcn());
+							logger.info("data库缺少此IEC量： " + pps.getIecpath() + " / " + pps.getDescrcn());
 						}
 					}
 				} else {
@@ -306,7 +307,7 @@ public class DeviceDataGenerator {
 		List<String> lists = new ArrayList<String>();
 		int n = VTimer.getStatusNum(); // 风机状态时钟计数器
 		try {
-			if (genFaultTree() != "0") { // 故障，风机停机
+			if ("0" != genFaultTree()) { // 故障，风机停机
 				status = "2";
 			} else {
 				for (Pathdescr pathdescr : df.getStatusList()) {

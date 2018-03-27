@@ -32,11 +32,11 @@ public class TCPDataServer {
 	}
 
 	/***
-	 * 定时器启动 风机TCP启动
+	 * 关键字定时器启动 风机TCP启动
 	 */
 	public void Start() {
 		try {
-			VTimer.timerStart();
+			VTimer.keyWorkTimer();
 			run();
 		} catch (Exception e) {
 			e.printStackTrace();

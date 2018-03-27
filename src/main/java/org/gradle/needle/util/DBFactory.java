@@ -3,7 +3,9 @@
  */
 package org.gradle.needle.util;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import org.apache.commons.io.IOUtils;
 import org.apache.ibatis.io.Resources;
@@ -26,8 +28,10 @@ public final class DBFactory {
 		Reader reader = null;
 		try {
 			reader = Resources.getResourceAsReader(configpath);
-			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,
-					env.name());
+			sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,env.name());
+			
+			//InputStream file = new FileInputStream(configpath);
+			//sqlSessionFactory = new SqlSessionFactoryBuilder().build(file, env.name());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

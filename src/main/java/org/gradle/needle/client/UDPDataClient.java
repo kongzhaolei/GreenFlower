@@ -93,7 +93,7 @@ public class UDPDataClient implements DataClient {
 			multicast = new Multicast(multicastIP, multicastPort);
 			logger.info(multicastIP + ":" + multicastPort + " 组播服务已启动...");
 			new Thread(new DevWmanDataThread()).start();
-			new Thread(new CftWmanDataThread()).start();
+			//new Thread(new CftWmanDataThread()).start();
 			//new Thread(new DevFaultDataThread()).start();
 			//new Thread(new DevAlarmDataThread()).start();
 			//new Thread(new DevComStateThread()).start();

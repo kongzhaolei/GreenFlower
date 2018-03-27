@@ -37,7 +37,7 @@ public class VTimer {
 	/**
 	 * ¶¨Ê±Æ÷
 	 */
-	public static void timerStart() {
+	public static void keyWorkTimer() {
 		final long interval = Long.parseLong(GlobalSettings.getProperty("vtime"));
 		Timer timer = new Timer();
 		final int stop_size = new DataDefined(protocolid).getStopModeWordList().size();
