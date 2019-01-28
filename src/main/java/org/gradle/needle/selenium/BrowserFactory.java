@@ -23,8 +23,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dto.GlobalSettings;
-import org.gradle.needle.dto.UIMapSetting;
+import org.gradle.needle.config.GlobalSettings;
+import org.gradle.needle.config.UIMapSetting;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -64,14 +64,14 @@ public class BrowserFactory {
 	public BrowserFactory() {
 		setupBrowserCoreType(GlobalSettings.browserCoreType);
 		JSExecutor = (JavascriptExecutor) browserCore;
-		logger.info("Æô¶¯ä¯ÀÀÆ÷");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	}
 
-	// Ñ¡Ôñä¯ÀÀÆ÷
+	// Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private void setupBrowserCoreType(int type) {
 		if (type == 1) {
 			browserCore = new FirefoxDriver();
-			logger.info("Ê¹ÓÃ Firefoxä¯ÀÀÆ÷");
+			logger.info("Ê¹ï¿½ï¿½ Firefoxï¿½ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 		if (type == 2) {
@@ -89,7 +89,7 @@ public class BrowserFactory {
 					Arrays.asList("--start-maximized"));
 			browserCore = new RemoteWebDriver(chromeServer.getUrl(),
 					capabilities);
-			logger.info("Ê¹ÓÃChromeä¯ÀÀÆ÷");
+			logger.info("Ê¹ï¿½ï¿½Chromeï¿½ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 		if (type == 3) {
@@ -102,12 +102,12 @@ public class BrowserFactory {
 							InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
 							true);
 			browserCore = new InternetExplorerDriver(capabilities);
-			logger.info("Ê¹ÓÃ IE ä¯ÀÀÆ÷");
+			logger.info("Ê¹ï¿½ï¿½ IE ï¿½ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 		if (type == 4) {
 			browserCore = new SafariDriver();
-			logger.info("Ê¹ÓÃ Safari ä¯ÀÀÆ÷");
+			logger.info("Ê¹ï¿½ï¿½ Safari ï¿½ï¿½ï¿½ï¿½ï¿½");
 			return;
 		}
 
@@ -127,7 +127,7 @@ public class BrowserFactory {
 	}
 	
 
-	// ¼ÓÔØ²âÊÔÒ³Ãæ
+	// ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	public void open(String projectSName){
 		projectUrl = GlobalSettings.getFileProperties().getProperty(projectSName);
 		browser = new WebDriverBackedSelenium(browserCore, projectUrl);
@@ -136,22 +136,22 @@ public class BrowserFactory {
 			browser.open(projectUrl);
 		} catch (Exception e) {
 			e.printStackTrace();
-			handleFailure("¼ÓÔØÒ³ÃæÊ§°Ü" + projectUrl);
+			handleFailure("ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ê§ï¿½ï¿½" + projectUrl);
 		}
-		logger.info("¼ÓÔØÒ³Ãæ " + projectUrl);
+		logger.info("ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ " + projectUrl);
 	}
 
-	// ÍË³öä¯ÀÀÆ÷
+	// ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void quit() {
 		pause(stepInterval);
 		browserCore.quit();
 		if (GlobalSettings.browserCoreType == 2) {
 			chromeServer.stop();
 		}
-		logger.info("ÍË³öä¯ÀÀÆ÷");
+		logger.info("ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	}
 
-	// µ¥»÷Ò³ÃæÔªËØ
+	// ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½
 	public void click(String xpath) {
 		xpath = UIMapSetting.getUIMap().getProperty(xpath);
 		expectElementExistOrNot(true, xpath, timeout);
@@ -159,12 +159,12 @@ public class BrowserFactory {
 			clickcheck(xpath, System.currentTimeMillis(), 2500);
 		} catch (Exception e) {
 			e.printStackTrace();
-			handleFailure("µ¥»÷Ê§°Ü " + xpath);
+			handleFailure("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ " + xpath);
 		}
-		logger.info("µ¥»÷ " + xpath);
+		logger.info("ï¿½ï¿½ï¿½ï¿½ " + xpath);
 	}
 
-	// ¼ì²éÒ³ÃæÔªËØÊÇ·ñ´æÔÚ
+	// ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	public void expectElementExistOrNot(boolean expectExist,
 			final String xpath, int timeout) {
 		if (expectExist) {
@@ -173,12 +173,12 @@ public class BrowserFactory {
 					public boolean until() {
 						return isElementPresent(xpath, -1);
 					}
-				}.wait("²éÕÒÒ³ÃæÔªËØ³¬Ê± " + xpath, timeout);
+				}.wait("ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ôªï¿½Ø³ï¿½Ê± " + xpath, timeout);
 			} catch (Exception e) {
 				e.printStackTrace();
-				handleFailure("ÎÞ·¨ÕÒµ½Ò³ÃæÔªËØ " + xpath);
+				handleFailure("ï¿½Þ·ï¿½ï¿½Òµï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½ " + xpath);
 			}
-			logger.info("Ò³ÃæÔªËØÒÑÕÒµ½ " + xpath);
+			logger.info("Ò³ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ " + xpath);
 		}
 	}
 
@@ -193,7 +193,7 @@ public class BrowserFactory {
 		}
 	}
 
-	// ²éÕÒÎÄ±¾ÊÇ·ñ´æÔÚ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	public boolean isTextPresent(String text, int time) {
 		pause(time);
 		boolean isPresent = browser.isTextPresent(text);
@@ -206,24 +206,24 @@ public class BrowserFactory {
 		}
 	}
 
-	// ÅÐ¶ÏÒ³ÃæÔªËØÊÇ·ñ¿ÉÒÔµ¥»÷£¬¿ØÖÆ³¬Ê±
+	// ï¿½Ð¶ï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½Ê±
 	private void clickcheck(String xpath, long startTime, int timeout)
 			throws Exception {
 		try {
 			browserCore.findElementByXPath(xpath).click();
 		} catch (Exception e) {
 			if (System.currentTimeMillis() - startTime > timeout) {
-				logger.info("Element " + xpath + " ²»¿Éµ¥»÷");
+				logger.info("Element " + xpath + " ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½");
 				throw new Exception(e);
 			} else {
 				Thread.sleep(500);
-				logger.info("Element " + xpath + " ²»¿Éµ¥»÷, ÖØÐÂ³¢ÊÔ");
+				logger.info("Element " + xpath + " ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½");
 				clickcheck(xpath, startTime, timeout);
 			}
 		}
 	}
 
-	// Ò³ÃæÂ¼ÈëÎÄ±¾
+	// Ò³ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ä±ï¿½
 	public void type(String xpath, String text) {
 		xpath = UIMapSetting.getUIMap().getProperty(xpath);
 		pause(stepInterval);
@@ -232,19 +232,19 @@ public class BrowserFactory {
 		try {
 			we.clear();
 		} catch (Exception e) {
-			logger.warn("Çå¿ÕÊ§°Ü " + xpath);
+			logger.warn("ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ " + xpath);
 		}
 		try {
 			we.sendKeys(text);
 		} catch (Exception e) {
 			e.printStackTrace();
-			handleFailure("Â¼ÈëÊ§°Ü " + text + " at " + xpath);
+			handleFailure("Â¼ï¿½ï¿½Ê§ï¿½ï¿½ " + text + " at " + xpath);
 		}
 
-		logger.info(" ÔÚ" + xpath + "Â¼Èë " + text);
+		logger.info(" ï¿½ï¿½" + xpath + "Â¼ï¿½ï¿½ " + text);
 	}
 
-	// ÏÔÊ¾²ã¼¶²Ëµ¥²¢µÈ´ý
+	// ï¿½ï¿½Ê¾ï¿½ã¼¶ï¿½Ëµï¿½ï¿½ï¿½ï¿½È´ï¿½
 	public void MenuListDisplay(String menuxpath, String timewait) {
 		final String menuxpath_p = UIMapSetting.getUIMap().getProperty(
 				menuxpath);
@@ -258,7 +258,7 @@ public class BrowserFactory {
 				});
 	}
 
-	// Êó±êÖ¸ÏòÒ³ÃæÔªËØ
+	// ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ò³ï¿½ï¿½Ôªï¿½ï¿½
 	public void mouseOver(String xpath) {
 		pause(stepInterval);
 		expectElementExistOrNot(true, xpath, timeout);
@@ -277,10 +277,10 @@ public class BrowserFactory {
 				builder.moveToElement(we).build().perform();
 			} catch (Exception e) {
 				e.printStackTrace();
-				handleFailure("Êó±êÖ¸ÏòÊ§°Ü " + xpath);
+				handleFailure("ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ê§ï¿½ï¿½ " + xpath);
 			}
 
-			logger.info("Êó±êÖ¸Ïò " + xpath);
+			logger.info("ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ " + xpath);
 			return;
 		}
 
@@ -290,27 +290,27 @@ public class BrowserFactory {
 				Actions builder = new Actions(browserCore);
 				builder.moveToElement(we).build().perform();
 			}
-			logger.info("Êó±êÖ¸Ïò  " + xpath);
+			logger.info("ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½  " + xpath);
 			return;
 		}
 
 		if (GlobalSettings.browserCoreType == 4) {
-			Assert.fail("²»Ö§³ÖSafari");
+			Assert.fail("ï¿½ï¿½Ö§ï¿½ï¿½Safari");
 		}
-		Assert.fail("ÇëÖØÐÂÑ¡Ôñä¯ÀÀÆ÷");
+		Assert.fail("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 	}
 
-	// Ñ¡Ôñä¯ÀÀÆ÷´°¿Ú
+	// Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void selectmainWindow() {
 		pause(stepInterval);
 		// browser.selectWindow(windowTitle);
-		// µ±×îºóÖ»ÓÐÒ»¸ö´°¿ÚÊ£ÏÂµÄÊ±ºò£¬Ó¦¸Ã¿ÉÒÔÖ±½ÓÊ¹ÓÃ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½Âµï¿½Ê±ï¿½ï¿½Ó¦ï¿½Ã¿ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ê¹ï¿½ï¿½
 		browserCore.switchTo().window(browserCore.getWindowHandle());
-		logger.info("ÇÐ»»´°¿ÚÖÁ " + browserCore.getTitle());
+		logger.info("ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + browserCore.getTitle());
 	}
 
 	/**
-	 * Í¨¹ýÑ­»·±È½ÏËùÓÐ´°¿ÚµÄhandle ÅÅ³ýÆäËû´°¿Ú£¬¶¨Î»µ½µ±Ç°µ¯³ö´°¿Ú
+	 * Í¨ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Úµï¿½handle ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void selectWindow() {
 		pause(stepInterval);
@@ -321,13 +321,13 @@ public class BrowserFactory {
 				continue;
 			browserCore.switchTo().window(handler);
 			// System.out.println(browserCore.getTitle());
-			logger.info(Title_0 + "  ÇÐ»»´°¿ÚÖÁ  " + browserCore.getTitle());
+			logger.info(Title_0 + "  ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  " + browserCore.getTitle());
 		}
 	}
     
 	/**
-	 * switchFrame()·½·¨ÊÇ
-	 * ÔÚ¶à¸öiframe·´¸´ÇÐ»»£¬²»ÔÙÐèÒª»Øµ½×îÍâ²ãframe
+	 * switchFrame()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½Ú¶ï¿½ï¿½iframeï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½frame
 	 
 	
 	//
@@ -345,37 +345,37 @@ public class BrowserFactory {
 	 }
 */
 	
-	// Í¨¹ýID¶¨Î»iframe
+	// Í¨ï¿½ï¿½IDï¿½ï¿½Î»iframe
 	public void enterFrameid(String Id) {
 		Id = UIMapSetting.getUIMap().getProperty(Id);
 		pause(stepInterval);
 		browserCore.switchTo().frame(browserCore.findElementById(Id));
-		logger.info("½øÈë iframe " + Id);
+		logger.info("ï¿½ï¿½ï¿½ï¿½ iframe " + Id);
 	}
 
-	// Í¨¹ýxpath¶¨Î»iframe
+	// Í¨ï¿½ï¿½xpathï¿½ï¿½Î»iframe
 	public void enterFramexpath(String xpath) {
 		xpath = UIMapSetting.getUIMap().getProperty(xpath);
 		pause(stepInterval);
 		browserCore.switchTo().frame(browserCore.findElementByXPath(xpath));
-		logger.info("½øÈë iframe " + xpath);
+		logger.info("ï¿½ï¿½ï¿½ï¿½ iframe " + xpath);
 	}
 
-	// Ìø³öiframe
+	// ï¿½ï¿½ï¿½ï¿½iframe
 	public void leaveFrame() {
 		pause(stepInterval);
 		browserCore.switchTo().defaultContent();
-		logger.info("Ìø³öiframe");
+		logger.info("ï¿½ï¿½ï¿½ï¿½iframe");
 	}
 
-	// Ë¢ÐÂä¯ÀÀÆ÷
+	// Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void refresh() {
 		pause(stepInterval);
 		browserCore.navigate().refresh();
-		logger.info("ÒÑË¢ÐÂ");
+		logger.info("ï¿½ï¿½Ë¢ï¿½ï¿½");
 	}
 
-	// ¼üÅÌÊÂ¼þ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 	public void pressKeyboard(int keyCode) {
 		pause(stepInterval);
 		Robot rb = null;
@@ -390,7 +390,7 @@ public class BrowserFactory {
 		logger.info("Pressed key with code " + keyCode);
 	}
 
-	// ¼üÅÌÊäÈëÎÄ±¾
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
 	public void inputKeyboard(String text) {
 		String cmd = System.getProperty("user.dir")
 				+ "\\res\\SeleniumCommand.exe" + " sendKeys " + text;
@@ -407,23 +407,23 @@ public class BrowserFactory {
 		logger.info("Pressed key with string " + text);
 	}
 
-	// Ïß³ÌµÈ´ý
+	// ï¿½ß³ÌµÈ´ï¿½
 	public void pause(int time) {
 		if (time <= 0) {
 			return;
 		}
 		try {
 			Thread.sleep(time);
-			logger.info("µÈ´ý " + time + " ms");
+			logger.info("ï¿½È´ï¿½ " + time + " ms");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// Òì³£´¦Àí
+	// ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
 	private void handleFailure(String notice) {
 		String png = CaptureScreenshot.screenShot(this);
-		String log = notice + "  ÒÑ¾­±£´æÊ§°Ü½ØÍ¼ " + png;
+		String log = notice + "  ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü½ï¿½Í¼ " + png;
 		logger.error(log);
 		if (projectUrl.lastIndexOf("/") == projectUrl.length()) {
 			projectUrl = projectUrl.substring(0, projectUrl.length() - 1);
@@ -433,47 +433,47 @@ public class BrowserFactory {
 		Assert.fail(log);
 	}
 
-	// »ñÈ¡ÎÄ±¾
+	// ï¿½ï¿½È¡ï¿½Ä±ï¿½
 	public String getText(String xpath) {
 		WebElement element = this.getBrowserCore().findElement(By.xpath(xpath));
 		return element.getText();
 	}
 
-	// Ñ¡Ôñ±êÇ©
+	// Ñ¡ï¿½ï¿½ï¿½Ç©
 	public void select(String xpath, String option) {
 		WebElement element = this.browserCore.findElement(By.xpath(xpath));
 		Select select = new Select(element);
 		select.selectByVisibleText(option);
 	}
 
-	// DOM ´¦ÀíÊ±¼ä¿Ø¼þ»òÄ£Ì¬´°¿Ú,¸³Öµ
+	// DOM ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½Ä£Ì¬ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Öµ
 	public void TypeJsElement(String value, String id) {
 		id = UIMapSetting.getUIMap().getProperty(id);
 		WebElement DatePicker = browserCore.findElement(By.id(id));
 		JSExecutor.executeScript(
 				"arguments[0].value=arguments[1]", DatePicker, value);
-		logger.info("ÔÚ " + id + "  Â¼Èë  " + value);
+		logger.info("ï¿½ï¿½ " + id + "  Â¼ï¿½ï¿½  " + value);
 	};
 	
 
 	
 	/**
-	 * ÅÐ¶ÏÒ³ÃæÊÇ·ñ¼ÓÔØÁËjquery¿â
-	 * ¼ÓÔØjquery¿â²¢³õÊ¼»¯
-	 * ÀûÓÃjquery¶¨Î»Ò³ÃæÔªËØ
+	 * ï¿½Ð¶ï¿½Ò³ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jqueryï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½jqueryï¿½â²¢ï¿½ï¿½Ê¼ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½jqueryï¿½ï¿½Î»Ò³ï¿½ï¿½Ôªï¿½ï¿½
 	 */
 	
-	//³õÊ¼»¯jQuery¿â
+	//ï¿½ï¿½Ê¼ï¿½ï¿½jQueryï¿½ï¿½
 	public void injectjQueryCheck() {
 		if (!jQueryLoaded()){
-		    System.out.println("JqueryÎ´¼ÓÔØ");
+		    System.out.println("JqueryÎ´ï¿½ï¿½ï¿½ï¿½");
 		    injectjQuery(); 
 		}
 		else
-			System.out.println("JqueryÒÑ¼ÓÔØ");
+			System.out.println("Jqueryï¿½Ñ¼ï¿½ï¿½ï¿½");
 	}
     
-	//¼ÓÔØJquery
+	//ï¿½ï¿½ï¿½ï¿½Jquery
 	private void injectjQuery() {
 	   try{
 		   JSExecutor.executeScript("var headID = document.getElementsByTagName(\"head\")[0];" 
@@ -481,14 +481,14 @@ public class BrowserFactory {
 				   + "newScript.type = 'text/javascript';" 
 				   + "newScript.src = '/greenflower/src/test/resources/jquery-2.1.1.js';" 
 				   + "headID.appendChild(newScript);"); 
-		   System.out.println("Jquery ¼ÓÔØ³É¹¦"); 
+		   System.out.println("Jquery ï¿½ï¿½ï¿½Ø³É¹ï¿½"); 
 		   Thread.sleep(1000);
 	   }catch(InterruptedException e){
 		   e.printStackTrace(); 
 	   }
 	}
     
-	//ÅÐ¶ÏÊÇ·ñ¼ÓÔØÁËjQuery¿â
+	//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jQueryï¿½ï¿½
 	private boolean jQueryLoaded() {
 		Boolean loaded;
 		String s = (String)(JSExecutor.executeScript("return typeof jQuery")); 
@@ -499,7 +499,7 @@ public class BrowserFactory {
 		 return loaded;
 	}
 	
-	//ÀûÓÃjQuery¶¨Î»
+	//ï¿½ï¿½ï¿½ï¿½jQueryï¿½ï¿½Î»
 	public WebElement LocatorWithjQuery(String selector){ 
 		injectjQueryCheck();
 		String js="return jQuery(\""+selector+"\")[0]";

@@ -1,5 +1,5 @@
 /**
- *创建各个数据库的会话工厂，传入mybatis配置文件信息
+ *锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷匡拷幕峄帮拷锟斤拷锟斤拷锟斤拷锟斤拷锟絤ybatis锟斤拷锟斤拷锟侥硷拷锟斤拷息
  */
 package org.gradle.needle.util;
 
@@ -21,7 +21,7 @@ public final class DBFactory {
 	private static final String configpath = "SqlMapConfig.xml";
 
 	/*
-	 * 根据environment id 获取对应的SqlSessionFactory
+	 * 锟斤拷锟斤拷environment id 锟斤拷取锟斤拷应锟斤拷SqlSessionFactory
 	 */
 	public static SqlSessionFactory getSqlSessionFactory(DBEnvironment env) {
 		SqlSessionFactory sqlSessionFactory = null;
@@ -40,7 +40,7 @@ public final class DBFactory {
 		return sqlSessionFactory;
 	}
 	
-    //定义一个枚举类，对应多数据源的environment id
+    //锟斤拷锟斤拷一锟斤拷枚锟斤拷锟洁，锟斤拷应锟斤拷锟斤拷锟斤拷源锟斤拷environment id
 	public static enum DBEnvironment {
 		configmdb,
 		datamdb,
@@ -48,6 +48,7 @@ public final class DBFactory {
 	    datadb,
 		sqlserver,
 		postgresql,
+		mysql,
 		oracle;
 	}
 }

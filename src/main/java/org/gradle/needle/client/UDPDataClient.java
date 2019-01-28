@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.engine.DeviceDataGenerator;
 import org.gradle.needle.multicast.Multicast;
 import org.gradle.needle.thread.CftWmanDataThread;
@@ -28,23 +28,23 @@ import io.netty.channel.socket.DatagramPacket;
 /**
  * author kongzhaolei
  * 
- * --×é²¥Êý¾ÝµÄ·¢ÉúÆ÷ Á½ÖÖÍ¨Ñ¶ÀàÐÍ 1. multicast: ¶¯Ì¬Ä£ÄâÇ°ÖÃµÄ×é²¥ 2. UDP: Ä£ÄâÊý¾Ý´¦Àí·þÎñµÄÏòÉÏ×ª·¢
- *  1. Ö÷ÂÖÑ¯Êý¾Ý DevMainData
- * ¸ñÊ½ËµÃ÷£º(wman|650101001|Êý¾Ý) Êý¾ÝËµÃ÷£º(transtype=1 offsets´ÓÐ¡µ½´óÅÅÐò)
- * Êý¾ÝÊµÀý£º(wman|422804646|2016-07-08
+ * --ï¿½é²¥ï¿½ï¿½ï¿½ÝµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Í¨Ñ¶ï¿½ï¿½ï¿½ï¿½ 1. multicast: ï¿½ï¿½Ì¬Ä£ï¿½ï¿½Ç°ï¿½Ãµï¿½ï¿½é²¥ 2. UDP: Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
+ *  1. ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ DevMainData
+ * ï¿½ï¿½Ê½Ëµï¿½ï¿½ï¿½ï¿½(wman|650101001|ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½(transtype=1 offsetsï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½(wman|422804646|2016-07-08
  * 10:49:03.431,1092.81,1087.53,1085.78,391.97,390.55,390.55,1259.52,-218.24,50,0.99,False,True)
  * 
- * 2. ¹ÊÕÏÊý¾Ý DevFaultData ¸ñÊ½ËµÃ÷£º(falutdata|wtid|¹ÊÕÏºÅ|¹ØÁªiecpathÁ¿|Éè±¸×´Ì¬|Î¨Ò»ºÅ)
- * Êý¾ÝÊµÀý£º(falutdata|650101001|106;90;91;92;95)
+ * 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DevFaultData ï¿½ï¿½Ê½Ëµï¿½ï¿½ï¿½ï¿½(falutdata|wtid|ï¿½ï¿½ï¿½Ïºï¿½|ï¿½ï¿½ï¿½ï¿½iecpathï¿½ï¿½|ï¿½è±¸×´Ì¬|Î¨Ò»ï¿½ï¿½)
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½(falutdata|650101001|106;90;91;92;95)
  * 
- * 3. ¾¯¸æÊý¾Ý DevAlarmdata ¸ñÊ½ËµÃ÷£º(alarmdata|wtid|¾¯¸æºÅ|¹ØÁªiecpathÁ¿|Éè±¸×´Ì¬)
- * Êý¾ÝÊµÀý£º(alarmdata|652111802|163;120;82)
+ * 3. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DevAlarmdata ï¿½ï¿½Ê½Ëµï¿½ï¿½ï¿½ï¿½(alarmdata|wtid|ï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½iecpathï¿½ï¿½|ï¿½è±¸×´Ì¬)
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½(alarmdata|652111802|163;120;82)
  * 
- * 4. Ç°ÖÃºÍÉè±¸Ö®¼äµÄÍ¨ÐÅ×´Ì¬ DevComState ¸ñÊ½ËµÃ÷£º(comstate|wtid|Í¨Ñ¶×´Ì¬)
- * Êý¾ÝÊµÀý£º(comstate|650101001|0)
+ * 4. Ç°ï¿½Ãºï¿½ï¿½è±¸Ö®ï¿½ï¿½ï¿½Í¨ï¿½ï¿½×´Ì¬ DevComState ï¿½ï¿½Ê½Ëµï¿½ï¿½ï¿½ï¿½(comstate|wtid|Í¨Ñ¶×´Ì¬)
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½(comstate|650101001|0)
  * 
- * 5. °üÊý¾Ý×é²¥ DevPackData ¸ñÊ½ËµÃ÷£º(pack|Êý¾Ý°üÃû|wtid|Êý¾Ý) Êý¾ÝËµÃ÷£ºcompath=Êý¾Ý°üÃûoffsets´ÓÐ¡µ½´óÅÅÐò
- * Êý¾ÝÊµÀý£º(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
+ * 5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é²¥ DevPackData ï¿½ï¿½Ê½Ëµï¿½ï¿½ï¿½ï¿½(pack|ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½|wtid|ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½compath=ï¿½ï¿½ï¿½Ý°ï¿½ï¿½ï¿½offsetsï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½(pack|WFPR|650101002|6,0,0,2,7,7,1,1,1,FALSE,FALSE,TRUE,FALSE,TRUE)
  * 
  */
 public class UDPDataClient implements DataClient {
@@ -71,7 +71,7 @@ public class UDPDataClient implements DataClient {
 	}
 
 	/**
-	 * Êý¾Ý·¢ÉúÆ÷ ÅÐ¶Ï×é²¥»òµ¥²¥·½Ê½
+	 * ï¿½ï¿½ï¿½Ý·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¶ï¿½ï¿½é²¥ï¿½òµ¥²ï¿½ï¿½ï¿½Ê½
 	 */
 	public void GeneratorStart() {
 		try {
@@ -86,12 +86,12 @@ public class UDPDataClient implements DataClient {
 	}
 
 	/**
-	 * udpÏß³Ì×é
+	 * udpï¿½ß³ï¿½ï¿½ï¿½
 	 */
 	private void multicastGen() {
 		try {
 			multicast = new Multicast(multicastIP, multicastPort);
-			logger.info(multicastIP + ":" + multicastPort + " ×é²¥·þÎñÒÑÆô¶¯...");
+			logger.info(multicastIP + ":" + multicastPort + " ï¿½é²¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...");
 			new Thread(new DevWmanDataThread()).start();
 			//new Thread(new CftWmanDataThread()).start();
 			//new Thread(new DevFaultDataThread()).start();
@@ -105,7 +105,7 @@ public class UDPDataClient implements DataClient {
 	}
 
 	/**
-	 * UDPµ¥²¥·½Ê½·¢ËÍÊý¾Ý Ä£ÄâÊý¾Ý´¦Àí·þÎñµÄÏòÉÏ×ª·¢ÒµÎñ
+	 * UDPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Òµï¿½ï¿½
 	 */
 	private void singleGen() {
 		EventLoopGroup group = new NioEventLoopGroup();
@@ -116,12 +116,12 @@ public class UDPDataClient implements DataClient {
 
 			Channel channel = bs.bind(0).sync().channel();
 
-			// Ïò·þÎñ¶Ë´«µÝUDPÏûÏ¢
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½UDPï¿½ï¿½Ï¢
 			channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(dgen_wt.genDevWmanData(), CharsetUtil.UTF_8),
 					new InetSocketAddress(singleIP, singlePort))).sync();
-			logger.info("ÏûÏ¢ÒÑ·¢ËÍ...");
+			logger.info("ï¿½ï¿½Ï¢ï¿½Ñ·ï¿½ï¿½ï¿½...");
 			if (!channel.closeFuture().await(6000)) {
-				logger.info("·¢ËÍ³¬Ê±...");
+				logger.info("ï¿½ï¿½ï¿½Í³ï¿½Ê±...");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -130,7 +130,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥·ç»ú DevWmanData
+	// ï¿½é²¥ï¿½ï¿½ï¿½ DevWmanData
 
 	public static void sendDevWmanData() {
 		try {
@@ -141,7 +141,7 @@ public class UDPDataClient implements DataClient {
 		}   
 	}
 	
-   // ×é²¥²â·çËþ CftWmanData
+   // ï¿½é²¥ï¿½ï¿½ï¿½ï¿½ï¿½ CftWmanData
 	public static void sendCftWmanData() {
 		try {
 			multicast.send(dgen_cft.genDevWmanData());
@@ -151,7 +151,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥ DevFaultData
+	// ï¿½é²¥ DevFaultData
 	public void sendDevFaultData() {
 		try {
 			multicast.send(dgen_wt.genDevFaultData());
@@ -160,7 +160,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥ DevAlarmData
+	// ï¿½é²¥ DevAlarmData
 
 	public void sendDevAlarmData() {
 		try {
@@ -170,7 +170,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥ DevStateData
+	// ï¿½é²¥ DevStateData
 
 	public void sendDevStateData() {
 		try {
@@ -180,7 +180,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥ DevComState
+	// ï¿½é²¥ DevComState
 
 	public static void sendDevComState() {
 		try {
@@ -190,7 +190,7 @@ public class UDPDataClient implements DataClient {
 		}
 	}
 
-	// ×é²¥ DevWarnLog
+	// ï¿½é²¥ DevWarnLog
 
 	public void sendDevWarnLog() {
 		try {

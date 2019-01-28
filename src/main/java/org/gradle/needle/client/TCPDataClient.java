@@ -1,8 +1,8 @@
 package org.gradle.needle.client;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dto.GlobalSettings;
-import org.gradle.needle.engine.DataDefined;
+import org.gradle.needle.config.GlobalSettings;
+import org.gradle.needle.engine.DataHub;
 import org.gradle.needle.engine.DeviceDataGenerator;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.thread.CftFiveDataThread;
@@ -46,7 +46,7 @@ public class TCPDataClient implements DataClient {
 	}
 
 	/**
-	 * TCP Ïß³Ì×é
+	 * TCP ï¿½ß³ï¿½ï¿½ï¿½
 	 */
 	public void GeneratorStart() {
 		try {
@@ -64,7 +64,7 @@ public class TCPDataClient implements DataClient {
 	} 	
 
 	/**
-	 * ÅäÖÃtcp client
+	 * ï¿½ï¿½ï¿½ï¿½tcp client
 	 * 
 	 * @param data
 	 */
@@ -82,7 +82,7 @@ public class TCPDataClient implements DataClient {
 						}
 					});
 			future = bs.connect(HOST, PORT).sync();
-			logger.info("ÒÑÁ¬½Óµ½·þÎñ¶Ë " + HOST + ":" + PORT);
+			logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + HOST + ":" + PORT);
 			// future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class TCPDataClient implements DataClient {
 	}
 
 	/**
-	 * Í¨µÀ·¢ËÍtcpÊý¾Ý
+	 * Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tcpï¿½ï¿½ï¿½ï¿½
 	 */
 	public static void channelSend(String data) {
 		try {

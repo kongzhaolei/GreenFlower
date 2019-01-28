@@ -1,7 +1,7 @@
 package org.gradle.needle.server;
 
 import org.apache.log4j.Logger;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -32,7 +32,7 @@ public class TCPDataServer {
 	}
 
 	/***
-	 * ¹Ø¼ü×Ö¶¨Ê±Æ÷Æô¶¯ ·ç»úTCPÆô¶¯
+	 * ï¿½Ø¼ï¿½ï¿½Ö¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½TCPï¿½ï¿½ï¿½ï¿½
 	 */
 	public void Start() {
 		try {
@@ -44,7 +44,7 @@ public class TCPDataServer {
 	}
 
 	/**
-	 * ·ç»úÐ­Òé
+	 * ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -53,16 +53,16 @@ public class TCPDataServer {
 	}
 
 	/**
-	 * ·þÎñ¶ËÆô¶¯
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void run() {
-		// EventLoopGroupÊÇÓÃÀ´´¦ÀíIO²Ù×÷µÄ¶àÏß³ÌÊÂ¼þÑ­»·Æ÷
-		// bossGroup ÓÃÀ´½ÓÊÕ¿Í»§¶ËµÄÁ¬½Ó£¬workerGroup ÓÃÀ´´¦ÀíÒÑ¾­±»½ÓÊÕµÄÁ¬½Ó
+		// EventLoopGroupï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IOï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ß³ï¿½ï¿½Â¼ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½
+		// bossGroup ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¿Í»ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½Ó£ï¿½workerGroup ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
 		try {
-			// NIO ·þÎñµÄ¸¨ÖúÆô¶¯Àà
+			// NIO ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			ServerBootstrap sbs = new ServerBootstrap().group(bossGroup, workerGroup)
 					.channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<SocketChannel>() {
 
@@ -74,9 +74,9 @@ public class TCPDataServer {
 						};
 					}).option(ChannelOption.SO_BACKLOG, 128).childOption(ChannelOption.SO_KEEPALIVE, true);
 
-			// °ó¶¨¶Ë¿Ú£¬¿ªÊ¼½ÓÊÕ½øÀ´µÄÁ¬½Ó
+			// ï¿½ó¶¨¶Ë¿Ú£ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			ChannelFuture future = sbs.bind(host, port).sync();
-			logger.info("·þÎñÆ÷¼àÌýÓÚ£º " + host + ":" + port);
+			logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ " + host + ":" + port);
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();

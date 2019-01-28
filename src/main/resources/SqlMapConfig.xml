@@ -10,6 +10,7 @@
 		<typeAlias alias="Wtinfo" type="org.gradle.needle.model.Wtinfo" />
 		<typeAlias alias="Runlogcode" type="org.gradle.needle.model.Runlogcode" />
 		<typeAlias alias="Towerweatherheightmap" type="org.gradle.needle.model.Towerweatherheightmap" />
+		<typeAlias alias="WtOneData" type="org.gradle.needle.model.WtOneData" />
 		
 	</typeAliases>
 
@@ -50,9 +51,9 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-				<property name="url" value="jdbc:sqlserver://10.68.100.28;databaseName=MirrorDB_wf836610" />
-				<property name="username" value="sa" />
-				<property name="password" value="1234.abcd" />
+				<property name="url" value="jdbc:sqlserver://10.10.0.80;databaseName=MirrorDB_wf836610" />
+				<property name="username" value="andy" />
+				<property name="password" value="andy" />
 			</dataSource>
 		</environment>
 		
@@ -63,6 +64,16 @@
 				<property name="url" value="jdbc:postgresql://10.68.100.28:5432/scada" />
 				<property name="username" value="postgres" />
 				<property name="password" value="123" />
+			</dataSource>
+		</environment>
+		
+		<environment id="mysql">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://10.10.0.80:3309/dbo" />
+				<property name="username" value="andy" />
+				<property name="password" value="andy" />
 			</dataSource>
 		</environment>
 

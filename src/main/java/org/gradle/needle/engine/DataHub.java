@@ -12,12 +12,13 @@ import java.util.Random;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Runlogcode;
 import org.gradle.needle.model.Towerweatherheightmap;
+import org.gradle.needle.model.WtOneData;
 import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
@@ -28,71 +29,85 @@ import org.gradle.needle.util.DBFactory.DBEnvironment;
  * 
  * 
  */
-public class DataDefined {
+public class DataHub {
 	private int protocolid;
 	private String cmdname;
-	private static Logger logger = Logger.getLogger(DataDefined.class.getName());
+	private static Logger logger = Logger.getLogger(DataHub.class.getName());
 
 	/*
-	 * ¹¹Ôì·½·¨,³õÊ¼»¯protocolid,cmdname
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½,ï¿½ï¿½Ê¼ï¿½ï¿½protocolid,cmdname
 	 */
-	public DataDefined(int protocolid, String cmdname) {
+	public DataHub(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
 
 	}
 
 	/*
-	 * ¹¹Ôì·½·¨,³õÊ¼»¯protocolid
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½,ï¿½ï¿½Ê¼ï¿½ï¿½protocolid
 	 */
-	public DataDefined(int protocolid) {
+	public DataHub(int protocolid) {
 		this.protocolid = protocolid;
 	}
 
 	/*
-	 * ¿Õ¹¹Ôì·½·¨
+	 * ï¿½Õ¹ï¿½ï¿½ì·½ï¿½ï¿½
 	 */
-	public DataDefined() {
+	public DataHub() {
 
+	}
+	
+	/**
+	 * Get onedata from sqlserver 
+	 * @return
+	 */
+	public List<WtOneData> getWtonedata(int wtid,String time) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		WtOneData oneData = new WtOneData();
+		oneData.setWtid(wtid);
+		oneData.setRectime(time);
+		List<WtOneData> list = mapper.selectWtOneData(oneData);
+		return list;
 	}
 
 	/**
-	 * »ñÈ¡¹ÊÕÏ
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 */
 	public List<Pathdescr> getFaultList() {
 		return getPathdescr("WTUR.Flt.Rs.S");
 	}
 
 	/**
-	 * »ñÈ¡¾¯¸æ
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 */
 	public List<Pathdescr> getAlarmList() {
 		return getPathdescr("WTUR.Alam.Rs.S");
 	}
 
 	/**
-	 * »ñÈ¡·ç»ú×´Ì¬
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½×´Ì¬
 	 */
 	public List<Pathdescr> getStatusList() {
 		return getPathdescr("WTUR.TurSt.Rs.S");
 	}
 
 	/**
-	 * »ñÈ¡Í£»úÄ£Ê½×Ö
+	 * ï¿½ï¿½È¡Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½
 	 */
 	public List<Pathdescr> getStopModeWordList() {
 		return getPathdescr("WTUR.Other.Wn.I16.StopModeWord");
 	}
 
 	/**
-	 * »ñÈ¡ÏÞ¹¦ÂÊÄ£Ê½×Ö
+	 * ï¿½ï¿½È¡ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½
 	 */
 	public List<Pathdescr> getLimitModeWordList() {
 		return getPathdescr("WTUR.Other.Rs.S.LitPowByPLC");
 	}
 
 	/*
-	 * »ñÈ¡localdb pathdescr±íµäÐÍÎ¬Êý¾Ý¼¯(protocolid, iecpath)
+	 * ï¿½ï¿½È¡localdb pathdescrï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½(protocolid, iecpath)
 	 */
 	public List<Pathdescr> getPathdescr(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -105,7 +120,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * »ñÈ¡propathsµÄcmdÊý¾Ý¼¯(protocolid, cmdname)
+	 * ï¿½ï¿½È¡propathsï¿½ï¿½cmdï¿½ï¿½ï¿½Ý¼ï¿½(protocolid, cmdname)
 	 */
 	public List<Propaths> getCmdPropaths() {
 		List<Propaths> pack_list = new ArrayList<>();
@@ -121,13 +136,13 @@ public class DataDefined {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info(" Çë¼ì²écompathµÄÖµÊÇ·ñÎªnull ");
+			logger.info(" ï¿½ï¿½ï¿½ï¿½compathï¿½ï¿½Öµï¿½Ç·ï¿½Îªnull ");
 		}
 		return pack_list;
 	}
 
 	/**
-	 * »ñÈ¡propathsµÄÌØ¶¨Êý¾Ý¼¯
+	 * ï¿½ï¿½È¡propathsï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½
 	 */
 	public List<Propaths> getTypicalPropaths(String type) {
 		List<Propaths> pps_list = new ArrayList<>();
@@ -189,7 +204,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡localdb propaths±íµäÐÍÎ¬Êý¾Ý¼¯(protocolid)
+	 * ï¿½ï¿½È¡localdb propathsï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½(protocolid)
 	 */
 	public List<Propaths> getAllPropaths() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -201,13 +216,13 @@ public class DataDefined {
 	}
 
 	/**
-	 * »ñÈ¡prodata±íµäÐÍÎ¬Êý¾Ý¼¯(protocolid, cmdname)
+	 * ï¿½ï¿½È¡prodataï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½(protocolid, cmdname)
 	 */
 	public List<Prodata> getCmdProData() {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
 			for (Prodata pda : getAllProData()) {
-				if (pda.getCompath() != null) { // compathÓÐnullÇé¿ö£¬ÏÈÅÐ¶Ï
+				if (pda.getCompath() != null) { // compathï¿½ï¿½nullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 					if (getCompathOnCmdname().equals(pda.getCompath().trim())) {
 						pack_list.add(pda);
 					}
@@ -222,7 +237,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡datadb prodata±íµäÐÍÎ¬Êý¾Ý¼¯(protocolid)
+	 * ï¿½ï¿½È¡datadb prodataï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½(protocolid)
 	 */
 	public List<Prodata> getAllProData() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
@@ -234,14 +249,14 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡µ¥·ç³¡±àºÅ
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ç³¡ï¿½ï¿½ï¿½
 	 */
 	public Integer getWfid() {
 		return this.getWtinfo().get(0).getWfid();
 	}
 
 	/*
-	 * »ñÈ¡²â·çËþ¾­Î³¶È float[]
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½ï¿½ float[]
 	 */
 	public float[] getLongitudeAndLatitude() {
 		float[] aFloats = {this.getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
@@ -249,7 +264,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡local wtinfo±íµäÐÍÎ¬Êý¾Ý¼¯(protocolid)
+	 * ï¿½ï¿½È¡local wtinfoï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½(protocolid)
 	 */
 	public List<Wtinfo> getWtinfo() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -261,7 +276,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡runlog code list<code>
+	 * ï¿½ï¿½È¡runlog code list<code>
 	 * 
 	 * @systemid
 	 */
@@ -278,7 +293,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡localdb runlogcode±íµäÐÍÎ¬Êý¾Ý¼¯
+	 * ï¿½ï¿½È¡localdb runlogcodeï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½
 	 */
 	public List<Runlogcode> getRunLogCode(int systemid) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -290,7 +305,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * ²âÁ¿Ëþ²ã¸ß
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public List<Integer> getTowerHeight() {
 		List<Integer> lists = new ArrayList<Integer>();
@@ -305,7 +320,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * »ñÈ¡localdb TowerweatherheightmapµäÐÍÎ¬Êý¾Ý¼¯
+	 * ï¿½ï¿½È¡localdb Towerweatherheightmapï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½Ý¼ï¿½
 	 */
 	private List<Towerweatherheightmap> getTowerweatherheightmap() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -316,7 +331,7 @@ public class DataDefined {
 	}
 
 	/*
-	 * ¸ù¾ÝÇ°ÖÃµÄGWSOCKETÃüÁî»ñÈ¡¶ÔÓ¦µÄcompath
+	 * ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Ãµï¿½GWSOCKETï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ó¦ï¿½ï¿½compath
 	 */
 	protected String getCompathOnCmdname() {
 		String compath = GlobalSettings.getProperty(cmdname);
@@ -324,17 +339,17 @@ public class DataDefined {
 		if (null != compath) {
 			compathString = compath;
 		} else {
-			logger.info("ÎÞ·¨ÏìÓ¦¸ÃÖ¸Áî£º " + cmdname);
+			logger.info("ï¿½Þ·ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ö¸ï¿½î£º " + cmdname);
 		}
 		return compathString;
 	}
 
 	/**
 	 * 
-	 * ¸ù¾Ýcol_1ÀàÐÍÉú³ÉDynamicValue 1 FIXED ¹Ì¶¨Öµ£¬col_2 2 FIXBOOL Ëæ»ú²¼¶û ranBoolean() 3
-	 * DYNAMIC ¶¯Ì¬¼ÆËã 4 FAULTMAIN Ö÷¹ÊÕÏ 5 STATUS ·ç»ú×´Ì¬ 6 YEAR Äê 7 MONTH ÔÂ 8 DAY ÈÕ 9
-	 * HOUR Ê± 10 MINUTE ·Ö 11 SECOND Ãë 12 RANDOM Ëæ»úÊý ranDouble() 13 TOTAL Ò£ÂöÁ¿ 14
-	 * STOPMODE Í£»úÄ£Ê½×Ö/×´Ì¬Ä£Ê½×Ö 15 LIMITMODE ÏÞ¹¦ÂÊÄ£Ê½×Ö 16 ALARM ¾¯¸æ 17 FAULT ¹ÊÕÏÊ÷
+	 * ï¿½ï¿½ï¿½ï¿½col_1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DynamicValue 1 FIXED ï¿½Ì¶ï¿½Öµï¿½ï¿½col_2 2 FIXBOOL ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ranBoolean() 3
+	 * DYNAMIC ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ 4 FAULTMAIN ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5 STATUS ï¿½ï¿½ï¿½×´Ì¬ 6 YEAR ï¿½ï¿½ 7 MONTH ï¿½ï¿½ 8 DAY ï¿½ï¿½ 9
+	 * HOUR Ê± 10 MINUTE ï¿½ï¿½ 11 SECOND ï¿½ï¿½ 12 RANDOM ï¿½ï¿½ï¿½ï¿½ï¿½ ranDouble() 13 TOTAL Ò£ï¿½ï¿½ï¿½ï¿½ 14
+	 * STOPMODE Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½/×´Ì¬Ä£Ê½ï¿½ï¿½ 15 LIMITMODE ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ 16 ALARM ï¿½ï¿½ï¿½ï¿½ 17 FAULT ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String getDynamicValue(Prodata pda) throws SQLException {
 		String rString = "";
@@ -386,7 +401,7 @@ public class DataDefined {
 			rString = Boolean.toString(ranBoolean());
 			break;
 
-		// ÔÝÊ±¸³Öµ ranCoin()
+		// ï¿½ï¿½Ê±ï¿½ï¿½Öµ ranCoin()
 		case "DYNAMIC":
 			rString = Integer.toString(ranCoin());
 			break;
@@ -428,7 +443,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * Éú³ÉËæ»ú×Ö·û´®µÄ·½·¨
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 	 */
 	public String ranString(int length) {
 		String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -441,7 +456,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * Éú³ÉËæ»úÕûÐÍ£¬Î»ÓÚmaxºÍminÖ®¼äµÄ·½·¨ ·µ»Ø(min,max)¼¯ºÏÖÐµÄÕûÊý£¬²»°üÀ¨max
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½Î»ï¿½ï¿½maxï¿½ï¿½minÖ®ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(min,max)ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½max
 	 */
 	public Integer ranInteger(int min, int max) {
 		Random random = new Random();
@@ -451,7 +466,7 @@ public class DataDefined {
 
 
 	/**
-	 * Éú³ÉÒ»¸öËæ»úµÄ²¼¶ûÖµµÄ·½·¨
+	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Öµï¿½Ä·ï¿½ï¿½ï¿½
 	 */
 	public boolean ranBoolean() {
 		Random x = new Random();
@@ -459,7 +474,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * Éú³ÉËæ»ú0»ò1
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½1
 	 */
 	public int ranCoin() {
 		Random rand = new Random();
@@ -467,7 +482,7 @@ public class DataDefined {
 	}
 
 	/**
-	 * Éú³ÉËæ»úµ¥¾«¶È£¬Î»ÓÚmaxºÍminÖ®¼äµÄ·½·¨
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½Î»ï¿½ï¿½maxï¿½ï¿½minÖ®ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 	 */
 	public String ranFloat(int min, int max) {
 		double bt = min + ((max - min) * new Random().nextFloat());

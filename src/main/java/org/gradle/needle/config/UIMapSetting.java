@@ -1,4 +1,4 @@
-package org.gradle.needle.dto;
+package org.gradle.needle.config;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -15,11 +15,11 @@ public class UIMapSetting {
 	public static Properties getUIMap() {
 		UIMap = new Properties();
 		try {
-			//¾ø¶ÔÂ·¾¶¶ÁÈ¡JAT°üÍâµÄÅäÖÃÎÄ¼ş·½·¨
+			//ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½È¡JATï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			String filePath = System.getProperty("user.dir") + "/src/test/resources/UIMap.properties"; 
 			InputStream file = new BufferedInputStream(new FileInputStream(filePath)); 
 			
-			//¶ÁÈ¡JAR°üÄÚµÄÅäÖÃÎÄ¼ş·½·¨,ÀàÎÄ¼şºÍÅäÖÃÎÄ¼şÔÚÍ¬Ò»°üÄÚ
+			//ï¿½ï¿½È¡JARï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½
 			//InputStream file = UIMapSetting.class.getClass().getResourceAsStream("/UIMap.properties");
 			UIMap.load(file);
 			file.close();

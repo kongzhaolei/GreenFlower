@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.gradle.needle.dto.GlobalSettings;
-import org.gradle.needle.engine.DataDefined;
+import org.gradle.needle.config.GlobalSettings;
+import org.gradle.needle.engine.DataHub;
 
 public class VTimer {
 
@@ -14,35 +14,35 @@ public class VTimer {
 	private static int status_list_n = -1;
 	private static int protocolid = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
     /*
-	 * Í£»úÄ£Ê½×ÖÐòÁÐºÅ
+	 * Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½
 	 */
 	public static int getStopNum() {
 		return stop_list_n;
 	}
 
 	/*
-	 * ÏÞ¹¦ÂÊÄ£Ê½×ÖÐòÁÐºÅ
+	 * ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½
 	 */
 	public static int getLimitNum() {
 		return limit_list_n;
 	}
 	
 	/*
-	 * ·ç»ú×´Ì¬×ÖÐòÁÐºÅ
+	 * ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½
 	 */
 	public static int getStatusNum() {
 		return status_list_n;
 	}
 	
 	/**
-	 * ¶¨Ê±Æ÷
+	 * ï¿½ï¿½Ê±ï¿½ï¿½
 	 */
 	public static void keyWorkTimer() {
 		final long interval = Long.parseLong(GlobalSettings.getProperty("vtime"));
 		Timer timer = new Timer();
-		final int stop_size = new DataDefined(protocolid).getStopModeWordList().size();
-		final int limit_size = new DataDefined(protocolid).getLimitModeWordList().size();
-		final int status_size = new DataDefined(protocolid).getStatusList().size();
+		final int stop_size = new DataHub(protocolid).getStopModeWordList().size();
+		final int limit_size = new DataHub(protocolid).getLimitModeWordList().size();
+		final int status_size = new DataHub(protocolid).getStatusList().size();
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {

@@ -16,46 +16,46 @@ import org.gradle.needle.util.VTimer;
 
 /***
  * 
- * @author kongzhaolei Êý¾ÝÄ£ÄâÒýÇæÀà 1. Ö§³ÖÄ£ÄâË²Ì¬Êý¾Ý£¬¹ÊÕÏÊý¾Ý£¬¾¯¸æÊý¾Ý£¬Í¨ÐÅ×´Ì¬£¬·ç»ú×´Ì¬Êý¾Ý,¸æ¾¯ÈÕÖ¾ 2.
- *         Ö§³ÖÄ£ÄâÀúÊ·Ë²Ì¬Êý¾Ý£¬·ÖÖÓÊý¾Ý(10,5,1)£¬¹¦ÂÊÇúÏßÊý¾Ý£¬ÀúÊ·³Á»ýÊý¾Ý£¬±äÎ»Êý¾Ý
+ * @author kongzhaolei ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1. Ö§ï¿½ï¿½Ä£ï¿½ï¿½Ë²Ì¬ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½Í¨ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½,ï¿½æ¾¯ï¿½ï¿½Ö¾ 2.
+ *         Ö§ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ê·Ë²Ì¬ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(10,5,1)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
  */
 public class DeviceDataGenerator {
 
 	private int protocolid;
 	private String cmdname;
-	private DataDefined df;
+	private DataHub dataHub;
 	private static Logger logger = Logger.getLogger(DeviceDataGenerator.class.getName());
 	Date date = new Date();
 
 	/*
-	 * ¹¹Ôì·½·¨ 1 PLC£¬³õÊ¼»¯protocolid,cmdname
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ 1 PLCï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½protocolid,cmdname
 	 */
 	public DeviceDataGenerator(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
 		this.cmdname = cmdname;
-		df = new DataDefined(protocolid, cmdname);
+		dataHub = new DataHub(protocolid, cmdname);
 	}
 
 	/*
-	 * ¹¹Ôì·½·¨ 2 normal£¬³õÊ¼»¯protocolid
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ 2 normalï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½protocolid
 	 */
 	public DeviceDataGenerator(int protocolid) {
 		this.protocolid = protocolid;
-		df = new DataDefined(protocolid);
+		dataHub = new DataHub(protocolid);
 	}
 
 	/**
-	 * Í³Ò»Êý¾ÝÒýÇæ
+	 * Í³Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String gevDevDataEngine(String type) {
 		String sReturn = null;
 		Map<String, String> alldatamap = new HashMap<String, String>();
 		try {
-			for (Prodata prodata : df.getAllProData()) {
-				alldatamap.put(prodata.getIecpath().trim(), df.getDynamicValue(prodata));
+			for (Prodata prodata : dataHub.getAllProData()) {
+				alldatamap.put(prodata.getIecpath().trim(), dataHub.getDynamicValue(prodata));
 			}
-			if (!df.getAllPropaths().isEmpty()) {
-				for (Propaths propaths : df.getTypicalPropaths(type)) {
+			if (!dataHub.getAllPropaths().isEmpty()) {
+				for (Propaths propaths : dataHub.getTypicalPropaths(type)) {
 					if (alldatamap.containsKey(propaths.getIecpath())) {
 						sReturn += alldatamap.get(propaths.getIecpath()) + ",";
 					} else {
@@ -66,18 +66,18 @@ public class DeviceDataGenerator {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("µ±Ç°Êý¾Ý´®£º" + sReturn);
+			logger.info("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½" + sReturn);
 		}
 		return sReturn;
 	}
 
 	/**
-	 * »ñÈ¡·ç»ú±àºÅlist<wtid>
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½list<wtid>
 	 */
 	public List<Integer> getWtidList() {
 		List<Integer> lists = new ArrayList<Integer>();
 		try {
-			for (Wtinfo wtinfo : df.getWtinfo()) {
+			for (Wtinfo wtinfo : dataHub.getWtinfo()) {
 				lists.add(wtinfo.getWtid());
 			}
 		} catch (Exception e) {
@@ -87,21 +87,21 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ³Á»ýÊý¾Ý sediment,Ò»·ÖÖÓ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sediment,Ò»ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genDevSedimentOne() {
 		date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOne() + ")";
 	}
 
-	// ³Á»ýÊý¾Ý sediment Ò»·ÖÖÓÀíÂÛ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sediment Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public String genDevSedimentOneData() {
 		date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOneData()
 				+ ")";
 	}
 
-	// ³Á»ýÊý¾Ý sediment ÀúÊ·Ë²Ì¬
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sediment ï¿½ï¿½Ê·Ë²Ì¬
 	public String genDevSedimentRealData() {
 		date.setTime(date.getTime() - 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevRealTimeData()
@@ -109,48 +109,48 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ÀúÊ·Ë²Ì¬Êý¾Ý realtimedata
+	 * ï¿½ï¿½Ê·Ë²Ì¬ï¿½ï¿½ï¿½ï¿½ realtimedata
 	 */
 	public String genDevRealTimeData() {
-		return "(realtimedata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
+		return "(realtimedata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("realtimedata") + ")";
 	}
 
 	/*
-	 * Ê®·ÖÖÓÊý¾Ý tendata
+	 * Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ tendata
 	 */
 	public String genDevTenData(Integer wtid) {
 		return "(tendata|" + wtid + "|" + this.gevDevDataEngine("tendata") + ")";
 	}
 
 	/*
-	 * Îå·ÖÖÓÊý¾Ý fivedata
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ fivedata
 	 */
 	public String genDevFiveData(Integer wtid) {
 		return "(fivedata|" + wtid + "|" + this.gevDevDataEngine("fivedata") + ")";
 	}
 
 	/*
-	 * Ò»·ÖÖÓÊý¾Ý one
+	 * Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ one
 	 */
 	public String genDevOne() {
-		return "(one|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + this.gevDevDataEngine("one")
+		return "(one|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + this.gevDevDataEngine("one")
 				+ ")";
 	}
 
-	// Ò»·ÖÖÓÀíÂÛÊý¾Ý onedata
+	// Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ onedata
 	public String genDevOneData() {
 		StringBuilder onedata = new StringBuilder();
-		Integer wtid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
+		Integer wtid = getWtidList().get(dataHub.ranInteger(0, getWtidList().size()));
 		String wind_power = this.gevDevDataEngine("onedata");
 		String statdata = this.genStateData();
-		String otherstat = Integer.toString(df.ranInteger(0, 3));
+		String otherstat = Integer.toString(dataHub.ranInteger(0, 3));
 		String mainfault = this.genMainFault();
 		String stopword = this.genStopModeWord();
-		String ambient_temp = df.ranFloat(20, 60);
-		String first_yield = df.ranFloat(0, 8687);
-		String last_yield = df.ranFloat(6984, 113256);
-		String theoretical = df.ranFloat(24,46);
+		String ambient_temp = dataHub.ranFloat(20, 60);
+		String first_yield = dataHub.ranFloat(0, 8687);
+		String last_yield = dataHub.ranFloat(6984, 113256);
+		String theoretical = dataHub.ranFloat(24,46);
 		onedata = onedata.append("(onedata|").append(wtid).append("|").append(wind_power).append(",")
 				.append(theoretical).append(",").append(statdata).append(",").append(otherstat).append(",")
 				.append(mainfault).append(",").append(stopword).append(",").append(ambient_temp).append(",")
@@ -159,43 +159,43 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ±äÎ»Êý¾Ý changesave
+	 * ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ changesave
 	 */
 	public String genDevChangeSave() {
-		return "(changesave|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
+		return "(changesave|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("changesave") + ")";
 	}
 
 	/*
-	 * ¹¦ÂÊÇúÏß powercurve
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ powercurve
 	 */
 	public String genDevPowerCurve() {
-		return "(powercurve|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
+		return "(powercurve|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("powercurve") + ")";
 	}
 
 	/*
-	 * ·ç»ú,²â·çËþÖ÷ÂÖÑ¯Êý¾Ý wman
+	 * ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ wman
 	 */
 	public String genDevWmanData() {
-		return "(wman|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|"
+		return "(wman|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
 				+ this.gevDevDataEngine("wman") + ")";
 	}
 
 	/*
-	 * ¸æ¾¯ÈÕÖ¾
+	 * ï¿½æ¾¯ï¿½ï¿½Ö¾
 	 */
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
-		int systemid = 3; // ÔÝÊ±Ö»Ä£Äâ¹¦ÂÊ¿ØÖÆ
-		String levelid = Integer.toString(df.ranInteger(0, 3)); // 0 ÌáÊ¾¡¢1 ¾¯¸æ¡¢2//
-																// ¹ÊÕÏ
+		int systemid = 3; // ï¿½ï¿½Ê±Ö»Ä£ï¿½â¹¦ï¿½Ê¿ï¿½ï¿½ï¿½
+		String levelid = Integer.toString(dataHub.ranInteger(0, 3)); // 0 ï¿½ï¿½Ê¾ï¿½ï¿½1 ï¿½ï¿½ï¿½æ¡¢2//
+																// ï¿½ï¿½ï¿½ï¿½
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
-		int wfid = df.getWfid();
-		int objectid = getWtidList().get(df.ranInteger(0, getWtidList().size()));
-		String logcode = df.getLogCodeList(systemid).get(df.ranInteger(0, df.getRunLogCode(systemid).size()));
-		String warnid = df.ranString(16) + "-0" + systemid + "003645";
-		int flag = df.ranCoin();
+		int wfid = dataHub.getWfid();
+		int objectid = getWtidList().get(dataHub.ranInteger(0, getWtidList().size()));
+		String logcode = dataHub.getLogCodeList(systemid).get(dataHub.ranInteger(0, dataHub.getRunLogCode(systemid).size()));
+		String warnid = dataHub.ranString(16) + "-0" + systemid + "003645";
+		int flag = dataHub.ranCoin();
 		warnlog = warnlog.append("(warnlog|").append(systemid).append("|").append(levelid).append("|").append(rectime)
 				.append("|").append(wfid).append("|").append(objectid).append("|").append(logcode).append("|")
 				.append(warnid).append("|").append(flag).append(")");
@@ -203,14 +203,14 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ÏµÍ³¸æ¾¯½áÊø
+	 * ÏµÍ³ï¿½æ¾¯ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genDevWarnEnd() {
 		return "";
 	}
 
 	/*
-	 * ·ç»úÔªÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -222,12 +222,12 @@ public class DeviceDataGenerator {
 			if ("GETCURRENTERROR".equals(cmdname)) {
 				sReturn = genMainFault();
 			} else {
-				for (Prodata pda : df.getCmdProData()) {
-					varpathMap.put(pda.getIecpath().trim(), df.getDynamicValue(pda));
+				for (Prodata pda : dataHub.getCmdProData()) {
+					varpathMap.put(pda.getIecpath().trim(), dataHub.getDynamicValue(pda));
 				}
 
-				if (!df.getCmdPropaths().isEmpty()) {
-					for (Propaths pps : df.getCmdPropaths()) {
+				if (!dataHub.getCmdPropaths().isEmpty()) {
+					for (Propaths pps : dataHub.getCmdPropaths()) {
 						while (n < pps.getAscflg()) {
 							sReturn = sReturn + ";";
 							n++;
@@ -237,14 +237,14 @@ public class DeviceDataGenerator {
 							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("data¿âÈ±ÉÙ´ËIECÁ¿£º " + pps.getIecpath() + " / " + pps.getDescrcn());
+							logger.info("dataï¿½ï¿½È±ï¿½Ù´ï¿½IECï¿½ï¿½ï¿½ï¿½ " + pps.getIecpath() + " / " + pps.getDescrcn());
 						}
 					}
 				} else {
-					logger.info(protocolid + "Ð­Òé²»´æÔÚ¸Ãcompath£º " + df.getCompathOnCmdname());
+					logger.info(protocolid + "Ð­ï¿½é²»ï¿½ï¿½ï¿½Ú¸ï¿½compathï¿½ï¿½ " + dataHub.getCompathOnCmdname());
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				logger.info(df.getCompathOnCmdname() + " Êý×éÒÑ·¢ËÍ" + sReturn.split(";").length + "¸öIECÁ¿");
+				logger.info(dataHub.getCompathOnCmdname() + " ï¿½ï¿½ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½" + sReturn.split(";").length + "ï¿½ï¿½IECï¿½ï¿½");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -253,14 +253,14 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ¶¨Ê±Æ÷Ë¢ÐÂÍ£»úÄ£Ê½×Ö
+	 * ï¿½ï¿½Ê±ï¿½ï¿½Ë¢ï¿½ï¿½Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½
 	 */
 	public String genStopModeWord() {
 		String stopmodeword = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getStopNum(); // Í£»úÄ£Ê½×ÖÊ±ÖÓ¼ÆÊýÆ÷
+		int n = VTimer.getStopNum(); // Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½Ê±ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
-			for (Pathdescr pathdescr : df.getStopModeWordList()) {
+			for (Pathdescr pathdescr : dataHub.getStopModeWordList()) {
 				lists.add(pathdescr.getIecvalue());
 			}
 			if (!(n > lists.size())) {
@@ -271,20 +271,20 @@ public class DeviceDataGenerator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// logger.info("µ±Ç°Í£»úÄ£Ê½×ÖÎª£º " + stopmodeword);
+		// logger.info("ï¿½ï¿½Ç°Í£ï¿½ï¿½Ä£Ê½ï¿½ï¿½Îªï¿½ï¿½ " + stopmodeword);
 		return stopmodeword;
 	}
 
 	/*
-	 * ¶¨Ê±Æ÷Ë¢ÐÂÏÞ¹¦ÂÊÄ£Ê½×Ö
+	 * ï¿½ï¿½Ê±ï¿½ï¿½Ë¢ï¿½ï¿½ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½
 	 * 
 	 */
 	public String genLimitModeWord() {
 		String limitmodeword = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getLimitNum(); // ÏÞ¹¦ÂÊÄ£Ê½×ÖÊ±ÖÓ¼ÆÊýÆ÷
+		int n = VTimer.getLimitNum(); // ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½Ê±ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
-			for (Pathdescr pathdescr : df.getLimitModeWordList()) {
+			for (Pathdescr pathdescr : dataHub.getLimitModeWordList()) {
 				lists.add(pathdescr.getIecvalue());
 			}
 			if (!(n > lists.size())) {
@@ -295,22 +295,22 @@ public class DeviceDataGenerator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// logger.info("µ±Ç°ÏÞ¹¦ÂÊÄ£Ê½×ÖÎª£º " + limitmodeword);
+		// logger.info("ï¿½ï¿½Ç°ï¿½Þ¹ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½Îªï¿½ï¿½ " + limitmodeword);
 		return limitmodeword;
 	}
 
 	/*
-	 * ¶¨Ê±Æ÷Ë¢ÐÂ·ç»ú×´Ì¬ Ö§³Ö¹ÊÕÏÂß¼­
+	 * ï¿½ï¿½Ê±ï¿½ï¿½Ë¢ï¿½Â·ï¿½ï¿½×´Ì¬ Ö§ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
 	 */
 	public String genStateData() {
 		String status = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getStatusNum(); // ·ç»ú×´Ì¬Ê±ÖÓ¼ÆÊýÆ÷
+		int n = VTimer.getStatusNum(); // ï¿½ï¿½ï¿½×´Ì¬Ê±ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
-			if ("0" != genFaultTree()) { // ¹ÊÕÏ£¬·ç»úÍ£»ú
+			if ("0" != genFaultTree()) { // ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½
 				status = "2";
 			} else {
-				for (Pathdescr pathdescr : df.getStatusList()) {
+				for (Pathdescr pathdescr : dataHub.getStatusList()) {
 					lists.add(pathdescr.getIecvalue());
 				}
 				if (!(n > lists.size())) {
@@ -326,45 +326,45 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ·ç»ú×´Ì¬
+	 * ï¿½ï¿½ï¿½×´Ì¬
 	 */
 	public String genDevStateData() {
-		return "(statedata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genStateData() + ")";
+		return "(statedata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genStateData() + ")";
 	}
 
 	/*
-	 * Ç°ÖÃºÍÉè±¸Í¨ÐÅ×´Ì¬£¬ÔÝÊ±ÉèÖÃÎªÍ¨ÐÅÕý³£
+	 * Ç°ï¿½Ãºï¿½ï¿½è±¸Í¨ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ÎªÍ¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genDevComState() {
-		return "(comstate|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + "0" + ")";
+		return "(comstate|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + "0" + ")";
 	}
 
 	/*
-	 * ·ç»úÖ÷¹ÊÕÏ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genMainFault() {
 		return genFaultTree().split(";")[0];
 	}
 
 	/*
-	 * ¹ÊÕÏÊý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genDevFaultData() {
-		return "(falutdata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genFaultTree() + ")";
+		return "(falutdata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genFaultTree() + ")";
 	}
 
 	/*
-	 * ·ç»ú¹ÊÕÏÊ÷£¬³õÊ¼ÎÞ¹ÊÕÏ ¶¨Ê±Æ÷ÆµÂÊÄ£Äâ5¸ö¹ÊÕÏ£¬Ö®ºó»Ö¸´ faultsign true ÎÞ¹ÊÕÏ£»false£º¹ÊÕÏ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Þ¹ï¿½ï¿½ï¿½ ï¿½ï¿½Ê±ï¿½ï¿½Æµï¿½ï¿½Ä£ï¿½ï¿½5ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½Ö®ï¿½ï¿½Ö¸ï¿½ faultsign true ï¿½Þ¹ï¿½ï¿½Ï£ï¿½falseï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genFaultTree() {
 		String faulttree = "";
 		List<String> lists = new ArrayList<String>();
-		boolean faultsign = df.ranBoolean();
+		boolean faultsign = dataHub.ranBoolean();
 		try {
 			if (faultsign == false) {
 				faulttree = "0";
 			} else {
-				for (Pathdescr pathdescr : df.getFaultList()) {
+				for (Pathdescr pathdescr : dataHub.getFaultList()) {
 					lists.add(pathdescr.getIecvalue());
 				}
 				for (int i = 0; i < 5; i++) {
@@ -379,25 +379,25 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ·ç»ú¾¯¸æ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public String genDevAlarmData() {
-		return "(alarmdata|" + getWtidList().get(df.ranInteger(0, getWtidList().size())) + "|" + genAlarmTree() + ")";
+		return "(alarmdata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genAlarmTree() + ")";
 	}
 
 	/*
-	 * ·ç»ú¾¯¸æÊ÷£¬³õÊ¼»¯ÎÞ¾¯¸æ ¶¨Ê±Æ÷ÆµÂÊÄ£Äâ3¸ö¾¯¸æ£¬Ö®ºó»Ö¸´ alarmsign
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ê±ï¿½ï¿½Æµï¿½ï¿½Ä£ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬Ö®ï¿½ï¿½Ö¸ï¿½ alarmsign
 	 */
 	public String genAlarmTree() {
 		String alarmtree = "";
 		List<String> lists = new ArrayList<String>();
-		boolean alarmsign = df.ranBoolean();
+		boolean alarmsign = dataHub.ranBoolean();
 
 		try {
 			if (alarmsign == false) {
 				alarmtree = "0";
 			} else {
-				for (Pathdescr pathdescr : df.getAlarmList()) {
+				for (Pathdescr pathdescr : dataHub.getAlarmList()) {
 					lists.add(pathdescr.getIecvalue());
 				}
 				for (int i = 0; i < 3; i++) {

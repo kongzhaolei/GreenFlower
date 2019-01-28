@@ -4,7 +4,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.awaitility.Awaitility.await;
 
 import org.gradle.needle.client.TCPDataClient;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.util.VTimer;
 import org.gradle.needle.util.VerifyUtils;
 

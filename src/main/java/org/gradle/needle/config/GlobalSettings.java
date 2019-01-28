@@ -14,7 +14,7 @@
  *  limitations under the License.
  *
  */
-package org.gradle.needle.dto;
+package org.gradle.needle.config;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -24,18 +24,18 @@ public class GlobalSettings {
 
 	public static Properties prop = getFileProperties();
 
-	// ä¯ÀÀÆ÷»ù±¾ÅäÖÃ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static int browserCoreType = Integer.parseInt(prop.getProperty("BrowserCoreType", "2"));
 	public static String chromeDriverPath = prop.getProperty("ChromeDriverPath", "res/chromedriver_for_win.exe");
 	public static String ieDriverPath = prop.getProperty("IEDriverPath", "otherpath");
 	public static String stepInterval = prop.getProperty("StepInterval", "500");
 	public static String timeout = prop.getProperty("Timeout", "30000");
 
-	// webapi²âÊÔÊı¾İÎÄ¼şÂ·¾¶ÅäÖÃ
+	// webapiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static String ExcelDataFile = prop.getProperty("ExcelDataFile", "");
 	// key
 
-	// XMLÊı¾İÎÄ¼şÅäÖÃ
+	// XMLï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static String XmlDataFile1 = prop.getProperty("XmlDataFile1", "");
 
 	public static String getProperty(String property) {
@@ -45,11 +45,11 @@ public class GlobalSettings {
 	public static Properties getFileProperties() {
 		Properties prop = new Properties();
 		try {
-			// ¾ø¶ÔÂ·¾¶¶ÁÈ¡JAT°üÍâµÄÅäÖÃÎÄ¼ş·½·¨
+			// ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½È¡JATï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½
 			 //String filePath = "/opt/needle/GreenFlower/Globalsetting.properties";
 			 //InputStream file = new FileInputStream(filePath);
 
-			// ¶ÁÈ¡JAR°üÄÚµÄÅäÖÃÎÄ¼ş·½·¨,ÀàÎÄ¼şºÍÅäÖÃÎÄ¼şÔÚÍ¬Ò»°üÄÚ
+			// ï¿½ï¿½È¡JARï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½
 			 InputStream file =
 			 GlobalSettings.class.getClass().getResourceAsStream("/Globalsetting.properties");
 

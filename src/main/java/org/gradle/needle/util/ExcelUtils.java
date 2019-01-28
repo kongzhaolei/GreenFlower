@@ -8,7 +8,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 
 import net.sf.jxls.util.Util;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -25,7 +25,7 @@ public class ExcelUtils {
 	private static Workbook ExcelWorkBook;
 	private static Logger logger = Logger.getLogger(ExcelUtils.class.getName());
 
-	// ¶¨Òå¼¸¸öÁÐ³£Á¿£¬ÓÃÓÚÊý¾Ý¶ÁÈ¡»òÐ´Èë
+	// ï¿½ï¿½ï¿½å¼¸ï¿½ï¿½ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¶ï¿½È¡ï¿½ï¿½Ð´ï¿½ï¿½
 	static int responsecol = Integer.parseInt(GlobalSettings.getProperty("response"));
 	static int expectcol = Integer.parseInt(GlobalSettings.getProperty("expect"));
 	static int E_keycol = Integer.parseInt(GlobalSettings.getProperty("E_key"));
@@ -49,7 +49,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ¶Ô»ùÏßexpectºÍ·µ»Øresponse×öÑ­»·¶Ô±È£¬½«¶Ô±È½á¹ûÐ´Èëcomparison²¢±ê¼Ç
+	 * ï¿½Ô»ï¿½ï¿½ï¿½expectï¿½Í·ï¿½ï¿½ï¿½responseï¿½ï¿½Ñ­ï¿½ï¿½ï¿½Ô±È£ï¿½ï¿½ï¿½ï¿½Ô±È½ï¿½ï¿½Ð´ï¿½ï¿½comparisonï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param testid
 	 * @param bsheet
@@ -60,12 +60,12 @@ public class ExcelUtils {
 
 		Map<String, String> actualmap = CustomUtils.parser(response);
 		try {
-			// ÔÚbsheetÖÐ¶ÁÈ¡expect×Ö·û´®
+			// ï¿½ï¿½bsheetï¿½Ð¶ï¿½È¡expectï¿½Ö·ï¿½ï¿½ï¿½
 			ExcelUtils.setWorkSheet(bsheet);
 			int brownum = ExcelUtils.getRowNumberOnTestid(testid);
 			String expectstr = (String) ExcelUtils.getCellData(brownum, expectcol);
 
-			// ÇÐ»»ÖÁcsheet,Ð´Èë¶Ô±Èºó½á¹û
+			// ï¿½Ð»ï¿½ï¿½ï¿½csheet,Ð´ï¿½ï¿½Ô±Èºï¿½ï¿½ï¿½
 			ExcelUtils.setWorkSheet(csheet);
 			int crownum = ExcelUtils.getRowNumberOnTestid(testid);
 			Map<String, String> expectmap = CustomUtils.parser(expectstr);
@@ -100,11 +100,11 @@ public class ExcelUtils {
 					ExcelUtils.setCellData("failed", crownum, Resultcol);
 					ExcelUtils.setBorder(crownum, Resultcol);
 					ExcelUtils.setCellColor("YELLOW", crownum, Resultcol);
-					logger.info(testid + ":  " + ekey + "¸ÃÍ³¼ÆÁ¿ÔÚ·µ»Ø½á¹ûÖÐ²»´æÔÚ");
+					logger.info(testid + ":  " + ekey + "ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½Ø½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 
-				// ÕâÀïÔÚtestidÐÐÏÂÃæ²åÈëÒ»¸öÐÂÐÐ£¬×¼±¸Ð´ÈëÏÂÒ»×ékey-value
-				int totalrows = ExcelUtils.getWorkSheet().getLastRowNum(); // »ñÈ¡×ÜÐÐÊý
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½testidï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½×¼ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½key-value
+				int totalrows = ExcelUtils.getWorkSheet().getLastRowNum(); // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				ExcelUtils.insertRow(crownum, totalrows, 1);
 			}
 		} catch (Exception e) {
@@ -113,7 +113,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ½«½Ó¿ÚµÄ·µ»Ø½á¹ûÐ´ÈëoutputÖÐ
+	 * ï¿½ï¿½ï¿½Ó¿ÚµÄ·ï¿½ï¿½Ø½ï¿½ï¿½Ð´ï¿½ï¿½outputï¿½ï¿½
 	 * 
 	 * @param osheet
 	 * @param testid
@@ -132,7 +132,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ³õÊ¼»¯Excel¹¤×÷±í
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½Excelï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param SheetName
 	 * @throws Exception
@@ -141,9 +141,9 @@ public class ExcelUtils {
 		try {
 			ExcelWorkBook = WorkbookFactory.create(CaseInputStream);
 			ExcelWorkSheet = ExcelWorkBook.getSheet(SheetName);
-			// logger.info("²âÊÔ¹¤×÷±í " + SheetName + " ³É¹¦³õÊ¼»¯");
+			// logger.info("ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ï¿½ï¿½ " + SheetName + " ï¿½É¹ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½");
 		} catch (Exception e) {
-			logger.error("²âÊÔ¹¤×÷±í " + SheetName + " ³õÊ¼»¯Ê§°Ü£¡");
+			logger.error("ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ï¿½ï¿½ " + SheetName + " ï¿½ï¿½Ê¼ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 			e.printStackTrace();
 		}
 	}
@@ -154,8 +154,8 @@ public class ExcelUtils {
 
 	/**
 	 * @param TestSet
-	 *            Ö¸¶¨TestSet
-	 * @return mapÀàÐÍµÄ²âÊÔÊý¾Ý¼¯£¬keyÎªÁÐ±êÌâ£¬valueÎªÁÐÖµ column ´ÓµÚiÁÐ¿ªÊ¼¶ÁÈ¡Êý¾Ý
+	 *            Ö¸ï¿½ï¿½TestSet
+	 * @return mapï¿½ï¿½ï¿½ÍµÄ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½keyÎªï¿½Ð±ï¿½ï¿½â£¬valueÎªï¿½ï¿½Öµ column ï¿½Óµï¿½iï¿½Ð¿ï¿½Ê¼ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 * @throws Exception
 	 */
 	public Iterator<Map<String, String>> getCaseSet(String TestSet) throws Exception {
@@ -169,8 +169,8 @@ public class ExcelUtils {
 			} else {
 				if (row.getRowNum() != 0 & verRowBelong(TestSet, row)) {
 					/*
-					 * ÓÉÓÚmap<key,value>ÖÐ£¬keyÊÇÎ¨Ò»µÄ£¬Òò´ËmÔÚÃ¿´ÎÑ­»·¸³ÖµÖ®Ç°±ØÐë³õÊ¼»¯Ò»´Î£¬
-					 * ·ñÔòÏàÍ¬µÄkey¶ÔÓ¦µÄvalue»á±»ÏÂÒ»×é¸²¸Ç¡£
+					 * ï¿½ï¿½ï¿½ï¿½map<key,value>ï¿½Ð£ï¿½keyï¿½ï¿½Î¨Ò»ï¿½Ä£ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½Ã¿ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ÖµÖ®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Ò»ï¿½Î£ï¿½
+					 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½keyï¿½ï¿½Ó¦ï¿½ï¿½valueï¿½á±»ï¿½ï¿½Ò»ï¿½é¸²ï¿½Ç¡ï¿½
 					 */
 					m = new HashMap<String, String>();
 					for (int column = i; column < numberOfColumns; column++) {
@@ -179,21 +179,21 @@ public class ExcelUtils {
 						m.put(key.toString(), objectFrom(ExcelWorkBook, cell).toString());
 					}
 				} else {
-					// logger.info("·Ç±¾´Î²âÊÔÊý¾Ý¼¯£¬µÚ " + row.getRowNum() + "
-					// ÐÐ²âÊÔÊý¾Ý½«Ìø¹ý");
+					// logger.info("ï¿½Ç±ï¿½ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½ï¿½ï¿½ " + row.getRowNum() + "
+					// ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					continue;
 				}
 			}
 			requestlist.add(m);
-			// logger.info("ÕýÈ·Æ¥Åä£¬µÚ " + row.getRowNum() + " ÐÐ²âÊÔÊý¾ÝÑ¹ÈëÊý¾Ý¼¯");
+			// logger.info("ï¿½ï¿½È·Æ¥ï¿½ä£¬ï¿½ï¿½ " + row.getRowNum() + " ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½Ý¼ï¿½");
 		}
 		Iterator<Map<String, String>> s = requestlist.iterator();
-		// logger.info("ËùÓÐ²âÊÔÓÃÀý³õÊ¼»¯Íê³É" + "\r\n");
+		// logger.info("ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½" + "\r\n");
 		return (s);
 	}
 
 	/**
-	 * ÑéÖ¤ÊÇ·ñÊôÓÚTestSetµÄÊý¾ÝÐÐ TestSet±ØÐë·ÅÔÚ¹¤×÷±íµÄµÚ¶þÁÐ
+	 * ï¿½ï¿½Ö¤ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½TestSetï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ TestSetï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÚ¶ï¿½ï¿½ï¿½
 	 * 
 	 * @param TestSet
 	 * @param colNum
@@ -209,7 +209,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ´Ó°üº¬packageµÄ·½·¨ÃûÖÐ½ØÈ¡Êý¾ÝÇý¶¯µÄÓÃÀýÃû³Æ
+	 * ï¿½Ó°ï¿½ï¿½ï¿½packageï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String getTestCaseName(String sTestCase) throws Exception {
 		String value = sTestCase;
@@ -225,7 +225,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ¸ù¾Ýtestid»ñÈ¡¸ÃÐÐµÄrownumber return rownumber
+	 * ï¿½ï¿½ï¿½ï¿½testidï¿½ï¿½È¡ï¿½ï¿½ï¿½Ðµï¿½rownumber return rownumber
 	 */
 	public static int getRowNumberOnTestid(String testid) {
 		int rownumber = 0;
@@ -248,7 +248,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * »ñÈ¡µ¥Ôª¸ñ²âÊÔÊý¾Ý Excelµ¥Ôª¸ñµÄÐÐÁÐid¶¼ÊÇ´Ó0¿ªÊ¼ getRow(0)±íÊ¾±êÌâÐÐ
+	 * ï¿½ï¿½È¡ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Excelï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½ï¿½Ç´ï¿½0ï¿½ï¿½Ê¼ getRow(0)ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param RowNum
 	 * @param ColNum
@@ -261,10 +261,10 @@ public class ExcelUtils {
 			Cell cell = ExcelWorkSheet.getRow(RowNum).getCell(ColNum);
 			if (isEmpty(ExcelWorkSheet.getRow(RowNum))) {
 				CellData = null;
-				logger.info("µÚ  " + RowNum + " ÐÐ" + ColNum + "ÁÐÃ»ÓÐÖµ");
+				logger.info("ï¿½ï¿½  " + RowNum + " ï¿½ï¿½" + ColNum + "ï¿½ï¿½Ã»ï¿½ï¿½Öµ");
 			} else {
 				CellData = objectFrom(ExcelWorkBook, cell);
-				// logger.info("ÒÑ»ñÈ¡µÚ" + RowNum + " ÐÐ" + ColNum + "ÁÐµÄÖµ£º"+
+				// logger.info("ï¿½Ñ»ï¿½È¡ï¿½ï¿½" + RowNum + " ï¿½ï¿½" + ColNum + "ï¿½Ðµï¿½Öµï¿½ï¿½"+
 				// CellData);
 			}
 			return CellData;
@@ -274,7 +274,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ¼ì²éµ±Ç°ÐÐµÚÒ»ÁÐµÄÖµÊÇ·ñÎª¿Õ»òNULL
+	 * ï¿½ï¿½éµ±Ç°ï¿½Ðµï¿½Ò»ï¿½Ðµï¿½Öµï¿½Ç·ï¿½Îªï¿½Õ»ï¿½NULL
 	 * 
 	 * @param row
 	 * @return
@@ -286,7 +286,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ¼ÆËãµÚÒ»ÐÐµÄÁÐÊý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private static int countNonEmptyColumns(final Sheet sheet) {
 		Row firstRow = sheet.getRow(0);
@@ -305,7 +305,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ¸ù¾ÝcellµÄÊý¾ÝÀàÐÍ»ñÈ¡cellvalue
+	 * ï¿½ï¿½ï¿½ï¿½cellï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½È¡cellvalue
 	 * 
 	 * @param workbook
 	 * @param cell
@@ -329,7 +329,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ÅÐ¶ÏÊýÖµÀàÐÍÊÇ·ñÎªÈÕÆÚÐÍ
+	 * ï¿½Ð¶ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param cell
 	 * @return
@@ -361,7 +361,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * µ¥Ôª¸ñÐ´ÈëÊý¾Ý
+	 * ï¿½ï¿½Ôªï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param Value
 	 * @param RowNum
@@ -389,7 +389,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * µ¥Ôª¸ñÉèÖÃ±³¾°É«
+	 * ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½É«
 	 * 
 	 * @param Value
 	 * @param RowNum
@@ -430,7 +430,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * µ¥Ôª¸ñÉèÖÃ±ß¿ò ÉèÖÃ×Ô¶¯»»ÐÐ
+	 * ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½Ã±ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param crownum
 	 * @param e_keycol
@@ -451,14 +451,14 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * ÊµÏÖExcel²åÈëÐÐ
+	 * Êµï¿½ï¿½Excelï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param startrow
-	 *            ÆðÊ¼ÐÐ
+	 *            ï¿½ï¿½Ê¼ï¿½ï¿½
 	 * @param totalrows
-	 *            ×ÜÐÐÊý
+	 *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param rows
-	 *            ²åÈëµÄÐÐÊý
+	 *            ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static void insertRow(int startrow, int totalrows, int rows) {
 

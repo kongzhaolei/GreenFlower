@@ -7,14 +7,15 @@ import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Runlogcode;
 import org.gradle.needle.model.Towerweatherheightmap;
+import org.gradle.needle.model.WtOneData;
 import org.gradle.needle.model.Wtinfo;
 /**
  * 
  * @author kongzhaolei
- * 1. SuperMapper.xml中namespace等于mapper接口地址
- * 2. SuperMpper.java接口中的方法名和SuperMapper.xml中的statement的Id一致
- * 3. SuperMpper.java接口中的方法输入参数和SuperMapper.xml中的statement的parameterType类型一致
- * 4. SuperMpper.java接口中的方法返回值类型和SuperMapper.xml中的statement的resultType类型一致
+ * 1. SuperMapper.xml锟斤拷namespace锟斤拷锟斤拷mapper锟接口碉拷址
+ * 2. SuperMpper.java锟接匡拷锟叫的凤拷锟斤拷锟斤拷锟斤拷SuperMapper.xml锟叫碉拷statement锟斤拷Id一锟斤拷
+ * 3. SuperMpper.java锟接匡拷锟叫的凤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟絊uperMapper.xml锟叫碉拷statement锟斤拷parameterType锟斤拷锟斤拷一锟斤拷
+ * 4. SuperMpper.java锟接匡拷锟叫的凤拷锟斤拷锟斤拷锟斤拷值锟斤拷锟酵猴拷SuperMapper.xml锟叫碉拷statement锟斤拷resultType锟斤拷锟斤拷一锟斤拷
  *
  */
 
@@ -31,5 +32,7 @@ public interface SuperMapper {
 	public List<Runlogcode> selectRunlogcode(Runlogcode runlogcode);
 	
 	public List<Towerweatherheightmap> selectTowerweatherheightmap(Towerweatherheightmap towerweatherheightmap);
+	
+	public List<WtOneData> selectWtOneData(WtOneData wtonedata);
  
 }

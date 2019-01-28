@@ -1,10 +1,12 @@
 package org.gradle.needle.modbus;
 
+import java.net.InetAddress;
 import org.apache.log4j.Logger;
-import org.gradle.needle.engine.DataDefined;
+import org.gradle.needle.engine.DataHub;
 
 import net.wimpi.modbus.ModbusCoupler;
 import net.wimpi.modbus.net.ModbusTCPListener;
+import net.wimpi.modbus.procimg.IllegalAddressException;
 import net.wimpi.modbus.procimg.SimpleDigitalIn;
 import net.wimpi.modbus.procimg.SimpleDigitalOut;
 import net.wimpi.modbus.procimg.SimpleInputRegister;
@@ -15,15 +17,18 @@ public class ModbusTcpSlave {
 
 	ModbusTCPListener listener = null;
 	SimpleProcessImage spi = null;
+	String m_address;
 	int port;
 	Logger logger = Logger.getLogger(ModbusTcpSlave.class.getName());
 
-	public ModbusTcpSlave(int port) {
+	public ModbusTcpSlave(String address, int port) {
+		this.m_address = address;
 		this.port = port;
-	}
+
+	}	
 
 	/*
-	 * ¿ªÆô¼àÌý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void startTcpListenerThreadPool(int poolsize, int unitId) {
 		try {
@@ -31,17 +36,19 @@ public class ModbusTcpSlave {
 			ModbusCoupler.getReference().setProcessImage(spi);
 			ModbusCoupler.getReference().setMaster(false);
 			ModbusCoupler.getReference().setUnitID(unitId);
+
 			listener = new ModbusTCPListener(poolsize);
+			listener.setAddress(InetAddress.getByName(m_address));
 			listener.setPort(port);
 			listener.start();
-			logger.info("ModbusTcpSlave¿ªÆô¼àÌý: " + port);
+			logger.info("ModbusTcpSlaveï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½: " + m_address + ":" + port);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/*
-	 * ¹Ø±Õ¼àÌý
+	 * ï¿½Ø±Õ¼ï¿½ï¿½ï¿½
 	 */
 	public void stopTcplistener() {
 		listener.stop();
@@ -53,7 +60,7 @@ public class ModbusTcpSlave {
 	public void sendDevDI(int len) {
 		int i = 0;
 		while (i < len) {
-			spi.addDigitalIn(new SimpleDigitalIn(new DataDefined().ranBoolean()));
+			spi.addDigitalIn(new SimpleDigitalIn(new DataHub().ranBoolean()));
 			i++;
 		}
 	}
@@ -64,7 +71,7 @@ public class ModbusTcpSlave {
 	public void sendDevDO(int len) {
 		int i = 0;
 		while (i < len) {
-			spi.addDigitalOut(new SimpleDigitalOut(new DataDefined().ranBoolean()));
+			spi.addDigitalOut(new SimpleDigitalOut(new DataHub().ranBoolean()));
 			i++;
 		}
 	}
@@ -75,19 +82,31 @@ public class ModbusTcpSlave {
 	public void sendDevIR04(int len) {
 		int i = 0;
 		while (i < len) {
-			spi.addInputRegister(new SimpleInputRegister(new DataDefined().ranInteger(0, 10)));
+			spi.addInputRegister(new SimpleInputRegister(new DataHub().ranInteger(0, 10)));
 			i++;
 		}
 	}
 
 	/*
-	 * Register
+	 * update Register
 	 */
-	public void sendDevRI03(int len) {
-		int i = 0;
-		while (i < len) {
-			spi.addRegister(new SimpleRegister(new DataDefined().ranInteger(20, 70)));
-			i++;
+	public void addDevRI03(int value) {
+		spi.addRegister(new SimpleRegister(value));
+		logger.info(spi.getRegisterCount());
+	}
+
+	public void updateDevRI03(int ref, int value) {
+		//logger.info(spi.getRegisterCount());
+		if (ref < 0 || ref > spi.getRegisterCount()) {
+			throw new IllegalAddressException();
+		} else {
+			spi.setRegister(ref, new SimpleRegister(value));
+		}
+	}
+
+	public void initRegister(int count) {
+		for (int i = 0; i < count; i++) {
+			spi.addRegister(new SimpleRegister(0));
 		}
 	}
 }

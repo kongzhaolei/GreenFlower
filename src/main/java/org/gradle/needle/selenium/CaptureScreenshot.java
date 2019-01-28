@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -51,7 +51,7 @@ public class CaptureScreenshot {
 		} else if (GlobalSettings.browserCoreType == 2) {
 			augmentedDriver = new Augmenter().augment(bf.getBrowserCore());
 		} else {
-			return "ÎÞ·¨Ê¶±ðµÄä¯ÀÀÆ÷";
+			return "ï¿½Þ·ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}
 
 		try {
@@ -61,7 +61,7 @@ public class CaptureScreenshot {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "½ØÍ¼Ê§°Ü";
+			return "ï¿½ï¿½Í¼Ê§ï¿½ï¿½";
 		}
 
 		return screenShotPath.replace("\\", "/");

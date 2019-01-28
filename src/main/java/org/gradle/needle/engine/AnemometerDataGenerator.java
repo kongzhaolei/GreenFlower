@@ -8,13 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import org.gradle.needle.dto.GlobalSettings;
+import org.gradle.needle.config.GlobalSettings;
 
 import org.apache.log4j.Logger;
 
 public class AnemometerDataGenerator {
 
-	private DataDefined dataDefined;
+	private DataHub dataDefined;
 	private File file;
 	private Calendar calendar;
 	private String longtitude;
@@ -23,15 +23,15 @@ public class AnemometerDataGenerator {
 
 	public AnemometerDataGenerator(File file) {
 		this.file = file;
-		dataDefined = new DataDefined(Integer.parseInt(GlobalSettings.getProperty("protocolid_cft")));
+		dataDefined = new DataHub(Integer.parseInt(GlobalSettings.getProperty("protocolid_cft")));
 	}
 	
-	//ÉèÖÃ¾­¶È
+	//ï¿½ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½
 	public void setLongtitude(String longtitude) {
 		this.longtitude = longtitude;
 	}
 	
-	//ÉèÖÃÎ³¶È
+	//ï¿½ï¿½ï¿½ï¿½Î³ï¿½ï¿½
 	public void setlatitude(String latitude) {
 		this.latitude = latitude;
 	}
@@ -55,17 +55,17 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * Ò»°ãÃ¿¸öÎÄ¼þ°üÀ¨µ±Ç°5ÌìÊý¾Ý
+	 * Ò»ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
-	 * @ 00ÎÄ¼þ£º0000-0600
+	 * @ 00ï¿½Ä¼ï¿½ï¿½ï¿½0000-0600
 	 * 
-	 * @ 12ÎÄ¼þ£º1200-1800
+	 * @ 12ï¿½Ä¼ï¿½ï¿½ï¿½1200-1800
 	 * 
-	 * @duration ÌìÊý
+	 * @duration ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void genAnemometerFiles(int duration) throws IOException {
 		file = new File(file.getAbsolutePath() + "/" + anemometerFileNameLogic());
-		int timeGranularity = 96; // Ê±¼äÁ£¶È
+		int timeGranularity = 96; // Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		FileWriter fw = new FileWriter(file);
 		try {
 			for (int ontoday = -1; ontoday < duration; ontoday++) {
@@ -87,7 +87,7 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * ÆøÏóÊ±¼äÁ£¶È Ã¿ÈÕ¶¨Ê±´¥·¢Á½´Î£º02:50£¬14:50 96¸öÊ±¼äµã
+	 * ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¿ï¿½Õ¶ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î£ï¿½02:50ï¿½ï¿½14:50 96ï¿½ï¿½Ê±ï¿½ï¿½ï¿½
 	 */
 	private List<String> anemometerTimeGranularity(int timeGranularity) {
 		String amtime = "0000";
@@ -111,7 +111,7 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * Éú³Éµ±Ç°ÌìµÄÆøÏóÎÄ¼þÃû
+	 * ï¿½ï¿½ï¿½Éµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 	 */
 	private String anemometerFileNameLogic() {
 		String filename = "";
@@ -125,7 +125,7 @@ public class AnemometerDataGenerator {
 	}
 
 	/*
-	 * ¼ÆËã¾àÀëµ±Ç°ÌìµÚnÌìµÄÈÕÆÚ£¬·µ»Ø¸ñÊ½yyyyMMdd n = -1 ·µ»ØÇ°Ò»Ìì n = 1 ·µ»ØµÚ¶þÌì
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ±Ç°ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½Ê½yyyyMMdd n = -1 ï¿½ï¿½ï¿½ï¿½Ç°Ò»ï¿½ï¿½ n = 1 ï¿½ï¿½ï¿½ØµÚ¶ï¿½ï¿½ï¿½
 	 */
 	private String formatAnotherday(int n) {
 		calendar = Calendar.getInstance();
