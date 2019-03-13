@@ -11,14 +11,14 @@ public class ModbusShark {
 	public static void main(String[] args) {
 		try {
 			while (true) {
-				String dd = ModbusTcpMaster.readByTCP("10.68.12.40", 502, "03", 1, 50, 1);
+				String dd = ModbusTcpMaster.readByTCP("10.68.12.54", 503, "04", 0, 4, 1);
 				logger.info(dd);
 				String[] dds = StringUtils.split(dd, "-");
 				float[] r = ByteConvertUtils.getFloat(dds, true);
 				for (float f : r) {
 					logger.info(f);
 				}
-				Thread.sleep(5000);
+				Thread.sleep(60000);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

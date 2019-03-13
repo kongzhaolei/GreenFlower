@@ -274,7 +274,16 @@ public class DataHub {
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
-
+	
+	public List<Wtinfo> getWtinfo(int wfid) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Wtinfo wtinfo = new Wtinfo();
+		wtinfo.setWfid(wfid);
+		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
+		return list;
+	}
+	
 	/*
 	 * ��ȡrunlog code list<code>
 	 * 

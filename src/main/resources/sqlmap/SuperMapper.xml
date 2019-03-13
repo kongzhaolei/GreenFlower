@@ -25,9 +25,20 @@
 	
 	<select id="selectWtinfo" parameterType="Wtinfo" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="Wtinfo">
-        <![CDATA[
- SELECT * FROM wtinfo WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC
-        ]]>
+ SELECT * FROM config.wtinfo
+        <choose>
+          <when test="protocolid != null">
+            WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC
+          </when>
+          
+          <when test="wfid != null">
+            WHERE wfid = #{wfid} ORDER BY wtid ASC
+          </when>
+          
+          <otherwise>
+            WHERE 1 = 1
+          </otherwise> 
+        </choose>
 	</select>
 	
 	<select id="selectRunlogcode" parameterType="Runlogcode" flushCache="false"

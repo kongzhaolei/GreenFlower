@@ -3,35 +3,26 @@ package org.gradle;
 import org.apache.log4j.Logger;
 import org.gradle.needle.engine.DataHub;
 import org.gradle.needle.modbus.ModbusTcpSlave;
-import org.gradle.needle.model.WtOneData;
+import org.gradle.needle.model.Wtinfo;
+import org.gradle.needle.thread.ModbusOneDataThread;
 
 public class ModbusGhost {
-	private static int wtid = 654327001;
-	private static String time = "2017-07-30";
+	private static int wfid = 654125;
+	private static String time = "2017-11-12";
 	private static int count = 20;
+	private static int ref = 0;
 	private static Logger logger = Logger.getLogger(ModbusGhost.class.getName());
 
 	public static void main(String[] args) {
 		DataHub dh = new DataHub();
 		try {
-			ModbusTcpSlave fjslave = new ModbusTcpSlave("10.68.12.40", 502);
-			// ModbusTcpSlave cftslave = new ModbusTcpSlave("10.68.12.40", 503);
+			ModbusTcpSlave fjslave = new ModbusTcpSlave("10.68.12.43", 502);
 			fjslave.startTcpListenerThreadPool(10, 1);
-			// cftslave.startTcpListenerThreadPool(10, 1);
-			fjslave.initRegister(count);
-			for (WtOneData onedata : dh.getWtonedata(wtid, time)) {
-					fjslave.updateDevRI03(0, onedata.getWindSpeed().intValue());
-					fjslave.updateDevRI03(2, dh.ranInteger(-80, 80));
-					fjslave.updateDevRI03(4, dh.ranInteger(-20, 40));
-					fjslave.updateDevRI03(6, onedata.getRealPower().intValue());
-					fjslave.updateDevRI03(8, dh.ranInteger(5000, 8000));
-					fjslave.updateDevRI03(10, dh.ranInteger(80000, 90000));
-					fjslave.updateDevRI03(12, dh.ranInteger(-80, 80));
-					fjslave.updateDevRI03(14, dh.ranInteger(-100, 100));
-					fjslave.updateDevRI03(16, onedata.getWtStatus());	
-					fjslave.updateDevRI03(18, onedata.getlimitStatus());				
-					Thread.sleep(60000);
-				}
+			fjslave.initRegister(dh.getWtinfo(wfid).size() * count);
+			for (Wtinfo wtinfo : dh.getWtinfo(wfid)) {
+				new Thread(new ModbusOneDataThread(fjslave,wtinfo,time,ref)).start();
+				ref = ref + count;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

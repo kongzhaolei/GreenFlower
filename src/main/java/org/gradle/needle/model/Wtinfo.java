@@ -20,6 +20,10 @@ public class Wtinfo {
 	public Integer getWfid() {
 		return wfid;
 	}
+	
+	public void setWfid(int wfid) {
+		this.wfid = wfid;
+	}
 
 	public Integer getWtid() {
 		return wtid;

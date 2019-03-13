@@ -14,8 +14,10 @@ public class WtOneData {
 	private double windspeed;
 	private double realpower;
 	private double theorypower;
-	private char wtstatus;
-	private char limitstatus;
+	private int wtstatus;
+	private int limitstatus;
+	private double envitemp;
+	private double endelec;
 	
 	public Integer getWfid() {
 		return wfid;
@@ -53,12 +55,20 @@ public class WtOneData {
 		return theorypower;
 	}
 	
-	public Character getWtStatus() {
+	public Integer getWtStatus() {
 		return wtstatus;
 	}
 	
-	public Character getlimitStatus() {
+	public Integer getlimitStatus() {
 		return limitstatus;
+	}
+	
+	public Double getEnvitemp() {
+		return envitemp;
+	}
+	
+	public Double getEndelec() {
+		return endelec;
 	}
 
 }

@@ -92,7 +92,7 @@ public class ModbusTcpSlave {
 	 */
 	public void addDevRI03(int value) {
 		spi.addRegister(new SimpleRegister(value));
-		logger.info(spi.getRegisterCount());
+		//logger.info(spi.getRegisterCount());
 	}
 
 	public void updateDevRI03(int ref, int value) {

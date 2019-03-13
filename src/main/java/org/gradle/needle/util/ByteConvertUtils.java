@@ -1,8 +1,8 @@
 package org.gradle.needle.util;
 
 public class ByteConvertUtils {
-	public static float[] getFloat(String[] s, boolean swap) {
 
+	public static float[] getFloat(String[] s, boolean swap) {
 		int il = s.length / 2;
 		char ch1, ch2;
 		byte[] dd0, dd1;
@@ -75,5 +75,23 @@ public class ByteConvertUtils {
 		}
 		return r;
 	}
+	
+
+	public static short[] getShort(Double val) {
+		byte[] bvals = ByteArrayConveter.getByteArray(val);
+		short[] datas = new short[2];
+		datas[0] = ByteArrayConveter.getShort(bvals, 0);
+		datas[1] = ByteArrayConveter.getShort(bvals, 2);
+		return datas;
+	}
+
+	public static short[] getShort(Float val) {
+		byte[] bvals = ByteArrayConveter.getByteArray(val);
+		short[] datas = new short[2];
+		datas[0] = ByteArrayConveter.getShort(bvals, 0);
+		datas[1] = ByteArrayConveter.getShort(bvals, 2);
+		return datas;
+	}
+	
 
 }
