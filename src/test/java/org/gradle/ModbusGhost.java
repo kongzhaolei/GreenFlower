@@ -16,7 +16,7 @@ public class ModbusGhost {
 	public static void main(String[] args) {
 		DataHub dh = new DataHub();
 		try {
-			ModbusTcpSlave fjslave = new ModbusTcpSlave("10.68.12.43", 502);
+			ModbusTcpSlave fjslave = new ModbusTcpSlave("10.200.50.136", 502);
 			fjslave.startTcpListenerThreadPool(10, 1);
 			fjslave.initRegister(dh.getWtinfo(wfid).size() * count);
 			for (Wtinfo wtinfo : dh.getWtinfo(wfid)) {

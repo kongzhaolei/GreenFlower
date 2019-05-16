@@ -23,12 +23,20 @@ import com.google.gson.reflect.TypeToken;
 public class JsonUtils {
 
 	/*
-	 * 嵌套json反序列化 返回 java对象
+	 * 嵌套json序列化 返回 java对象
 	 */
-	public static JsonData FromJson(String json) {
+	public static JsonData String2Json(String json) {
 		Gson gson = new Gson();
 		JsonData md = gson.fromJson(json, JsonData.class);
 		return md;
+	}
+	
+    /*
+     * JSON to String
+     */
+	public static String Json2String(JsonObject jsonObject) {
+		Gson gson = new Gson();
+		return gson.toJson(jsonObject);
 	}
 
 	/*
@@ -40,7 +48,7 @@ public class JsonUtils {
 		Type type = new TypeToken<Map<String, JsonElement>>() {
 		}.getType();
 		try {
-			JsonElement childobject = FromJson(json).getData().getAsJsonObject("cli").getAsJsonObject("dps")
+			JsonElement childobject = String2Json(json).getData().getAsJsonObject("cli").getAsJsonObject("dps")
 					.getAsJsonObject(childlabel);
 			wtjson = gson2.fromJson(childobject, type);
 		} catch (Exception e) {

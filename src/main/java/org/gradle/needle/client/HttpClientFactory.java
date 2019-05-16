@@ -31,6 +31,7 @@ import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.conn.ssl.TrustStrategy;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -88,7 +89,7 @@ public class HttpClientFactory {
 			registryBuilder.register("https", sslSF);
 		} catch (KeyStoreException e) {
 			throw new RuntimeException(e);
-		} catch (KeyManagementException e) {
+		} catch (KeyManagementException e) {	
 			throw new RuntimeException(e);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
@@ -160,6 +161,8 @@ public class HttpClientFactory {
 				pairs.add(new BasicNameValuePair(entry.getKey().trim(), entry.getValue().trim()));
 			}
 		}
+		
+		// 
 
 		// ∑¢ÀÕ«Î«Û
 		try {

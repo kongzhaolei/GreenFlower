@@ -59,6 +59,7 @@ public class ModbusOneDataThread implements Runnable {
 						fjslave.updateDevRI03(ref + 17, ByteConvertUtils.getShort(onedata.getWtStatus().floatValue())[1]);
 						fjslave.updateDevRI03(ref + 18, ByteConvertUtils.getShort(onedata.getlimitStatus().floatValue())[0]);
 						fjslave.updateDevRI03(ref + 19, ByteConvertUtils.getShort(onedata.getlimitStatus().floatValue())[1]);
+						
 						Thread.sleep(55000);
 					}
 				}
