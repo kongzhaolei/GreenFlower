@@ -58,7 +58,7 @@
 	<select id="selectWtOneData" parameterType="WtOneData" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="WtOneData">
         <![CDATA[
- SELECT * FROM onedata WHERE wtid = #{wtid} AND rectime LIKE CONCAT('%',#{rectime},'%') ORDER BY rectime ASC
+ SELECT * FROM onedata WHERE wtid = #{wtid} AND rectime >= #{rectime} ORDER BY rectime ASC
         ]]>
 	</select>
 	

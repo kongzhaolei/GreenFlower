@@ -16,10 +16,10 @@ public class PostCase {
 	private static Logger logger = Logger.getLogger(PostCase.class.getName());
 	static CloseableHttpClient sclient;
 
-	private static String url1 = "http://10.12.8.29:9999/dataserver/cdqbasedate";
+	private static String url1 = "http://10.12.8.41:9999/dataserver/cdqbasedate";
 	private static String url2 = "http://10.12.8.36:9999/dataserver/getfactdatajson";
 	private static String url3 = "http://10.12.8.36:9999/dataserver/getkjrldata";
-	private static String url4 = "http://10.12.8.41:9999/dataserver/getfactjson";
+	private static String url4 = "http://10.12.8.41:9999/dataserver/getfactjson";	
 	private static String url5 = "http://10.12.8.36:9999/dataserver/getsuperjson";
 	private static String body2 = "{\"wfids\":652243,\"date\":\"201805\",\"vars\":\"wfid, dtime, r_pres\"}";
 	private static String body3 = "{\"wfids\":652243,\"datetime\":\"20190416\",\"vars\":\"wfid,dtime,r_running_cap_ratio\"}";
@@ -28,11 +28,11 @@ public class PostCase {
 
 	public static void main(String[] args) throws IOException {
 		sclient = HttpClients.createDefault();
-		HttpPost post = new HttpPost(url4);
+		HttpPost post = new HttpPost(url1);
 
 		try {
 			post.addHeader("Content-Type", "application/json;charset=UTF-8");
-			post.setEntity(new StringEntity(body4));
+			//post.setEntity(new StringEntity(body4));
 			HttpResponse httpResponse = sclient.execute(post);
 			HttpEntity entity = httpResponse.getEntity();
 			String response = EntityUtils.toString(entity, "UTF-8");
