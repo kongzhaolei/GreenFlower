@@ -16,8 +16,8 @@ import org.gradle.needle.util.VTimer;
 
 /***
  * 
- * @author kongzhaolei ����ģ�������� 1. ֧��ģ��˲̬���ݣ��������ݣ��������ݣ�ͨ��״̬�����״̬����,�澯��־ 2.
- *         ֧��ģ����ʷ˲̬���ݣ���������(10,5,1)�������������ݣ���ʷ�������ݣ���λ����
+ * @author kongzhaolei 锟斤拷锟斤拷模锟斤拷锟斤拷锟斤拷锟斤拷 1. 支锟斤拷模锟斤拷瞬态锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷锟捷ｏ拷通锟斤拷状态锟斤拷锟斤拷锟阶刺拷锟斤拷锟�,锟芥警锟斤拷志 2.
+ *         支锟斤拷模锟斤拷锟斤拷史瞬态锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟斤拷锟斤拷(10,5,1)锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷ｏ拷锟斤拷史锟斤拷锟斤拷锟斤拷锟捷ｏ拷锟斤拷位锟斤拷锟斤拷
  */
 public class DeviceDataGenerator {
 
@@ -28,7 +28,7 @@ public class DeviceDataGenerator {
 	Date date = new Date();
 
 	/*
-	 * ���췽�� 1 PLC����ʼ��protocolid,cmdname
+	 * 锟斤拷锟届方锟斤拷 1 PLC锟斤拷锟斤拷始锟斤拷protocolid,cmdname
 	 */
 	public DeviceDataGenerator(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
@@ -37,7 +37,7 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ���췽�� 2 normal����ʼ��protocolid
+	 * 锟斤拷锟届方锟斤拷 2 normal锟斤拷锟斤拷始锟斤拷protocolid
 	 */
 	public DeviceDataGenerator(int protocolid) {
 		this.protocolid = protocolid;
@@ -45,7 +45,7 @@ public class DeviceDataGenerator {
 	}
 
 	/**
-	 * ͳһ��������
+	 * 统一锟斤拷锟斤拷锟斤拷锟斤拷
 	 */
 	public String gevDevDataEngine(String type) {
 		String sReturn = null;
@@ -66,13 +66,13 @@ public class DeviceDataGenerator {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info("��ǰ���ݴ���" + sReturn);
+			logger.info("锟斤拷前锟斤拷锟捷达拷锟斤拷" + sReturn);
 		}
 		return sReturn;
 	}
 
 	/**
-	 * ��ȡ������list<wtid>
+	 * 锟斤拷取锟斤拷锟斤拷锟斤拷list<wtid>
 	 */
 	public List<Integer> getWtidList() {
 		List<Integer> lists = new ArrayList<Integer>();
@@ -87,21 +87,21 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * �������� sediment,һ����
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷 sediment,一锟斤拷锟斤拷
 	 */
 	public String genDevSedimentOne() {
 		date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOne() + ")";
 	}
 
-	// �������� sediment һ��������
+	// 锟斤拷锟斤拷锟斤拷锟斤拷 sediment 一锟斤拷锟斤拷锟斤拷锟斤拷
 	public String genDevSedimentOneData() {
 		date.setTime(date.getTime() - 60 * 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevOneData()
 				+ ")";
 	}
 
-	// �������� sediment ��ʷ˲̬
+	// 锟斤拷锟斤拷锟斤拷锟斤拷 sediment 锟斤拷史瞬态
 	public String genDevSedimentRealData() {
 		date.setTime(date.getTime() - 1000);
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(date) + "|" + genDevRealTimeData()
@@ -109,7 +109,7 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ��ʷ˲̬���� realtimedata
+	 * 锟斤拷史瞬态锟斤拷锟斤拷 realtimedata
 	 */
 	public String genDevRealTimeData() {
 		return "(realtimedata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
@@ -117,28 +117,33 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ʮ�������� tendata
+	 * 十锟斤拷锟斤拷锟斤拷锟斤拷 tendata
 	 */
 	public String genDevTenData(Integer wtid) {
 		return "(tendata|" + wtid + "|" + this.gevDevDataEngine("tendata") + ")";
 	}
 
 	/*
-	 * ��������� fivedata
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟� fivedata
 	 */
 	public String genDevFiveData(Integer wtid) {
 		return "(fivedata|" + wtid + "|" + this.gevDevDataEngine("fivedata") + ")";
 	}
+	
+	// new fivedata
+	public String genNewDevFiveData(Integer wtid) {
+		return "(newfivedata|" + wtid + "|" + "1" + "|" + this.gevDevDataEngine("fivedata") + "|" + "0" + "|" + "0" + "|" + "1" + "|" + protocolid + ")";
+	}
 
 	/*
-	 * һ�������� one
+	 * 一锟斤拷锟斤拷锟斤拷锟斤拷 one
 	 */
 	public String genDevOne() {
 		return "(one|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + this.gevDevDataEngine("one")
 				+ ")";
 	}
 
-	// һ������������ onedata
+	// 一锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 onedata
 	public String genDevOneData() {
 		StringBuilder onedata = new StringBuilder();
 		Integer wtid = getWtidList().get(dataHub.ranInteger(0, getWtidList().size()));
@@ -159,7 +164,7 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ��λ���� changesave
+	 * 锟斤拷位锟斤拷锟斤拷 changesave
 	 */
 	public String genDevChangeSave() {
 		return "(changesave|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
@@ -167,7 +172,7 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * �������� powercurve
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷 powercurve
 	 */
 	public String genDevPowerCurve() {
 		return "(powercurve|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
@@ -175,7 +180,7 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ���,���������ѯ���� wman
+	 * 锟斤拷锟�,锟斤拷锟斤拷锟斤拷锟斤拷锟窖拷锟斤拷锟� wman
 	 */
 	public String genDevWmanData() {
 		return "(wman|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|"
@@ -183,13 +188,13 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * �澯��־
+	 * 锟芥警锟斤拷志
 	 */
 	public StringBuilder genDevWarnLog() {
 		StringBuilder warnlog = new StringBuilder();
-		int systemid = 3; // ��ʱֻģ�⹦�ʿ���
-		String levelid = Integer.toString(dataHub.ranInteger(0, 3)); // 0 ��ʾ��1 ���桢2//
-																// ����
+		int systemid = 3; // 锟斤拷时只模锟解功锟绞匡拷锟斤拷
+		String levelid = Integer.toString(dataHub.ranInteger(0, 3)); // 0 锟斤拷示锟斤拷1 锟斤拷锟芥、2//
+																// 锟斤拷锟斤拷
 		String rectime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").format(new Date());
 		int wfid = dataHub.getWfid();
 		int objectid = getWtidList().get(dataHub.ranInteger(0, getWtidList().size()));
@@ -203,14 +208,14 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ϵͳ�澯����
+	 * 系统锟芥警锟斤拷锟斤拷
 	 */
 	public String genDevWarnEnd() {
 		return "";
 	}
 
 	/*
-	 * ���Ԫ����
+	 * 锟斤拷锟皆拷锟斤拷锟�
 	 * 
 	 * @return
 	 */
@@ -237,14 +242,14 @@ public class DeviceDataGenerator {
 							sReturn += varpathMap.get(pps.getIecpath()) + ";";
 							n++;
 						} else {
-							logger.info("data��ȱ�ٴ�IEC���� " + pps.getIecpath() + " / " + pps.getDescrcn());
+							logger.info("data锟斤拷缺锟劫达拷IEC锟斤拷锟斤拷 " + pps.getIecpath() + " / " + pps.getDescrcn());
 						}
 					}
 				} else {
-					logger.info(protocolid + "Э�鲻���ڸ�compath�� " + dataHub.getCompathOnCmdname());
+					logger.info(protocolid + "协锟介不锟斤拷锟节革拷compath锟斤拷 " + dataHub.getCompathOnCmdname());
 				}
 				sReturn = sReturn.substring(sReturn.indexOf("null") + 4, sReturn.length() - 1);
-				logger.info(dataHub.getCompathOnCmdname() + " �����ѷ���" + sReturn.split(";").length + "��IEC��");
+				logger.info(dataHub.getCompathOnCmdname() + " 锟斤拷锟斤拷锟窖凤拷锟斤拷" + sReturn.split(";").length + "锟斤拷IEC锟斤拷");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -253,12 +258,12 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ��ʱ��ˢ��ͣ��ģʽ��
+	 * 锟斤拷时锟斤拷刷锟斤拷停锟斤拷模式锟斤拷
 	 */
 	public String genStopModeWord() {
 		String stopmodeword = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getStopNum(); // ͣ��ģʽ��ʱ�Ӽ�����
+		int n = VTimer.getStopNum(); // 停锟斤拷模式锟斤拷时锟接硷拷锟斤拷锟斤拷
 		try {
 			for (Pathdescr pathdescr : dataHub.getStopModeWordList()) {
 				lists.add(pathdescr.getIecvalue());
@@ -271,18 +276,18 @@ public class DeviceDataGenerator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// logger.info("��ǰͣ��ģʽ��Ϊ�� " + stopmodeword);
+		// logger.info("锟斤拷前停锟斤拷模式锟斤拷为锟斤拷 " + stopmodeword);
 		return stopmodeword;
 	}
 
 	/*
-	 * ��ʱ��ˢ���޹���ģʽ��
+	 * 锟斤拷时锟斤拷刷锟斤拷锟睫癸拷锟斤拷模式锟斤拷
 	 * 
 	 */
 	public String genLimitModeWord() {
 		String limitmodeword = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getLimitNum(); // �޹���ģʽ��ʱ�Ӽ�����
+		int n = VTimer.getLimitNum(); // 锟睫癸拷锟斤拷模式锟斤拷时锟接硷拷锟斤拷锟斤拷
 		try {
 			for (Pathdescr pathdescr : dataHub.getLimitModeWordList()) {
 				lists.add(pathdescr.getIecvalue());
@@ -295,19 +300,19 @@ public class DeviceDataGenerator {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// logger.info("��ǰ�޹���ģʽ��Ϊ�� " + limitmodeword);
+		// logger.info("锟斤拷前锟睫癸拷锟斤拷模式锟斤拷为锟斤拷 " + limitmodeword);
 		return limitmodeword;
 	}
 
 	/*
-	 * ��ʱ��ˢ�·��״̬ ֧�ֹ����߼�
+	 * 锟斤拷时锟斤拷刷锟铰凤拷锟阶刺� 支锟街癸拷锟斤拷锟竭硷拷
 	 */
 	public String genStateData() {
 		String status = null;
 		List<String> lists = new ArrayList<String>();
-		int n = VTimer.getStatusNum(); // ���״̬ʱ�Ӽ�����
+		int n = VTimer.getStatusNum(); // 锟斤拷锟阶刺憋拷蛹锟斤拷锟斤拷锟�
 		try {
-			if ("0" != genFaultTree()) { // ���ϣ����ͣ��
+			if ("0" != genFaultTree()) { // 锟斤拷锟较ｏ拷锟斤拷锟酵ｏ拷锟�
 				status = "2";
 			} else {
 				for (Pathdescr pathdescr : dataHub.getStatusList()) {
@@ -326,35 +331,35 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * ���״̬
+	 * 锟斤拷锟阶刺�
 	 */
 	public String genDevStateData() {
 		return "(statedata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genStateData() + ")";
 	}
 
 	/*
-	 * ǰ�ú��豸ͨ��״̬����ʱ����Ϊͨ������
+	 * 前锟矫猴拷锟借备通锟斤拷状态锟斤拷锟斤拷时锟斤拷锟斤拷为通锟斤拷锟斤拷锟斤拷
 	 */
 	public String genDevComState() {
 		return "(comstate|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + "0" + ")";
 	}
 
 	/*
-	 * ���������
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟�
 	 */
 	public String genMainFault() {
 		return genFaultTree().split(";")[0];
 	}
 
 	/*
-	 * ��������
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷
 	 */
 	public String genDevFaultData() {
 		return "(falutdata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genFaultTree() + ")";
 	}
 
 	/*
-	 * �������������ʼ�޹��� ��ʱ��Ƶ��ģ��5�����ϣ�֮��ָ� faultsign true �޹��ϣ�false������
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞硷拷薰锟斤拷锟� 锟斤拷时锟斤拷频锟斤拷模锟斤拷5锟斤拷锟斤拷锟较ｏ拷之锟斤拷指锟� faultsign true 锟睫癸拷锟较ｏ拷false锟斤拷锟斤拷锟斤拷
 	 */
 	public String genFaultTree() {
 		String faulttree = "";
@@ -379,14 +384,14 @@ public class DeviceDataGenerator {
 	}
 
 	/*
-	 * �������
+	 * 锟斤拷锟斤拷锟斤拷锟�
 	 */
 	public String genDevAlarmData() {
 		return "(alarmdata|" + getWtidList().get(dataHub.ranInteger(0, getWtidList().size())) + "|" + genAlarmTree() + ")";
 	}
 
 	/*
-	 * �������������ʼ���޾��� ��ʱ��Ƶ��ģ��3�����棬֮��ָ� alarmsign
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞硷拷锟斤拷蘧锟斤拷锟� 锟斤拷时锟斤拷频锟斤拷模锟斤拷3锟斤拷锟斤拷锟芥，之锟斤拷指锟� alarmsign
 	 */
 	public String genAlarmTree() {
 		String alarmtree = "";

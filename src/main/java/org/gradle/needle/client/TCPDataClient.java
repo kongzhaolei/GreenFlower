@@ -9,6 +9,7 @@ import org.gradle.needle.thread.CftFiveDataThread;
 import org.gradle.needle.thread.CftTenDataThread;
 import org.gradle.needle.thread.DevChangeSaveThread;
 import org.gradle.needle.thread.DevFiveDataThread;
+import org.gradle.needle.thread.DevNewFiveDataThread;
 import org.gradle.needle.thread.DevPowerCurveThread;
 import org.gradle.needle.thread.DevRealTimeDataThread;
 import org.gradle.needle.thread.DevTenDataThread;
@@ -46,13 +47,14 @@ public class TCPDataClient implements DataClient {
 	}
 
 	/**
-	 * TCP �߳���
+	 * TCP 锟竭筹拷锟斤拷
 	 */
 	public void GeneratorStart() {
 		try {
 			TcpConnect();
-			new Thread(new DevTenDataThread()).start();
-			new Thread(new DevFiveDataThread()).start();
+			// new Thread(new DevTenDataThread()).start();
+			// new Thread(new DevFiveDataThread()).start();
+			new Thread(new DevNewFiveDataThread()).start();
 			//new Thread(new CftTenDataThread()).start();
 			//new Thread(new CftFiveDataThread()).start();
 			// new Thread(new DevRealTimeDataThread()).start();
@@ -64,7 +66,7 @@ public class TCPDataClient implements DataClient {
 	} 	
 
 	/**
-	 * ����tcp client
+	 * 锟斤拷锟斤拷tcp client
 	 * 
 	 * @param data
 	 */
@@ -82,7 +84,7 @@ public class TCPDataClient implements DataClient {
 						}
 					});
 			future = bs.connect(HOST, PORT).sync();
-			logger.info("�����ӵ������ " + HOST + ":" + PORT);
+			logger.info("锟斤拷锟斤拷锟接碉拷锟斤拷锟斤拷锟� " + HOST + ":" + PORT);
 			// future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +92,7 @@ public class TCPDataClient implements DataClient {
 	}
 
 	/**
-	 * ͨ������tcp����
+	 * 通锟斤拷锟斤拷锟斤拷tcp锟斤拷锟斤拷
 	 */
 	public static void channelSend(String data) {
 		try {
@@ -142,6 +144,18 @@ public class TCPDataClient implements DataClient {
 			for(Integer wtid : dgen_wt.getWtidList()){
 				channelSend(dgen_wt.genDevFiveData(wtid));
 				//logger.info(dgen_wt.genDevFiveData(wtid));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// send newDevFiveData
+	public static void sendNewDevFiveData () {
+		try {
+			for(Integer wtid : dgen_wt.getWtidList()){
+				channelSend(dgen_wt.genNewDevFiveData(wtid));
+				//logger.info(dgen_wt.genNewDevFiveData(wtid));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

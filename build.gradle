@@ -46,7 +46,7 @@ dependencies {
 	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 	compile group: 'org.apache.poi', name: 'poi', version: '3.7'
 	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.7'
-	compile group: 'net.sf.jxls', name: 'jxls-core', version: '1.0.6'
+	compile group: 'net.sf.jxls', name: 'jxls-core', version: '1.0.6'	
 	compile group: 'org.seleniumhq.selenium', name: 'selenium-server-standalone', version: '2.35.0'
 	compile group: 'net.sf.ucanaccess', name: 'ucanaccess', version: '3.0.4'
 	testCompile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.20.0'
