@@ -35,7 +35,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.sqlite.JDBC" />
-				<property name="url" value="jdbc:sqlite:/opt/needle/GreenFlower/dbfiles/localdb_652243.sqlite" />
+				<property name="url" value="jdbc:sqlite:/home/needle/workspace/GreenDocker/Devops-Ghost/dbfiles/localdb_652243.sqlite" />
 			</dataSource>
 		</environment>
 		
@@ -43,7 +43,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.sqlite.JDBC" />
-				<property name="url" value="jdbc:sqlite:/opt/needle/GreenFlower/dbfiles/datadb.sqlite" />
+				<property name="url" value="jdbc:sqlite:/home/needle/workspace/GreenDocker/Devops-Ghost/dbfiles/datadb.sqlite" />
 			</dataSource>
 		</environment>
 		
