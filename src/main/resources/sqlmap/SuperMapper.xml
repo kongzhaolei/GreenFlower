@@ -25,7 +25,7 @@
 	
 	<select id="selectWtinfo" parameterType="Wtinfo" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="Wtinfo">
- SELECT * FROM config.wtinfo
+ SELECT * FROM wtinfo
         <choose>
           <when test="protocolid != null">
             WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC

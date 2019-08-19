@@ -4,7 +4,7 @@ public class Wtinfo {
 
 	private Integer protocolid;
 	private Integer wfid;
-	private Integer wtid;
+	private String wtid;
 	private String wtname;
 	private float wtlongitude;
 	private float wtlatitude;
@@ -25,7 +25,7 @@ public class Wtinfo {
 		this.wfid = wfid;
 	}
 
-	public Integer getWtid() {
+	public String getWtid() {
 		return wtid;
 	}
 	

@@ -35,7 +35,7 @@ public class DataHub {
 	private static Logger logger = Logger.getLogger(DataHub.class.getName());
 
 	/*
-	 * ���췽��,��ʼ��protocolid,cmdname
+	 * 锟斤拷锟届方锟斤拷,锟斤拷始锟斤拷protocolid,cmdname
 	 */
 	public DataHub(int protocolid, String cmdname) {
 		this.protocolid = protocolid;
@@ -44,24 +44,25 @@ public class DataHub {
 	}
 
 	/*
-	 * ���췽��,��ʼ��protocolid
+	 * 锟斤拷锟届方锟斤拷,锟斤拷始锟斤拷protocolid
 	 */
 	public DataHub(int protocolid) {
 		this.protocolid = protocolid;
 	}
 
 	/*
-	 * �չ��췽��
+	 * 锟秸癸拷锟届方锟斤拷
 	 */
 	public DataHub() {
 
 	}
-	
+
 	/**
-	 * Get onedata from sqlserver 
+	 * Get onedata from sqlserver
+	 * 
 	 * @return
 	 */
-	public List<WtOneData> getWtonedata(int wtid,String time) {
+	public List<WtOneData> getWtonedata(String wtid, String time) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		WtOneData oneData = new WtOneData();
@@ -72,42 +73,42 @@ public class DataHub {
 	}
 
 	/**
-	 * ��ȡ����
+	 * 锟斤拷取锟斤拷锟斤拷
 	 */
 	public List<Pathdescr> getFaultList() {
 		return getPathdescr("WTUR.Flt.Rs.S");
 	}
 
 	/**
-	 * ��ȡ����
+	 * 锟斤拷取锟斤拷锟斤拷
 	 */
 	public List<Pathdescr> getAlarmList() {
 		return getPathdescr("WTUR.Alam.Rs.S");
 	}
 
 	/**
-	 * ��ȡ���״̬
+	 * 锟斤拷取锟斤拷锟阶刺�
 	 */
 	public List<Pathdescr> getStatusList() {
 		return getPathdescr("WTUR.TurSt.Rs.S");
 	}
 
 	/**
-	 * ��ȡͣ��ģʽ��
+	 * 锟斤拷取停锟斤拷模式锟斤拷
 	 */
 	public List<Pathdescr> getStopModeWordList() {
 		return getPathdescr("WTUR.Other.Wn.I16.StopModeWord");
 	}
 
 	/**
-	 * ��ȡ�޹���ģʽ��
+	 * 锟斤拷取锟睫癸拷锟斤拷模式锟斤拷
 	 */
 	public List<Pathdescr> getLimitModeWordList() {
 		return getPathdescr("WTUR.Other.Rs.S.LitPowByPLC");
 	}
 
 	/*
-	 * ��ȡlocaldb pathdescr�����ά���ݼ�(protocolid, iecpath)
+	 * 锟斤拷取localdb pathdescr锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid, iecpath)
 	 */
 	public List<Pathdescr> getPathdescr(String iecpath) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -120,7 +121,7 @@ public class DataHub {
 	}
 
 	/**
-	 * ��ȡpropaths��cmd���ݼ�(protocolid, cmdname)
+	 * 锟斤拷取propaths锟斤拷cmd锟斤拷锟捷硷拷(protocolid, cmdname)
 	 */
 	public List<Propaths> getCmdPropaths() {
 		List<Propaths> pack_list = new ArrayList<>();
@@ -136,13 +137,13 @@ public class DataHub {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.info(" ����compath��ֵ�Ƿ�Ϊnull ");
+			logger.info(" 锟斤拷锟斤拷compath锟斤拷值锟角凤拷为null ");
 		}
 		return pack_list;
 	}
 
 	/**
-	 * ��ȡpropaths���ض����ݼ�
+	 * 锟斤拷取propaths锟斤拷锟截讹拷锟斤拷锟捷硷拷
 	 */
 	public List<Propaths> getTypicalPropaths(String type) {
 		List<Propaths> pps_list = new ArrayList<>();
@@ -193,6 +194,21 @@ public class DataHub {
 					}
 				}
 				break;
+			case "newfivedata":
+				String[] foreiec = { "WTUR.WSpd.Ra.F32[AVG]", "WTUR.WSpd.Ra.F32[MIN]", "WTUR.WSpd.Ra.F32[MAX]",
+						"WTUR.Wdir.Ra.F32", "WTUR.Wdir.Ra.F32.25s", "WTUR.Wdir.Ra.F32.abs",
+						"WTUR.Temp.Ra.F32[AVG]", "WGEN.Spd.Ra.F32[AVG]", "WTPS.Ang.Ra.F32.blade1[AVG]",
+						"WTUR.PwrAt.Ra.F32[AVG]", "WTUR.PwrAt.Ra.F32.Theory[AVG]", "WTUR.PwrReact.Ra.F32[AVG]",
+						"WTUR.TotEgyAt.Wt.F32[max]", "WTUR.TotEgyAt.Wt.F32[min]", "WTUR.Other.Rn.I16.HaveFault[MAX]",
+						"WTUR.Other.Ri.I16.bLitPow", "WTUR.Other.Ri.I16.LitPowByPLC", "WTUR.TurSt.Rs.S",
+						"WTUR.Flt.Rs.S" };
+				for (Propaths pps : getAllPropaths()) {
+					if (Arrays.asList(foreiec).contains(pps.getIecpath().trim())) {
+						pps_list.add(pps);
+					}
+				}
+				break;
+
 			default:
 				getAllPropaths();
 				break;
@@ -204,7 +220,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ��ȡlocaldb propaths�����ά���ݼ�(protocolid)
+	 * 锟斤拷取localdb propaths锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid)
 	 */
 	public List<Propaths> getAllPropaths() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -216,13 +232,13 @@ public class DataHub {
 	}
 
 	/**
-	 * ��ȡprodata�����ά���ݼ�(protocolid, cmdname)
+	 * 锟斤拷取prodata锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid, cmdname)
 	 */
 	public List<Prodata> getCmdProData() {
 		List<Prodata> pack_list = new ArrayList<>();
 		try {
 			for (Prodata pda : getAllProData()) {
-				if (pda.getCompath() != null) { // compath��null��������ж�
+				if (pda.getCompath() != null) { // compath锟斤拷null锟斤拷锟斤拷锟斤拷锟斤拷卸锟�
 					if (getCompathOnCmdname().equals(pda.getCompath().trim())) {
 						pack_list.add(pda);
 					}
@@ -237,7 +253,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ��ȡdatadb prodata�����ά���ݼ�(protocolid)
+	 * 锟斤拷取datadb prodata锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid)
 	 */
 	public List<Prodata> getAllProData() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
@@ -249,22 +265,22 @@ public class DataHub {
 	}
 
 	/*
-	 * ��ȡ���糡���
+	 * 锟斤拷取锟斤拷锟界场锟斤拷锟�
 	 */
 	public Integer getWfid() {
 		return this.getWtinfo().get(0).getWfid();
 	}
 
 	/*
-	 * ��ȡ�������γ�� float[]
+	 * 锟斤拷取锟斤拷锟斤拷锟斤拷锟轿筹拷锟� float[]
 	 */
 	public float[] getLongitudeAndLatitude() {
-		float[] aFloats = {this.getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude()};
+		float[] aFloats = { this.getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude() };
 		return aFloats;
 	}
 
 	/*
-	 * ��ȡlocal wtinfo�����ά���ݼ�(protocolid)
+	 * 锟斤拷取local wtinfo锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid)
 	 */
 	public List<Wtinfo> getWtinfo() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -274,7 +290,7 @@ public class DataHub {
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
-	
+
 	public List<Wtinfo> getWtinfo(int wfid) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
@@ -283,9 +299,9 @@ public class DataHub {
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
-	
+
 	/*
-	 * ��ȡrunlog code list<code>
+	 * 锟斤拷取runlog code list<code>
 	 * 
 	 * @systemid
 	 */
@@ -302,7 +318,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ��ȡlocaldb runlogcode�����ά���ݼ�
+	 * 锟斤拷取localdb runlogcode锟斤拷锟斤拷锟轿拷锟斤拷菁锟�
 	 */
 	public List<Runlogcode> getRunLogCode(int systemid) {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -314,7 +330,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ���������
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟�
 	 */
 	public List<Integer> getTowerHeight() {
 		List<Integer> lists = new ArrayList<Integer>();
@@ -329,7 +345,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ��ȡlocaldb Towerweatherheightmap����ά���ݼ�
+	 * 锟斤拷取localdb Towerweatherheightmap锟斤拷锟斤拷维锟斤拷锟捷硷拷
 	 */
 	private List<Towerweatherheightmap> getTowerweatherheightmap() {
 		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
@@ -340,7 +356,7 @@ public class DataHub {
 	}
 
 	/*
-	 * ����ǰ�õ�GWSOCKET�����ȡ��Ӧ��compath
+	 * 锟斤拷锟斤拷前锟矫碉拷GWSOCKET锟斤拷锟斤拷锟饺★拷锟接︼拷锟絚ompath
 	 */
 	protected String getCompathOnCmdname() {
 		String compath = GlobalSettings.getProperty(cmdname);
@@ -348,17 +364,19 @@ public class DataHub {
 		if (null != compath) {
 			compathString = compath;
 		} else {
-			logger.info("�޷���Ӧ��ָ� " + cmdname);
+			logger.info("锟睫凤拷锟斤拷应锟斤拷指锟筋： " + cmdname);
 		}
 		return compathString;
 	}
 
 	/**
 	 * 
-	 * ����col_1��������DynamicValue 1 FIXED �̶�ֵ��col_2 2 FIXBOOL ������� ranBoolean() 3
-	 * DYNAMIC ��̬���� 4 FAULTMAIN ������ 5 STATUS ���״̬ 6 YEAR �� 7 MONTH �� 8 DAY �� 9
-	 * HOUR ʱ 10 MINUTE �� 11 SECOND �� 12 RANDOM ����� ranDouble() 13 TOTAL ң���� 14
-	 * STOPMODE ͣ��ģʽ��/״̬ģʽ�� 15 LIMITMODE �޹���ģʽ�� 16 ALARM ���� 17 FAULT ������
+	 * 锟斤拷锟斤拷col_1锟斤拷锟斤拷锟斤拷锟斤拷DynamicValue 1 FIXED 锟教讹拷值锟斤拷col_2 2 FIXBOOL
+	 * 锟斤拷锟斤拷锟斤拷锟� ranBoolean() 3 DYNAMIC 锟斤拷态锟斤拷锟斤拷 4 FAULTMAIN 锟斤拷锟斤拷锟斤拷 5
+	 * STATUS 锟斤拷锟阶刺� 6 YEAR 锟斤拷 7 MONTH 锟斤拷 8 DAY 锟斤拷 9 HOUR 时 10 MINUTE 锟斤拷 11
+	 * SECOND 锟斤拷 12 RANDOM 锟斤拷锟斤拷锟� ranDouble() 13 TOTAL 遥锟斤拷锟斤拷 14 STOPMODE
+	 * 停锟斤拷模式锟斤拷/状态模式锟斤拷 15 LIMITMODE 锟睫癸拷锟斤拷模式锟斤拷 16 ALARM 锟斤拷锟斤拷 17 FAULT
+	 * 锟斤拷锟斤拷锟斤拷
 	 */
 	public String getDynamicValue(Prodata pda) throws SQLException {
 		String rString = "";
@@ -410,7 +428,7 @@ public class DataHub {
 			rString = Boolean.toString(ranBoolean());
 			break;
 
-		// ��ʱ��ֵ ranCoin()
+		// 锟斤拷时锟斤拷值 ranCoin()
 		case "DYNAMIC":
 			rString = Integer.toString(ranCoin());
 			break;
@@ -452,7 +470,7 @@ public class DataHub {
 	}
 
 	/**
-	 * ��������ַ����ķ���
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷址锟斤拷锟斤拷姆锟斤拷锟�
 	 */
 	public String ranString(int length) {
 		String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -465,7 +483,8 @@ public class DataHub {
 	}
 
 	/**
-	 * ����������ͣ�λ��max��min֮��ķ��� ����(min,max)�����е�������������max
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷停锟轿伙拷锟絤ax锟斤拷min之锟斤拷姆锟斤拷锟�
+	 * 锟斤拷锟斤拷(min,max)锟斤拷锟斤拷锟叫碉拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷max
 	 */
 	public Integer ranInteger(int min, int max) {
 		Random random = new Random();
@@ -473,9 +492,8 @@ public class DataHub {
 		return bd;
 	}
 
-
 	/**
-	 * ����һ������Ĳ���ֵ�ķ���
+	 * 锟斤拷锟斤拷一锟斤拷锟斤拷锟斤拷牟锟斤拷锟街碉拷姆锟斤拷锟�
 	 */
 	public boolean ranBoolean() {
 		Random x = new Random();
@@ -483,7 +501,7 @@ public class DataHub {
 	}
 
 	/**
-	 * �������0��1
+	 * 锟斤拷锟斤拷锟斤拷锟�0锟斤拷1
 	 */
 	public int ranCoin() {
 		Random rand = new Random();
@@ -491,7 +509,7 @@ public class DataHub {
 	}
 
 	/**
-	 * ������������ȣ�λ��max��min֮��ķ���
+	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷龋锟轿伙拷锟絤ax锟斤拷min之锟斤拷姆锟斤拷锟�
 	 */
 	public String ranFloat(int min, int max) {
 		double bt = min + ((max - min) * new Random().nextFloat());

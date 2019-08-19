@@ -24,7 +24,7 @@ public class DataDispGhost {
 			 TCPDataClient.sendDevSedimentRealData();
 			 TCPDataClient.sendDevTenData();
 			 TCPDataClient.sendDevFiveData();
-			 await().atMost(120000, MILLISECONDS)
+			 await().atMost(120000, MILLISECONDS)	
 			 .untilAsserted(() -> new VerifyUtils("10.1.3.152:5432", "v5",
 			 "postgres", "postgres")
 			 .assertTbaleChanges("public.statisticdata"));

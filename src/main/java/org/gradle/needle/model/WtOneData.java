@@ -9,7 +9,7 @@ package org.gradle.needle.model;
  */
 public class WtOneData {
 	private int wfid;
-	private int wtid;
+	private String wtid;
 	private String rectime;
 	private double windspeed;
 	private double realpower;
@@ -27,11 +27,11 @@ public class WtOneData {
 		this.wfid = wfid;
 	}
 	
-	public Integer getWtid() {
+	public String getWtid() {
 		return wtid;
 	}
 	
-	public void setWtid(int wtid) {
+	public void setWtid(String wtid) {
 		this.wtid = wtid;
 	}
 	
