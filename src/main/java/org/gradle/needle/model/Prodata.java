@@ -4,11 +4,11 @@ package org.gradle.needle.model;
  * 
  * @author kongzhaolei
  * 
- * prodata±í¶ÔÓ¦µÄÊµÌåÀà
+ * prodataï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
  */
 public class Prodata {
 
-	// ÕâÀïÉèÖÃ³ÉÔ±±äÁ¿ÃûÓëprodata±í×Ö¶ÎÃû±£³ÖÒ»ÖÂ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½prodataï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	private Integer protocolid;
 	private Integer ascflg;
 	private Integer pathid;
@@ -18,6 +18,11 @@ public class Prodata {
 	private String descrcn;
 	private String col_1;
 	private String col_2;
+	private Integer transtype;
+	private Integer changesave;
+	private Integer bsend;
+	private Integer bsave;
+	
 
 	public Integer getProtocolid() {
 		return protocolid;
@@ -57,5 +62,21 @@ public class Prodata {
 
 	public String getCol2() {
 		return col_2;
+	}
+	
+	public Integer getTranstype(){
+		return transtype;
+	}
+	
+	public Integer getChangesave() {
+		return changesave;
+	}
+	
+	public Integer getBsend() {
+		return bsend;
+	}
+	
+	public Integer getBsave() {
+		return bsave;
 	}
 }

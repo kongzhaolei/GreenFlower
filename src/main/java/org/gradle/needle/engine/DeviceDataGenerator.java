@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
+import org.gradle.needle.model.Windmast;
 import org.gradle.needle.model.Wtinfo;
+import org.gradle.needle.model.Syzinfo;
 import org.gradle.needle.util.VTimer;
 
 /***
@@ -27,6 +30,7 @@ public class DeviceDataGenerator {
 	private String cmdname;
 	private DataHub dataHub;
 	private static Logger logger = Logger.getLogger(DeviceDataGenerator.class.getName());
+	private static String wpid = GlobalSettings.getProperty("wpid");
 
 	/*
 	 * 锟斤拷锟届方锟斤拷 1 PLC锟斤拷锟斤拷始锟斤拷protocolid,cmdname
@@ -59,10 +63,10 @@ public class DeviceDataGenerator {
 			for (Prodata prodata : dataHub.getAllProData()) {
 				alldatamap.put(prodata.getIecpath().trim(), dataHub.getDynamicValue(prodata));
 			}
-			if (!dataHub.getAllPropaths().isEmpty()) {
-				for (Propaths propaths : dataHub.getTypicalPropaths(type)) {
-					if (alldatamap.containsKey(propaths.getIecpath())) {
-						sReturn += alldatamap.get(propaths.getIecpath()) + ",";
+			if (!dataHub.getAllProData().isEmpty()) {
+				for (Prodata prodata : dataHub.getTypicalPropaths(type)) {
+					if (alldatamap.containsKey(prodata.getIecpath())) {
+						sReturn += alldatamap.get(prodata.getIecpath()) + ",";
 					} else {
 						continue;
 					}
@@ -82,8 +86,32 @@ public class DeviceDataGenerator {
 	public List<String> getWtidList() {
 		List<String> lists = new ArrayList<String>();
 		try {
-			for (Wtinfo wtinfo : dataHub.getWtinfo()) {
-				lists.add(wtinfo.getWtid());
+			for (Wtinfo wtinfo : dataHub.getWtinfo(wpid)) {
+				lists.add(wtinfo.getWtcode());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+	
+	public List<String> getSyzList() {
+		List<String> lists = new ArrayList<String>();
+		try {
+			for (Syzinfo syzinfo : dataHub.getSyzinfo(wpid)) {
+				lists.add(syzinfo.getSyzid());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lists;
+	}
+	
+	public List<String> getWindmastList() {
+		List<String> lists = new ArrayList<String>();
+		try {
+			for (Windmast windmast : dataHub.getWindmastinfo(wpid)) {
+				lists.add(windmast.getWindcode());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,7 +166,7 @@ public class DeviceDataGenerator {
 		return "(fivedata|" + wtid + "|" + this.gevDevDataEngine("fivedata") + ")";
 	}
 
-	// newfivedata
+	// normal newfivedata
 	public String genNewDevFiveData(String wtid) {
 		Date date = new Date();
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
@@ -152,20 +180,42 @@ public class DeviceDataGenerator {
 				+ "|" + "2" + "|" + this.gevDevDataEngine("fivedata") + "|" + "0" + "|" + "0" + "|" + "1" + "|"
 				+ protocolid + ")";
 	}
+	
+	public String genNewNBQFiveData(String wtid) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "4" + "|" + this.gevDevDataEngine("fivedata") + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
 
-	public String genNewCdqData() {
+	public String genNewQXZFiveData(String wtid) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "5" + "|" + this.gevDevDataEngine("fivedata") + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
+	
+	public String genNewSYZFiveData(String wtid) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "1" + "|" + this.gevDevDataEngine("fivedata") + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
+	
+	// shsn newfivedata
+	public String genNewCdqDataSN() {
 		Date date = new Date();
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|"
 				+ 130734956 + "|" + "1" + "|" + this.gevPowerValue(16) + "||" + "8" + "|" + "0" + "|13057" + ")";
 	}
 	
-	public String genNewDqData() {
+	public String genNewDqDataSN() {
 		Date date = new Date();
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|"
 				+ 130734957 + "|" + "2" + "|" + this.gevPowerValue(672) + "||" + "9" + "|" + "0" + "|13058" + ")";
 	}
 	
-	public String genNewCgtData() {
+	public String genNewCgtDataSN() {
 		Date date = new Date();
 		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|"
 				+ 130734955 + "|" + "5" + "|" + this.gevPowerValue(27) + "||" + "9" + "|" + "0" + "|13059" + ")";
@@ -243,7 +293,7 @@ public class DeviceDataGenerator {
 																		// 锟斤拷锟芥、2//
 		// 锟斤拷锟斤拷
 		String rectime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
-		int wfid = dataHub.getWfid();
+		int wfid = Integer.parseInt(GlobalSettings.getProperty("wfid"));
 		String objectid = getWtidList().get(dataHub.ranInteger(0, getWtidList().size()));
 		String logcode = dataHub.getLogCodeList(systemid)
 				.get(dataHub.ranInteger(0, dataHub.getRunLogCode(systemid).size()));
@@ -280,7 +330,7 @@ public class DeviceDataGenerator {
 				}
 
 				if (!dataHub.getCmdPropaths().isEmpty()) {
-					for (Propaths pps : dataHub.getCmdPropaths()) {
+					for (Prodata pps : dataHub.getCmdPropaths()) {
 						while (n < pps.getAscflg()) {
 							sReturn = sReturn + ";";
 							n++;

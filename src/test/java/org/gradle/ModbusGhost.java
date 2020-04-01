@@ -8,10 +8,10 @@ import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.thread.ModbusOneDataThread;
 
 public class ModbusGhost {
-	private static int wfid = Integer.parseInt(GlobalSettings.getProperty("wfid"));;
+	private static String wfid = GlobalSettings.getProperty("wfid");
 	private static String host = GlobalSettings.getProperty("host");
 	private static int port = Integer.parseInt(GlobalSettings.getProperty("port"));
-	private static String time = "2019-05-03";
+	private static String date = "2019-05-03";
 	private static int count = 20;
 	private static int ref = 0;
 	private static Logger logger = Logger.getLogger(ModbusGhost.class.getName());
@@ -23,7 +23,7 @@ public class ModbusGhost {
 			fjslave.startTcpListenerThreadPool(10, 1);
 			fjslave.initRegister(dh.getWtinfo(wfid).size() * count);
 			for (Wtinfo wtinfo : dh.getWtinfo(wfid)) {
-				new Thread(new ModbusOneDataThread(fjslave,wtinfo,time,ref)).start();
+				new Thread(new ModbusOneDataThread(fjslave,wtinfo,date,ref)).start();
 				ref = ref + count;
 			}
 		} catch (Exception e) {

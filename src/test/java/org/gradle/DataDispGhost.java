@@ -27,9 +27,10 @@ public class DataDispGhost {
 			 await().atMost(120000, MILLISECONDS)	
 			 .untilAsserted(() -> new VerifyUtils("10.1.3.152:5432", "v5",
 			 "postgres", "postgres")
-			 .assertTbaleChanges("public.statisticdata"));
+			 .assertTbaleChanges("public.statisticdata"));s
 			 await().atMost(2000, MILLISECONDS).untilAsserted(() -> new VerifyUtils().assertTcpResponse());
 		}
 */
 	}
 }
+	

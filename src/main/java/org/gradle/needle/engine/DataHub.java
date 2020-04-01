@@ -15,11 +15,11 @@ import org.apache.log4j.Logger;
 import org.gradle.needle.config.GlobalSettings;
 import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
-import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Runlogcode;
-import org.gradle.needle.model.Towerweatherheightmap;
+import org.gradle.needle.model.Windmast;
 import org.gradle.needle.model.WtOneData;
 import org.gradle.needle.model.Wtinfo;
+import org.gradle.needle.model.Syzinfo;
 import org.gradle.needle.util.DBFactory;
 import org.gradle.needle.util.DBFactory.DBEnvironment;
 
@@ -58,7 +58,7 @@ public class DataHub {
 	}
 
 	/**
-	 * Get onedata from sqlserver
+	 * Get onedata from mysql
 	 * 
 	 * @return
 	 */
@@ -111,7 +111,7 @@ public class DataHub {
 	 * 锟斤拷取localdb pathdescr锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid, iecpath)
 	 */
 	public List<Pathdescr> getPathdescr(String iecpath) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Pathdescr pathdescr = new Pathdescr();
 		pathdescr.setProtocolid(protocolid);
@@ -123,10 +123,10 @@ public class DataHub {
 	/**
 	 * 锟斤拷取propaths锟斤拷cmd锟斤拷锟捷硷拷(protocolid, cmdname)
 	 */
-	public List<Propaths> getCmdPropaths() {
-		List<Propaths> pack_list = new ArrayList<>();
+	public List<Prodata> getCmdPropaths() {
+		List<Prodata> pack_list = new ArrayList<>();
 		try {
-			for (Propaths pps : getAllPropaths()) {
+			for (Prodata pps : getAllProData()) {
 				if (pps.getCompath() != null) {
 					if (getCompathOnCmdname().equals(pps.getCompath().trim())) {
 						pack_list.add(pps);
@@ -145,12 +145,12 @@ public class DataHub {
 	/**
 	 * 锟斤拷取propaths锟斤拷锟截讹拷锟斤拷锟捷硷拷
 	 */
-	public List<Propaths> getTypicalPropaths(String type) {
-		List<Propaths> pps_list = new ArrayList<>();
+	public List<Prodata> getTypicalPropaths(String type) {
+		List<Prodata> pps_list = new ArrayList<>();
 		try {
 			switch (type) {
 			case "wman":
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (pps.getTranstype().intValue() == 1) {
 						pps_list.add(pps);
 					}
@@ -159,28 +159,28 @@ public class DataHub {
 			case "tendata":
 			case "fivedata":
 			case "one":
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (pps.getTranstype().intValue() == 2) {
 						pps_list.add(pps);
 					}
 				}
 				break;
 			case "onedata":
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (pps.getBsend().intValue() == 1) {
 						pps_list.add(pps);
 					}
 				}
 				break;
 			case "changesave":
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (pps.getTranstype().intValue() < 2 & pps.getChangesave().intValue() == 1) {
 						pps_list.add(pps);
 					}
 				}
 				break;
 			case "realtimedata":
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (pps.getTranstype().intValue() == 1 & pps.getBsave().intValue() == 1) {
 						pps_list.add(pps);
 					}
@@ -188,7 +188,7 @@ public class DataHub {
 				break;
 			case "powercurve":
 				String[] iec = { "WTUR.WSpd.Ra.F32[AVG]", "WTUR.PwrAt.Ra.F32[AVG]", "WTUR.Temp.Ra.F32[AVG]" };
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (Arrays.asList(iec).contains(pps.getIecpath().trim())) {
 						pps_list.add(pps);
 					}
@@ -202,7 +202,7 @@ public class DataHub {
 						"WTUR.TotEgyAt.Wt.F32[max]", "WTUR.TotEgyAt.Wt.F32[min]", "WTUR.Other.Rn.I16.HaveFault[MAX]",
 						"WTUR.Other.Ri.I16.bLitPow", "WTUR.Other.Ri.I16.LitPowByPLC", "WTUR.TurSt.Rs.S",
 						"WTUR.Flt.Rs.S" };
-				for (Propaths pps : getAllPropaths()) {
+				for (Prodata pps : getAllProData()) {
 					if (Arrays.asList(foreiec).contains(pps.getIecpath().trim())) {
 						pps_list.add(pps);
 					}
@@ -210,25 +210,13 @@ public class DataHub {
 				break;
 
 			default:
-				getAllPropaths();
+				getAllProData();
 				break;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pps_list;
-	}
-
-	/*
-	 * 锟斤拷取localdb propaths锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid)
-	 */
-	public List<Propaths> getAllPropaths() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
-		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Propaths propaths = new Propaths();
-		propaths.setProtocolid(protocolid);
-		List<Propaths> list = mapper.selectPropaths(propaths);
-		return list;
 	}
 
 	/**
@@ -264,47 +252,38 @@ public class DataHub {
 		return list;
 	}
 
-	/*
-	 * 锟斤拷取锟斤拷锟界场锟斤拷锟�
-	 */
-	public Integer getWfid() {
-		return this.getWtinfo().get(0).getWfid();
-	}
-
-	/*
-	 * 锟斤拷取锟斤拷锟斤拷锟斤拷锟轿筹拷锟� float[]
-	 */
-	public float[] getLongitudeAndLatitude() {
-		float[] aFloats = { this.getWtinfo().get(0).getWtlongitude(), getWtinfo().get(0).getWtlatitude() };
-		return aFloats;
-	}
-
-	/*
-	 * 锟斤拷取local wtinfo锟斤拷锟斤拷锟轿拷锟斤拷菁锟�(protocolid)
-	 */
-	public List<Wtinfo> getWtinfo() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
+	public List<Wtinfo> getWtinfo(String wpid) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql2).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Wtinfo wtinfo = new Wtinfo();
-		wtinfo.setProtocolid(protocolid);
+		wtinfo.setWpid(wpid);
 		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
 		return list;
 	}
-
-	public List<Wtinfo> getWtinfo(int wfid) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql).openSession();
+	
+	public List<Windmast> getWindmastinfo(String wpid) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql2).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Wtinfo wtinfo = new Wtinfo();
-		wtinfo.setWfid(wfid);
-		List<Wtinfo> list = mapper.selectWtinfo(wtinfo);
+		Windmast windmast = new Windmast();
+		windmast.setWpid(wpid);
+		List<Windmast> list = mapper.selectWindmast(windmast);
+		return list;
+	}
+	
+	public List<Syzinfo> getSyzinfo(String wpid) {
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.mysql2).openSession();
+		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
+		Syzinfo syz = new Syzinfo();
+		syz.setWpid(wpid);
+		List<Syzinfo> list = mapper.selectSyzinfo(syz);
 		return list;
 	}
 
 	/*
 	 * 锟斤拷取runlog code list<code>
-	 * 
 	 * @systemid
 	 */
+	 
 	public List<String> getLogCodeList(int systemid) {
 		List<String> lists = new ArrayList<String>();
 		try {
@@ -316,12 +295,13 @@ public class DataHub {
 		}
 		return lists;
 	}
+	
 
 	/*
 	 * 锟斤拷取localdb runlogcode锟斤拷锟斤拷锟轿拷锟斤拷菁锟�
 	 */
 	public List<Runlogcode> getRunLogCode(int systemid) {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
+		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.datadb).openSession();
 		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
 		Runlogcode runlogcode = new Runlogcode();
 		runlogcode.setSystemid(systemid);
@@ -329,31 +309,6 @@ public class DataHub {
 		return list;
 	}
 
-	/*
-	 * 锟斤拷锟斤拷锟斤拷锟斤拷锟�
-	 */
-	public List<Integer> getTowerHeight() {
-		List<Integer> lists = new ArrayList<Integer>();
-		try {
-			for (Towerweatherheightmap towerweatherheightmap : getTowerweatherheightmap()) {
-				lists.add(towerweatherheightmap.getTowerheight());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return lists;
-	}
-
-	/*
-	 * 锟斤拷取localdb Towerweatherheightmap锟斤拷锟斤拷维锟斤拷锟捷硷拷
-	 */
-	private List<Towerweatherheightmap> getTowerweatherheightmap() {
-		SqlSession sqlSession = DBFactory.getSqlSessionFactory(DBEnvironment.localdb).openSession();
-		SuperMapper mapper = sqlSession.getMapper(SuperMapper.class);
-		Towerweatherheightmap towerweatherheightmap = new Towerweatherheightmap();
-		List<Towerweatherheightmap> list = mapper.selectTowerweatherheightmap(towerweatherheightmap);
-		return list;
-	}
 
 	/*
 	 * 锟斤拷锟斤拷前锟矫碉拷GWSOCKET锟斤拷锟斤拷锟饺★拷锟接︼拷锟絚ompath

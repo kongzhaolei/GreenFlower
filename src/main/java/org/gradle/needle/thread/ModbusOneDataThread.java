@@ -23,7 +23,7 @@ public class ModbusOneDataThread implements Runnable {
 	private String time;
 	private int ref;
 
-	private Logger logger = Logger.getLogger(DevFiveDataThread.class.getName());
+	private Logger logger = Logger.getLogger(ModbusOneDataThread.class.getName());
 
 	public ModbusOneDataThread(ModbusTcpSlave fjslave, Wtinfo wtinfo, String time, int ref) {
 		this.fjslave = fjslave;
@@ -36,7 +36,8 @@ public class ModbusOneDataThread implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				List<WtOneData> wDatas = dh.getWtonedata(wtinfo.getWtid(), time);
+				List<WtOneData> wDatas = dh.getWtonedata(wtinfo.getWtcode(), time);
+				logger.info(wtinfo.getWtcode());
 				if (null != wDatas && wDatas.size() > 0) {
 					for (WtOneData onedata : wDatas) {
 						fjslave.updateDevRI03(ref + 0, ByteConvertUtils.getShort(onedata.getWindSpeed().floatValue())[0]);

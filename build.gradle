@@ -55,6 +55,7 @@ dependencies {
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
 	compile group: 'org.jbehave', name: 'jbehave-core', version: '4.1.3'
 	compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.0'
+	compile group: 'org.openmuc', name: 'j60870', version: '1.3.1'
 }
 
 // �رմ�������
@@ -72,7 +73,7 @@ task copyJars(type: Copy){
 task generateJar(type: Jar, dependsOn: [copyJars, jar]) {
 	 manifest {
 		attributes('Implementation-Title':'GreenFlower',
-                           'Implementation-Version':1.0,
+                   'Implementation-Version':1.0,
 		           'Main-Class': 'org.gradle.ModbusGhost',
 		           'Class-Path': configurations.compile.collect{it.getName()}.join(' ')
                           )

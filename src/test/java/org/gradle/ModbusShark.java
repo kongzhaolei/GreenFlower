@@ -11,7 +11,7 @@ public class ModbusShark {
 	public static void main(String[] args) {
 		try {
 			while (true) {
-				String dd = ModbusTcpMaster.readByTCP("10.68.12.54", 503, "04", 0, 4, 1);
+				String dd = ModbusTcpMaster.readByTCP("127.0.0.1", 502, "03", 0, 4, 1);
 				logger.info(dd);
 				String[] dds = StringUtils.split(dd, "-");
 				float[] r = ByteConvertUtils.getFloat(dds, true);

@@ -67,7 +67,7 @@ public class HttpClientFactory {
 	 * 
 	 * @return CloseableHttpClient
 	 */
-	private static CloseableHttpClient getSSLHttpClient() {
+	public static CloseableHttpClient getSSLHttpClient() {
 		RegistryBuilder<ConnectionSocketFactory> registryBuilder = RegistryBuilder.<ConnectionSocketFactory>create();
 		ConnectionSocketFactory plainSF = new PlainConnectionSocketFactory();
 		registryBuilder.register("http", plainSF);

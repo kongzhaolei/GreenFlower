@@ -12,6 +12,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+
 /**
  * @author kongzhaolei
  * 
@@ -49,6 +51,7 @@ public final class DBFactory {
 		sqlserver,
 		postgresql,
 		mysql,
+		mysql2,
 		oracle;
 	}
 }

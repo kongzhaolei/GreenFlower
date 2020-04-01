@@ -25,21 +25,46 @@
 	
 	<select id="selectWtinfo" parameterType="Wtinfo" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="Wtinfo">
- SELECT * FROM wtinfo
+ SELECT * FROM base_wtinfo
         <choose>
-          <when test="protocolid != null">
-            WHERE PROTOCOLID = #{protocolid} ORDER BY wtid ASC
+          <when test="wpid != null">
+            WHERE wpid = #{wpid} ORDER BY id ASC
           </when>
-          
-          <when test="wfid != null">
-            WHERE wfid = #{wfid} ORDER BY wtid ASC
-          </when>
-          
+                  
           <otherwise>
             WHERE 1 = 1
           </otherwise> 
         </choose>
 	</select>
+	
+	<select id="selectWindmast" parameterType="Windmast" flushCache="false"
+	    useCache="true" statementType="PREPARED" resultType="Windmast">
+ SELECT * FROM base_windmast_info
+        <choose>
+          <when test="wpid != null">
+            WHERE wpid = #{wpid} ORDER BY id ASC
+          </when>
+                  
+          <otherwise>
+            WHERE 1 = 1
+          </otherwise> 
+        </choose>
+	</select>
+	
+	<select id="selectSyzinfo" parameterType="Syzinfo" flushCache="false"
+	    useCache="true" statementType="PREPARED" resultType="Syzinfo">
+ SELECT * FROM base_syzinfo
+        <choose>
+          <when test="wpid != null">
+            WHERE wpid = #{wpid} ORDER BY id ASC
+          </when>
+                  
+          <otherwise>
+            WHERE 1 = 1
+          </otherwise> 
+        </choose>
+	</select>
+
 	
 	<select id="selectRunlogcode" parameterType="Runlogcode" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="Runlogcode">
@@ -48,12 +73,6 @@
         ]]>
 	</select>
 	
-	<select id="selectTowerweatherheightmap" parameterType="Towerweatherheightmap" flushCache="false"
-	    useCache="true" statementType="PREPARED" resultType="Towerweatherheightmap">
-        <![CDATA[
- SELECT * FROM Towerweatherheightmap ORDER BY towerheight ASC
-        ]]>
-	</select>
 	
 	<select id="selectWtOneData" parameterType="WtOneData" flushCache="false"
 	    useCache="true" statementType="PREPARED" resultType="WtOneData">

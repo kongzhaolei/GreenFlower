@@ -8,10 +8,10 @@
 		<typeAlias alias="Propaths" type="org.gradle.needle.model.Propaths" />
 		<typeAlias alias="Pathdescr" type="org.gradle.needle.model.Pathdescr" />
 		<typeAlias alias="Wtinfo" type="org.gradle.needle.model.Wtinfo" />
+		<typeAlias alias="Windmast" type="org.gradle.needle.model.Windmast" />
+		<typeAlias alias="Syzinfo" type="org.gradle.needle.model.Syzinfo" />
 		<typeAlias alias="Runlogcode" type="org.gradle.needle.model.Runlogcode" />
-		<typeAlias alias="Towerweatherheightmap" type="org.gradle.needle.model.Towerweatherheightmap" />
-		<typeAlias alias="WtOneData" type="org.gradle.needle.model.WtOneData" />
-		
+		<typeAlias alias="WtOneData" type="org.gradle.needle.model.WtOneData" />		
 	</typeAliases>
 
 	<environments default="localdb">
@@ -71,9 +71,19 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://10.10.0.45:3309/dbo" />
-				<property name="username" value="check" />
-				<property name="password" value="check" />
+				<property name="url" value="jdbc:mysql://10.10.0.80:3309/dbo" />
+				<property name="username" value="andy" />
+				<property name="password" value="andy" />
+			</dataSource>
+		</environment>
+		
+		<environment id="mysql2">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://10.200.50.136:3306/wp6465" />
+				<property name="username" value="root" />
+				<property name="password" value="1234.abcd" />
 			</dataSource>
 		</environment>
 

@@ -8,15 +8,18 @@ import org.gradle.needle.model.Wtinfo;
 import org.gradle.needle.thread.CftFiveDataThread;
 import org.gradle.needle.thread.CftNewFiveDataThread;
 import org.gradle.needle.thread.CftTenDataThread;
-import org.gradle.needle.thread.CgtNewDataThread;
+import org.gradle.needle.thread.CgtNewDataSNThread;
 import org.gradle.needle.thread.DevChangeSaveThread;
 import org.gradle.needle.thread.DevFiveDataThread;
 import org.gradle.needle.thread.DevNewFiveDataThread;
 import org.gradle.needle.thread.DevPowerCurveThread;
 import org.gradle.needle.thread.DevRealTimeDataThread;
 import org.gradle.needle.thread.DevTenDataThread;
-import org.gradle.needle.thread.DqNewDataThread;
-import org.gradle.needle.thread.CdqNewDataThread;
+import org.gradle.needle.thread.DqNewDataSNThread;
+import org.gradle.needle.thread.NbqNewFiveDataThread;
+import org.gradle.needle.thread.QxzNewFiveDataThread;
+import org.gradle.needle.thread.SyzNewFiveDataThread;
+import org.gradle.needle.thread.CdqNewDataSNThread;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -36,9 +39,11 @@ public class TCPDataClient implements DataClient {
 	private static int PORT;
 	private static int protocolid_wt = Integer.parseInt(GlobalSettings.getProperty("protocolid_wt"));
 	private static int protocolid_cft = Integer.parseInt(GlobalSettings.getProperty("protocolid_cft"));
+	private static int protocolid_syz = Integer.parseInt(GlobalSettings.getProperty("protocolid_syz"));
 	private static Logger logger = Logger.getLogger(TCPDataClient.class.getName());
 	private static DeviceDataGenerator dgen_wt = new DeviceDataGenerator(protocolid_wt);
 	private static DeviceDataGenerator dgen_cft = new DeviceDataGenerator(protocolid_cft);
+	private static DeviceDataGenerator dgen_syz = new DeviceDataGenerator(protocolid_syz);
 	private static ChannelFuture future;
 
 	public TCPDataClient(String host, int port) {
@@ -58,16 +63,21 @@ public class TCPDataClient implements DataClient {
 			TcpConnect();
 			// new Thread(new DevTenDataThread()).start();
 			// new Thread(new DevFiveDataThread()).start();
-			new Thread(new DevNewFiveDataThread()).start();
 			// new Thread(new CftTenDataThread()).start();
 			// new Thread(new CftFiveDataThread()).start();
-			// new Thread(new CftNewFiveDataThread()).start();
 			// new Thread(new DevRealTimeDataThread()).start();
 			// new Thread(new DevChangeSaveThread()).start();
 			// new Thread(new DevPowerCurveThread()).start();
-			// new Thread(new CdqNewDataThread()).start();
-			// new Thread(new DqNewDataThread()).start();
-			// new Thread(new CgtNewDataThread()).start();
+			
+			// new Thread(new DevNewFiveDataThread()).start();
+			// new Thread(new CftNewFiveDataThread()).start();
+			new Thread(new NbqNewFiveDataThread()).start();
+			new Thread(new QxzNewFiveDataThread()).start();
+			new Thread(new SyzNewFiveDataThread()).start();
+			
+			// new Thread(new CdqNewDataSNThread()).start();
+			// new Thread(new DqNewDataSNThread()).start();
+			// new Thread(new CgtNewDataSNThread()).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -146,18 +156,6 @@ public class TCPDataClient implements DataClient {
 		}
 	}
 
-	// send newCftFiveData
-	public static void sendNewCftFiveData() {
-		try {
-			for (String wtid : dgen_cft.getWtidList()) {
-				channelSend(dgen_cft.genNewCftFiveData(wtid));
-				// logger.info(dgen_cft.genNewCftFiveData(wtid));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	// send DevFiveData
 	public static void sendDevFiveData() {
 		try {
@@ -181,31 +179,81 @@ public class TCPDataClient implements DataClient {
 			e.printStackTrace();
 		}
 	}
-
-	// send newCdqData
-	public static void sendNewCdqData() {
+	
+	// send newCftFiveData
+	public static void sendNewCftFiveData() {
 		try {
-			channelSend(new DeviceDataGenerator().genNewCdqData());
+			for (String wtid : dgen_cft.getWindmastList()) {
+				channelSend(dgen_cft.genNewCftFiveData(wtid));
+				//logger.info(dgen_cft.genNewCftFiveData(wtid));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	// send newNBQFiveData
+	public static void sendNewNBQFiveData() {
+		try {
+			for (String wtid : dgen_wt.getWtidList()) {
+				channelSend(dgen_wt.genNewNBQFiveData(wtid));
+				//logger.info(dgen_wt.genNewNBQFiveData(wtid));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// send newQXZFiveData
+	public static void sendNewQXZFiveData() {
+		try {
+			for (String wtid : dgen_cft.getWindmastList()) {
+				channelSend(dgen_cft.genNewQXZFiveData(wtid));
+				// logger.info(dgen_cft.genNewQXZFiveData(wtid)); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// send newSYZFiveData
+		public static void sendNewSYZFiveData() {
+			try {
+				for (String wtid : dgen_syz.getSyzList()) {
+					channelSend(dgen_syz.genNewSYZFiveData(wtid));
+					// logger.info(dgen_cft.genNewSYZFiveData(wtid));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+
+	// send shsn newCdqData
+	public static void sendNewCdqDataSN() {
+		try {
+			channelSend(new DeviceDataGenerator().genNewCdqDataSN());
 			// logger.info(dgen_wt.genNewCdqData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// send newdqData
-	public static void sendNewDqData() {
+	// send shsn newdqData
+	public static void sendNewDqDataSN() {
 		try {
-			channelSend(new DeviceDataGenerator().genNewDqData());
+			channelSend(new DeviceDataGenerator().genNewDqDataSN());
 			// logger.info(dgen_wt.genNewDqData());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	// send newcgtdata
-	public static void sendNewCgtData() {
+	// send shsn newcgtdata
+	public static void sendNewCgtDataSN() {
 		try {
-			channelSend(new DeviceDataGenerator().genNewCgtData());
+			channelSend(new DeviceDataGenerator().genNewCgtDataSN());
 			// logger.info(dgen_wt.genNewCgtData());
 		} catch (Exception e) {
 			e.printStackTrace();

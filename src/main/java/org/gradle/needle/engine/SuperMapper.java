@@ -6,7 +6,8 @@ import org.gradle.needle.model.Pathdescr;
 import org.gradle.needle.model.Prodata;
 import org.gradle.needle.model.Propaths;
 import org.gradle.needle.model.Runlogcode;
-import org.gradle.needle.model.Towerweatherheightmap;
+import org.gradle.needle.model.Syzinfo;
+import org.gradle.needle.model.Windmast;
 import org.gradle.needle.model.WtOneData;
 import org.gradle.needle.model.Wtinfo;
 /**
@@ -29,9 +30,11 @@ public interface SuperMapper {
 	
 	public List<Wtinfo> selectWtinfo(Wtinfo wtinfo);
 	
-	public List<Runlogcode> selectRunlogcode(Runlogcode runlogcode);
+	public List<Windmast> selectWindmast(Windmast windmast);
 	
-	public List<Towerweatherheightmap> selectTowerweatherheightmap(Towerweatherheightmap towerweatherheightmap);
+	public List<Syzinfo> selectSyzinfo(Syzinfo syzinfo);
+	
+	public List<Runlogcode> selectRunlogcode(Runlogcode runlogcode);
 	
 	public List<WtOneData> selectWtOneData(WtOneData wtonedata);
  

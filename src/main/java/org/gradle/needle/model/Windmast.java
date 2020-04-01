@@ -1,10 +1,10 @@
 package org.gradle.needle.model;
 
-public class Wtinfo {
+public class Windmast {
 
 	private String wpid;
-	private String wtcode;
-	private String wtname;
+	private String id;
+	private String windMast_code;
 	private float longitude;
 	private float latitude;
 
@@ -17,19 +17,19 @@ public class Wtinfo {
 		this.wpid = wpid;
 	}
 
-	public String getWtcode() {
-		return wtcode;
+	public String getWindmastid() {
+		return id;
 	}
 	
-	public String getWtname() {
-		return wtname;
+	public String getWindcode() {
+		return windMast_code;
 	}
 	
-	public float getWtlongitude() {
+	public float getWindlongitude() {
 		return longitude;
 	}
 	
-	public float getWtlatitude() {
+	public float getWindlatitude() {
 		return latitude;
 	}
 }
