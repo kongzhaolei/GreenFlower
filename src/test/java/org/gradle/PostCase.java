@@ -45,7 +45,7 @@ public class PostCase {
 		HttpPost post = new HttpPost(url4);
 
 		try {
-			post.addHeader("Content-Type", "application/json;c	harset=UTF-8");
+			post.addHeader("Content-Type", "application/json;charset=UTF-8");
 			post.setEntity(new StringEntity(body4));
 			HttpResponse httpResponse = sclient.execute(post);
 			HttpEntity entity = httpResponse.getEntity();

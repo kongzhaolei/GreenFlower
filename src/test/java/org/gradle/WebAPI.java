@@ -35,6 +35,7 @@ public class WebAPI {
 	public void test0(String testid, String call_type, String url, Map<String, String> header,
 			Map<String, String> body) {
 		String response = HttpClientFactory.invokeServiceMethod(call_type, url, header, body);
+		
 		logger.info(response);
 		try {
 			ExcelUtils.saveResponse("Output", testid, response);

@@ -19,6 +19,7 @@ import javax.net.ssl.SSLContext;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -89,7 +90,7 @@ public class HttpClientFactory {
 			registryBuilder.register("https", sslSF);
 		} catch (KeyStoreException e) {
 			throw new RuntimeException(e);
-		} catch (KeyManagementException e) {	
+		} catch (KeyManagementException e) {
 			throw new RuntimeException(e);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
@@ -100,14 +101,10 @@ public class HttpClientFactory {
 		// 构建客户端
 		return HttpClientBuilder.create().setConnectionManager(connManager).build();
 	}
-	
+
 	/**
 	 * http 异步调用
 	 */
-	
-	
-	
-	
 
 	/**
 	 * http get and post
@@ -130,6 +127,32 @@ public class HttpClientFactory {
 	private static String httpGetWay(String url, Map<String, String> header) {
 		// TODO 自动生成的方法存根
 		return null;
+	}
+
+	/**
+	 * http json
+	 * 
+	 * @throws IOException
+	 */
+	public static String httpPostJson(String url, String body) {
+		httpclient = HttpClients.createDefault();
+		HttpPost post = new HttpPost(url);
+		try {
+			post.addHeader("Content-Type", "application/json;charset=UTF-8");
+			post.setEntity(new StringEntity(body));
+			HttpResponse httpResponse = httpclient.execute(post);
+			HttpEntity entity = httpResponse.getEntity();
+			response = EntityUtils.toString(entity, "UTF-8");
+			statuscode = httpResponse.getStatusLine().getStatusCode();
+			// logger.info(response);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.info("网络异常:" + e.getMessage());
+		} finally {
+			post.releaseConnection();
+		}
+		return response;
 	}
 
 	/**
@@ -161,8 +184,8 @@ public class HttpClientFactory {
 				pairs.add(new BasicNameValuePair(entry.getKey().trim(), entry.getValue().trim()));
 			}
 		}
-		
-		// 
+
+		//
 
 		// 发送请求
 		try {
@@ -172,8 +195,8 @@ public class HttpClientFactory {
 			if (statuscode == HttpStatus.SC_OK) {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
-				logger.info("API test success!"); 
-				logger.info("API test response ： " + response); 
+				logger.info("API test success!");
+				logger.info("API test response ： " + response);
 			} else {
 				logger.info("API test faiure！，statuscode： " + statuscode);
 			}

@@ -202,6 +202,27 @@ public class DeviceDataGenerator {
 				+ protocolid + ")";
 	}
 	
+	public String genNewRandomDevFiveData(String wtid, int num) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "0" + "|" + this.gevPowerValue(num) + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
+	
+	public String genNewRandomCftFiveData(String wtid, int num) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "2" + "|" + this.gevPowerValue(num) + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
+	
+	public String genNewRandomSyzFiveData(String wtid, int num) {
+		Date date = new Date();
+		return "(sediment|" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date) + "|" + "newfivedata|" + wtid
+				+ "|" + "1" + "|" + this.gevPowerValue(num) + "|" + "0" + "|" + "0" + "|" + "1" + "|"
+				+ protocolid + ")";
+	}
+	
 	// shsn newfivedata
 	public String genNewCdqDataSN() {
 		Date date = new Date();
