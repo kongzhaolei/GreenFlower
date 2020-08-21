@@ -69,8 +69,8 @@ public class TCPDataClient implements DataClient {
 			// new Thread(new DevChangeSaveThread()).start();
 			// new Thread(new DevPowerCurveThread()).start();
 			
-			// new Thread(new DevNewFiveDataThread()).start();
-			// new Thread(new CftNewFiveDataThread()).start();
+			new Thread(new DevNewFiveDataThread()).start();
+			new Thread(new CftNewFiveDataThread()).start();
 			new Thread(new NbqNewFiveDataThread()).start();
 			new Thread(new QxzNewFiveDataThread()).start();
 			new Thread(new SyzNewFiveDataThread()).start();
@@ -173,7 +173,7 @@ public class TCPDataClient implements DataClient {
 		try {
 			for (String wtid : dgen_wt.getWtidList()) {
 				channelSend(dgen_wt.genNewDevFiveData(wtid));
-				//logger.info(dgen_wt.genNewDevFiveData(wtid));
+				logger.info(dgen_wt.genNewDevFiveData(wtid));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -185,7 +185,7 @@ public class TCPDataClient implements DataClient {
 		try {
 			for (String wtid : dgen_cft.getWindmastList()) {
 				channelSend(dgen_cft.genNewCftFiveData(wtid));
-				//logger.info(dgen_cft.genNewCftFiveData(wtid));
+				logger.info(dgen_cft.genNewCftFiveData(wtid));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -198,7 +198,7 @@ public class TCPDataClient implements DataClient {
 		try {
 			for (String wtid : dgen_wt.getWtidList()) {
 				channelSend(dgen_wt.genNewNBQFiveData(wtid));
-				//logger.info(dgen_wt.genNewNBQFiveData(wtid));
+				logger.info(dgen_wt.genNewNBQFiveData(wtid));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -210,7 +210,7 @@ public class TCPDataClient implements DataClient {
 		try {
 			for (String wtid : dgen_cft.getWindmastList()) {
 				channelSend(dgen_cft.genNewQXZFiveData(wtid));
-				// logger.info(dgen_cft.genNewQXZFiveData(wtid)); 
+			    logger.info(dgen_cft.genNewQXZFiveData(wtid)); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -222,7 +222,7 @@ public class TCPDataClient implements DataClient {
 			try {
 				for (String wtid : dgen_syz.getSyzList()) {
 					channelSend(dgen_syz.genNewSYZFiveData(wtid));
-					// logger.info(dgen_cft.genNewSYZFiveData(wtid));
+					logger.info(dgen_syz.genNewSYZFiveData(wtid));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

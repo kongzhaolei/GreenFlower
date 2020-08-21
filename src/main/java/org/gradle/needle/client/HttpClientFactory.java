@@ -16,13 +16,16 @@ import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
@@ -125,8 +128,24 @@ public class HttpClientFactory {
 	}
 
 	private static String httpGetWay(String url, Map<String, String> header) {
-		// TODO 自动生成的方法存根
-		return null;
+		httpclient = getSSLHttpClient();
+		HttpGet get = new HttpGet(url);
+		try {
+			HttpResponse httpResponse = httpclient.execute(get);
+			if (statuscode == HttpStatus.SC_OK) {
+				HttpEntity entity = httpResponse.getEntity();
+				response = EntityUtils.toString(entity, "UTF-8");
+				logger.info("API test success!");
+				logger.info("API test response ： " + response);
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.info("网络异常:" + e.getMessage());
+		} finally {
+			get.releaseConnection();
+		}
+		return response;
 	}
 
 	/**
@@ -165,8 +184,8 @@ public class HttpClientFactory {
 	 */
 	private static String httpPostWay(String url, Map<String, String> header, Map<String, String> body) {
 
-		httpclient = HttpClients.createDefault();
-		// httpclient = getSSLHttpClient();
+		// httpclient = HttpClients.createDefault();
+		httpclient = getSSLHttpClient();
 		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 

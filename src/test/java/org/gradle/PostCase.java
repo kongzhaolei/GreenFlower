@@ -1,9 +1,12 @@
 package org.gradle;
 
 import java.io.IOException;
+import java.util.Base64;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -12,6 +15,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.gradle.needle.client.HttpClientFactory;
+
+import com.alibaba.fastjson.JSONObject;
 
 public class PostCase {
 
@@ -52,6 +57,8 @@ public class PostCase {
 	private static String url7 = "http://10.64.12.33:9999/dataserver/soam/foreEnergyFourHourTotal";
 
 	private static String url = "https://10.200.50.136:9200/ws/NEMWholesale/selfForecast/v1/SubmitDispatchForecast";
+	private static String tokenurl = "https://metapi.goldwind.com.cn:443/api/token";
+	private static String durl = "https://metapi.goldwind.com.cn/weather/v1/weather_fcst/optimal2/hourly/records/?lon=116.02&lat=39.5581";
 
 	private static String body6 = "{\"date\":\"2019-06-28 00:30\",\"wfIds\":\"[450323,450327,450329,450338]\"}";
 	private static String body8 = "{\"date\":\"2019-06-28 12:15\",\"wfId\":\"152523\"}";
@@ -61,23 +68,39 @@ public class PostCase {
 	private static String body9 = "{\"beginDate\":\"2020-06-23\",\"endDate\":\"2020-06-29\",\"wpList\":\"652204\",\"probability\":\"false\"}";
 	private static String cookie = "JSESSIONID=7AAB49B8AA4EEC00CC86FF316F2D2784";
 	
+	private static String tokenkey = "Basic cG93ZXJfZm9yZWNhc3Q6a3RxRy1mQHJyKUV0";
+	
 
 	public static void main(String[] args) throws IOException {
 		// sclient = HttpClients.createDefault();
 		sclient = HttpClientFactory.getSSLHttpClient();
-		HttpPost post = new HttpPost(url9);
+		//HttpPost post = new HttpPost(surl);
+		HttpGet gettoken = new HttpGet(tokenurl);
+		HttpGet normalget = new HttpGet(durl);
 
 		try {
-			post.addHeader("Content-Type", "application/json;charset=UTF-8");
-			post.addHeader(new BasicHeader("Cookie",cookie));
-			post.setEntity(new StringEntity(body9));
-			HttpResponse httpResponse = sclient.execute(post);
+			gettoken.setHeader("Authorization", tokenkey);
+			// post.addHeader("Content-Type", "application/json;charset=UTF-8");
+			// post.addHeader(new BasicHeader("Cookie",cookie));
+			// post.setEntity(new StringEntity(body9));
+			HttpResponse httpResponse = sclient.execute(gettoken);
 			HttpEntity entity = httpResponse.getEntity();
-			String response = EntityUtils.toString(entity, "UTF-8");
-			logger.info(response);
+			String stoken = EntityUtils.toString(entity, "UTF-8");
+			JSONObject json = JSONObject.parseObject(stoken);
+			String token = json.getString("token");
+			//logger.info(token);
+			
+			String token2 = "power_forecast:" + token;
+			normalget.setHeader("Authorization","Basic " + Base64.getEncoder().encodeToString(token2.getBytes()));
+			HttpResponse dResponse = sclient.execute(normalget);
+			HttpEntity dentity = dResponse.getEntity();
+			String data = EntityUtils.toString(dentity, "UTF-8");
+			logger.info(data);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} finally {
+			
 			sclient.close();
 		}
 	}
