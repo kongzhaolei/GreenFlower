@@ -23,13 +23,14 @@ public class PostCase {
 	private static Logger logger = Logger.getLogger(PostCase.class.getName());
 	static CloseableHttpClient sclient;
 
-	private static String url1 = "http://10.12.8.29:12306/dataserver/cdqbasedate";
-	private static String url2 = "http://10.12.8.29:12306/dataserver/getfactdatajson";
+	private static String url1 = "http://10.12.7.160:12306/dataserver/getforesuperversion";
+	private static String url2 = "http://10.12.7.160:12306/dataserver/getforesuperupdate";
 	private static String url3 = "http://10.12.8.29:12306/dataserver/getkjrldata";
 	private static String url4 = "http://10.12.8.29:12306/dataserver/getfactjson";
-	private static String url5 = "http://10.12.7.161:12306/dataserver/getsuperjson";
+	private static String url5 = "http://10.12.7.160:12306/dataserver/getsuperjson";
 
-	private static String body2 = "{\"wfids\":610826,\"date\":\"201911\",\"vars\":\"wfid, dtime, r_wspd, r_pres, r_running_cap\"}";
+	private static String body1 = "{'wfid':'451425', 'sys_version':'v3.0.102','packages_version':'v1.0.200.21'}";
+	private static String body2 = "{'wfid':'451425', 'dt':'2020-12-01 10:20:00', 'dir_name':'20201201080042288635', 'type':'pro','status':1,'message':'success-too'}";
 	private static String body3 = "{\"wfids\":610826,\"datetime\":\"20191107\",\"vars\":\"wfid,dtime,r_running_cap_ratio\"}";
 	private static String body4 = "{\"wfids\":610826,\"datetime\":\"201911061310\",\"vars\":\"\"}";
 	private static String body5 = "{"
@@ -72,27 +73,27 @@ public class PostCase {
 	
 
 	public static void main(String[] args) throws IOException {
-		// sclient = HttpClients.createDefault();
-		sclient = HttpClientFactory.getSSLHttpClient();
-		//HttpPost post = new HttpPost(surl);
-		HttpGet gettoken = new HttpGet(tokenurl);
-		HttpGet normalget = new HttpGet(durl);
+		sclient = HttpClients.createDefault();
+		//sclient = HttpClientFactory.getSSLHttpClient();
+		HttpPost post = new HttpPost(url1);
+		// HttpGet gettoken = new HttpGet(tokenurl);
+		// HttpGet normalget = new HttpGet(durl);
 
 		try {
-			gettoken.setHeader("Authorization", tokenkey);
-			// post.addHeader("Content-Type", "application/json;charset=UTF-8");
-			// post.addHeader(new BasicHeader("Cookie",cookie));
-			// post.setEntity(new StringEntity(body9));
-			HttpResponse httpResponse = sclient.execute(gettoken);
-			HttpEntity entity = httpResponse.getEntity();
-			String stoken = EntityUtils.toString(entity, "UTF-8");
-			JSONObject json = JSONObject.parseObject(stoken);
-			String token = json.getString("token");
+			// gettoken.setHeader("Authorization", tokenkey);
+			post.addHeader("Content-Type", "application/json;charset=UTF-8");
+		    post.addHeader(new BasicHeader("Cookie",cookie));
+			post.setEntity(new StringEntity(body1));
+			//HttpResponse httpResponse = sclient.execute(gettoken);
+			//HttpEntity entity = httpResponse.getEntity();
+			//String stoken = EntityUtils.toString(entity, "UTF-8");
+			//JSONObject json = JSONObject.parseObject(stoken);
+			//String token = json.getString("token");
 			//logger.info(token);
 			
-			String token2 = "power_forecast:" + token;
-			normalget.setHeader("Authorization","Basic " + Base64.getEncoder().encodeToString(token2.getBytes()));
-			HttpResponse dResponse = sclient.execute(normalget);
+			//String token2 = "power_forecast:" + token;
+			//normalget.setHeader("Authorization","Basic " + Base64.getEncoder().encodeToString(token2.getBytes()));
+			HttpResponse dResponse = sclient.execute(post);
 			HttpEntity dentity = dResponse.getEntity();
 			String data = EntityUtils.toString(dentity, "UTF-8");
 			logger.info(data);

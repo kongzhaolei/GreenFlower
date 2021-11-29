@@ -81,9 +81,9 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://10.200.50.136:3306/wp6465" />
+				<property name="url" value="jdbc:mysql://10.80.34.203:3306/pf5-qhhhsd-20200714" />
 				<property name="username" value="root" />
-				<property name="password" value="1234.abcd" />
+				<property name="password" value="1234.Abcd" />
 			</dataSource>
 		</environment>
 

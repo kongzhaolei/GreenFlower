@@ -40,6 +40,7 @@ import org.openmuc.j60870.Server;
 import org.openmuc.j60870.ServerEventListener;
 import org.openmuc.j60870.ie.IeQuality;
 import org.openmuc.j60870.ie.IeScaledValue;
+import org.openmuc.j60870.ie.IeShortFloat;
 import org.openmuc.j60870.ie.IeSingleCommand;
 import org.openmuc.j60870.ie.InformationElement;
 import org.openmuc.j60870.ie.InformationObject;
@@ -64,17 +65,25 @@ public class SampleServer {
 
 				try {
 					switch (aSdu.getTypeIdentification()) {
-					// interrogation command
 					case C_IC_NA_1:
 						connection.sendConfirmation(aSdu);
 						println("Got interrogation command. Will send scaled measured values.\n");
 
-						connection.send(new ASdu(ASduType.M_ME_NB_1, true, CauseOfTransmission.SPONTANEOUS, false,
+						connection.send(new ASdu(ASduType.M_ME_NC_1, true, CauseOfTransmission.SPONTANEOUS, false,
 								false, 0, aSdu.getCommonAddress(),
-								new InformationObject(1, new InformationElement[][] {
-										{ new IeScaledValue(-32768), new IeQuality(true, true, true, true, true) },
-										{ new IeScaledValue(10), new IeQuality(true, true, true, true, true) },
-										{ new IeScaledValue(200), new IeQuality(true, true, true, true, true) } })));
+								new InformationObject(16385, new InformationElement[][] {
+										{ new IeScaledValue(12), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(76), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(14358), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(79), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(14359), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(24773), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(21569), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(2), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(2), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(2), new IeQuality(true, true, true, true, true) },
+										{ new IeScaledValue(2), new IeQuality(true, true, true, true, true) },
+										{ new IeShortFloat(1), new IeQuality(true, true, true, true, true) }})));
 
 						break;
 
