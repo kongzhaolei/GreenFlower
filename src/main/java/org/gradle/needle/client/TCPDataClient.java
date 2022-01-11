@@ -71,8 +71,8 @@ public class TCPDataClient implements DataClient {
 			
 			new Thread(new DevNewFiveDataThread()).start();
 			new Thread(new CftNewFiveDataThread()).start();
-			new Thread(new NbqNewFiveDataThread()).start();
-			new Thread(new QxzNewFiveDataThread()).start();
+			// new Thread(new NbqNewFiveDataThread()).start();
+			// new Thread(new QxzNewFiveDataThread()).start();
 			new Thread(new SyzNewFiveDataThread()).start();
 			
 			// new Thread(new CdqNewDataSNThread()).start();

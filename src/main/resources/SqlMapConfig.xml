@@ -43,7 +43,7 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="org.sqlite.JDBC" />
-				<property name="url" value="jdbc:sqlite:/home/workspace/DevopsMe/Devops-Ghost/dbfiles/datadb.sqlite" />
+				<property name="url" value="jdbc:sqlite:E:\workspace\DevopsMe\Devops-Ghost\dbfiles\datadb.sqlite" />
 			</dataSource>
 		</environment>
 		
