@@ -1,0 +1,875 @@
+{
+	"msg": "success",
+	"code": "1",
+	"data": {
+		"wpId": "500102",
+		"FactVoidance24Data": [
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "341.7190",
+				"settlePrice": "49.9800",
+				"time": "2022-05-30 00:15",
+				"fsElectric": "0.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "345.7190",
+				"settlePrice": "53.9800",
+				"time": "2022-05-30 01:15",
+				"fsElectric": "4.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "349.7190",
+				"settlePrice": "57.9800",
+				"time": "2022-05-30 02:15",
+				"fsElectric": "8.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "353.7190",
+				"settlePrice": "61.9800",
+				"time": "2022-05-30 03:15",
+				"fsElectric": "12.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "357.7190",
+				"settlePrice": "65.9800",
+				"time": "2022-05-30 04:15",
+				"fsElectric": "16.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "361.7190",
+				"settlePrice": "69.9800",
+				"time": "2022-05-30 05:15",
+				"fsElectric": "20.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "365.7190",
+				"settlePrice": "73.9800",
+				"time": "2022-05-30 06:15",
+				"fsElectric": "24.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "369.7190",
+				"settlePrice": "77.9800",
+				"time": "2022-05-30 07:15",
+				"fsElectric": "28.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "373.7190",
+				"settlePrice": "81.9800",
+				"time": "2022-05-30 08:15",
+				"fsElectric": "32.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "377.7190",
+				"settlePrice": "85.9800",
+				"time": "2022-05-30 09:15",
+				"fsElectric": "36.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "381.7190",
+				"settlePrice": "89.9800",
+				"time": "2022-05-30 10:15",
+				"fsElectric": "40.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "385.7190",
+				"settlePrice": "93.9800",
+				"time": "2022-05-30 11:15",
+				"fsElectric": "44.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "389.7190",
+				"settlePrice": "97.9800",
+				"time": "2022-05-30 12:15",
+				"fsElectric": "48.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "393.7190",
+				"settlePrice": "101.9800",
+				"time": "2022-05-30 13:15",
+				"fsElectric": "52.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "397.7190",
+				"settlePrice": "105.9800",
+				"time": "2022-05-30 14:15",
+				"fsElectric": "56.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "401.7190",
+				"settlePrice": "109.9800",
+				"time": "2022-05-30 15:15",
+				"fsElectric": "60.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "405.7190",
+				"settlePrice": "113.9800",
+				"time": "2022-05-30 16:15",
+				"fsElectric": "64.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "409.7190",
+				"settlePrice": "117.9800",
+				"time": "2022-05-30 17:15",
+				"fsElectric": "68.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "413.7190",
+				"settlePrice": "121.9800",
+				"time": "2022-05-30 18:15",
+				"fsElectric": "72.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "417.7190",
+				"settlePrice": "125.9800",
+				"time": "2022-05-30 19:15",
+				"fsElectric": "76.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "421.7190",
+				"settlePrice": "129.9800",
+				"time": "2022-05-30 20:15",
+				"fsElectric": "80.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "425.7190",
+				"settlePrice": "133.9800",
+				"time": "2022-05-30 21:15",
+				"fsElectric": "84.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "429.7190",
+				"settlePrice": "137.9800",
+				"time": "2022-05-30 22:15",
+				"fsElectric": "88.0000",
+				"fsOffOnName": "开机"
+			},
+			{
+				"fsTagName": "新能源场站",
+				"fsPrice": "433.7190",
+				"settlePrice": "141.9800",
+				"time": "2022-05-30 23:15",
+				"fsElectric": "92.0000",
+				"fsOffOnName": "开机"
+			}
+		],
+		"FactVoidance96Data": [
+			{
+				"theOutputValue": "4.3900",
+				"clearPrice": "585.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 00:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4000",
+				"clearPrice": "586.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 00:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4100",
+				"clearPrice": "587.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 00:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4200",
+				"clearPrice": "588.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 00:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4300",
+				"clearPrice": "589.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 01:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4400",
+				"clearPrice": "590.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 01:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4500",
+				"clearPrice": "591.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 01:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4600",
+				"clearPrice": "592.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 01:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4700",
+				"clearPrice": "593.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 02:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4800",
+				"clearPrice": "594.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 02:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.4900",
+				"clearPrice": "595.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 02:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5000",
+				"clearPrice": "596.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 02:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5100",
+				"clearPrice": "597.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 03:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5200",
+				"clearPrice": "598.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 03:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5300",
+				"clearPrice": "599.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 03:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5400",
+				"clearPrice": "600.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 03:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5500",
+				"clearPrice": "601.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 04:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5600",
+				"clearPrice": "602.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 04:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5700",
+				"clearPrice": "603.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 04:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5800",
+				"clearPrice": "604.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 04:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.5900",
+				"clearPrice": "605.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 05:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6000",
+				"clearPrice": "606.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 05:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6100",
+				"clearPrice": "607.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 05:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6200",
+				"clearPrice": "608.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 05:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6300",
+				"clearPrice": "609.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 06:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6400",
+				"clearPrice": "610.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 06:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6500",
+				"clearPrice": "611.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 06:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6600",
+				"clearPrice": "612.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 06:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6700",
+				"clearPrice": "613.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 07:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6800",
+				"clearPrice": "614.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 07:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.6900",
+				"clearPrice": "615.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 07:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7000",
+				"clearPrice": "616.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 07:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7100",
+				"clearPrice": "617.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 08:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7200",
+				"clearPrice": "618.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 08:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7300",
+				"clearPrice": "619.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 08:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7400",
+				"clearPrice": "620.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 08:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7500",
+				"clearPrice": "621.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 09:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7600",
+				"clearPrice": "622.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 09:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7700",
+				"clearPrice": "623.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 09:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7800",
+				"clearPrice": "624.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 09:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.7900",
+				"clearPrice": "625.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 10:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8000",
+				"clearPrice": "626.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 10:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8100",
+				"clearPrice": "627.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 10:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8200",
+				"clearPrice": "628.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 10:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8300",
+				"clearPrice": "629.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 11:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8400",
+				"clearPrice": "630.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 11:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8500",
+				"clearPrice": "631.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 11:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8600",
+				"clearPrice": "632.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 11:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8700",
+				"clearPrice": "633.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 12:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8800",
+				"clearPrice": "634.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 12:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.8900",
+				"clearPrice": "635.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 12:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9000",
+				"clearPrice": "636.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 12:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9100",
+				"clearPrice": "637.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 13:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9200",
+				"clearPrice": "638.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 13:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9300",
+				"clearPrice": "639.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 13:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9400",
+				"clearPrice": "640.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 13:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9500",
+				"clearPrice": "641.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 14:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9600",
+				"clearPrice": "642.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 14:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9700",
+				"clearPrice": "643.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 14:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9800",
+				"clearPrice": "644.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 14:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.9900",
+				"clearPrice": "645.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 15:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1000",
+				"clearPrice": "646.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 15:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1010",
+				"clearPrice": "647.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 15:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1020",
+				"clearPrice": "648.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 15:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1030",
+				"clearPrice": "649.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 16:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1040",
+				"clearPrice": "650.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 16:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1050",
+				"clearPrice": "651.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 16:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1060",
+				"clearPrice": "652.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 16:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1070",
+				"clearPrice": "653.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 17:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1080",
+				"clearPrice": "654.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 17:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1090",
+				"clearPrice": "655.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 17:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1100",
+				"clearPrice": "656.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 17:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1110",
+				"clearPrice": "657.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 18:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1120",
+				"clearPrice": "658.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 18:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1130",
+				"clearPrice": "659.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 18:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1140",
+				"clearPrice": "660.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 18:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1150",
+				"clearPrice": "661.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 19:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1160",
+				"clearPrice": "662.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 19:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1170",
+				"clearPrice": "663.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 19:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1180",
+				"clearPrice": "664.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 19:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1190",
+				"clearPrice": "665.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 20:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1200",
+				"clearPrice": "666.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 20:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1210",
+				"clearPrice": "667.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 20:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1220",
+				"clearPrice": "668.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 20:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1230",
+				"clearPrice": "669.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 21:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1240",
+				"clearPrice": "670.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 21:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1250",
+				"clearPrice": "671.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 21:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1260",
+				"clearPrice": "672.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 21:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1270",
+				"clearPrice": "673.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 22:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1280",
+				"clearPrice": "674.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 22:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1290",
+				"clearPrice": "675.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 22:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1300",
+				"clearPrice": "676.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 22:45",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1310",
+				"clearPrice": "677.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 23:00",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1320",
+				"clearPrice": "678.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 23:15",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "4.1330",
+				"clearPrice": "679.6340",
+				"offOnName": "开机",
+				"time": "2022-05-30 23:30",
+				"tagName": "新能源场站"
+			},
+			{
+				"theOutputValue": "",
+				"clearPrice": "",
+				"offOnName": "",
+				"time": "2022-05-30 23:45",
+				"tagName": ""
+			}
+		]
+	}
+}
