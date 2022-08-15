@@ -75,7 +75,7 @@ task copyJars(type: Copy){
 task generateJar(type: Jar, dependsOn: [copyJars, jar]) {
 	 manifest {
 		attributes('Implementation-Title':'GreenFlower',
-                   'Implementation-Version':1.0,
+                   'Implementation-Version':3.0,
 		           'Main-Class': 'org.gradle.ModbusGhost',
 		           'Class-Path': configurations.compile.collect{it.getName()}.join(' ')
                           )

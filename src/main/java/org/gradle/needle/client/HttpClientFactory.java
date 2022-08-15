@@ -16,12 +16,9 @@ import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 
-import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -44,6 +41,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
+
 public class HttpClientFactory {
 	private static CloseableHttpClient httpclient;
 	private static PoolingHttpClientConnectionManager connManager;
@@ -54,15 +52,15 @@ public class HttpClientFactory {
 	private static int timeout = 60000;
 
 	/**
-	 * ³õÊ¼»¯ÅäÖÃ
+	 * åˆå§‹åŒ–é…ç½®
 	 */
 	static {
-		// ÉèÖÃÁ¬½Ó³Ø
+		// è®¾ç½®è¿æ¥æ± 
 		connManager = new PoolingHttpClientConnectionManager();
-		// ÉèÖÃÁ¬½Ó³Ø´óĞ¡
+		// è®¾ç½®è¿æ¥æ± å¤§å°
 		connManager.setMaxTotal(100);
 		connManager.setDefaultMaxPerRoute(connManager.getMaxTotal());
-		// connectionºÍsocket³¬Ê±ÅäÖÃÏî
+		// connectionå’Œsocketè¶…æ—¶é…ç½®é¡¹
 		timeconfig = RequestConfig.custom().setSocketTimeout(timeout).setConnectTimeout(timeout).build();
 	}
 
@@ -76,10 +74,10 @@ public class HttpClientFactory {
 		ConnectionSocketFactory plainSF = new PlainConnectionSocketFactory();
 		registryBuilder.register("http", plainSF);
 
-		// Ö¸¶¨ĞÅÈÎÃÜÔ¿´æ´¢¶ÔÏóºÍÁ¬½ÓÌ×½Ó×Ö¹¤³§
+		// æŒ‡å®šä¿¡ä»»å¯†é’¥å­˜å‚¨å¯¹è±¡å’Œè¿æ¥å¥—æ¥å­—å·¥å‚
 		try {
 			KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
-			// ĞÅÈÎÈÎºÎÁ´½Ó
+			// ä¿¡ä»»ä»»ä½•é“¾æ¥
 			TrustStrategy anyTrustStrategy = new TrustStrategy() {
 				@Override
 				public boolean isTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
@@ -99,14 +97,14 @@ public class HttpClientFactory {
 			throw new RuntimeException(e);
 		}
 		Registry<ConnectionSocketFactory> registry = registryBuilder.build();
-		// ÉèÖÃÁ¬½Ó¹ÜÀíÆ÷
+		// è®¾ç½®è¿æ¥ç®¡ç†å™¨
 		connManager = new PoolingHttpClientConnectionManager(registry);
-		// ¹¹½¨¿Í»§¶Ë
+		// æ„å»ºå®¢æˆ·ç«¯
 		return HttpClientBuilder.create().setConnectionManager(connManager).build();
 	}
 
 	/**
-	 * http Òì²½µ÷ÓÃ
+	 * http å¼‚æ­¥è°ƒç”¨
 	 */
 
 	/**
@@ -116,38 +114,42 @@ public class HttpClientFactory {
 			Map<String, String> body) {
 
 		if (call_type.equalsIgnoreCase("get")) {
-			response = httpGetWay(url, header);
+			response = httpGetWay(url);
 		} else {
 			if (call_type.equalsIgnoreCase("post")) {
 				response = httpPostWay(url, header, body);
 			} else {
-				logger.info(call_type + "ÇëÇó²»ÔÚ±¾¿ò¼Ü´¦Àí·¶Î§ÄÚ");
+				logger.info(call_type + "è¯·æ±‚ä¸åœ¨æœ¬æ¡†æ¶å¤„ç†èŒƒå›´å†…");
 			}
 		}
 		return response;
 	}
 
-	private static String httpGetWay(String url, Map<String, String> header) {
+	public static String httpGetWay(String url) {
+		// httpclient = HttpClients.createDefault();
 		httpclient = getSSLHttpClient();
 		HttpGet get = new HttpGet(url);
 		try {
+			get.addHeader("User-Agent", "Chrome/99.0.4844.51");
+	//		get.addHeader("Cookie", GlobalSettings.getProperty("cookie"));
 			HttpResponse httpResponse = httpclient.execute(get);
+			statuscode = httpResponse.getStatusLine().getStatusCode();
+			// logger.info(url);
+			// logger.info(statuscode);
 			if (statuscode == HttpStatus.SC_OK) {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
-				logger.info("API test success!");
-				logger.info("API test response £º " + response);
+				// logger.info("API test response ï¿½ï¿½ " + response);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.info("ÍøÂçÒì³£:" + e.getMessage());
+			logger.info("ï¿½ï¿½ï¿½ï¿½ï¿½ì³£:" + e.getMessage());
 		} finally {
 			get.releaseConnection();
 		}
 		return response;
 	}
-
 	/**
 	 * http json
 	 * 
@@ -167,7 +169,7 @@ public class HttpClientFactory {
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.info("ÍøÂçÒì³£:" + e.getMessage());
+			logger.info("ç½‘ç»œå¼‚å¸¸:" + e.getMessage());
 		} finally {
 			post.releaseConnection();
 		}
@@ -175,7 +177,7 @@ public class HttpClientFactory {
 	}
 
 	/**
-	 * ·¢ËÍPOSTÇëÇó£¬»ñÈ¡response HttpPost
+	 * å‘é€POSTè¯·æ±‚ï¼Œè·å–response HttpPost
 	 * 
 	 * @param url
 	 * @param header
@@ -189,14 +191,14 @@ public class HttpClientFactory {
 		HttpPost post = new HttpPost(url);
 		post.setConfig(timeconfig);
 
-		// ÉèÖÃheader
+		// è®¾ç½®header
 		if (header != null) {
 			for (Map.Entry<String, String> entry : header.entrySet()) {
 				post.addHeader(entry.getKey().trim(), entry.getValue().trim());
 			}
 		}
 
-		// ÉèÖÃbody
+		// è®¾ç½®body
 		ArrayList<BasicNameValuePair> pairs = new ArrayList<BasicNameValuePair>();
 		if (body != null) {
 			for (Map.Entry<String, String> entry : body.entrySet()) {
@@ -206,7 +208,7 @@ public class HttpClientFactory {
 
 		//
 
-		// ·¢ËÍÇëÇó
+		// å‘é€è¯·æ±‚
 		try {
 			post.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
 			HttpResponse httpResponse = httpclient.execute(post);
@@ -215,14 +217,14 @@ public class HttpClientFactory {
 				HttpEntity entity = httpResponse.getEntity();
 				response = EntityUtils.toString(entity, "UTF-8");
 				logger.info("API test success!");
-				logger.info("API test response £º " + response);
+				logger.info("API test response ï¼š " + response);
 			} else {
-				logger.info("API test faiure£¡£¬statuscode£º " + statuscode);
+				logger.info("API test faiureï¼ï¼Œstatuscodeï¼š " + statuscode);
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.info("ÍøÂçÒì³£:" + e.getMessage());
+			logger.info("ç½‘ç»œå¼‚å¸¸:" + e.getMessage());
 		} finally {
 			post.releaseConnection();
 		}
@@ -230,7 +232,7 @@ public class HttpClientFactory {
 	}
 
 	/*
-	 * »ñÈ¡ÏìÓ¦Âë
+	 * è·å–å“åº”ç 
 	 */
 	public static int getStatusCode() {
 		return statuscode;
